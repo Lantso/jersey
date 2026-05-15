@@ -1,0 +1,14 @@
+{
+  "name": "lantso-storefront",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "test": "node --check catalog.mjs && node --check app.js && node --check server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

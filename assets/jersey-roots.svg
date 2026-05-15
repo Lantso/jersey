@@ -1,0 +1,10 @@
+<svg width="900" height="900" viewBox="0 0 900 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="900" fill="#d9d9d9"/>
+  <filter id="n" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2"/><feComponentTransfer><feFuncA type="table" tableValues="0 .07"/></feComponentTransfer></filter>
+  <rect width="900" height="900" filter="url(#n)"/>
+  <path d="M326 192h248l52 58c51 12 96 39 135 81l79 86-100 118-80-64v238H240V471l-80 64L60 417l79-86c39-42 84-69 135-81l52-58Z" fill="#777160"/>
+  <path d="M367 192h166l23 92c-70 43-141 43-212 0l23-92Z" fill="#202923"/>
+  <path d="M285 286c51 36 106 54 165 54s114-18 165-54M300 345v307M600 345v307M240 471c72 42 142 63 210 63s138-21 210-63" stroke="#efeee8" stroke-width="10"/>
+  <path d="M422 268h56l10 29-38-22-38 22 10-29Z" fill="#b60000"/>
+  <path d="M574 206c25 13 43 28 52 44M274 250c9-16 27-31 52-44" stroke="#efeee8" stroke-width="6"/>
+</svg>
