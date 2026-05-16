@@ -1,6 +1,5 @@
 import {
-  CHECKOUT_ALLOWED_COUNTRIES,
-  FREE_SHIPPING_THRESHOLD,
+  CURRENCY,
   PRODUCTS,
   SHIPPING_ZONES,
   calculateShipping,
@@ -148,7 +147,7 @@ const I18N = {
       terms: "Conditions generales",
       privacy: "Confidentialite",
       contact: "Contact",
-      locked: "Stay locked in"
+      locked: "Reste connecte"
     },
     hero: {
       title: "From the Roots\nto the World",
@@ -162,9 +161,9 @@ const I18N = {
     },
     product: {
       limited: "Pieces limitees",
-      claim: "Claim piece",
+      claim: "Reclamer la piece",
       access: "Acceder au maillot",
-      paypal: "Pay with",
+      paypal: "Payer avec",
       size: "Taille",
       price: "Prix",
       color: "Couleur",
@@ -180,7 +179,7 @@ const I18N = {
       stock: "Serie limitee"
     },
     cart: {
-      title: "Chariot",
+      title: "Panier",
       empty: "Votre panier est vide.",
       continue: "Continuer la navigation",
       country: "Pays de livraison",
@@ -219,7 +218,7 @@ const I18N = {
       sent: "Message enregistre. Connecter l'envoi email avant lancement."
     },
     roots: {
-      title: "Before the design,\nthere was a story",
+      title: "Avant le design,\nil y avait une histoire",
       body: "Cette page est reservee a l'histoire de Lantso, aux sketchs au crayon et au parcours from the roots to the world. La structure est prete pour ajouter les textes et visuels finaux sans modifier la boutique."
     },
     club: {
@@ -387,7 +386,6 @@ const I18N = {
 };
 
 const LAUNCH_DATE = new Date("2026-06-06T00:00:00+02:00");
-const ACCESS_HASH = "c1111e162eb6d424f42b1b970b98780963ee494bac8ae1f3ad2ef42f426ab3cc";
 
 const state = {
   lang: localStorage.getItem("lantso:lang") || "en",
@@ -429,6 +427,93 @@ function route() {
   return { name: "home" };
 }
 
+function pageMeta(current = route()) {
+  if (current.name === "product") {
+    const product = findProduct(current.id) || PRODUCTS[0];
+    const name = product.name.en;
+    return {
+      title: `${name} - Limited Moroccan Jersey | Lantso`,
+      description: `${name} by Lantso. ${product.description.en} 100% polyester. Limited to 25 pieces per colour.`,
+      path: `/product/${product.id}`,
+      image: `/assets/photos/${product.id}.png`,
+      schema: productSchema(product)
+    };
+  }
+  const pages = {
+    shop: {
+      title: "Shop Moroccan Jerseys | Lantso",
+      description: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan jerseys for the 2026 World Cup.",
+      path: "/shop",
+      image: "/assets/photos/hero.png",
+      schema: collectionSchema()
+    },
+    info: {
+      title: "Shipping, Returns and FAQ | Lantso",
+      description: "Shipping, returns, sizing and FAQ information for Lantso limited Moroccan jerseys.",
+      path: "/info",
+      image: "/assets/photos/story.png",
+      schema: faqSchema()
+    },
+    legal: {
+      title: "Legal and Contact | Lantso",
+      description: "Legal information, privacy information and contact form for Lantso.",
+      path: "/legal",
+      image: "/assets/photos/story.png",
+      schema: organizationSchema()
+    },
+    roots: {
+      title: "Discover the Roots | Lantso",
+      description: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
+      path: "/roots",
+      image: "/assets/photos/story.png",
+      schema: organizationSchema()
+    }
+  };
+  return (
+    pages[current.name] || {
+      title: "Lantso - From the Roots to the World",
+      description: "Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White.",
+      path: "/",
+      image: "/assets/photos/hero.png",
+      schema: collectionSchema()
+    }
+  );
+}
+
+function updateSeo(current = route()) {
+  const meta = pageMeta(current);
+  const url = absoluteUrl(meta.path);
+  document.title = meta.title;
+  setMeta("description", meta.description);
+  setMeta("og:title", meta.title, "property");
+  setMeta("og:description", meta.description, "property");
+  setMeta("og:url", url, "property");
+  setMeta("og:image", absoluteUrl(meta.image), "property");
+  setMeta("twitter:card", "summary_large_image");
+  let canonical = document.querySelector("link[rel='canonical']");
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.rel = "canonical";
+    document.head.append(canonical);
+  }
+  canonical.href = url;
+  setStructuredData([organizationSchema(), webSiteSchema(), breadcrumbSchema(current), meta.schema].filter(Boolean));
+}
+
+function setMeta(name, content, key = "name") {
+  let meta = document.querySelector(`meta[${key}="${name}"]`);
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.setAttribute(key, name);
+    document.head.append(meta);
+  }
+  meta.content = content;
+}
+
+function absoluteUrl(path) {
+  return new URL(path, "https://www.lantso.com").href;
+}
+
 function navigate(path) {
   history.pushState({}, "", path);
   render();
@@ -454,6 +539,9 @@ function setLanguage(lang) {
   document.documentElement.classList.toggle("is-arabic", lang === "ar");
   document.querySelectorAll("[data-lang]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.lang === lang);
+  });
+  document.querySelectorAll("[data-i18n]").forEach((node) => {
+    node.textContent = t(node.dataset.i18n);
   });
   document.querySelector("[data-open-club]").textContent = t("club.title");
   render();
@@ -533,46 +621,62 @@ function paymentBadges() {
 
 function placeholder(label = "") {
   const visual = visualFor(label);
+  const alt = visual.alt || label;
   return `
     <figure class="photo-frame ${visual.className}" aria-label="${escapeHtml(label)}">
-      <img src="${visual.src}" alt="${escapeHtml(label)}" loading="lazy">
+      <picture>
+        <source srcset="${visual.webp}" type="image/webp">
+        <img src="${visual.src}" alt="${escapeHtml(alt)}" loading="${visual.loading || "lazy"}" width="${visual.width}" height="${visual.height}">
+      </picture>
     </figure>
   `;
+}
+
+function photo(file, className, alt, width, height, loading = "lazy") {
+  return {
+    src: `/assets/photos/${file}.png`,
+    webp: `/assets/photos/${file}.webp`,
+    className,
+    alt,
+    width,
+    height,
+    loading
+  };
 }
 
 function visualFor(label) {
   const key = label.toLowerCase();
   if (key.includes("detail one")) {
-    return { src: "/assets/photos/campaign-1.png", className: "campaign-visual" };
+    return photo("campaign-1", "campaign-visual", "Lantso campaign portrait wearing the Roots 01 Khaki jersey", 1122, 1402);
   }
   if (key.includes("detail two")) {
-    return { src: "/assets/photos/campaign-3.png", className: "campaign-visual" };
+    return photo("campaign-3", "campaign-visual", "Lantso campaign scene with the Atlas 02 White and Roots 01 Khaki jerseys", 1122, 1402);
   }
   if (key.includes("detail three")) {
-    return { src: "/assets/photos/campaign-4.png", className: "campaign-visual" };
+    return photo("campaign-4", "campaign-visual", "Close lifestyle detail of the Lantso Roots 01 Khaki jersey", 1121, 1403);
   }
   if (key.includes("roots 01") || key.includes("روتس")) {
-    return { src: "/assets/photos/roots-01-khaki.png", className: "product-visual" };
+    return photo("roots-01-khaki", "product-visual", "Lantso Roots 01 Khaki limited Moroccan jersey front view", 1448, 1086);
   }
   if (key.includes("atlas") || key.includes("أطلس")) {
-    return { src: "/assets/photos/atlas-02-white.png", className: "product-visual" };
+    return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1448, 1086);
   }
   if (key.includes("campaign image one")) {
-    return { src: "/assets/photos/campaign-1.png", className: "campaign-visual" };
+    return photo("campaign-1", "campaign-visual", "Lantso Roots 01 Khaki jersey worn in a Moroccan interior campaign portrait", 1122, 1402);
   }
   if (key.includes("campaign image two")) {
-    return { src: "/assets/photos/campaign-2.png", className: "campaign-visual" };
+    return photo("campaign-2", "campaign-visual", "Lantso campaign scene with two Moroccan jerseys on a rooftop", 1402, 1122);
   }
   if (key.includes("campaign image three")) {
-    return { src: "/assets/photos/campaign-3.png", className: "campaign-visual" };
+    return photo("campaign-3", "campaign-visual", "Two children wearing Lantso Moroccan jerseys on a football pitch", 1122, 1402);
   }
   if (key.includes("campaign image four")) {
-    return { src: "/assets/photos/campaign-4.png", className: "campaign-visual" };
+    return photo("campaign-4", "campaign-visual", "Lantso Atlas 02 White jersey detail with Moroccan crest and collar", 1121, 1403);
   }
   if (key.includes("origin") || key.includes("pencil") || key.includes("chapter")) {
-    return { src: "/assets/photos/story.png", className: "campaign-visual" };
+    return photo("story", "campaign-visual", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085);
   }
-  return { src: "/assets/photos/hero.png", className: "hero-visual" };
+  return photo("hero", "hero-visual", "Lantso Moroccan jersey campaign in a Casablanca street", 1672, 941, "eager");
 }
 
 function gatePage() {
@@ -580,7 +684,10 @@ function gatePage() {
   return `
     <section class="gate-page">
       <figure class="gate-media" aria-hidden="true">
-        <img src="/assets/photos/hero.png" alt="">
+        <picture>
+          <source srcset="/assets/photos/hero.webp" type="image/webp">
+          <img src="/assets/photos/hero.png" alt="" width="1672" height="941">
+        </picture>
       </figure>
       <div class="gate-language" aria-label="Language">
         ${["en", "fr", "ar"]
@@ -959,9 +1066,10 @@ function noticePage(kind) {
 
 function render() {
   if (state.locked) {
+    updateSeo(route());
     document.body.classList.add("is-gated");
     document.querySelector(".site-header").hidden = true;
-    app.innerHTML = `<div class="page">${gatePage()}</div>`;
+    app.innerHTML = safeMarkup(`<div class="page">${gatePage()}</div>`);
     bindGateEvents();
     startCountdown();
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -973,14 +1081,15 @@ function render() {
   document.querySelector(".site-header").hidden = false;
   const current = route();
   document.querySelector(".site-header").dataset.floating = current.name === "home";
-  if (current.name === "home") app.innerHTML = `<div class="page">${homePage()}</div>`;
-  if (current.name === "shop") app.innerHTML = `<div class="page">${shopPage()}</div>`;
-  if (current.name === "product") app.innerHTML = `<div class="page">${productPage(current.id)}</div>`;
-  if (current.name === "info") app.innerHTML = `<div class="page">${infoPage()}</div>`;
-  if (current.name === "legal") app.innerHTML = `<div class="page">${legalPage()}</div>`;
-  if (current.name === "roots") app.innerHTML = `<div class="page">${rootsPage()}</div>`;
-  if (current.name === "success") app.innerHTML = `<div class="page">${noticePage("success")}</div>`;
-  if (current.name === "cancel") app.innerHTML = `<div class="page">${noticePage("cancel")}</div>`;
+  updateSeo(current);
+  if (current.name === "home") app.innerHTML = safeMarkup(`<div class="page">${homePage()}</div>`);
+  if (current.name === "shop") app.innerHTML = safeMarkup(`<div class="page">${shopPage()}</div>`);
+  if (current.name === "product") app.innerHTML = safeMarkup(`<div class="page">${productPage(current.id)}</div>`);
+  if (current.name === "info") app.innerHTML = safeMarkup(`<div class="page">${infoPage()}</div>`);
+  if (current.name === "legal") app.innerHTML = safeMarkup(`<div class="page">${legalPage()}</div>`);
+  if (current.name === "roots") app.innerHTML = safeMarkup(`<div class="page">${rootsPage()}</div>`);
+  if (current.name === "success") app.innerHTML = safeMarkup(`<div class="page">${noticePage("success")}</div>`);
+  if (current.name === "cancel") app.innerHTML = safeMarkup(`<div class="page">${noticePage("cancel")}</div>`);
   bindPageEvents();
   renderCart();
   window.scrollTo({ top: 0, behavior: "instant" });
@@ -1085,13 +1194,13 @@ function renderCart() {
   cartCount.textContent = cartQuantity();
   const lines = lineItems();
   if (!lines.length) {
-    cartBody.innerHTML = `
+    cartBody.innerHTML = safeMarkup(`
       <div class="cart-empty">
         <span class="bag-icon" aria-hidden="true"></span>
         <p>${t("cart.empty")}</p>
         <button class="button-ghost" type="button" data-close-cart>${t("cart.continue")}</button>
       </div>
-    `;
+    `);
     cartBody.querySelector("[data-close-cart]").addEventListener("click", closeCart);
     return;
   }
@@ -1099,7 +1208,7 @@ function renderCart() {
   const sub = subtotal();
   const shipping = calculateShipping(state.shippingCountry, sub, cartQuantity());
   const total = sub + shipping.amount;
-  cartBody.innerHTML = `
+  cartBody.innerHTML = safeMarkup(`
     <div class="cart-items">
       ${lines.map((line) => cartItem(line)).join("")}
     </div>
@@ -1119,7 +1228,7 @@ function renderCart() {
       <button class="button-primary" type="button" data-checkout>${t("cart.checkout")}</button>
       <p class="checkout-message" data-checkout-message role="status"></p>
     </div>
-  `;
+  `);
 
   cartBody.querySelectorAll("[data-qty]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -1181,6 +1290,112 @@ function sizeGuide(product) {
     .join(" / ");
 }
 
+function setStructuredData(graph) {
+  let script = document.querySelector("#structured-data");
+  if (!script) {
+    script = document.createElement("script");
+    script.id = "structured-data";
+    script.type = "application/ld+json";
+    document.head.append(script);
+  }
+  script.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
+}
+
+function productSchema(product) {
+  const shipping = calculateShipping("FR", product.price, 1);
+  return {
+    "@type": "Product",
+    "@id": absoluteUrl(`/product/${product.id}#product`),
+    name: product.name.en,
+    description: product.description.en,
+    image: [absoluteUrl(`/assets/photos/${product.id}.png`)],
+    sku: product.sku,
+    brand: { "@type": "Brand", name: "Lantso" },
+    material: product.material.en,
+    size: product.sizes.join(", "),
+    offers: {
+      "@type": "Offer",
+      url: absoluteUrl(`/product/${product.id}`),
+      priceCurrency: CURRENCY.toUpperCase(),
+      price: (product.price / 100).toFixed(2),
+      availability: "https://schema.org/LimitedAvailability",
+      itemCondition: "https://schema.org/NewCondition",
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "FR" },
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: (shipping.amount / 100).toFixed(2),
+          currency: CURRENCY.toUpperCase()
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          businessDays: { "@type": "QuantitativeValue", minValue: 2, maxValue: 4 }
+        }
+      }
+    }
+  };
+}
+
+function collectionSchema() {
+  return {
+    "@type": "ItemList",
+    "@id": absoluteUrl("/shop#products"),
+    name: "Lantso limited Moroccan jerseys",
+    itemListElement: PRODUCTS.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: absoluteUrl(`/product/${product.id}`),
+      item: productSchema(product)
+    }))
+  };
+}
+
+function organizationSchema() {
+  return {
+    "@type": "Organization",
+    "@id": absoluteUrl("/#organization"),
+    name: "Lantso",
+    url: absoluteUrl("/"),
+    logo: absoluteUrl("/lantso_logo.svg"),
+    email: "contact@lantso.com"
+  };
+}
+
+function webSiteSchema() {
+  return {
+    "@type": "WebSite",
+    "@id": absoluteUrl("/#website"),
+    name: "Lantso",
+    url: absoluteUrl("/")
+  };
+}
+
+function breadcrumbSchema(current = route()) {
+  const meta = pageMeta(current);
+  const items = [
+    { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") }
+  ];
+  if (meta.path !== "/") {
+    items.push({ "@type": "ListItem", position: 2, name: meta.title.replace(" | Lantso", ""), item: absoluteUrl(meta.path) });
+  }
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items
+  };
+}
+
+function faqSchema() {
+  return {
+    "@type": "FAQPage",
+    mainEntity: [
+      { "@type": "Question", name: I18N.en.info.q1, acceptedAnswer: { "@type": "Answer", text: I18N.en.info.a1 } },
+      { "@type": "Question", name: I18N.en.info.q2, acceptedAnswer: { "@type": "Answer", text: I18N.en.info.a2 } },
+      { "@type": "Question", name: I18N.en.info.q3, acceptedAnswer: { "@type": "Answer", text: I18N.en.info.a3 } }
+    ]
+  };
+}
+
 async function checkout(preferredMethod = "") {
   const message = cartBody.querySelector("[data-checkout-message]");
   if (message) message.textContent = "";
@@ -1231,16 +1446,7 @@ async function submitForm(name, payload) {
 async function verifyAccess(password) {
   const response = await postJson("/api/access", { password });
   if (response.ok && response.data?.ok) return true;
-  return (await sha256(String(password || ""))) === ACCESS_HASH;
-}
-
-async function sha256(value) {
-  if (!window.crypto?.subtle) return "";
-  const bytes = new TextEncoder().encode(value);
-  const digest = await window.crypto.subtle.digest("SHA-256", bytes);
-  return Array.from(new Uint8Array(digest))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
+  return false;
 }
 
 function countdownParts() {
@@ -1274,6 +1480,26 @@ function updateCountdown() {
       node.textContent = String(value).padStart(2, "0");
     });
   });
+}
+
+function safeMarkup(markup) {
+  const template = document.createElement("template");
+  template.innerHTML = markup;
+  template.content.querySelectorAll("script:not([type='application/ld+json']), iframe, object, embed").forEach((node) => node.remove());
+  template.content.querySelectorAll("*").forEach((node) => {
+    [...node.attributes].forEach((attribute) => {
+      const name = attribute.name.toLowerCase();
+      const value = attribute.value.trim().toLowerCase();
+      if (
+        name === "style" ||
+        name.startsWith("on") ||
+        ((name === "href" || name === "src" || name === "srcset" || name === "xlink:href") && value.startsWith("javascript:"))
+      ) {
+        node.removeAttribute(attribute.name);
+      }
+    });
+  });
+  return template.innerHTML;
 }
 
 function escapeHtml(value) {

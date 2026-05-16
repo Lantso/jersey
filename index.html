@@ -13,9 +13,65 @@
     <meta property="og:url" content="https://www.lantso.com/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://www.lantso.com/">
     <link rel="icon" href="/lantso_logo.svg" type="image/svg+xml">
     <title>Lantso - From the Roots to the World</title>
+    <script id="structured-data" type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.lantso.com/#organization",
+            "name": "Lantso",
+            "url": "https://www.lantso.com/",
+            "logo": "https://www.lantso.com/lantso_logo.svg",
+            "email": "contact@lantso.com"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.lantso.com/#website",
+            "name": "Lantso",
+            "url": "https://www.lantso.com/"
+          },
+          {
+            "@type": "Product",
+            "@id": "https://www.lantso.com/product/roots-01-khaki#product",
+            "name": "Roots 01 - Khaki",
+            "description": "A very limited Morocco-inspired jersey in khaki green, designed for match days, summer nights, and collectors.",
+            "image": "https://www.lantso.com/assets/photos/roots-01-khaki.png",
+            "sku": "ROOTS-01-KHAKI",
+            "brand": { "@type": "Brand", "name": "Lantso" },
+            "material": "100% polyester",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.lantso.com/product/roots-01-khaki",
+              "priceCurrency": "EUR",
+              "price": "59.99",
+              "availability": "https://schema.org/LimitedAvailability",
+              "itemCondition": "https://schema.org/NewCondition"
+            }
+          },
+          {
+            "@type": "Product",
+            "@id": "https://www.lantso.com/product/atlas-02-white#product",
+            "name": "Atlas 02 - White",
+            "description": "A very limited white jersey from the same heritage line, built around contrast, movement, and Moroccan detail.",
+            "image": "https://www.lantso.com/assets/photos/atlas-02-white.png",
+            "sku": "ATLAS-02-WHITE",
+            "brand": { "@type": "Brand", "name": "Lantso" },
+            "material": "100% polyester",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.lantso.com/product/atlas-02-white",
+              "priceCurrency": "EUR",
+              "price": "59.99",
+              "availability": "https://schema.org/LimitedAvailability",
+              "itemCondition": "https://schema.org/NewCondition"
+            }
+          }
+        ]
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -44,7 +100,24 @@
       </div>
     </header>
 
-    <main id="app" tabindex="-1"></main>
+    <main id="app" tabindex="-1">
+      <noscript>
+        <section>
+          <h1>Lantso - From the Roots to the World</h1>
+          <p>Very limited Moroccan jerseys for the 2026 World Cup.</p>
+          <article>
+            <h2>Roots 01 - Khaki</h2>
+            <p>Limited khaki green Moroccan jersey. 59.99 EUR. 100% polyester. Sizes M and L.</p>
+            <a href="/product/roots-01-khaki">Roots 01 - Khaki</a>
+          </article>
+          <article>
+            <h2>Atlas 02 - White</h2>
+            <p>Limited white Moroccan jersey. 59.99 EUR. 100% polyester. Sizes M and L.</p>
+            <a href="/product/atlas-02-white">Atlas 02 - White</a>
+          </article>
+        </section>
+      </noscript>
+    </main>
 
     <aside class="cart-drawer" data-cart-drawer aria-hidden="true" aria-labelledby="cart-title">
       <div class="cart-panel">
@@ -108,6 +181,6 @@
       <input name="bot-field">
     </form>
 
-    <script type="module" src="/app.js"></script>
+    <script type="module" src="/app.js?v=20260516b"></script>
   </body>
 </html>

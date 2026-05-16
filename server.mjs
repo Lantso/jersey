@@ -5,7 +5,7 @@ import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { verifyAccessPassword } from "./lib/access.mjs";
-import { createStripeCheckoutSession, securityHeaders } from "./lib/checkout.mjs";
+import { createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -33,6 +33,16 @@ const mimeTypes = new Map([
 const server = http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, PUBLIC_SITE_URL);
+    if (url.pathname.startsWith("/api/")) {
+      if (!isAllowedOrigin(request.headers.origin, PUBLIC_SITE_URL)) {
+        return json(response, 403, { message: "Forbidden origin" });
+      }
+      const key = `${request.socket.remoteAddress || "local"}:${url.pathname}`;
+      const limited = rateLimit(key, { limit: url.pathname === "/api/access" ? 20 : 80, windowMs: 60_000 });
+      if (!limited.ok) {
+        return json(response, 429, { message: "Too many requests" });
+      }
+    }
     if (url.pathname === "/api/health") {
       return json(response, 200, { ok: true });
     }
