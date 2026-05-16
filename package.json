@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
-    "test": "node --check catalog.mjs && node --check app.js && node --check server.mjs"
+    "test": "node --check catalog.mjs && node --check app.js && node --check server.mjs && node --check lib/access.mjs && node --check lib/checkout.mjs && node --check netlify/functions/access.mjs && node --check netlify/functions/create-checkout-session.mjs && node --check netlify/functions/health.mjs && node --check netlify/functions/webhook.mjs"
   },
   "engines": {
     "node": ">=20"

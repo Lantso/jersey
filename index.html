@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Lantso, limited Moroccan jerseys for the 2026 World Cup."
+      content="Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White."
     >
+    <meta property="og:title" content="Lantso - From the Roots to the World">
+    <meta property="og:description" content="Very limited Moroccan jerseys for the 2026 World Cup. 25 pieces per colour.">
+    <meta property="og:image" content="https://www.lantso.com/assets/photos/hero.png">
+    <meta property="og:url" content="https://www.lantso.com/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://www.lantso.com/">
+    <link rel="icon" href="/lantso_logo.svg" type="image/svg+xml">
     <title>Lantso - From the Roots to the World</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +22,7 @@
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Luxurious+Script&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="/styles.css?v=20260509">
+    <link rel="stylesheet" href="/styles.css?v=20260516">
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
@@ -62,10 +70,6 @@
           <span data-i18n="club.email">Email</span>
           <input name="email" type="email" autocomplete="email" required>
         </label>
-        <label>
-          <span data-i18n="club.password">Password</span>
-          <input name="password" type="password" minlength="8" autocomplete="new-password" required>
-        </label>
         <label class="check-row">
           <input name="newsletter" type="checkbox" checked>
           <span data-i18n="club.newsletter">Newsletter and early access</span>
@@ -90,6 +94,19 @@
         <span class="payment-icon visa" aria-label="Visa"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">VISA</text></svg></span>
       </div>
     </template>
+
+    <form name="club" netlify netlify-honeypot="bot-field" hidden>
+      <input name="name">
+      <input name="email">
+      <input name="newsletter">
+      <input name="bot-field">
+    </form>
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input name="name">
+      <input name="email">
+      <textarea name="message"></textarea>
+      <input name="bot-field">
+    </form>
 
     <script type="module" src="/app.js"></script>
   </body>

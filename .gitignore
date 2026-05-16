@@ -2,3 +2,8 @@
 .env
 data/*.jsonl
 node_modules/
+/green_Jersey.png
+/white_Jersey.png
+/hero.png
+/story_image.png
+/image_*.png

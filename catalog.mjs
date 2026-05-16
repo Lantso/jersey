@@ -1,5 +1,11 @@
 export const CURRENCY = "eur";
-export const FREE_SHIPPING_THRESHOLD = 18000;
+export const FREE_SHIPPING_THRESHOLD = null;
+export const JERSEY_WEIGHT_GRAMS = 300;
+export const PARCEL_DIMENSIONS_CM = {
+  length: 32,
+  width: 45,
+  height: 4
+};
 
 export const PRODUCTS = [
   {
@@ -27,17 +33,29 @@ export const PRODUCTS = [
       ar: "مستوحى من 98. مصمم للحاضر."
     },
     description: {
-      en: "A limited Morocco-inspired jersey cut for match days, summer nights, and collectors.",
-      fr: "Un maillot limite inspire du Maroc, pense pour les jours de match, les soirs d'ete et les collectionneurs.",
-      ar: "قميص محدود مستوحى من المغرب، مناسب للمباريات والأمسيات الصيفية والمهتمين بالقطع الخاصة."
+      en: "A very limited Morocco-inspired jersey in khaki green, designed for match days, summer nights, and collectors.",
+      fr: "Un maillot vert khaki en edition tres limitee, inspire du Maroc et pense pour les jours de match, les soirs d'ete et les collectionneurs.",
+      ar: "قميص أخضر كاكي بإصدار محدود جدا، مستوحى من المغرب ومصمم للمباريات والأمسيات الصيفية والمهتمين بالقطع الخاصة."
     },
-    price: 8900,
-    sizes: ["S", "M", "L", "XL"],
+    material: {
+      en: "100% polyester",
+      fr: "100% polyester",
+      ar: "100% بوليستر"
+    },
+    care: {
+      en: "Machine wash cold at 30C, wash inside out with similar colours, do not bleach, do not tumble dry, cool iron inside out, do not dry clean.",
+      fr: "Lavage en machine a froid a 30C, laver sur l'envers avec des couleurs similaires, ne pas blanchir, ne pas secher en machine, repassage doux sur l'envers, nettoyage a sec interdit.",
+      ar: "يغسل في الغسالة على 30 درجة، يقلب القميص قبل الغسل، يغسل مع ألوان مشابهة، يمنع المبيض والتجفيف الآلي، كي خفيف من الداخل، يمنع التنظيف الجاف."
+    },
+    measurements: {
+      M: { length: 71, width: 51 },
+      L: { length: 73, width: 53 }
+    },
+    price: 5999,
+    sizes: ["M", "L"],
     inventory: {
-      S: 18,
-      M: 24,
-      L: 24,
-      XL: 14
+      M: 13,
+      L: 12
     },
     accent: "#a30000"
   },
@@ -66,17 +84,29 @@ export const PRODUCTS = [
       ar: "يظهر عن قرب. ويصل إحساسه من بعيد."
     },
     description: {
-      en: "A clean white chapter for the same heritage line, designed around contrast and movement.",
-      fr: "Un chapitre blanc epure pour la meme ligne heritage, construit autour du contraste et du mouvement.",
-      ar: "فصل أبيض نقي من نفس خط التراث، مبني على التباين والحركة."
+      en: "A very limited white jersey from the same heritage line, built around contrast, movement, and Moroccan detail.",
+      fr: "Un maillot blanc en edition tres limitee dans la meme ligne heritage, construit autour du contraste, du mouvement et du detail marocain.",
+      ar: "قميص أبيض بإصدار محدود جدا من نفس خط التراث، مبني على التباين والحركة والتفاصيل المغربية."
     },
-    price: 8900,
-    sizes: ["S", "M", "L", "XL"],
+    material: {
+      en: "100% polyester",
+      fr: "100% polyester",
+      ar: "100% بوليستر"
+    },
+    care: {
+      en: "Machine wash cold at 30C, wash inside out with similar colours, do not bleach, do not tumble dry, cool iron inside out, do not dry clean.",
+      fr: "Lavage en machine a froid a 30C, laver sur l'envers avec des couleurs similaires, ne pas blanchir, ne pas secher en machine, repassage doux sur l'envers, nettoyage a sec interdit.",
+      ar: "يغسل في الغسالة على 30 درجة، يقلب القميص قبل الغسل، يغسل مع ألوان مشابهة، يمنع المبيض والتجفيف الآلي، كي خفيف من الداخل، يمنع التنظيف الجاف."
+    },
+    measurements: {
+      M: { length: 71, width: 51 },
+      L: { length: 73, width: 53 }
+    },
+    price: 5999,
+    sizes: ["M", "L"],
     inventory: {
-      S: 16,
-      M: 22,
-      L: 22,
-      XL: 12
+      M: 13,
+      L: 12
     },
     accent: "#a30000"
   }
@@ -91,7 +121,10 @@ export const SHIPPING_ZONES = [
       ar: "فرنسا"
     },
     countries: ["FR", "MC"],
-    rate: 690,
+    rates: [
+      { maxWeight: 1000, amount: 790 },
+      { maxWeight: 2000, amount: 990 }
+    ],
     eta: {
       en: "2-4 business days",
       fr: "2 a 4 jours ouvres",
@@ -133,7 +166,10 @@ export const SHIPPING_ZONES = [
       "ES",
       "SE"
     ],
-    rate: 1190,
+    rates: [
+      { maxWeight: 1000, amount: 1590 },
+      { maxWeight: 2000, amount: 1890 }
+    ],
     eta: {
       en: "4-7 business days",
       fr: "4 a 7 jours ouvres",
@@ -148,7 +184,10 @@ export const SHIPPING_ZONES = [
       ar: "المملكة المتحدة"
     },
     countries: ["GB"],
-    rate: 1490,
+    rates: [
+      { maxWeight: 1000, amount: 1890 },
+      { maxWeight: 2000, amount: 2490 }
+    ],
     eta: {
       en: "5-8 business days",
       fr: "5 a 8 jours ouvres",
@@ -163,7 +202,10 @@ export const SHIPPING_ZONES = [
       ar: "المغرب"
     },
     countries: ["MA"],
-    rate: 1490,
+    rates: [
+      { maxWeight: 1000, amount: 1890 },
+      { maxWeight: 2000, amount: 2490 }
+    ],
     eta: {
       en: "5-9 business days",
       fr: "5 a 9 jours ouvres",
@@ -178,7 +220,10 @@ export const SHIPPING_ZONES = [
       ar: "باقي العالم"
     },
     countries: ["US", "CA", "CH", "NO", "AE", "SA", "QA", "AU", "JP"],
-    rate: 2490,
+    rates: [
+      { maxWeight: 1000, amount: 2990 },
+      { maxWeight: 2000, amount: 3990 }
+    ],
     eta: {
       en: "7-14 business days",
       fr: "7 a 14 jours ouvres",
@@ -203,12 +248,17 @@ export function findShippingZone(countryCode = "FR") {
   );
 }
 
-export function calculateShipping(countryCode, subtotal) {
+export function calculateShipping(countryCode, subtotal, quantity = 1) {
   const zone = findShippingZone(countryCode);
-  const amount = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : zone.rate;
+  const weight = Math.max(1, Number(quantity || 1)) * JERSEY_WEIGHT_GRAMS;
+  const tier = zone.rates.find((rate) => weight <= rate.maxWeight) || zone.rates.at(-1);
+  const freeShipping = FREE_SHIPPING_THRESHOLD && subtotal >= FREE_SHIPPING_THRESHOLD;
+  const amount = freeShipping ? 0 : tier.amount;
   return {
     zone,
-    amount
+    amount,
+    weight,
+    dimensions: PARCEL_DIMENSIONS_CM
   };
 }
 

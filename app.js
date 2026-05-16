@@ -46,6 +46,9 @@ const I18N = {
       add: "Add to cart",
       checkout: "Checkout",
       description: "Description",
+      material: "Material",
+      care: "Care",
+      measurements: "Measurements",
       selectSize: "Select size",
       added: "Added to cart.",
       shippingEstimate: "Shipping estimate",
@@ -81,9 +84,9 @@ const I18N = {
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Purchases are processed in EUR. An order is confirmed only after successful payment authorization. Product photos, measurements, delivery timing, company details, and refund policy should be reviewed by the business before launch.",
-      privacyBody: "Customer details are used for checkout, delivery, support, and optional newsletter access. Payment data is handled by the payment provider and is not stored by this website.",
-      contactBody: "For order support, sizing, press, or wholesale requests, use the form below.",
+      termsBody: "Lantso sells limited edition jerseys in EUR. An order is confirmed only after successful payment through Stripe Checkout. Delivery is prepared manually after payment and sent with tracked home delivery. For support, contact contact@lantso.com.",
+      privacyBody: "Customer details are used for checkout, delivery, support, fraud prevention, and optional newsletter access. Payment data is handled by Stripe and is not stored by this website.",
+      contactBody: "For order support, sizing, press, or wholesale requests, use the form below or write to contact@lantso.com.",
       name: "Name",
       email: "Email",
       message: "Message",
@@ -98,11 +101,26 @@ const I18N = {
       title: "Join the club",
       name: "Name",
       email: "Email",
-      password: "Password",
       newsletter: "Newsletter and early access",
-      submit: "Create profile",
-      success: "Profile created. You are on the list.",
+      submit: "Join the list",
+      success: "You are on the list.",
       error: "The profile could not be saved."
+    },
+    gate: {
+      title: "From the Roots\nto the World",
+      date: "06 / 06 / 2026",
+      password: "Password",
+      unlock: "Enter",
+      invalid: "Wrong password.",
+      intro: "Private access before the drop.",
+      email: "Email",
+      subscribe: "Join the club",
+      subscribed: "You are on the list.",
+      countdown: "Drop opens in",
+      days: "Days",
+      hours: "Hours",
+      minutes: "Minutes",
+      seconds: "Seconds"
     },
     checkout: {
       successTitle: "Order received",
@@ -118,29 +136,29 @@ const I18N = {
   },
   fr: {
     nav: {
-      home: "Home",
-      shop: "Shop",
-      allProducts: "All products",
-      jerseys: "Jerseys",
+      home: "Accueil",
+      shop: "Boutique",
+      allProducts: "Tous les produits",
+      jerseys: "Maillots",
       info: "Info",
-      shipping: "Shipping",
-      returns: "Returns",
+      shipping: "Livraison",
+      returns: "Retours",
       faq: "FAQ",
       legal: "Legal",
-      terms: "Terms & conditions",
-      privacy: "Privacy policy",
+      terms: "Conditions generales",
+      privacy: "Confidentialite",
       contact: "Contact",
       locked: "Stay locked in"
     },
     hero: {
       title: "From the Roots\nto the World",
-      step: "Step inside",
-      chapter: "Chapter 01 - Roots",
-      headline: "Two pieces\none heritage\nreimagined",
-      discoverShop: "Discover the shop",
-      origin: "Origin",
-      before: "Before the design,\nthere was a story",
-      discoverRoots: "Discover the roots"
+      step: "Entrer",
+      chapter: "Chapitre 01 - Roots",
+      headline: "Deux pieces\nun heritage\nreimagine",
+      discoverShop: "Decouvrir la boutique",
+      origin: "Origine",
+      before: "Avant le design,\nil y avait une histoire",
+      discoverRoots: "Decouvrir les roots"
     },
     product: {
       limited: "Pieces limitees",
@@ -153,6 +171,9 @@ const I18N = {
       add: "Ajouter au panier",
       checkout: "Paiement",
       description: "Description",
+      material: "Matiere",
+      care: "Entretien",
+      measurements: "Mesures",
       selectSize: "Choisir une taille",
       added: "Ajoute au panier.",
       shippingEstimate: "Estimation livraison",
@@ -188,9 +209,9 @@ const I18N = {
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Les achats sont traites en EUR. Une commande est confirmee uniquement apres autorisation du paiement. Photos produit, mesures, delais, details de societe et politique de remboursement doivent etre valides par l'entreprise avant lancement.",
-      privacyBody: "Les donnees client servent au paiement, a la livraison, au support et a la newsletter optionnelle. Les donnees de paiement sont gerees par le prestataire de paiement et ne sont pas stockees par ce site.",
-      contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous.",
+      termsBody: "Lantso vend des maillots en edition limitee en EUR. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout. La preparation est faite manuellement apres paiement puis envoyee en livraison suivie a domicile. Pour le support : contact@lantso.com.",
+      privacyBody: "Les donnees client servent au paiement, a la livraison, au support, a la prevention de fraude et a la newsletter optionnelle. Les donnees de paiement sont gerees par Stripe et ne sont pas stockees par ce site.",
+      contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous ou ecris a contact@lantso.com.",
       name: "Nom",
       email: "Email",
       message: "Message",
@@ -205,11 +226,26 @@ const I18N = {
       title: "Join the club",
       name: "Nom",
       email: "Email",
-      password: "Mot de passe",
       newsletter: "Newsletter et acces en avance",
-      submit: "Creer le profil",
-      success: "Profil cree. Tu es dans la liste.",
+      submit: "Rejoindre la liste",
+      success: "Tu es dans la liste.",
       error: "Le profil n'a pas pu etre enregistre."
+    },
+    gate: {
+      title: "From the Roots\nto the World",
+      date: "06 / 06 / 2026",
+      password: "Mot de passe",
+      unlock: "Entrer",
+      invalid: "Mot de passe incorrect.",
+      intro: "Acces prive avant le drop.",
+      email: "Email",
+      subscribe: "Join the club",
+      subscribed: "Tu es dans la liste.",
+      countdown: "Ouverture du drop dans",
+      days: "Jours",
+      hours: "Heures",
+      minutes: "Minutes",
+      seconds: "Secondes"
     },
     checkout: {
       successTitle: "Commande recue",
@@ -260,6 +296,9 @@ const I18N = {
       add: "أضف إلى السلة",
       checkout: "الدفع",
       description: "الوصف",
+      material: "الخامة",
+      care: "العناية",
+      measurements: "المقاسات",
       selectSize: "اختر المقاس",
       added: "تمت الإضافة إلى السلة.",
       shippingEstimate: "تقدير الشحن",
@@ -295,9 +334,9 @@ const I18N = {
     },
     legal: {
       title: "القانوني والتواصل",
-      termsBody: "تعالج الطلبات باليورو. يؤكد الطلب بعد نجاح عملية الدفع فقط. يجب مراجعة صور المنتجات، المقاسات، مدة الشحن، بيانات الشركة وسياسة الاسترجاع قبل الإطلاق.",
-      privacyBody: "تستخدم بيانات العميل للدفع والتوصيل والدعم والنشرة الاختيارية. بيانات الدفع يعالجها مزود الدفع ولا يخزنها هذا الموقع.",
-      contactBody: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، استخدم النموذج أدناه.",
+      termsBody: "تبيع Lantso قمصانا محدودة باليورو. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout. يتم تجهيز الطلب يدويا بعد الدفع ثم إرساله بتوصيل متتبع إلى المنزل. للدعم: contact@lantso.com.",
+      privacyBody: "تستخدم بيانات العميل للدفع والتوصيل والدعم ومنع الاحتيال والنشرة الاختيارية. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع.",
+      contactBody: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، استخدم النموذج أدناه أو اكتب إلى contact@lantso.com.",
       name: "الاسم",
       email: "البريد الإلكتروني",
       message: "الرسالة",
@@ -312,11 +351,26 @@ const I18N = {
       title: "Join the club",
       name: "الاسم",
       email: "البريد الإلكتروني",
-      password: "كلمة المرور",
       newsletter: "النشرة والوصول المبكر",
-      submit: "إنشاء حساب",
-      success: "تم إنشاء الحساب. أنت في القائمة.",
+      submit: "انضم إلى القائمة",
+      success: "أنت الآن في القائمة.",
       error: "تعذر حفظ الحساب."
+    },
+    gate: {
+      title: "From the Roots\nto the World",
+      date: "06 / 06 / 2026",
+      password: "كلمة المرور",
+      unlock: "دخول",
+      invalid: "كلمة المرور غير صحيحة.",
+      intro: "دخول خاص قبل الإصدار.",
+      email: "البريد الإلكتروني",
+      subscribe: "Join the club",
+      subscribed: "أنت الآن في القائمة.",
+      countdown: "يفتح الإصدار بعد",
+      days: "أيام",
+      hours: "ساعات",
+      minutes: "دقائق",
+      seconds: "ثوان"
     },
     checkout: {
       successTitle: "تم استلام الطلب",
@@ -332,9 +386,13 @@ const I18N = {
   }
 };
 
+const LAUNCH_DATE = new Date("2026-06-06T00:00:00+02:00");
+const ACCESS_HASH = "c1111e162eb6d424f42b1b970b98780963ee494bac8ae1f3ad2ef42f426ab3cc";
+
 const state = {
   lang: localStorage.getItem("lantso:lang") || "en",
   cart: loadCart(),
+  locked: localStorage.getItem("lantso:access") !== "granted",
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, product.sizes[0]])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR"
 };
@@ -344,6 +402,7 @@ const drawer = document.querySelector("[data-cart-drawer]");
 const cartBody = document.querySelector("[data-cart-body]");
 const cartCount = document.querySelector("[data-cart-count]");
 const clubModal = document.querySelector("[data-club-modal]");
+let countdownTimer;
 
 function t(path) {
   return path.split(".").reduce((value, key) => value?.[key], I18N[state.lang]) || path;
@@ -483,28 +542,90 @@ function placeholder(label = "") {
 
 function visualFor(label) {
   const key = label.toLowerCase();
+  if (key.includes("detail one")) {
+    return { src: "/assets/photos/campaign-1.png", className: "campaign-visual" };
+  }
+  if (key.includes("detail two")) {
+    return { src: "/assets/photos/campaign-3.png", className: "campaign-visual" };
+  }
+  if (key.includes("detail three")) {
+    return { src: "/assets/photos/campaign-4.png", className: "campaign-visual" };
+  }
   if (key.includes("roots 01") || key.includes("روتس")) {
-    return { src: "/assets/jersey-roots.svg", className: "product-visual" };
+    return { src: "/assets/photos/roots-01-khaki.png", className: "product-visual" };
   }
   if (key.includes("atlas") || key.includes("أطلس")) {
-    return { src: "/assets/jersey-atlas.svg", className: "product-visual" };
+    return { src: "/assets/photos/atlas-02-white.png", className: "product-visual" };
   }
-  if (key.includes("campaign image one") || key.includes("origin") || key.includes("pencil sketch one")) {
-    return { src: "/assets/gallery-01.svg", className: "campaign-visual" };
+  if (key.includes("campaign image one")) {
+    return { src: "/assets/photos/campaign-1.png", className: "campaign-visual" };
   }
-  if (key.includes("campaign image two") || key.includes("campaign image four")) {
-    return { src: "/assets/gallery-02.svg", className: "campaign-visual" };
+  if (key.includes("campaign image two")) {
+    return { src: "/assets/photos/campaign-2.png", className: "campaign-visual" };
   }
   if (key.includes("campaign image three")) {
-    return { src: "/assets/gallery-01.svg", className: "campaign-visual" };
+    return { src: "/assets/photos/campaign-3.png", className: "campaign-visual" };
   }
-  if (key.includes("pencil")) {
-    return { src: "/assets/sketch-roots.svg", className: "campaign-visual" };
+  if (key.includes("campaign image four")) {
+    return { src: "/assets/photos/campaign-4.png", className: "campaign-visual" };
   }
-  if (key.includes("chapter")) {
-    return { src: "/assets/chapter-roots.svg", className: "campaign-visual" };
+  if (key.includes("origin") || key.includes("pencil") || key.includes("chapter")) {
+    return { src: "/assets/photos/story.png", className: "campaign-visual" };
   }
-  return { src: "/assets/hero-campaign.svg", className: "hero-visual" };
+  return { src: "/assets/photos/hero.png", className: "hero-visual" };
+}
+
+function gatePage() {
+  const parts = countdownParts();
+  return `
+    <section class="gate-page">
+      <figure class="gate-media" aria-hidden="true">
+        <img src="/assets/photos/hero.png" alt="">
+      </figure>
+      <div class="gate-language" aria-label="Language">
+        ${["en", "fr", "ar"]
+          .map((lang) => `<button class="lang-button${state.lang === lang ? " is-active" : ""}" type="button" data-gate-lang="${lang}">${lang === "en" ? "🇬🇧" : lang === "fr" ? "🇫🇷" : "🇲🇦"}</button>`)
+          .join("")}
+      </div>
+      <div class="gate-content">
+        <img class="gate-logo" src="/Lantso_text.svg" alt="Lantso">
+        <p class="gate-date">${t("gate.date")}</p>
+        <h1 class="script-title">${t("gate.title").replace("\n", "<br>")}</h1>
+        <p class="gate-intro">${t("gate.intro")}</p>
+        <div class="countdown" aria-label="${t("gate.countdown")}">
+          ${countdownUnit("days", parts.days)}
+          ${countdownUnit("hours", parts.hours)}
+          ${countdownUnit("minutes", parts.minutes)}
+          ${countdownUnit("seconds", parts.seconds)}
+        </div>
+        <form class="gate-form" data-access-form>
+          <label>
+            <span>${t("gate.password")}</span>
+            <input name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button class="button-primary" type="submit">${t("gate.unlock")}</button>
+          <p class="form-message" data-access-message role="status"></p>
+        </form>
+        <form class="gate-form gate-newsletter" data-gate-newsletter>
+          <label>
+            <span>${t("gate.email")}</span>
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+          <button class="button-secondary" type="submit">${t("gate.subscribe")}</button>
+          <p class="form-message" data-gate-newsletter-message role="status"></p>
+        </form>
+      </div>
+    </section>
+  `;
+}
+
+function countdownUnit(key, value) {
+  return `
+    <div class="countdown-unit">
+      <strong data-countdown-value="${key}">${String(value).padStart(2, "0")}</strong>
+      <span>${t(`gate.${key}`)}</span>
+    </div>
+  `;
 }
 
 function footer() {
@@ -668,7 +789,7 @@ function productPage(productId) {
   const product = findProduct(productId) || PRODUCTS[0];
   const productName = product.shortName[state.lang] || product.shortName.en;
   const selected = state.selectedSizes[product.id];
-  const shipping = calculateShipping(state.shippingCountry, product.price);
+  const shipping = calculateShipping(state.shippingCountry, product.price, 1);
   return `
     <div class="page-shell">
       ${breadcrumb(productName)}
@@ -688,8 +809,11 @@ function productPage(productId) {
           <div class="detail-list">
             <div><span>${t("product.price")}</span><strong>${formatMoney(product.price, locale())}</strong></div>
             <div><span>${t("product.color")}</span><strong>${product.color[state.lang] || product.color.en}</strong></div>
+            <div><span>${t("product.material")}</span><strong>${product.material[state.lang] || product.material.en}</strong></div>
+            <div><span>${t("product.measurements")}</span><strong>${sizeGuide(product)}</strong></div>
             <div><span>${t("product.stock")}</span><strong>${t("product.limited")}</strong></div>
             <div><span>${t("product.shippingEstimate")}</span><strong>${formatMoney(shipping.amount, locale())} · ${shipping.zone.eta[state.lang] || shipping.zone.eta.en}</strong></div>
+            <div class="detail-long"><span>${t("product.care")}</span><strong>${product.care[state.lang] || product.care.en}</strong></div>
           </div>
           <div class="size-row" role="group" aria-label="${t("product.size")}">
             ${product.sizes
@@ -834,6 +958,19 @@ function noticePage(kind) {
 }
 
 function render() {
+  if (state.locked) {
+    document.body.classList.add("is-gated");
+    document.querySelector(".site-header").hidden = true;
+    app.innerHTML = `<div class="page">${gatePage()}</div>`;
+    bindGateEvents();
+    startCountdown();
+    window.scrollTo({ top: 0, behavior: "instant" });
+    return;
+  }
+
+  stopCountdown();
+  document.body.classList.remove("is-gated");
+  document.querySelector(".site-header").hidden = false;
   const current = route();
   document.querySelector(".site-header").dataset.floating = current.name === "home";
   if (current.name === "home") app.innerHTML = `<div class="page">${homePage()}</div>`;
@@ -847,6 +984,41 @@ function render() {
   bindPageEvents();
   renderCart();
   window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function bindGateEvents() {
+  app.querySelectorAll("[data-gate-lang]").forEach((button) => {
+    button.addEventListener("click", () => setLanguage(button.dataset.gateLang));
+  });
+
+  const accessForm = app.querySelector("[data-access-form]");
+  accessForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const message = accessForm.querySelector("[data-access-message]");
+    const password = new FormData(accessForm).get("password");
+    const unlocked = await verifyAccess(password);
+    if (!unlocked) {
+      message.textContent = t("gate.invalid");
+      return;
+    }
+    localStorage.setItem("lantso:access", "granted");
+    state.locked = false;
+    render();
+  });
+
+  const newsletterForm = app.querySelector("[data-gate-newsletter]");
+  newsletterForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const message = newsletterForm.querySelector("[data-gate-newsletter-message]");
+    const email = new FormData(newsletterForm).get("email");
+    const response = await submitForm("club", {
+      name: "Launch list",
+      email,
+      newsletter: "yes"
+    });
+    message.textContent = response.ok ? t("gate.subscribed") : t("club.error");
+    if (response.ok) newsletterForm.reset();
+  });
 }
 
 function bindPageEvents() {
@@ -890,7 +1062,7 @@ function bindPageEvents() {
       const data = new FormData(calculator);
       state.shippingCountry = data.get("country");
       localStorage.setItem("lantso:shippingCountry", state.shippingCountry);
-      const result = calculateShipping(state.shippingCountry, subtotal() || PRODUCTS[0].price);
+      const result = calculateShipping(state.shippingCountry, subtotal() || PRODUCTS[0].price, cartQuantity() || 1);
       calculator.querySelector("[data-calc-result]").textContent = `${result.zone.label[state.lang] || result.zone.label.en}: ${formatMoney(result.amount, locale())} · ${result.zone.eta[state.lang] || result.zone.eta.en}`;
       renderCart();
     });
@@ -902,7 +1074,7 @@ function bindPageEvents() {
       event.preventDefault();
       const message = contactForm.querySelector("[data-contact-message]");
       const payload = Object.fromEntries(new FormData(contactForm));
-      const response = await postJson("/api/contact", payload);
+      const response = await submitForm("contact", payload);
       message.textContent = response.ok ? t("legal.sent") : t("club.error");
       if (response.ok) contactForm.reset();
     });
@@ -925,7 +1097,7 @@ function renderCart() {
   }
 
   const sub = subtotal();
-  const shipping = calculateShipping(state.shippingCountry, sub);
+  const shipping = calculateShipping(state.shippingCountry, sub, cartQuantity());
   const total = sub + shipping.amount;
   cartBody.innerHTML = `
     <div class="cart-items">
@@ -1000,6 +1172,15 @@ function countryOptions(selected) {
   ).join("");
 }
 
+function sizeGuide(product) {
+  return product.sizes
+    .map((size) => {
+      const measure = product.measurements[size];
+      return `${size}: ${measure.length}cm x ${measure.width}cm`;
+    })
+    .join(" / ");
+}
+
 async function checkout(preferredMethod = "") {
   const message = cartBody.querySelector("[data-checkout-message]");
   if (message) message.textContent = "";
@@ -1029,6 +1210,70 @@ async function postJson(url, payload) {
   } catch (error) {
     return { ok: false, data: { message: error.message } };
   }
+}
+
+async function submitForm(name, payload) {
+  const body = new URLSearchParams({ "form-name": name, ...payload }).toString();
+  try {
+    const response = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body
+    });
+    if (response.ok) return { ok: true, data: {} };
+  } catch {
+    // Local development falls back to the JSON endpoints below.
+  }
+  const endpoint = name === "contact" ? "/api/contact" : "/api/club";
+  return postJson(endpoint, payload);
+}
+
+async function verifyAccess(password) {
+  const response = await postJson("/api/access", { password });
+  if (response.ok && response.data?.ok) return true;
+  return (await sha256(String(password || ""))) === ACCESS_HASH;
+}
+
+async function sha256(value) {
+  if (!window.crypto?.subtle) return "";
+  const bytes = new TextEncoder().encode(value);
+  const digest = await window.crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function countdownParts() {
+  const diff = Math.max(0, LAUNCH_DATE.getTime() - Date.now());
+  const seconds = Math.floor(diff / 1000);
+  return {
+    days: Math.floor(seconds / 86400),
+    hours: Math.floor((seconds % 86400) / 3600),
+    minutes: Math.floor((seconds % 3600) / 60),
+    seconds: seconds % 60
+  };
+}
+
+function startCountdown() {
+  stopCountdown();
+  updateCountdown();
+  countdownTimer = window.setInterval(updateCountdown, 1000);
+}
+
+function stopCountdown() {
+  if (countdownTimer) {
+    window.clearInterval(countdownTimer);
+    countdownTimer = undefined;
+  }
+}
+
+function updateCountdown() {
+  const parts = countdownParts();
+  Object.entries(parts).forEach(([key, value]) => {
+    app.querySelectorAll(`[data-countdown-value="${key}"]`).forEach((node) => {
+      node.textContent = String(value).padStart(2, "0");
+    });
+  });
 }
 
 function escapeHtml(value) {
@@ -1067,8 +1312,8 @@ document.querySelector("[data-club-form]").addEventListener("submit", async (eve
   const form = event.currentTarget;
   const message = form.querySelector("[data-club-message]");
   const payload = Object.fromEntries(new FormData(form));
-  payload.newsletter = form.newsletter.checked;
-  const response = await postJson("/api/club", payload);
+  payload.newsletter = form.newsletter.checked ? "yes" : "no";
+  const response = await submitForm("club", payload);
   message.textContent = response.ok ? t("club.success") : response.data?.message || t("club.error");
   if (response.ok) form.reset();
 });

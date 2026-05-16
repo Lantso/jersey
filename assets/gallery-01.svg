@@ -1,9 +1,0 @@
-<svg width="900" height="620" viewBox="0 0 900 620" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="900" height="620" fill="#d9d9d9"/>
-  <filter id="n" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2"/><feComponentTransfer><feFuncA type="table" tableValues="0 .08"/></feComponentTransfer></filter>
-  <rect width="900" height="620" filter="url(#n)"/>
-  <rect x="86" y="86" width="728" height="448" fill="#cfcfcf"/>
-  <path d="M146 474c116-118 213-177 291-177 58 0 112 27 162 80 38 40 90 73 155 97v60H146v-60Z" fill="#b8b8b8"/>
-  <path d="M132 122h172v240H132zM365 122h172v240H365zM598 122h172v240H598z" fill="#efeee8" opacity=".68"/>
-  <path d="M177 154h82M410 154h82M643 154h82" stroke="#111" stroke-width="10"/>
-</svg>
