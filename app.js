@@ -392,7 +392,8 @@ const state = {
   cart: loadCart(),
   locked: localStorage.getItem("lantso:access") !== "granted",
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, product.sizes[0]])),
-  shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR"
+  shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
+  inventory: null
 };
 
 const app = document.querySelector("#app");
@@ -566,6 +567,19 @@ function subtotal() {
   return lineItems().reduce((sum, item) => sum + item.lineTotal, 0);
 }
 
+function stockAvailable(productId, size) {
+  const live = state.inventory?.products?.[productId]?.sizes?.[size]?.available;
+  if (Number.isFinite(Number(live))) return Math.max(0, Number(live));
+  const product = findProduct(productId);
+  return Math.max(0, Number(product?.inventory?.[size] || 0));
+}
+
+function stockSummary(product) {
+  const total = product.sizes.reduce((sum, size) => sum + stockAvailable(product.id, size), 0);
+  if (total <= 0) return state.lang === "fr" ? "Epuisé" : state.lang === "ar" ? "نفد المخزون" : "Sold out";
+  return `${t("product.limited")} · ${total}`;
+}
+
 function cartQuantity() {
   return state.cart.reduce((sum, item) => sum + item.quantity, 0);
 }
@@ -574,6 +588,8 @@ function addToCart(productId, size = state.selectedSizes[productId], quantity = 
   const product = findProduct(productId);
   if (!product || !product.sizes.includes(size)) return;
   const existing = state.cart.find((item) => item.productId === productId && item.size === size);
+  const currentQuantity = existing?.quantity || 0;
+  if (currentQuantity + quantity > stockAvailable(productId, size)) return;
   if (existing) {
     existing.quantity += quantity;
   } else {
@@ -588,6 +604,9 @@ function updateQuantity(productId, size, delta) {
   const item = state.cart.find((entry) => entry.productId === productId && entry.size === size);
   if (!item) return;
   item.quantity += delta;
+  if (item.quantity > stockAvailable(productId, size)) {
+    item.quantity = stockAvailable(productId, size);
+  }
   if (item.quantity <= 0) {
     state.cart = state.cart.filter((entry) => !(entry.productId === productId && entry.size === size));
   }
@@ -878,8 +897,10 @@ function shopCard(product) {
       <div class="size-row" role="group" aria-label="${t("product.size")}">
         ${product.sizes
           .map((size) => {
-            const low = product.inventory[size] <= 16 ? " is-low" : "";
-            return `<button class="size-button${low}" type="button" data-size="${product.id}:${size}" aria-pressed="${selected === size}">${size}</button>`;
+            const available = stockAvailable(product.id, size);
+            const low = available > 0 && available <= 4 ? " is-low" : "";
+            const soldOut = available <= 0 ? " is-sold-out" : "";
+            return `<button class="size-button${low}${soldOut}" type="button" data-size="${product.id}:${size}" aria-pressed="${selected === size}" ${available <= 0 ? "disabled" : ""}>${size}</button>`;
           })
           .join("")}
       </div>
@@ -918,13 +939,17 @@ function productPage(productId) {
             <div><span>${t("product.color")}</span><strong>${product.color[state.lang] || product.color.en}</strong></div>
             <div><span>${t("product.material")}</span><strong>${product.material[state.lang] || product.material.en}</strong></div>
             <div><span>${t("product.measurements")}</span><strong>${sizeGuide(product)}</strong></div>
-            <div><span>${t("product.stock")}</span><strong>${t("product.limited")}</strong></div>
+            <div><span>${t("product.stock")}</span><strong>${stockSummary(product)}</strong></div>
             <div><span>${t("product.shippingEstimate")}</span><strong>${formatMoney(shipping.amount, locale())} · ${shipping.zone.eta[state.lang] || shipping.zone.eta.en}</strong></div>
             <div class="detail-long"><span>${t("product.care")}</span><strong>${product.care[state.lang] || product.care.en}</strong></div>
           </div>
           <div class="size-row" role="group" aria-label="${t("product.size")}">
             ${product.sizes
-              .map((size) => `<button class="size-button" type="button" data-size="${product.id}:${size}" aria-pressed="${selected === size}">${size}</button>`)
+              .map((size) => {
+                const available = stockAvailable(product.id, size);
+                const soldOut = available <= 0 ? " is-sold-out" : "";
+                return `<button class="size-button${soldOut}" type="button" data-size="${product.id}:${size}" aria-pressed="${selected === size}" ${available <= 0 ? "disabled" : ""}>${size}</button>`;
+              })
               .join("")}
           </div>
           <div class="claim-row">
@@ -1252,6 +1277,7 @@ function renderCart() {
 
 function cartItem(line) {
   const productName = line.product.shortName[state.lang] || line.product.shortName.en;
+  const canIncrease = line.quantity < stockAvailable(line.productId, line.size);
   return `
     <article class="cart-item">
       ${placeholder(productName)}
@@ -1262,7 +1288,7 @@ function cartItem(line) {
         <div class="qty-row">
           <button type="button" data-qty="${line.productId}:${line.size}:-1" aria-label="-">-</button>
           <span>${t("cart.qty")} ${line.quantity}</span>
-          <button type="button" data-qty="${line.productId}:${line.size}:1" aria-label="+">+</button>
+          <button type="button" data-qty="${line.productId}:${line.size}:1" aria-label="+" ${canIncrease ? "" : "disabled"}>+</button>
           <button type="button" data-remove="${line.productId}:${line.size}">${t("cart.remove")}</button>
         </div>
       </div>
@@ -1410,6 +1436,7 @@ async function checkout(preferredMethod = "") {
     window.location.assign(response.data.url);
     return;
   }
+  if (response.status === 409) refreshInventory();
   if (message) message.textContent = response.data?.message || t("cart.checkoutError");
 }
 
@@ -1421,9 +1448,30 @@ async function postJson(url, payload) {
       body: JSON.stringify(payload)
     });
     const data = await response.json().catch(() => ({}));
-    return { ok: response.ok, data };
+    return { ok: response.ok, status: response.status, data };
   } catch (error) {
-    return { ok: false, data: { message: error.message } };
+    return { ok: false, status: 0, data: { message: error.message } };
+  }
+}
+
+async function refreshInventory() {
+  try {
+    const response = await fetch("/api/inventory", {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    if (!response.ok) return;
+    state.inventory = await response.json();
+    for (const product of PRODUCTS) {
+      const selected = state.selectedSizes[product.id];
+      if (stockAvailable(product.id, selected) <= 0) {
+        state.selectedSizes[product.id] = product.sizes.find((size) => stockAvailable(product.id, size) > 0) || selected;
+      }
+    }
+    render();
+    renderCart();
+  } catch {
+    // Static catalog stock remains as the fallback if the live endpoint is unavailable.
   }
 }
 
@@ -1546,3 +1594,4 @@ document.querySelector("[data-club-form]").addEventListener("submit", async (eve
 
 window.addEventListener("popstate", render);
 setLanguage(state.lang);
+refreshInventory();

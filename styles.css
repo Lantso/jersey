@@ -506,6 +506,42 @@ a {
   color: var(--white);
 }
 
+.size-button:disabled,
+.qty-row button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+  text-decoration: line-through;
+}
+
+.seo-hero,
+.seo-section,
+.seo-products,
+.seo-product {
+  padding: clamp(72px, 10vw, 132px) var(--page-pad);
+}
+
+.seo-hero img,
+.seo-section img,
+.seo-products img,
+.seo-product img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.seo-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.seo-product {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 40px;
+  align-items: start;
+}
+
 .origin-band {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);

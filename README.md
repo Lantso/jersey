@@ -21,10 +21,11 @@ http://127.0.0.1:3000
 3. Add `STRIPE_SECRET_KEY` in Netlify.
 4. Add `STRIPE_WEBHOOK_SECRET` after creating the Stripe webhook.
 5. In Stripe, enable the payment methods the business can legally support in its region. Leave `STRIPE_PAYMENT_METHOD_TYPES` empty to let Stripe show eligible dashboard-enabled methods, or set a comma list such as `card,klarna,paypal` after confirming account eligibility.
-6. Review `PRODUCTS`, prices, inventory, and copy in `catalog.mjs`.
-7. Review `SHIPPING_ZONES` in `catalog.mjs`. Current tiers use the 300g / 32x45x4cm parcel data and calculate a tracked home-delivery rate by country and quantity.
-8. Netlify Forms captures launch newsletter, club, and contact submissions. Configure Netlify email notifications to `contact@lantso.com`.
-9. Have the business validate legal registration details, tax settings, privacy wording, and terms before taking live orders.
+6. Netlify Blobs stores production stock reservations and paid orders. No extra database account is needed on Netlify, but the dependency must install during the Netlify build.
+7. Review `PRODUCTS`, prices, inventory, and copy in `catalog.mjs`.
+8. Review `SHIPPING_ZONES` in `catalog.mjs`. Current tiers use the 300g / 32x45x4cm parcel data and calculate a tracked home-delivery rate by country and quantity.
+9. Netlify Forms captures launch newsletter, club, and contact submissions. Configure Netlify email notifications to `contact@lantso.com`.
+10. Have the business validate legal registration details, tax settings, privacy wording, and terms before taking live orders.
 
 ## Launch Gate
 
@@ -42,8 +43,13 @@ The local server appends operational records under `data/`:
 - `paid-orders.jsonl`
 - `club-profiles.jsonl`
 - `contact-messages.jsonl`
+- `inventory-state.json`
 
-For production, Netlify Forms captures club/contact submissions and Stripe Dashboard captures paid orders.
+For production, Netlify Forms captures club/contact submissions. Netlify Blobs stores checkout reservations, inventory sold counts, and paid-order records outside the Stripe Dashboard.
+
+## Inventory Safety
+
+`lib/inventory.mjs` reserves stock before creating a Stripe Checkout Session. It writes the shared stock state with Netlify Blobs conditional writes (`onlyIfMatch` / `onlyIfNew`) and retries on conflicts, so concurrent buyers cannot both reserve the same final piece. Stripe Checkout expiry is set on each session, and expired or failed sessions release their reservation.
 
 ## Webhook
 
@@ -57,5 +63,15 @@ Listen for:
 
 - `checkout.session.completed`
 - `checkout.session.async_payment_succeeded`
+- `checkout.session.expired`
+- `checkout.session.async_payment_failed`
 
-The site already verifies Stripe signatures when `STRIPE_WEBHOOK_SECRET` is set.
+The site verifies Stripe signatures when `STRIPE_WEBHOOK_SECRET` is set. The webhook is the only code path that permanently marks inventory as sold and records a paid order.
+
+## SEO Build
+
+```bash
+npm run build
+```
+
+The build writes pre-rendered HTML files to `dist/` for `/`, `/shop`, both product pages, `/info`, `/legal`, and `/roots`. Netlify publishes `dist/`.

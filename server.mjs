@@ -1,4 +1,3 @@
-import crypto from "node:crypto";
 import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { mkdir, stat, appendFile } from "node:fs/promises";
 import http from "node:http";
@@ -6,6 +5,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { verifyAccessPassword } from "./lib/access.mjs";
 import { createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
+import { getInventorySnapshot, handleStripeCommerceEvent } from "./lib/inventory.mjs";
+import { verifyStripeSignature } from "./lib/stripe-webhook.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -48,6 +49,9 @@ const server = http.createServer(async (request, response) => {
     }
     if (url.pathname === "/api/create-checkout-session" && request.method === "POST") {
       return createCheckoutSession(request, response);
+    }
+    if (url.pathname === "/api/inventory" && request.method === "GET") {
+      return inventorySnapshot(response);
     }
     if (url.pathname === "/api/access" && request.method === "POST") {
       return verifyAccess(request, response);
@@ -93,6 +97,10 @@ async function createCheckoutSession(request, response) {
   return json(response, 200, result.data);
 }
 
+async function inventorySnapshot(response) {
+  return json(response, 200, await getInventorySnapshot());
+}
+
 async function verifyAccess(request, response) {
   const body = await readJson(request);
   if (!verifyAccessPassword(body.password)) {
@@ -135,41 +143,27 @@ async function handleStripeWebhook(request, response) {
     return json(response, 400, { message: "Invalid webhook signature" });
   }
   const event = JSON.parse(rawBody.toString("utf8"));
-  if (event.type === "checkout.session.completed" || event.type === "checkout.session.async_payment_succeeded") {
+  const result = await handleStripeCommerceEvent(event);
+  if (result.order) {
     await appendJsonl("paid-orders.jsonl", {
       receivedAt: new Date().toISOString(),
       type: event.type,
-      session: event.data.object
+      order: result.order
     });
   }
-  return json(response, 200, { received: true });
-}
-
-function verifyStripeSignature(signatureHeader, rawBody) {
-  if (!process.env.STRIPE_WEBHOOK_SECRET || process.env.STRIPE_WEBHOOK_SECRET.includes("replace_me")) {
-    return false;
-  }
-  if (!signatureHeader) return false;
-  const fields = Object.fromEntries(signatureHeader.split(",").map((pair) => pair.split("=")));
-  const timestamp = fields.t;
-  const expected = fields.v1;
-  if (!timestamp || !expected) return false;
-  const signedPayload = `${timestamp}.${rawBody.toString("utf8")}`;
-  const digest = crypto
-    .createHmac("sha256", process.env.STRIPE_WEBHOOK_SECRET)
-    .update(signedPayload)
-    .digest("hex");
-  try {
-    return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(expected));
-  } catch {
-    return false;
-  }
+  return json(response, 200, { received: true, action: result.status || "processed" });
 }
 
 async function serveStatic(pathname, response, headOnly = false) {
-  const safePath = pathname === "/" ? "/index.html" : decodeURIComponent(pathname);
+  let safePath = "/";
+  try {
+    safePath = pathname === "/" ? "/index.html" : decodeURIComponent(pathname).replaceAll("\0", "");
+  } catch {
+    return json(response, 400, { message: "Bad request" });
+  }
   let filePath = path.normalize(path.join(__dirname, safePath));
-  if (!filePath.startsWith(__dirname)) {
+  const relative = path.relative(__dirname, filePath);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) {
     return json(response, 403, { message: "Forbidden" });
   }
   try {

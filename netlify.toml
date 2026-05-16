@@ -1,5 +1,6 @@
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
   functions = "netlify/functions"
 
 [[headers]]
@@ -20,6 +21,11 @@
 [[redirects]]
   from = "/api/create-checkout-session"
   to = "/.netlify/functions/create-checkout-session"
+  status = 200
+
+[[redirects]]
+  from = "/api/inventory"
+  to = "/.netlify/functions/inventory"
   status = 200
 
 [[redirects]]

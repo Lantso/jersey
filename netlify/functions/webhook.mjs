@@ -1,32 +1,29 @@
-import crypto from "node:crypto";
 import { securityHeaders } from "../../lib/checkout.mjs";
+import { handleStripeCommerceEvent } from "../../lib/inventory.mjs";
+import { verifyStripeSignature } from "../../lib/stripe-webhook.mjs";
 
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return json(405, { message: "Method not allowed" });
   }
   const rawBody = Buffer.from(event.body || "", event.isBase64Encoded ? "base64" : "utf8");
-  if (!verifyStripeSignature(event.headers["stripe-signature"], rawBody)) {
+  if (!verifyStripeSignature(header(event, "stripe-signature"), rawBody)) {
     return json(400, { message: "Invalid webhook signature" });
   }
-  return json(200, { received: true });
+  const stripeEvent = parseJson(rawBody);
+  const result = await handleStripeCommerceEvent(stripeEvent);
+  return json(200, { received: true, action: result.status || "processed" });
 }
 
-function verifyStripeSignature(signatureHeader, rawBody) {
-  const secret = process.env.STRIPE_WEBHOOK_SECRET || "";
-  if (!secret || secret.includes("replace_me")) return false;
-  if (!signatureHeader) return false;
+function header(event, name) {
+  return event.headers?.[name] || event.headers?.[name.toLowerCase()] || event.headers?.[name.toUpperCase()];
+}
 
-  const fields = Object.fromEntries(signatureHeader.split(",").map((pair) => pair.split("=")));
-  const timestamp = fields.t;
-  const expected = fields.v1;
-  if (!timestamp || !expected) return false;
-
-  const digest = crypto.createHmac("sha256", secret).update(`${timestamp}.${rawBody.toString("utf8")}`).digest("hex");
+function parseJson(rawBody) {
   try {
-    return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(expected));
+    return JSON.parse(rawBody.toString("utf8"));
   } catch {
-    return false;
+    return {};
   }
 }
 

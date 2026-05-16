@@ -1,6 +1,8 @@
 .DS_Store
 .env
 data/*.jsonl
+data/inventory-state.json
+dist/
 node_modules/
 /green_Jersey.png
 /white_Jersey.png
