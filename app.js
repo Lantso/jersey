@@ -7,6 +7,11 @@ import {
   formatMoney
 } from "./catalog.mjs";
 
+const SOCIAL_LINKS = {
+  instagram: "https://www.instagram.com/lantso.at",
+  tiktok: "https://www.tiktok.com/@lantsobrand"
+};
+
 const I18N = {
   en: {
     nav: {
@@ -84,14 +89,14 @@ const I18N = {
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Lantso sells limited edition jerseys in EUR. An order is confirmed only after successful payment through Stripe Checkout. Delivery is prepared manually after payment and sent with tracked home delivery. For support, contact contact@lantso.com.",
+      termsBody: "Lantso sells limited edition jerseys in EUR. No VAT number is displayed on the storefront. An order is confirmed only after successful payment through Stripe Checkout. Delivery is prepared manually after payment and sent with tracked home delivery. For support, contact contact@lantso.com.",
       privacyBody: "Customer details are used for checkout, delivery, support, fraud prevention, and optional newsletter access. Payment data is handled by Stripe and is not stored by this website.",
       contactBody: "For order support, sizing, press, or wholesale requests, use the form below or write to contact@lantso.com.",
       name: "Name",
       email: "Email",
       message: "Message",
       send: "Send",
-      sent: "Message saved. Connect email delivery before launch."
+      sent: "Message saved. We will reply by email."
     },
     roots: {
       title: "Before the design,\nthere was a story",
@@ -217,14 +222,14 @@ const I18N = {
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Lantso vend des maillots en edition limitee en EUR. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout. La preparation est faite manuellement apres paiement puis envoyee en livraison suivie a domicile. Pour le support : contact@lantso.com.",
+      termsBody: "Lantso vend des maillots en edition limitee en EUR. Aucun numero de TVA n'est affiche sur la boutique. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout. La preparation est faite manuellement apres paiement puis envoyee en livraison suivie a domicile. Pour le support : contact@lantso.com.",
       privacyBody: "Les donnees client servent au paiement, a la livraison, au support, a la prevention de fraude et a la newsletter optionnelle. Les donnees de paiement sont gerees par Stripe et ne sont pas stockees par ce site.",
       contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous ou ecris a contact@lantso.com.",
       name: "Nom",
       email: "Email",
       message: "Message",
       send: "Envoyer",
-      sent: "Message enregistre. Connecter l'envoi email avant lancement."
+      sent: "Message enregistre. Nous repondrons par email."
     },
     roots: {
       title: "Avant le design,\nil y avait une histoire",
@@ -350,14 +355,14 @@ const I18N = {
     },
     legal: {
       title: "القانوني والتواصل",
-      termsBody: "تبيع Lantso قمصانا محدودة باليورو. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout. يتم تجهيز الطلب يدويا بعد الدفع ثم إرساله بتوصيل متتبع إلى المنزل. للدعم: contact@lantso.com.",
+      termsBody: "تبيع Lantso قمصانا محدودة باليورو. لا يتم عرض رقم ضريبة VAT في المتجر. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout. يتم تجهيز الطلب يدويا بعد الدفع ثم إرساله بتوصيل متتبع إلى المنزل. للدعم: contact@lantso.com.",
       privacyBody: "تستخدم بيانات العميل للدفع والتوصيل والدعم ومنع الاحتيال والنشرة الاختيارية. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع.",
       contactBody: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، استخدم النموذج أدناه أو اكتب إلى contact@lantso.com.",
       name: "الاسم",
       email: "البريد الإلكتروني",
       message: "الرسالة",
       send: "إرسال",
-      sent: "تم حفظ الرسالة. اربط خدمة البريد قبل الإطلاق."
+      sent: "تم حفظ الرسالة. سنرد عبر البريد الإلكتروني."
     },
     roots: {
       title: "قبل التصميم،\nكانت هناك قصة",
@@ -753,7 +758,21 @@ function trapCartFocus(event) {
 }
 
 function paymentBadges() {
-  return document.querySelector("#payment-badges").innerHTML;
+  return `
+    <div class="payment-strip" aria-label="secure payments">
+      <span class="payment-icon amex" aria-label="American Express"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="14">AM</text><text x="32" y="25">EX</text></svg></span>
+      <span class="payment-icon apple" aria-label="Apple Pay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">Pay</text></svg></span>
+      <span class="payment-icon bancontact" aria-label="Bancontact"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><path d="M8 18h48v8H8z"/><path d="M8 8h48v8H8z"/><text x="32" y="22">bc</text></svg></span>
+      <span class="payment-icon gpay" aria-label="Google Pay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">G Pay</text></svg></span>
+      <span class="payment-icon ideal" aria-label="iDEAL"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">iDEAL</text></svg></span>
+      <span class="payment-icon klarna" aria-label="Klarna"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">Klarna</text></svg></span>
+      <span class="payment-icon maestro" aria-label="Maestro"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><circle cx="26" cy="17" r="10"/><circle cx="38" cy="17" r="10"/><text x="32" y="28">Maestro</text></svg></span>
+      <span class="payment-icon mastercard" aria-label="Mastercard"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><circle cx="26" cy="17" r="10"/><circle cx="38" cy="17" r="10"/></svg></span>
+      <span class="payment-icon shoppay" aria-label="Shop Pay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">shop</text></svg></span>
+      <span class="payment-icon unionpay" aria-label="UnionPay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="15">Union</text><text x="32" y="25">Pay</text></svg></span>
+      <span class="payment-icon visa" aria-label="Visa"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">VISA</text></svg></span>
+    </div>
+  `;
 }
 
 function placeholder(label = "") {
@@ -898,8 +917,8 @@ function footer() {
       <div class="footer-col">
         <h3>${t("nav.locked")}</h3>
         <div class="social-row">
-          <a href="https://instagram.com" rel="noreferrer" target="_blank">IG</a>
-          <a href="https://www.tiktok.com" rel="noreferrer" target="_blank">TT</a>
+          <a href="${SOCIAL_LINKS.instagram}" rel="noreferrer" target="_blank" aria-label="Instagram">IG</a>
+          <a href="${SOCIAL_LINKS.tiktok}" rel="noreferrer" target="_blank" aria-label="TikTok">TT</a>
         </div>
       </div>
       <div class="payments">
@@ -1214,7 +1233,7 @@ function render() {
     updateSeo(route());
     document.body.classList.add("is-gated");
     document.querySelector(".site-header").hidden = true;
-    app.innerHTML = safeMarkup(`<div class="page">${gatePage()}</div>`);
+    renderMarkup(app, `<div class="page">${gatePage()}</div>`);
     bindGateEvents();
     startCountdown();
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -1227,14 +1246,14 @@ function render() {
   const current = route();
   document.querySelector(".site-header").dataset.floating = current.name === "home";
   updateSeo(current);
-  if (current.name === "home") app.innerHTML = safeMarkup(`<div class="page">${homePage()}</div>`);
-  if (current.name === "shop") app.innerHTML = safeMarkup(`<div class="page">${shopPage()}</div>`);
-  if (current.name === "product") app.innerHTML = safeMarkup(`<div class="page">${productPage(current.id)}</div>`);
-  if (current.name === "info") app.innerHTML = safeMarkup(`<div class="page">${infoPage()}</div>`);
-  if (current.name === "legal") app.innerHTML = safeMarkup(`<div class="page">${legalPage()}</div>`);
-  if (current.name === "roots") app.innerHTML = safeMarkup(`<div class="page">${rootsPage()}</div>`);
-  if (current.name === "success") app.innerHTML = safeMarkup(`<div class="page">${noticePage("success")}</div>`);
-  if (current.name === "cancel") app.innerHTML = safeMarkup(`<div class="page">${noticePage("cancel")}</div>`);
+  if (current.name === "home") renderMarkup(app, `<div class="page">${homePage()}</div>`);
+  if (current.name === "shop") renderMarkup(app, `<div class="page">${shopPage()}</div>`);
+  if (current.name === "product") renderMarkup(app, `<div class="page">${productPage(current.id)}</div>`);
+  if (current.name === "info") renderMarkup(app, `<div class="page">${infoPage()}</div>`);
+  if (current.name === "legal") renderMarkup(app, `<div class="page">${legalPage()}</div>`);
+  if (current.name === "roots") renderMarkup(app, `<div class="page">${rootsPage()}</div>`);
+  if (current.name === "success") renderMarkup(app, `<div class="page">${noticePage("success")}</div>`);
+  if (current.name === "cancel") renderMarkup(app, `<div class="page">${noticePage("cancel")}</div>`);
   bindPageEvents();
   renderCart();
   window.scrollTo({ top: 0, behavior: "instant" });
@@ -1355,7 +1374,7 @@ function renderCart() {
   cartCount.textContent = cartQuantity();
   const lines = lineItems();
   if (!lines.length) {
-    cartBody.innerHTML = safeMarkup(`
+    renderMarkup(cartBody, `
       <div class="cart-empty">
         <span class="bag-icon" aria-hidden="true"></span>
         <p>${t("cart.empty")}</p>
@@ -1369,7 +1388,7 @@ function renderCart() {
   const sub = subtotal();
   const shipping = calculateShipping(state.shippingCountry, sub, cartQuantity());
   const total = sub + shipping.amount;
-  cartBody.innerHTML = safeMarkup(`
+  renderMarkup(cartBody, `
     <div class="cart-items">
       ${lines.map((line) => cartItem(line)).join("")}
     </div>
@@ -1532,7 +1551,8 @@ function organizationSchema() {
     name: "Lantso",
     url: absoluteUrl("/"),
     logo: absoluteUrl("/lantso_logo.svg"),
-    email: "contact@lantso.com"
+    email: "contact@lantso.com",
+    sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok]
   };
 }
 
@@ -1685,11 +1705,14 @@ function updateCountdown() {
   });
 }
 
-function safeMarkup(markup) {
-  const template = document.createElement("template");
-  template.innerHTML = markup;
-  template.content.querySelectorAll("script:not([type='application/ld+json']), iframe, object, embed").forEach((node) => node.remove());
-  template.content.querySelectorAll("*").forEach((node) => {
+function renderMarkup(target, markup) {
+  target.replaceChildren(safeFragment(markup));
+}
+
+function safeFragment(markup) {
+  const parsed = new DOMParser().parseFromString(`<body>${markup}</body>`, "text/html");
+  parsed.body.querySelectorAll("script:not([type='application/ld+json']), iframe, object, embed").forEach((node) => node.remove());
+  parsed.body.querySelectorAll("*").forEach((node) => {
     [...node.attributes].forEach((attribute) => {
       const name = attribute.name.toLowerCase();
       const value = attribute.value.trim().toLowerCase();
@@ -1702,7 +1725,9 @@ function safeMarkup(markup) {
       }
     });
   });
-  return template.innerHTML;
+  const fragment = document.createDocumentFragment();
+  fragment.append(...parsed.body.childNodes);
+  return fragment;
 }
 
 function escapeHtml(value) {

@@ -3,7 +3,7 @@ import { mkdir, stat, appendFile } from "node:fs/promises";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { verifyAccessPassword } from "./lib/access.mjs";
+import { accessCookieHeader, verifyAccessPassword } from "./lib/access.mjs";
 import { corsHeaders, createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
 import { getInventorySnapshot, handleStripeCommerceEvent } from "./lib/inventory.mjs";
 import { verifyStripeSignature } from "./lib/stripe-webhook.mjs";
@@ -109,7 +109,9 @@ async function verifyAccess(request, response) {
   if (!verifyAccessPassword(body.password)) {
     return json(response, 401, { message: "Invalid password" }, request);
   }
-  return json(response, 200, { ok: true }, request);
+  return json(response, 200, { ok: true }, request, {
+    "Set-Cookie": accessCookieHeader({ secure: PUBLIC_SITE_URL.startsWith("https:") })
+  });
 }
 
 async function saveClubProfile(request, response) {
@@ -208,9 +210,9 @@ function readBody(request, maxBytes = 1024 * 1024) {
   });
 }
 
-function json(response, statusCode, payload, request = null) {
+function json(response, statusCode, payload, request = null, extraHeaders = {}) {
   const origin = request?.headers?.origin;
-  response.writeHead(statusCode, { ...securityHeaders(), ...corsHeaders(origin, PUBLIC_SITE_URL) });
+  response.writeHead(statusCode, { ...securityHeaders(), ...corsHeaders(origin, PUBLIC_SITE_URL), ...extraHeaders });
   response.end(JSON.stringify(payload));
 }
 

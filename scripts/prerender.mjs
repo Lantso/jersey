@@ -9,6 +9,10 @@ const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://www.lantso.com").replace(/\/$/, "");
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
+const SOCIAL_LINKS = {
+  instagram: "https://www.instagram.com/lantso.at",
+  tiktok: "https://www.tiktok.com/@lantsobrand"
+};
 
 const COPY = {
   homeTitle: {
@@ -66,9 +70,9 @@ const COPY = {
   },
   legalHeading: { en: "Legal and contact", fr: "Legal et contact", ar: "القانوني والتواصل" },
   legalBody: {
-    en: "Lantso sells limited edition jerseys in EUR. An order is confirmed only after successful payment through Stripe Checkout.",
-    fr: "Lantso vend des maillots en edition limitee en EUR. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout.",
-    ar: "تبيع Lantso قمصانا محدودة باليورو. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout."
+    en: "Lantso sells limited edition jerseys in EUR. No VAT number is displayed on the storefront. An order is confirmed only after successful payment through Stripe Checkout.",
+    fr: "Lantso vend des maillots en edition limitee en EUR. Aucun numero de TVA n'est affiche sur la boutique. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout.",
+    ar: "تبيع Lantso قمصانا محدودة باليورو. لا يتم عرض رقم ضريبة VAT في المتجر. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout."
   },
   rootsTitle: { en: "Discover the Roots | Lantso", fr: "Decouvrir les Roots | Lantso", ar: "اكتشف الجذور | Lantso" },
   rootsDescription: {
@@ -348,6 +352,7 @@ function legalBody(lang = DEFAULT_LANG) {
           <h1>${escapeHtml(text("legalHeading", lang))}</h1>
           <p>${escapeHtml(text("legalBody", lang))}</p>
           <p>For support, sizing, press, or wholesale requests, write to contact@lantso.com.</p>
+          <p>Instagram: <a href="${SOCIAL_LINKS.instagram}">lantso.at</a>. TikTok: <a href="${SOCIAL_LINKS.tiktok}">@lantsobrand</a>.</p>
           <p>Customer details are used for checkout, delivery, support, fraud prevention, and optional newsletter access. Payment data is handled by Stripe.</p>
         </section>
       `;
@@ -407,7 +412,8 @@ function organizationSchema(lang = DEFAULT_LANG) {
     name: "Lantso",
     url: absolute(localizedPath("/", lang)),
     logo: `${SITE_URL}/lantso_logo.svg`,
-    email: "contact@lantso.com"
+    email: "contact@lantso.com",
+    sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok]
   };
 }
 

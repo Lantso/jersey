@@ -1,4 +1,4 @@
-import { verifyAccessPassword } from "../../lib/access.mjs";
+import { accessCookieHeader, verifyAccessPassword } from "../../lib/access.mjs";
 import { corsHeaders, isAllowedOrigin, rateLimit, securityHeaders } from "../../lib/checkout.mjs";
 
 export async function handler(event) {
@@ -20,7 +20,9 @@ export async function handler(event) {
   if (!verifyAccessPassword(body.password)) {
     return json(401, { message: "Invalid password" }, origin, siteUrl);
   }
-  return json(200, { ok: true }, origin, siteUrl);
+  return json(200, { ok: true }, origin, siteUrl, {
+    "Set-Cookie": accessCookieHeader({ secure: true })
+  });
 }
 
 function header(event, name) {
@@ -31,10 +33,10 @@ function clientIp(event) {
   return header(event, "x-nf-client-connection-ip") || header(event, "client-ip") || "unknown";
 }
 
-function json(statusCode, payload, origin, siteUrl) {
+function json(statusCode, payload, origin, siteUrl, extraHeaders = {}) {
   return {
     statusCode,
-    headers: { ...securityHeaders(), ...corsHeaders(origin, siteUrl) },
+    headers: { ...securityHeaders(), ...corsHeaders(origin, siteUrl), ...extraHeaders },
     body: JSON.stringify(payload)
   };
 }
