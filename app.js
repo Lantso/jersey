@@ -122,6 +122,13 @@ const I18N = {
       minutes: "Minutes",
       seconds: "Seconds"
     },
+    form: {
+      processing: "Saving..."
+    },
+    cookie: {
+      body: "Lantso uses essential cookies and local storage for cart, language, private access, and checkout security.",
+      accept: "Accept"
+    },
     checkout: {
       successTitle: "Order received",
       successBody: "Payment is complete. A confirmation page can be expanded with order tracking once the fulfillment workflow is connected.",
@@ -247,6 +254,13 @@ const I18N = {
       hours: "Heures",
       minutes: "Minutes",
       seconds: "Secondes"
+    },
+    form: {
+      processing: "Enregistrement..."
+    },
+    cookie: {
+      body: "Lantso utilise des cookies essentiels et le stockage local pour le panier, la langue, l'acces prive et la securite du paiement.",
+      accept: "Accepter"
     },
     checkout: {
       successTitle: "Commande recue",
@@ -374,6 +388,13 @@ const I18N = {
       minutes: "دقائق",
       seconds: "ثوان"
     },
+    form: {
+      processing: "جاري الحفظ..."
+    },
+    cookie: {
+      body: "تستخدم Lantso ملفات تعريف ارتباط أساسية والتخزين المحلي للسلة واللغة والدخول الخاص وأمان الدفع.",
+      accept: "موافق"
+    },
     checkout: {
       successTitle: "تم استلام الطلب",
       successBody: "اكتملت عملية الدفع. يمكن توسيع هذه الصفحة بإضافة تتبع الطلب بعد ربط سير التجهيز.",
@@ -389,9 +410,31 @@ const I18N = {
 };
 
 const LAUNCH_DATE = new Date("2026-06-06T00:00:00+02:00");
+const LANGS = ["en", "fr", "ar"];
+const DEFAULT_LANG = "en";
+
+function languageFromPath(path = window.location.pathname) {
+  const firstSegment = path.split("/").filter(Boolean)[0];
+  return LANGS.includes(firstSegment) ? firstSegment : "";
+}
+
+function stripLanguagePrefix(path = window.location.pathname) {
+  const [pathname, suffix = ""] = String(path).split(/(?=[?#])/);
+  const parts = pathname.split("/").filter(Boolean);
+  if (!LANGS.includes(parts[0])) return `${pathname || "/"}${suffix}`;
+  const stripped = `/${parts.slice(1).join("/")}`;
+  return `${stripped === "/" ? "/" : stripped.replace(/\/$/, "")}${suffix}`;
+}
+
+function localizedPath(path, lang = state?.lang || DEFAULT_LANG) {
+  const [pathname, suffix = ""] = String(path || "/").split(/(?=[?#])/);
+  const clean = stripLanguagePrefix(pathname || "/");
+  const normalized = clean === "/" ? "" : clean;
+  return lang === DEFAULT_LANG ? `${normalized || "/"}${suffix}` : `/${lang}${normalized}${suffix}`;
+}
 
 const state = {
-  lang: localStorage.getItem("lantso:lang") || "en",
+  lang: languageFromPath() || localStorage.getItem("lantso:lang") || DEFAULT_LANG,
   cart: loadCart(),
   locked: localStorage.getItem("lantso:access") !== "granted",
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, product.sizes[0]])),
@@ -405,7 +448,9 @@ const drawer = document.querySelector("[data-cart-drawer]");
 const cartBody = document.querySelector("[data-cart-body]");
 const cartCount = document.querySelector("[data-cart-count]");
 const clubModal = document.querySelector("[data-club-modal]");
+const cookieNotice = document.querySelector("[data-cookie-notice]");
 let countdownTimer;
+let previousCartFocus;
 
 function t(path) {
   return path.split(".").reduce((value, key) => value?.[key], I18N[state.lang]) || path;
@@ -420,7 +465,7 @@ function locale() {
 function route() {
   const path = window.location.pathname;
   const hashPath = window.location.hash.startsWith("#/") ? window.location.hash.slice(1) : "";
-  const active = hashPath || path;
+  const active = stripLanguagePrefix(hashPath || path);
   if (active === "/" || active === "") return { name: "home" };
   if (active === "/shop") return { name: "shop" };
   if (active.startsWith("/product/")) return { name: "product", id: active.split("/").pop() };
@@ -435,49 +480,50 @@ function route() {
 function pageMeta(current = route()) {
   if (current.name === "product") {
     const product = findProduct(current.id) || PRODUCTS[0];
-    const name = product.name.en;
+    const name = product.name[state.lang] || product.name.en;
+    const description = product.description[state.lang] || product.description.en;
     return {
       title: `${name} - Limited Moroccan Jersey | Lantso`,
-      description: `${name} by Lantso. ${product.description.en} 100% polyester. Limited to 25 pieces per colour.`,
+      description: `${name} by Lantso. ${description} 100% polyester. Limited to 25 pieces per colour.`,
       path: `/product/${product.id}`,
       image: `/assets/photos/${product.id}.png`,
       schema: productSchema(product)
     };
   }
-  const pages = {
-    shop: {
-      title: "Shop Moroccan Jerseys | Lantso",
-      description: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan jerseys for the 2026 World Cup.",
-      path: "/shop",
-      image: "/assets/photos/hero.png",
-      schema: collectionSchema()
+  const localizedMeta = {
+    en: {
+      home: ["Lantso - From the Roots to the World", "Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White."],
+      shop: ["Shop Moroccan Jerseys | Lantso", "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan jerseys for the 2026 World Cup."],
+      info: ["Shipping, Returns and FAQ | Lantso", "Shipping, returns, sizing and FAQ information for Lantso limited Moroccan jerseys."],
+      legal: ["Legal and Contact | Lantso", "Legal information, privacy information and contact form for Lantso."],
+      roots: ["Discover the Roots | Lantso", "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world."]
     },
-    info: {
-      title: "Shipping, Returns and FAQ | Lantso",
-      description: "Shipping, returns, sizing and FAQ information for Lantso limited Moroccan jerseys.",
-      path: "/info",
-      image: "/assets/photos/story.png",
-      schema: faqSchema()
+    fr: {
+      home: ["Lantso - From the Roots to the World", "Lantso, maillots marocains tres limites pour la Coupe du Monde 2026. Roots 01 Khaki et Atlas 02 White."],
+      shop: ["Boutique maillots marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots marocains limites pour la Coupe du Monde 2026."],
+      info: ["Livraison, retours et FAQ | Lantso", "Informations livraison, retours, tailles et FAQ pour les maillots marocains limites Lantso."],
+      legal: ["Legal et contact | Lantso", "Informations legales, confidentialite et contact pour Lantso."],
+      roots: ["Decouvrir les Roots | Lantso", "L'histoire Lantso derriere Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."]
     },
-    legal: {
-      title: "Legal and Contact | Lantso",
-      description: "Legal information, privacy information and contact form for Lantso.",
-      path: "/legal",
-      image: "/assets/photos/story.png",
-      schema: organizationSchema()
-    },
-    roots: {
-      title: "Discover the Roots | Lantso",
-      description: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
-      path: "/roots",
-      image: "/assets/photos/story.png",
-      schema: organizationSchema()
+    ar: {
+      home: ["Lantso - From the Roots to the World", "Lantso، قمصان مغربية محدودة جدا لكأس العالم 2026. روتس 01 كاكي وأطلس 02 أبيض."],
+      shop: ["متجر القمصان المغربية | Lantso", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان مغربية محدودة لكأس العالم 2026."],
+      info: ["الشحن والإرجاع والأسئلة | Lantso", "معلومات الشحن والإرجاع والمقاسات والأسئلة لقمصان Lantso المغربية المحدودة."],
+      legal: ["القانوني والتواصل | Lantso", "معلومات قانونية وخصوصية وتواصل مع Lantso."],
+      roots: ["اكتشف الجذور | Lantso", "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."]
     }
+  };
+  const copy = localizedMeta[state.lang] || localizedMeta.en;
+  const pages = {
+    shop: { title: copy.shop[0], description: copy.shop[1], path: "/shop", image: "/assets/photos/hero.png", schema: collectionSchema() },
+    info: { title: copy.info[0], description: copy.info[1], path: "/info", image: "/assets/photos/story.png", schema: faqSchema() },
+    legal: { title: copy.legal[0], description: copy.legal[1], path: "/legal", image: "/assets/photos/story.png", schema: organizationSchema() },
+    roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/story.png", schema: organizationSchema() }
   };
   return (
     pages[current.name] || {
-      title: "Lantso - From the Roots to the World",
-      description: "Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White.",
+      title: copy.home[0],
+      description: copy.home[1],
       path: "/",
       image: "/assets/photos/hero.png",
       schema: collectionSchema()
@@ -487,7 +533,7 @@ function pageMeta(current = route()) {
 
 function updateSeo(current = route()) {
   const meta = pageMeta(current);
-  const url = absoluteUrl(meta.path);
+  const url = absoluteUrl(localizedPath(meta.path, state.lang));
   document.title = meta.title;
   setMeta("description", meta.description);
   setMeta("og:title", meta.title, "property");
@@ -502,6 +548,7 @@ function updateSeo(current = route()) {
     document.head.append(canonical);
   }
   canonical.href = url;
+  setAlternateLinks(meta.path);
   setStructuredData([organizationSchema(), webSiteSchema(), breadcrumbSchema(current), meta.schema].filter(Boolean));
 }
 
@@ -519,9 +566,30 @@ function absoluteUrl(path) {
   return new URL(path, "https://www.lantso.com").href;
 }
 
+function setAlternateLinks(basePath) {
+  document.querySelectorAll("link[data-lantso-alt]").forEach((node) => node.remove());
+  const alternates = [
+    ...LANGS.map((lang) => [lang, absoluteUrl(localizedPath(basePath, lang))]),
+    ["x-default", absoluteUrl(localizedPath(basePath, DEFAULT_LANG))]
+  ];
+  alternates.forEach(([hreflang, href]) => {
+    const link = document.createElement("link");
+    link.rel = "alternate";
+    link.hreflang = hreflang;
+    link.href = href;
+    link.dataset.lantsoAlt = "true";
+    document.head.append(link);
+  });
+}
+
 function navigate(path) {
-  history.pushState({}, "", path);
+  const target = localizedPath(path);
+  const hash = new URL(target, window.location.origin).hash;
+  history.pushState({}, "", target);
   render();
+  if (hash) {
+    window.setTimeout(() => document.querySelector(hash)?.scrollIntoView({ block: "start" }), 0);
+  }
 }
 
 function loadCart() {
@@ -536,7 +604,13 @@ function saveCart() {
   localStorage.setItem("lantso:cart", JSON.stringify(state.cart));
 }
 
-function setLanguage(lang) {
+function setLanguage(lang, options = {}) {
+  if (!LANGS.includes(lang)) return;
+  if (options.updateUrl) {
+    const current = route();
+    const basePath = pageMeta(current).path;
+    history.pushState({}, "", localizedPath(basePath, lang));
+  }
   state.lang = lang;
   localStorage.setItem("lantso:lang", lang);
   document.documentElement.lang = lang;
@@ -548,9 +622,17 @@ function setLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     node.textContent = t(node.dataset.i18n);
   });
-  document.querySelector("[data-open-club]").textContent = t("club.title");
+  const clubButton = document.querySelector("[data-open-club]");
+  if (clubButton) clubButton.textContent = t("club.title");
+  updateCookieNotice();
   render();
   renderCart();
+}
+
+function updateCookieNotice() {
+  if (!cookieNotice) return;
+  const accepted = localStorage.getItem("lantso:cookie") === "accepted";
+  cookieNotice.hidden = accepted;
 }
 
 function lineItems() {
@@ -627,15 +709,47 @@ function removeItem(productId, size) {
 }
 
 function openCart() {
+  previousCartFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   drawer.classList.add("is-open");
   drawer.setAttribute("aria-hidden", "false");
   document.body.classList.add("drawer-open");
+  document.addEventListener("keydown", trapCartFocus);
+  window.setTimeout(() => {
+    const target = drawer.querySelector("[data-close-cart], [data-checkout], button, select, input, a");
+    target?.focus();
+  }, 0);
 }
 
 function closeCart() {
   drawer.classList.remove("is-open");
   drawer.setAttribute("aria-hidden", "true");
   document.body.classList.remove("drawer-open");
+  document.removeEventListener("keydown", trapCartFocus);
+  previousCartFocus?.focus?.();
+  previousCartFocus = null;
+}
+
+function trapCartFocus(event) {
+  if (!drawer.classList.contains("is-open")) return;
+  if (event.key === "Escape") {
+    event.preventDefault();
+    closeCart();
+    return;
+  }
+  if (event.key !== "Tab") return;
+  const focusables = [...drawer.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])")].filter(
+    (node) => !node.disabled && node.offsetParent !== null
+  );
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables.at(-1);
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function paymentBadges() {
@@ -800,7 +914,7 @@ function footerColumn(title, links) {
   return `
     <div class="footer-col">
       <h3>${title}</h3>
-      ${links.map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}
+      ${links.map(([label, href]) => `<a href="${localizedPath(href)}" data-link>${label}</a>`).join("")}
     </div>
   `;
 }
@@ -808,7 +922,7 @@ function footerColumn(title, links) {
 function breadcrumb(current) {
   return `
     <div class="breadcrumb">
-      <a href="/" data-link>${t("nav.home")}</a>
+      <a href="${localizedPath("/")}" data-link>${t("nav.home")}</a>
       <span>›</span>
       <strong>${current}</strong>
     </div>
@@ -821,7 +935,7 @@ function homePage() {
       ${placeholder("Lantso campaign image")}
       <div class="hero-content">
         <h1 class="script-title">${t("hero.title").replace("\n", "<br>")}</h1>
-        <a class="button-primary" href="/shop" data-link>${t("hero.step")}</a>
+        <a class="button-primary" href="${localizedPath("/shop")}" data-link>${t("hero.step")}</a>
         <span class="hero-arrow" aria-hidden="true"></span>
       </div>
     </section>
@@ -829,7 +943,7 @@ function homePage() {
       <div class="split-copy">
         <p class="eyebrow">${t("hero.chapter")}</p>
         <h2 class="headline">${t("hero.headline").replaceAll("\n", "<br>")}</h2>
-        <a class="text-link" href="/shop" data-link>${t("hero.discoverShop")}</a>
+        <a class="text-link" href="${localizedPath("/shop")}" data-link>${t("hero.discoverShop")}</a>
       </div>
       ${placeholder("Chapter visual")}
     </section>
@@ -850,7 +964,7 @@ function productFeature(product, index) {
   const productName = product.shortName[state.lang] || product.shortName.en;
   return `
     <article class="product-card">
-      <a href="/product/${product.id}" data-link>${placeholder(productName)}</a>
+      <a href="${localizedPath(`/product/${product.id}`)}" data-link>${placeholder(productName)}</a>
       <div>
         <h2>${productName}</h2>
         <em>${product.story[state.lang] || product.story.en}</em>
@@ -879,7 +993,7 @@ function shopPage() {
         <div class="origin-copy">
           <p class="eyebrow">${t("hero.origin")}</p>
           <h2 class="headline">${t("hero.before").replace("\n", "<br>")}</h2>
-          <a class="text-link" href="/roots" data-link>${t("hero.discoverRoots")}</a>
+          <a class="text-link" href="${localizedPath("/roots")}" data-link>${t("hero.discoverRoots")}</a>
         </div>
       </section>
       ${footer()}
@@ -895,7 +1009,7 @@ function shopCard(product) {
       <div>
         <h2>${product.chapter}<br>${product.color[state.lang] || product.color.en}</h2>
       </div>
-      <a href="/product/${product.id}" data-link>${placeholder(productName)}</a>
+      <a href="${localizedPath(`/product/${product.id}`)}" data-link>${placeholder(productName)}</a>
       <div class="shop-meta">
         <span>${t("product.limited")}</span>
         <span>${formatMoney(product.price, locale())}</span>
@@ -1087,7 +1201,7 @@ function noticePage(kind) {
         <div class="notice-box">
           <h1>${isSuccess ? t("checkout.successTitle") : t("checkout.cancelTitle")}</h1>
           <p>${isSuccess ? t("checkout.successBody") : t("checkout.cancelBody")}</p>
-          <a class="button-primary" href="/shop" data-link>${t("checkout.back")}</a>
+          <a class="button-primary" href="${localizedPath("/shop")}" data-link>${t("checkout.back")}</a>
         </div>
       </section>
       ${footer()}
@@ -1128,7 +1242,7 @@ function render() {
 
 function bindGateEvents() {
   app.querySelectorAll("[data-gate-lang]").forEach((button) => {
-    button.addEventListener("click", () => setLanguage(button.dataset.gateLang));
+    button.addEventListener("click", () => setLanguage(button.dataset.gateLang, { updateUrl: true }));
   });
 
   const accessForm = app.querySelector("[data-access-form]");
@@ -1136,7 +1250,10 @@ function bindGateEvents() {
     event.preventDefault();
     const message = accessForm.querySelector("[data-access-message]");
     const password = new FormData(accessForm).get("password");
+    message.textContent = t("form.processing");
+    setFormPending(accessForm, true);
     const unlocked = await verifyAccess(password);
+    setFormPending(accessForm, false);
     if (!unlocked) {
       message.textContent = t("gate.invalid");
       return;
@@ -1151,11 +1268,14 @@ function bindGateEvents() {
     event.preventDefault();
     const message = newsletterForm.querySelector("[data-gate-newsletter-message]");
     const email = new FormData(newsletterForm).get("email");
+    message.textContent = t("form.processing");
+    setFormPending(newsletterForm, true);
     const response = await submitForm("club", {
       name: "Launch list",
       email,
       newsletter: "yes"
     });
+    setFormPending(newsletterForm, false);
     message.textContent = response.ok ? t("gate.subscribed") : t("club.error");
     if (response.ok) newsletterForm.reset();
   });
@@ -1165,7 +1285,7 @@ function bindPageEvents() {
   app.querySelectorAll("[data-link]").forEach((link) => {
     link.addEventListener("click", (event) => {
       const href = link.getAttribute("href");
-      if (!href || href.startsWith("http") || href.includes("#")) return;
+      if (!href || href.startsWith("http") || href.startsWith("#")) return;
       event.preventDefault();
       navigate(href);
     });
@@ -1214,11 +1334,21 @@ function bindPageEvents() {
       event.preventDefault();
       const message = contactForm.querySelector("[data-contact-message]");
       const payload = Object.fromEntries(new FormData(contactForm));
+      message.textContent = t("form.processing");
+      setFormPending(contactForm, true);
       const response = await submitForm("contact", payload);
+      setFormPending(contactForm, false);
       message.textContent = response.ok ? t("legal.sent") : t("club.error");
       if (response.ok) contactForm.reset();
     });
   }
+}
+
+function setFormPending(form, pending) {
+  form.toggleAttribute("aria-busy", pending);
+  form.querySelectorAll("button, input, select, textarea").forEach((control) => {
+    control.disabled = pending;
+  });
 }
 
 function renderCart() {
@@ -1337,17 +1467,17 @@ function productSchema(product) {
   const shipping = calculateShipping("FR", product.price, 1);
   return {
     "@type": "Product",
-    "@id": absoluteUrl(`/product/${product.id}#product`),
-    name: product.name.en,
-    description: product.description.en,
+    "@id": absoluteUrl(`${localizedPath(`/product/${product.id}`)}#product`),
+    name: product.name[state.lang] || product.name.en,
+    description: product.description[state.lang] || product.description.en,
     image: [absoluteUrl(`/assets/photos/${product.id}.png`)],
     sku: product.sku,
     brand: { "@type": "Brand", name: "Lantso" },
-    material: product.material.en,
+    material: product.material[state.lang] || product.material.en,
     size: product.sizes.join(", "),
     offers: {
       "@type": "Offer",
-      url: absoluteUrl(`/product/${product.id}`),
+      url: absoluteUrl(localizedPath(`/product/${product.id}`)),
       priceCurrency: CURRENCY.toUpperCase(),
       price: (product.price / 100).toFixed(2),
       availability: "https://schema.org/LimitedAvailability",
@@ -1384,12 +1514,12 @@ function merchantReturnPolicy() {
 function collectionSchema() {
   return {
     "@type": "ItemList",
-    "@id": absoluteUrl("/shop#products"),
+    "@id": absoluteUrl(`${localizedPath("/shop")}#products`),
     name: "Lantso limited Moroccan jerseys",
     itemListElement: PRODUCTS.map((product, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: absoluteUrl(`/product/${product.id}`),
+      url: absoluteUrl(localizedPath(`/product/${product.id}`)),
       item: productSchema(product)
     }))
   };
@@ -1418,10 +1548,10 @@ function webSiteSchema() {
 function breadcrumbSchema(current = route()) {
   const meta = pageMeta(current);
   const items = [
-    { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") }
+    { "@type": "ListItem", position: 1, name: t("nav.home"), item: absoluteUrl(localizedPath("/")) }
   ];
   if (meta.path !== "/") {
-    items.push({ "@type": "ListItem", position: 2, name: meta.title.replace(" | Lantso", ""), item: absoluteUrl(meta.path) });
+    items.push({ "@type": "ListItem", position: 2, name: meta.title.replace(" | Lantso", ""), item: absoluteUrl(localizedPath(meta.path)) });
   }
   return {
     "@type": "BreadcrumbList",
@@ -1433,9 +1563,9 @@ function faqSchema() {
   return {
     "@type": "FAQPage",
     mainEntity: [
-      { "@type": "Question", name: I18N.en.info.q1, acceptedAnswer: { "@type": "Answer", text: I18N.en.info.a1 } },
-      { "@type": "Question", name: I18N.en.info.q2, acceptedAnswer: { "@type": "Answer", text: I18N.en.info.a2 } },
-      { "@type": "Question", name: I18N.en.info.q3, acceptedAnswer: { "@type": "Answer", text: I18N.en.info.a3 } }
+      { "@type": "Question", name: t("info.q1"), acceptedAnswer: { "@type": "Answer", text: t("info.a1") } },
+      { "@type": "Question", name: t("info.q2"), acceptedAnswer: { "@type": "Answer", text: t("info.a2") } },
+      { "@type": "Question", name: t("info.q3"), acceptedAnswer: { "@type": "Answer", text: t("info.a3") } }
     ]
   };
 }
@@ -1584,7 +1714,7 @@ function escapeHtml(value) {
 }
 
 document.querySelectorAll("[data-lang]").forEach((button) => {
-  button.addEventListener("click", () => setLanguage(button.dataset.lang));
+  button.addEventListener("click", () => setLanguage(button.dataset.lang, { updateUrl: true }));
 });
 
 document.querySelector("[data-open-cart]").addEventListener("click", openCart);
@@ -1612,9 +1742,17 @@ document.querySelector("[data-club-form]").addEventListener("submit", async (eve
   const message = form.querySelector("[data-club-message]");
   const payload = Object.fromEntries(new FormData(form));
   payload.newsletter = form.newsletter.checked ? "yes" : "no";
+  message.textContent = t("form.processing");
+  setFormPending(form, true);
   const response = await submitForm("club", payload);
+  setFormPending(form, false);
   message.textContent = response.ok ? t("club.success") : response.data?.message || t("club.error");
   if (response.ok) form.reset();
+});
+
+document.querySelector("[data-accept-cookie]")?.addEventListener("click", () => {
+  localStorage.setItem("lantso:cookie", "accepted");
+  updateCookieNotice();
 });
 
 window.addEventListener("popstate", render);
