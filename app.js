@@ -66,6 +66,7 @@ const I18N = {
       remove: "Remove",
       qty: "Qty",
       checkout: "Checkout securely",
+      processing: "Opening checkout...",
       checkoutError: "Checkout is not configured yet. Add Stripe keys in .env before taking live orders.",
       estimate: "Estimated delivery"
     },
@@ -191,6 +192,7 @@ const I18N = {
       remove: "Retirer",
       qty: "Qte",
       checkout: "Paiement securise",
+      processing: "Ouverture du paiement...",
       checkoutError: "Le paiement n'est pas encore configure. Ajoute les cles Stripe dans .env avant les commandes live.",
       estimate: "Livraison estimee"
     },
@@ -316,6 +318,7 @@ const I18N = {
       remove: "حذف",
       qty: "الكمية",
       checkout: "دفع آمن",
+      processing: "جاري فتح صفحة الدفع...",
       checkoutError: "الدفع غير مهيأ بعد. أضف مفاتيح Stripe في .env قبل استقبال الطلبات.",
       estimate: "التوصيل المتوقع"
     },
@@ -393,7 +396,8 @@ const state = {
   locked: localStorage.getItem("lantso:access") !== "granted",
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, product.sizes[0]])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
-  inventory: null
+  inventory: null,
+  checkoutPending: false
 };
 
 const app = document.querySelector("#app");
@@ -644,7 +648,7 @@ function placeholder(label = "") {
   return `
     <figure class="photo-frame ${visual.className}" aria-label="${escapeHtml(label)}">
       <picture>
-        <source srcset="${visual.webp}" type="image/webp">
+        <source srcset="${visual.srcset}" sizes="${visual.sizes}" type="image/webp">
         <img src="${visual.src}" alt="${escapeHtml(alt)}" loading="${visual.loading || "lazy"}" width="${visual.width}" height="${visual.height}">
       </picture>
     </figure>
@@ -655,6 +659,8 @@ function photo(file, className, alt, width, height, loading = "lazy") {
   return {
     src: `/assets/photos/${file}.png`,
     webp: `/assets/photos/${file}.webp`,
+    srcset: `/assets/photos/responsive/${file}-480.webp 480w, /assets/photos/responsive/${file}-800.webp 800w, /assets/photos/responsive/${file}-1200.webp 1200w, /assets/photos/${file}.webp ${width}w`,
+    sizes: className === "hero-visual" ? "100vw" : "(max-width: 760px) 100vw, 50vw",
     className,
     alt,
     width,
@@ -704,7 +710,7 @@ function gatePage() {
     <section class="gate-page">
       <figure class="gate-media" aria-hidden="true">
         <picture>
-          <source srcset="/assets/photos/hero.webp" type="image/webp">
+          <source srcset="/assets/photos/responsive/hero-480.webp 480w, /assets/photos/responsive/hero-800.webp 800w, /assets/photos/responsive/hero-1200.webp 1200w, /assets/photos/hero.webp 1672w" sizes="100vw" type="image/webp">
           <img src="/assets/photos/hero.png" alt="" width="1672" height="941">
         </picture>
       </figure>
@@ -1250,7 +1256,7 @@ function renderCart() {
       <div class="summary-line"><span>${t("cart.shipping")} · ${shipping.zone.label[state.lang] || shipping.zone.label.en}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatMoney(shipping.amount, locale())}</strong></div>
       <div class="summary-line"><span>${t("cart.estimate")}</span><strong>${shipping.zone.eta[state.lang] || shipping.zone.eta.en}</strong></div>
       <div class="summary-line summary-total"><span>${t("cart.total")}</span><strong>${formatMoney(total, locale())}</strong></div>
-      <button class="button-primary" type="button" data-checkout>${t("cart.checkout")}</button>
+      <button class="button-primary" type="button" data-checkout ${state.checkoutPending ? "disabled" : ""}>${state.checkoutPending ? t("cart.processing") : t("cart.checkout")}</button>
       <p class="checkout-message" data-checkout-message role="status"></p>
     </div>
   `);
@@ -1346,6 +1352,7 @@ function productSchema(product) {
       price: (product.price / 100).toFixed(2),
       availability: "https://schema.org/LimitedAvailability",
       itemCondition: "https://schema.org/NewCondition",
+      hasMerchantReturnPolicy: merchantReturnPolicy(),
       shippingDetails: {
         "@type": "OfferShippingDetails",
         shippingDestination: { "@type": "DefinedRegion", addressCountry: "FR" },
@@ -1360,6 +1367,17 @@ function productSchema(product) {
         }
       }
     }
+  };
+}
+
+function merchantReturnPolicy() {
+  return {
+    "@type": "MerchantReturnPolicy",
+    applicableCountry: ["FR", "BE", "ES", "IT", "DE", "NL", "GB", "MA"],
+    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 14,
+    returnMethod: "https://schema.org/ReturnByMail",
+    returnFees: "https://schema.org/ReturnShippingFees"
   };
 }
 
@@ -1423,21 +1441,28 @@ function faqSchema() {
 }
 
 async function checkout(preferredMethod = "") {
+  if (state.checkoutPending) return;
+  state.checkoutPending = true;
+  renderCart();
   const message = cartBody.querySelector("[data-checkout-message]");
-  if (message) message.textContent = "";
+  if (message) message.textContent = t("cart.processing");
   const payload = {
     items: state.cart,
     shippingCountry: state.shippingCountry,
     language: state.lang,
-    preferredMethod
+    preferredMethod,
+    idempotencyKey: globalThis.crypto?.randomUUID ? crypto.randomUUID() : `checkout-${Date.now()}-${Math.random().toString(36).slice(2)}`
   };
   const response = await postJson("/api/create-checkout-session", payload);
   if (response.ok && response.data.url) {
     window.location.assign(response.data.url);
     return;
   }
+  state.checkoutPending = false;
   if (response.status === 409) refreshInventory();
-  if (message) message.textContent = response.data?.message || t("cart.checkoutError");
+  renderCart();
+  const errorMessage = cartBody.querySelector("[data-checkout-message]");
+  if (errorMessage) errorMessage.textContent = response.data?.message || t("cart.checkoutError");
 }
 
 async function postJson(url, payload) {

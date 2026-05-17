@@ -4,7 +4,7 @@ import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { verifyAccessPassword } from "./lib/access.mjs";
-import { createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
+import { corsHeaders, createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
 import { getInventorySnapshot, handleStripeCommerceEvent } from "./lib/inventory.mjs";
 import { verifyStripeSignature } from "./lib/stripe-webhook.mjs";
 
@@ -36,22 +36,25 @@ const server = http.createServer(async (request, response) => {
     const url = new URL(request.url, PUBLIC_SITE_URL);
     if (url.pathname.startsWith("/api/")) {
       if (!isAllowedOrigin(request.headers.origin, PUBLIC_SITE_URL)) {
-        return json(response, 403, { message: "Forbidden origin" });
+        return json(response, 403, { message: "Forbidden origin" }, request);
+      }
+      if (request.method === "OPTIONS") {
+        return json(response, 204, {}, request);
       }
       const key = `${request.socket.remoteAddress || "local"}:${url.pathname}`;
       const limited = rateLimit(key, { limit: url.pathname === "/api/access" ? 20 : 80, windowMs: 60_000 });
       if (!limited.ok) {
-        return json(response, 429, { message: "Too many requests" });
+        return json(response, 429, { message: "Too many requests" }, request);
       }
     }
     if (url.pathname === "/api/health") {
-      return json(response, 200, { ok: true });
+      return json(response, 200, { ok: true }, request);
     }
     if (url.pathname === "/api/create-checkout-session" && request.method === "POST") {
       return createCheckoutSession(request, response);
     }
     if (url.pathname === "/api/inventory" && request.method === "GET") {
-      return inventorySnapshot(response);
+      return inventorySnapshot(response, request);
     }
     if (url.pathname === "/api/access" && request.method === "POST") {
       return verifyAccess(request, response);
@@ -66,12 +69,12 @@ const server = http.createServer(async (request, response) => {
       return handleStripeWebhook(request, response);
     }
     if (request.method !== "GET" && request.method !== "HEAD") {
-      return json(response, 405, { message: "Method not allowed" });
+      return json(response, 405, { message: "Method not allowed" }, request);
     }
     return serveStatic(url.pathname, response, request.method === "HEAD");
   } catch (error) {
     console.error(error);
-    return json(response, 500, { message: "Internal server error" });
+    return json(response, 500, { message: "Internal server error" }, request);
   }
 });
 
@@ -82,7 +85,7 @@ server.listen(PORT, HOST, () => {
 async function createCheckoutSession(request, response) {
   const body = await readJson(request);
   const result = await createStripeCheckoutSession(body, { siteUrl: PUBLIC_SITE_URL });
-  if (!result.ok) return json(response, result.status, result.data);
+  if (!result.ok) return json(response, result.status, result.data, request);
 
   await appendJsonl("checkout-sessions.jsonl", {
     createdAt: new Date().toISOString(),
@@ -94,25 +97,25 @@ async function createCheckoutSession(request, response) {
     total: result.checkout.total,
     country: result.checkout.shippingCountry
   });
-  return json(response, 200, result.data);
+  return json(response, 200, result.data, request);
 }
 
-async function inventorySnapshot(response) {
-  return json(response, 200, await getInventorySnapshot());
+async function inventorySnapshot(response, request) {
+  return json(response, 200, await getInventorySnapshot(), request);
 }
 
 async function verifyAccess(request, response) {
   const body = await readJson(request);
   if (!verifyAccessPassword(body.password)) {
-    return json(response, 401, { message: "Invalid password" });
+    return json(response, 401, { message: "Invalid password" }, request);
   }
-  return json(response, 200, { ok: true });
+  return json(response, 200, { ok: true }, request);
 }
 
 async function saveClubProfile(request, response) {
   const body = await readJson(request);
-  if (!body.email || !body.name) {
-    return json(response, 400, { message: "Missing profile fields" });
+  if (!body.email || !body.name || !isValidEmail(body.email)) {
+    return json(response, 400, { message: "Missing profile fields" }, request);
   }
   await appendJsonl("club-profiles.jsonl", {
     createdAt: new Date().toISOString(),
@@ -120,13 +123,13 @@ async function saveClubProfile(request, response) {
     email: clean(body.email).toLowerCase(),
     newsletter: Boolean(body.newsletter)
   });
-  return json(response, 200, { ok: true });
+  return json(response, 200, { ok: true }, request);
 }
 
 async function saveContactMessage(request, response) {
   const body = await readJson(request);
-  if (!body.email || !body.message || !body.name) {
-    return json(response, 400, { message: "Missing contact fields" });
+  if (!body.email || !body.message || !body.name || !isValidEmail(body.email)) {
+    return json(response, 400, { message: "Missing contact fields" }, request);
   }
   await appendJsonl("contact-messages.jsonl", {
     createdAt: new Date().toISOString(),
@@ -134,13 +137,13 @@ async function saveContactMessage(request, response) {
     email: clean(body.email).toLowerCase(),
     message: clean(body.message)
   });
-  return json(response, 200, { ok: true });
+  return json(response, 200, { ok: true }, request);
 }
 
 async function handleStripeWebhook(request, response) {
   const rawBody = await readBody(request);
   if (!verifyStripeSignature(request.headers["stripe-signature"], rawBody)) {
-    return json(response, 400, { message: "Invalid webhook signature" });
+    return json(response, 400, { message: "Invalid webhook signature" }, request);
   }
   const event = JSON.parse(rawBody.toString("utf8"));
   const result = await handleStripeCommerceEvent(event);
@@ -151,7 +154,7 @@ async function handleStripeWebhook(request, response) {
       order: result.order
     });
   }
-  return json(response, 200, { received: true, action: result.status || "processed" });
+  return json(response, 200, { received: true, action: result.status || "processed" }, request);
 }
 
 async function serveStatic(pathname, response, headOnly = false) {
@@ -205,8 +208,9 @@ function readBody(request, maxBytes = 1024 * 1024) {
   });
 }
 
-function json(response, statusCode, payload) {
-  response.writeHead(statusCode, securityHeaders());
+function json(response, statusCode, payload, request = null) {
+  const origin = request?.headers?.origin;
+  response.writeHead(statusCode, { ...securityHeaders(), ...corsHeaders(origin, PUBLIC_SITE_URL) });
   response.end(JSON.stringify(payload));
 }
 
@@ -217,6 +221,11 @@ async function appendJsonl(fileName, payload) {
 
 function clean(value) {
   return String(value || "").trim().slice(0, 2000);
+}
+
+function isValidEmail(value) {
+  const email = clean(value).toLowerCase();
+  return email.length <= 320 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function loadDotEnv() {

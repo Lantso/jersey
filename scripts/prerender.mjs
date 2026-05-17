@@ -82,7 +82,7 @@ const template = await readFile(path.join(ROOT, "index.html"), "utf8");
 await rm(DIST, { recursive: true, force: true });
 await mkdir(DIST, { recursive: true });
 await Promise.all(
-  ["app.js", "catalog.mjs", "styles.css", "lantso_logo.svg", "Lantso_text.svg", "robots.txt", "sitemap.xml"].map((file) =>
+  ["app.js", "catalog.mjs", "styles.css", "lantso_logo.svg", "Lantso_text.svg", "robots.txt"].map((file) =>
     cp(path.join(ROOT, file), path.join(DIST, file), { recursive: true })
   )
 );
@@ -91,6 +91,7 @@ await cp(path.join(ROOT, "assets"), path.join(DIST, "assets"), { recursive: true
 for (const route of routes) {
   await writeRoute(route.path, renderRoute(route));
 }
+await writeFile(path.join(DIST, "sitemap.xml"), sitemapXml(), "utf8");
 
 function renderRoute(route) {
   const canonical = absolute(route.path);
@@ -127,7 +128,7 @@ async function writeRoute(routePath, html) {
 function homeBody() {
   return `
         <section class="seo-hero">
-          <img src="/assets/photos/hero.png" alt="Lantso Moroccan jersey campaign in a Casablanca street" width="1672" height="941">
+          ${pictureHtml("hero", "Lantso Moroccan jersey campaign in a Casablanca street", 1672, 941, "100vw")}
           <h1>From the Roots to the World</h1>
           <p>Two limited Moroccan jerseys for the 2026 World Cup: Roots 01 Khaki and Atlas 02 White.</p>
           <a class="button-primary" href="/shop">Step inside</a>
@@ -150,7 +151,7 @@ function productBody(product) {
   const shipping = calculateShipping("FR", product.price, 1);
   return `
         <article class="seo-product">
-          <img src="/assets/photos/${product.id}.png" alt="${escapeHtml(product.name.en)}" width="1448" height="1086">
+          ${pictureHtml(product.id, productImageAlt(product), 1448, 1086, "(max-width: 760px) 100vw, 50vw")}
           <div>
             <p>${escapeHtml(product.chapter)}</p>
             <h1>${escapeHtml(product.name.en)}</h1>
@@ -173,7 +174,12 @@ function infoBody() {
           <h2>Returns</h2>
           <p>Returns are accepted within 14 days after delivery when pieces are unworn, unwashed, and returned with their original packaging.</p>
           <h2>FAQ</h2>
-          <p>Each colour is limited to 25 pieces. Sizes M and L are available.</p>
+          <h3>When will the jerseys release?</h3>
+          <p>The store is prepared for the 2026 World Cup drop.</p>
+          <h3>Can I order outside Europe?</h3>
+          <p>Selected international countries are enabled in checkout.</p>
+          <h3>How do I know my size?</h3>
+          <p>The product page lists garment measurements for sizes M and L.</p>
         </section>
       `;
 }
@@ -192,7 +198,7 @@ function legalBody() {
 function rootsBody() {
   return `
         <section class="seo-section">
-          <img src="/assets/photos/story.png" alt="Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene" width="1449" height="1085">
+          ${pictureHtml("story", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085, "100vw")}
           <h1>Discover the Roots</h1>
           <p>This page is reserved for the Lantso story, pencil sketches, and the path from the roots to the world.</p>
         </section>
@@ -216,7 +222,7 @@ function productList() {
             (product) => `
             <article>
               <a href="/product/${product.id}">
-                <img src="/assets/photos/${product.id}.png" alt="${escapeHtml(product.name.en)}" width="1448" height="1086">
+                ${pictureHtml(product.id, productImageAlt(product), 1448, 1086, "(max-width: 760px) 100vw, 50vw")}
               </a>
               <h2><a href="/product/${product.id}">${escapeHtml(product.name.en)}</a></h2>
               <p>${escapeHtml(product.story.en)}</p>
@@ -289,6 +295,7 @@ function productSchema(product) {
       price: (product.price / 100).toFixed(2),
       availability: "https://schema.org/LimitedAvailability",
       itemCondition: "https://schema.org/NewCondition",
+      hasMerchantReturnPolicy: merchantReturnPolicy(),
       shippingDetails: {
         "@type": "OfferShippingDetails",
         shippingDestination: { "@type": "DefinedRegion", addressCountry: "FR" },
@@ -296,9 +303,24 @@ function productSchema(product) {
           "@type": "MonetaryAmount",
           value: (shipping.amount / 100).toFixed(2),
           currency: CURRENCY.toUpperCase()
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          businessDays: { "@type": "QuantitativeValue", minValue: 2, maxValue: 4 }
         }
       }
     }
+  };
+}
+
+function merchantReturnPolicy() {
+  return {
+    "@type": "MerchantReturnPolicy",
+    applicableCountry: ["FR", "BE", "ES", "IT", "DE", "NL", "GB", "MA"],
+    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 14,
+    returnMethod: "https://schema.org/ReturnByMail",
+    returnFees: "https://schema.org/ReturnShippingFees"
   };
 }
 
@@ -331,9 +353,49 @@ function faqSchema() {
         "@type": "Question",
         name: "Can I order outside Europe?",
         acceptedAnswer: { "@type": "Answer", text: "Selected international countries are enabled in checkout." }
+      },
+      {
+        "@type": "Question",
+        name: "How do I know my size?",
+        acceptedAnswer: { "@type": "Answer", text: "The product page lists garment measurements for sizes M and L." }
       }
     ]
   };
+}
+
+function productImageAlt(product) {
+  const color = product.color.en.toLowerCase();
+  return `${product.name.en} limited edition Morocco-inspired jersey, front view in ${color}`;
+}
+
+function pictureHtml(file, alt, width, height, sizes) {
+  return `<picture>
+            <source srcset="/assets/photos/responsive/${file}-480.webp 480w, /assets/photos/responsive/${file}-800.webp 800w, /assets/photos/responsive/${file}-1200.webp 1200w, /assets/photos/${file}.webp ${width}w" sizes="${escapeHtml(sizes)}" type="image/webp">
+            <img src="/assets/photos/${file}.png" alt="${escapeHtml(alt)}" width="${width}" height="${height}">
+          </picture>`;
+}
+
+function sitemapXml() {
+  const publicRoutes = routes.filter((route) => !route.noindex);
+  const lastmod = new Date().toISOString().slice(0, 10);
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${publicRoutes
+  .map((route) => {
+    const product = PRODUCTS.find((candidate) => route.path === `/product/${candidate.id}`);
+    const image = product ? route.image : null;
+    return `  <url>
+    <loc>${absolute(route.path)}</loc>
+    <lastmod>${lastmod}</lastmod>${image ? `
+    <image:image>
+      <image:loc>${absolute(image)}</image:loc>
+      <image:caption>${escapeXml(productImageAlt(product))}</image:caption>
+    </image:image>` : ""}
+  </url>`;
+  })
+  .join("\n")}
+</urlset>
+`;
 }
 
 function absolute(routePath) {
@@ -367,4 +429,13 @@ function escapeRegExp(value) {
 
 function escapeScriptJson(value) {
   return JSON.stringify(value).replaceAll("</", "<\\/");
+}
+
+function escapeXml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }

@@ -1,20 +1,26 @@
 import { verifyAccessPassword } from "../../lib/access.mjs";
-import { isAllowedOrigin, rateLimit, securityHeaders } from "../../lib/checkout.mjs";
+import { corsHeaders, isAllowedOrigin, rateLimit, securityHeaders } from "../../lib/checkout.mjs";
 
 export async function handler(event) {
-  if (event.httpMethod !== "POST") {
-    return json(405, { message: "Method not allowed" });
+  const origin = header(event, "origin");
+  const siteUrl = process.env.PUBLIC_SITE_URL || "https://www.lantso.com";
+  if (event.httpMethod === "OPTIONS") {
+    if (!isAllowedOrigin(origin, siteUrl)) return json(403, { message: "Forbidden origin" }, origin, siteUrl);
+    return json(204, {}, origin, siteUrl);
   }
-  if (!isAllowedOrigin(header(event, "origin"), process.env.PUBLIC_SITE_URL || "https://www.lantso.com")) {
-    return json(403, { message: "Forbidden origin" });
+  if (event.httpMethod !== "POST") {
+    return json(405, { message: "Method not allowed" }, origin, siteUrl);
+  }
+  if (!isAllowedOrigin(origin, siteUrl)) {
+    return json(403, { message: "Forbidden origin" }, origin, siteUrl);
   }
   const limited = rateLimit(`${clientIp(event)}:access`, { limit: 20, windowMs: 60_000 });
-  if (!limited.ok) return json(429, { message: "Too many requests" });
+  if (!limited.ok) return json(429, { message: "Too many requests" }, origin, siteUrl);
   const body = parseJson(event.body);
   if (!verifyAccessPassword(body.password)) {
-    return json(401, { message: "Invalid password" });
+    return json(401, { message: "Invalid password" }, origin, siteUrl);
   }
-  return json(200, { ok: true });
+  return json(200, { ok: true }, origin, siteUrl);
 }
 
 function header(event, name) {
@@ -25,10 +31,10 @@ function clientIp(event) {
   return header(event, "x-nf-client-connection-ip") || header(event, "client-ip") || "unknown";
 }
 
-function json(statusCode, payload) {
+function json(statusCode, payload, origin, siteUrl) {
   return {
     statusCode,
-    headers: securityHeaders(),
+    headers: { ...securityHeaders(), ...corsHeaders(origin, siteUrl) },
     body: JSON.stringify(payload)
   };
 }

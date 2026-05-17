@@ -121,9 +121,17 @@ export const SHIPPING_ZONES = [
       ar: "فرنسا"
     },
     countries: ["FR", "MC"],
+    quantityTiers: [
+      { maxQuantity: 1, amount: 859 },
+      { maxQuantity: 2, amount: 999 },
+      { maxQuantity: 4, amount: 1199 },
+      { maxQuantity: 999, amount: 1359 }
+    ],
     rates: [
-      { maxWeight: 1000, amount: 790 },
-      { maxWeight: 2000, amount: 990 }
+      { maxWeight: 500, amount: 859 },
+      { maxWeight: 1000, amount: 999 },
+      { maxWeight: 2000, amount: 1199 },
+      { maxWeight: 5000, amount: 1359 }
     ],
     eta: {
       en: "2-4 business days",
@@ -134,9 +142,9 @@ export const SHIPPING_ZONES = [
   {
     id: "EU",
     label: {
-      en: "European Union",
-      fr: "Union europeenne",
-      ar: "الاتحاد الأوروبي"
+      en: "European Union and Switzerland",
+      fr: "Union europeenne et Suisse",
+      ar: "الاتحاد الأوروبي وسويسرا"
     },
     countries: [
       "AT",
@@ -164,11 +172,15 @@ export const SHIPPING_ZONES = [
       "SK",
       "SI",
       "ES",
-      "SE"
+      "SE",
+      "CH"
     ],
     rates: [
-      { maxWeight: 1000, amount: 1590 },
-      { maxWeight: 2000, amount: 1890 }
+      { maxWeight: 500, amount: 1599 },
+      { maxWeight: 1000, amount: 2039 },
+      { maxWeight: 2000, amount: 2319 },
+      { maxWeight: 5000, amount: 2959 },
+      { maxWeight: 10000, amount: 4799 }
     ],
     eta: {
       en: "4-7 business days",
@@ -185,8 +197,11 @@ export const SHIPPING_ZONES = [
     },
     countries: ["GB"],
     rates: [
-      { maxWeight: 1000, amount: 1890 },
-      { maxWeight: 2000, amount: 2490 }
+      { maxWeight: 500, amount: 1999 },
+      { maxWeight: 1000, amount: 2439 },
+      { maxWeight: 2000, amount: 2719 },
+      { maxWeight: 5000, amount: 3359 },
+      { maxWeight: 10000, amount: 5799 }
     ],
     eta: {
       en: "5-8 business days",
@@ -203,8 +218,11 @@ export const SHIPPING_ZONES = [
     },
     countries: ["MA"],
     rates: [
-      { maxWeight: 1000, amount: 1890 },
-      { maxWeight: 2000, amount: 2490 }
+      { maxWeight: 500, amount: 2479 },
+      { maxWeight: 1000, amount: 2939 },
+      { maxWeight: 2000, amount: 3209 },
+      { maxWeight: 5000, amount: 4089 },
+      { maxWeight: 10000, amount: 7599 }
     ],
     eta: {
       en: "5-9 business days",
@@ -219,10 +237,13 @@ export const SHIPPING_ZONES = [
       fr: "Reste du monde",
       ar: "باقي العالم"
     },
-    countries: ["US", "CA", "CH", "NO", "AE", "SA", "QA", "AU", "JP"],
+    countries: ["US", "CA", "NO", "AE", "SA", "QA", "AU", "JP"],
     rates: [
-      { maxWeight: 1000, amount: 2990 },
-      { maxWeight: 2000, amount: 3990 }
+      { maxWeight: 500, amount: 3619 },
+      { maxWeight: 1000, amount: 4019 },
+      { maxWeight: 2000, amount: 5499 },
+      { maxWeight: 5000, amount: 7969 },
+      { maxWeight: 10000, amount: 15799 }
     ],
     eta: {
       en: "7-14 business days",
@@ -251,7 +272,11 @@ export function findShippingZone(countryCode = "FR") {
 export function calculateShipping(countryCode, subtotal, quantity = 1) {
   const zone = findShippingZone(countryCode);
   const weight = Math.max(1, Number(quantity || 1)) * JERSEY_WEIGHT_GRAMS;
-  const tier = zone.rates.find((rate) => weight <= rate.maxWeight) || zone.rates.at(-1);
+  const itemCount = Math.max(1, Math.ceil(Number(quantity || 1)));
+  const tier =
+    zone.quantityTiers?.find((rate) => itemCount <= rate.maxQuantity) ||
+    zone.rates.find((rate) => weight <= rate.maxWeight) ||
+    zone.rates.at(-1);
   const freeShipping = FREE_SHIPPING_THRESHOLD && subtotal >= FREE_SHIPPING_THRESHOLD;
   const amount = freeShipping ? 0 : tier.amount;
   return {

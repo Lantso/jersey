@@ -23,7 +23,7 @@ http://127.0.0.1:3000
 5. In Stripe, enable the payment methods the business can legally support in its region. Leave `STRIPE_PAYMENT_METHOD_TYPES` empty to let Stripe show eligible dashboard-enabled methods, or set a comma list such as `card,klarna,paypal` after confirming account eligibility.
 6. Netlify Blobs stores production stock reservations and paid orders. No extra database account is needed on Netlify, but the dependency must install during the Netlify build.
 7. Review `PRODUCTS`, prices, inventory, and copy in `catalog.mjs`.
-8. Review `SHIPPING_ZONES` in `catalog.mjs`. Current tiers use the 300g / 32x45x4cm parcel data and calculate a tracked home-delivery rate by country and quantity.
+8. Review `SHIPPING_ZONES` in `catalog.mjs`. Current tiers use the 300g / 32x45x4cm parcel data and calculate a tracked home-delivery rate by country and quantity. France uses the requested launch tiers: 1 jersey `8.59€`, 2 jerseys `9.99€`, 3-4 jerseys `11.99€`, 5+ jerseys `13.59€`. EU/Switzerland, UK, Morocco, and rest-of-world use Colissimo-style weight tiers with a 1 euro buffer.
 9. Netlify Forms captures launch newsletter, club, and contact submissions. Configure Netlify email notifications to `contact@lantso.com`.
 10. Have the business validate legal registration details, tax settings, privacy wording, and terms before taking live orders.
 
