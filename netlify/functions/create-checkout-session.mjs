@@ -2,7 +2,7 @@ import { corsHeaders, createStripeCheckoutSession, isAllowedOrigin, rateLimit, s
 
 export async function handler(event) {
   const origin = header(event, "origin");
-  const siteUrl = process.env.PUBLIC_SITE_URL || "https://www.lantso.com";
+  const siteUrl = process.env.PUBLIC_SITE_URL || "https://lantso.com";
   if (event.httpMethod === "OPTIONS") {
     if (!isAllowedOrigin(origin, siteUrl)) return json(403, { message: "Forbidden origin" }, origin, siteUrl);
     return json(204, {}, origin, siteUrl);

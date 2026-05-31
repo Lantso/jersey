@@ -12,6 +12,131 @@ const SOCIAL_LINKS = {
   tiktok: "https://www.tiktok.com/@lantsobrand"
 };
 const SITE_URL = "https://lantso.com";
+const COUNTRY_NAMES = {
+  AE: "United Arab Emirates",
+  AT: "Austria",
+  AU: "Australia",
+  BE: "Belgium",
+  BG: "Bulgaria",
+  CA: "Canada",
+  CH: "Switzerland",
+  CY: "Cyprus",
+  CZ: "Czechia",
+  DE: "Germany",
+  DK: "Denmark",
+  EE: "Estonia",
+  ES: "Spain",
+  FI: "Finland",
+  FR: "France",
+  GB: "United Kingdom",
+  GR: "Greece",
+  HR: "Croatia",
+  HU: "Hungary",
+  IE: "Ireland",
+  IT: "Italy",
+  JP: "Japan",
+  LT: "Lithuania",
+  LU: "Luxembourg",
+  LV: "Latvia",
+  MA: "Morocco",
+  MC: "Monaco",
+  MT: "Malta",
+  NL: "Netherlands",
+  NO: "Norway",
+  PL: "Poland",
+  PT: "Portugal",
+  QA: "Qatar",
+  RO: "Romania",
+  SA: "Saudi Arabia",
+  SE: "Sweden",
+  SI: "Slovenia",
+  SK: "Slovakia",
+  US: "United States"
+};
+const DELIVERY_COUNTRIES = [...new Set(SHIPPING_ZONES.flatMap((zone) => zone.countries))]
+  .map((code) => ({ code, name: COUNTRY_NAMES[code] || code }))
+  .sort((a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" }));
+const POSTAL_CODE_SAMPLES = {
+  AT: [["1010", "Vienna"], ["5020", "Salzburg"], ["6020", "Innsbruck"]],
+  AU: [["2000", "Sydney"], ["3000", "Melbourne"], ["4000", "Brisbane"], ["6000", "Perth"]],
+  BE: [["1000", "Brussels"], ["2000", "Antwerp"], ["9000", "Ghent"]],
+  BG: [["1000", "Sofia"], ["4000", "Plovdiv"], ["9000", "Varna"]],
+  CA: [["M5H 2N2", "Toronto"], ["H3A 0G4", "Montreal"], ["V6B 1A1", "Vancouver"]],
+  CH: [["8001", "Zurich"], ["1201", "Geneva"], ["3001", "Bern"]],
+  CY: [["1010", "Nicosia"], ["3040", "Limassol"], ["6020", "Larnaca"]],
+  CZ: [["110 00", "Prague"], ["602 00", "Brno"], ["702 00", "Ostrava"]],
+  DE: [["10115", "Berlin"], ["20095", "Hamburg"], ["80331", "Munich"], ["50667", "Cologne"]],
+  DK: [["1050", "Copenhagen"], ["2100", "Copenhagen"], ["8000", "Aarhus"]],
+  EE: [["10111", "Tallinn"], ["51003", "Tartu"], ["80010", "Parnu"]],
+  ES: [["08001", "Barcelona"], ["28001", "Madrid"], ["46001", "Valencia"], ["41001", "Seville"]],
+  FI: [["00100", "Helsinki"], ["20100", "Turku"], ["33100", "Tampere"]],
+  FR: [
+    ["01000", "Bourg-en-Bresse"],
+    ["06000", "Nice"],
+    ["06100", "Nice"],
+    ["06200", "Nice"],
+    ["13001", "Marseille"],
+    ["13002", "Marseille"],
+    ["13006", "Marseille"],
+    ["13008", "Marseille"],
+    ["31000", "Toulouse"],
+    ["33000", "Bordeaux"],
+    ["34000", "Montpellier"],
+    ["44000", "Nantes"],
+    ["59000", "Lille"],
+    ["59800", "Lille"],
+    ["67000", "Strasbourg"],
+    ["69001", "Lyon"],
+    ["69002", "Lyon"],
+    ["69003", "Lyon"],
+    ["75001", "Paris"],
+    ["75002", "Paris"],
+    ["75003", "Paris"],
+    ["75004", "Paris"],
+    ["75005", "Paris"],
+    ["75006", "Paris"],
+    ["75007", "Paris"],
+    ["75008", "Paris"],
+    ["75009", "Paris"],
+    ["75010", "Paris"],
+    ["75011", "Paris"],
+    ["75012", "Paris"],
+    ["75013", "Paris"],
+    ["75014", "Paris"],
+    ["75015", "Paris"],
+    ["75016", "Paris"],
+    ["75017", "Paris"],
+    ["75018", "Paris"],
+    ["75019", "Paris"],
+    ["75020", "Paris"],
+    ["92100", "Boulogne-Billancourt"],
+    ["93100", "Montreuil"],
+    ["94100", "Saint-Maur-des-Fosses"]
+  ],
+  GB: [["SW1A 1AA", "London"], ["W1A 1AA", "London"], ["M1 1AE", "Manchester"], ["EH1 1YZ", "Edinburgh"]],
+  GR: [["105 57", "Athens"], ["546 24", "Thessaloniki"], ["712 01", "Heraklion"]],
+  HR: [["10000", "Zagreb"], ["21000", "Split"], ["51000", "Rijeka"]],
+  HU: [["1051", "Budapest"], ["6720", "Szeged"], ["4024", "Debrecen"]],
+  IE: [["D01 F5P2", "Dublin"], ["T12 T656", "Cork"], ["H91 H2Y4", "Galway"]],
+  IT: [["00118", "Rome"], ["20121", "Milan"], ["50121", "Florence"], ["80121", "Naples"]],
+  JP: [["100-0001", "Tokyo"], ["530-0001", "Osaka"], ["600-8001", "Kyoto"]],
+  LT: [["LT-01100", "Vilnius"], ["LT-44280", "Kaunas"], ["LT-92127", "Klaipeda"]],
+  LU: [["L-1111", "Luxembourg"], ["L-1220", "Luxembourg"], ["L-4001", "Esch-sur-Alzette"]],
+  LV: [["LV-1050", "Riga"], ["LV-3401", "Liepaja"], ["LV-3001", "Jelgava"]],
+  MA: [["10000", "Rabat"], ["20000", "Casablanca"], ["20100", "Casablanca"], ["30000", "Fes"], ["40000", "Marrakech"], ["50000", "Meknes"], ["60000", "Oujda"], ["80000", "Agadir"], ["90000", "Tangier"]],
+  MC: [["98000", "Monaco"]],
+  MT: [["VLT 1111", "Valletta"], ["SLM 1020", "Sliema"], ["BKR 3000", "Birkirkara"]],
+  NL: [["1012 AB", "Amsterdam"], ["3011 AA", "Rotterdam"], ["2511 BT", "The Hague"]],
+  NO: [["0001", "Oslo"], ["5003", "Bergen"], ["7010", "Trondheim"]],
+  PL: [["00-001", "Warsaw"], ["30-001", "Krakow"], ["80-001", "Gdansk"]],
+  PT: [["1000-001", "Lisbon"], ["4000-001", "Porto"], ["8000-001", "Faro"]],
+  RO: [["010011", "Bucharest"], ["400001", "Cluj-Napoca"], ["300001", "Timisoara"]],
+  SA: [["12211", "Riyadh"], ["22233", "Jeddah"], ["34218", "Dammam"]],
+  SE: [["111 20", "Stockholm"], ["411 06", "Gothenburg"], ["211 20", "Malmo"]],
+  SI: [["1000", "Ljubljana"], ["2000", "Maribor"], ["6000", "Koper"]],
+  SK: [["811 01", "Bratislava"], ["040 01", "Kosice"], ["010 01", "Zilina"]],
+  US: [["10001", "New York"], ["33101", "Miami"], ["60601", "Chicago"], ["90001", "Los Angeles"], ["94102", "San Francisco"]]
+};
 
 const I18N = {
   en: {
@@ -74,7 +199,7 @@ const I18N = {
       qty: "Qty",
       checkout: "Checkout securely",
       processing: "Opening checkout...",
-      checkoutError: "Checkout is not configured yet. Add Stripe keys in .env before taking live orders.",
+      checkoutError: "Checkout could not open. Refresh the page and try again, or contact contact@lantso.com.",
       estimate: "Estimated delivery"
     },
     info: {
@@ -210,7 +335,7 @@ const I18N = {
       qty: "Qte",
       checkout: "Paiement securise",
       processing: "Ouverture du paiement...",
-      checkoutError: "Le paiement n'est pas encore configure. Ajoute les cles Stripe dans .env avant les commandes live.",
+      checkoutError: "Le paiement n'a pas pu s'ouvrir. Actualise la page et reessaie, ou contacte contact@lantso.com.",
       estimate: "Livraison estimee"
     },
     info: {
@@ -346,7 +471,7 @@ const I18N = {
       qty: "الكمية",
       checkout: "دفع آمن",
       processing: "جاري فتح صفحة الدفع...",
-      checkoutError: "الدفع غير مهيأ بعد. أضف مفاتيح Stripe في .env قبل استقبال الطلبات.",
+      checkoutError: "تعذر فتح الدفع. حدث الصفحة وحاول مرة أخرى أو تواصل عبر contact@lantso.com.",
       estimate: "التوصيل المتوقع"
     },
     info: {
@@ -454,6 +579,7 @@ const state = {
   locked: false,
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, product.sizes[0]])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
+  postalCode: localStorage.getItem("lantso:postalCode") || "",
   inventory: null,
   checkoutPending: false
 };
@@ -1175,7 +1301,8 @@ function shippingCalculator() {
       </label>
       <label>
         <span>${t("cart.postal")}</span>
-        <input name="postal" autocomplete="postal-code">
+        <input name="postal" autocomplete="postal-code" list="shipping-postal-options">
+        <datalist id="shipping-postal-options">${postalOptions(state.shippingCountry)}</datalist>
       </label>
       <button class="button-secondary" type="submit">${t("product.shippingEstimate")}</button>
       <p class="calc-result" data-calc-result></p>
@@ -1263,7 +1390,8 @@ function noticePage(kind) {
   `;
 }
 
-function render() {
+function render(options = {}) {
+  const shouldScroll = options.scroll !== false;
   if (state.locked) {
     updateSeo(route());
     document.body.classList.add("is-gated");
@@ -1271,7 +1399,7 @@ function render() {
     renderMarkup(app, `<div class="page">${gatePage()}</div>`);
     bindGateEvents();
     startCountdown();
-    window.scrollTo({ top: 0, behavior: "instant" });
+    if (shouldScroll) window.scrollTo({ top: 0, behavior: "instant" });
     return;
   }
 
@@ -1291,7 +1419,7 @@ function render() {
   if (current.name === "cancel") renderMarkup(app, `<div class="page">${noticePage("cancel")}</div>`);
   bindPageEvents();
   renderCart();
-  window.scrollTo({ top: 0, behavior: "instant" });
+  if (shouldScroll) window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function bindGateEvents() {
@@ -1346,10 +1474,11 @@ function bindPageEvents() {
   });
 
   app.querySelectorAll("[data-size]").forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
       const [productId, size] = button.dataset.size.split(":");
       state.selectedSizes[productId] = size;
-      render();
+      updateSizeButtons(productId, size);
     });
   });
 
@@ -1371,11 +1500,21 @@ function bindPageEvents() {
 
   const calculator = app.querySelector("[data-calculator]");
   if (calculator) {
+    const countrySelect = calculator.querySelector("select[name='country']");
+    const postalInput = calculator.querySelector("input[name='postal']");
+    const postalList = calculator.querySelector("#shipping-postal-options");
+    const syncPostalOptions = () => {
+      if (postalList) postalList.innerHTML = postalOptions(countrySelect.value, postalInput.value);
+    };
+    countrySelect?.addEventListener("change", syncPostalOptions);
+    postalInput?.addEventListener("input", syncPostalOptions);
     calculator.addEventListener("submit", (event) => {
       event.preventDefault();
       const data = new FormData(calculator);
       state.shippingCountry = data.get("country");
+      state.postalCode = String(data.get("postal") || "").trim();
       localStorage.setItem("lantso:shippingCountry", state.shippingCountry);
+      localStorage.setItem("lantso:postalCode", state.postalCode);
       const result = calculateShipping(state.shippingCountry, subtotal() || PRODUCTS[0].price, cartQuantity() || 1);
       calculator.querySelector("[data-calc-result]").textContent = `${result.zone.label[state.lang] || result.zone.label.en}: ${formatMoney(result.amount, locale())} · ${result.zone.eta[state.lang] || result.zone.eta.en}`;
       renderCart();
@@ -1434,10 +1573,11 @@ function renderCart() {
       </label>
       <label>
         <span>${t("cart.postal")}</span>
-        <input data-cart-postal autocomplete="postal-code">
+        <input data-cart-postal autocomplete="postal-code" list="cart-postal-options" value="${escapeHtml(state.postalCode)}">
+        <datalist id="cart-postal-options">${postalOptions(state.shippingCountry, state.postalCode)}</datalist>
       </label>
       <div class="summary-line"><span>${t("cart.subtotal")}</span><strong>${formatMoney(sub, locale())}</strong></div>
-      <div class="summary-line"><span>${t("cart.shipping")} · ${shipping.zone.label[state.lang] || shipping.zone.label.en}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatMoney(shipping.amount, locale())}</strong></div>
+      <div class="summary-line"><span>${t("cart.shipping")} · ${countryName(state.shippingCountry)}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatMoney(shipping.amount, locale())}</strong></div>
       <div class="summary-line"><span>${t("cart.estimate")}</span><strong>${shipping.zone.eta[state.lang] || shipping.zone.eta.en}</strong></div>
       <div class="summary-line summary-total"><span>${t("cart.total")}</span><strong>${formatMoney(total, locale())}</strong></div>
       <button class="button-primary" type="button" data-checkout ${state.checkoutPending ? "disabled" : ""}>${state.checkoutPending ? t("cart.processing") : t("cart.checkout")}</button>
@@ -1459,8 +1599,21 @@ function renderCart() {
   });
   cartBody.querySelector("[data-cart-country]").addEventListener("change", (event) => {
     state.shippingCountry = event.target.value;
+    state.postalCode = "";
     localStorage.setItem("lantso:shippingCountry", state.shippingCountry);
+    localStorage.removeItem("lantso:postalCode");
     renderCart();
+  });
+  const postalInput = cartBody.querySelector("[data-cart-postal]");
+  const postalList = cartBody.querySelector("#cart-postal-options");
+  postalInput?.addEventListener("input", () => {
+    state.postalCode = postalInput.value.trim();
+    if (state.postalCode) {
+      localStorage.setItem("lantso:postalCode", state.postalCode);
+    } else {
+      localStorage.removeItem("lantso:postalCode");
+    }
+    if (postalList) postalList.innerHTML = postalOptions(state.shippingCountry, state.postalCode);
   });
   cartBody.querySelector("[data-checkout]").addEventListener("click", () => checkout());
 }
@@ -1487,14 +1640,37 @@ function cartItem(line) {
 }
 
 function countryOptions(selected) {
-  return SHIPPING_ZONES.map((zone) =>
-    zone.countries
-      .map((code) => {
-        const label = zone.countries.length === 1 ? zone.label[state.lang] || zone.label.en : `${code} · ${zone.label[state.lang] || zone.label.en}`;
-        return `<option value="${code}" ${code === selected ? "selected" : ""}>${label}</option>`;
-      })
-      .join("")
-  ).join("");
+  return DELIVERY_COUNTRIES.map(({ code, name }) => {
+    const label = `${code} · ${name}`;
+    return `<option value="${code}" ${code === selected ? "selected" : ""}>${escapeHtml(label)}</option>`;
+  }).join("");
+}
+
+function countryName(code) {
+  return COUNTRY_NAMES[code] || code;
+}
+
+function postalOptions(countryCode, query = "") {
+  const samples = POSTAL_CODE_SAMPLES[countryCode] || [];
+  const normalizedQuery = normalizePostal(query);
+  return samples
+    .filter(([code]) => !normalizedQuery || normalizePostal(code).startsWith(normalizedQuery))
+    .slice(0, 12)
+    .map(([code, city]) => `<option value="${escapeHtml(code)}" label="${escapeHtml(city)}"></option>`)
+    .join("");
+}
+
+function normalizePostal(value) {
+  return String(value || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+}
+
+function updateSizeButtons(productId, selectedSize) {
+  app.querySelectorAll("[data-size]").forEach((button) => {
+    const [buttonProductId, buttonSize] = button.dataset.size.split(":");
+    if (buttonProductId === productId) {
+      button.setAttribute("aria-pressed", String(buttonSize === selectedSize));
+    }
+  });
 }
 
 function sizeGuide(product) {
@@ -1636,6 +1812,7 @@ async function checkout(preferredMethod = "") {
   const payload = {
     items: state.cart,
     shippingCountry: state.shippingCountry,
+    postalCode: state.postalCode,
     language: state.lang,
     preferredMethod,
     idempotencyKey: globalThis.crypto?.randomUUID ? crypto.randomUUID() : `checkout-${Date.now()}-${Math.random().toString(36).slice(2)}`
@@ -1649,7 +1826,7 @@ async function checkout(preferredMethod = "") {
   if (response.status === 409) refreshInventory();
   renderCart();
   const errorMessage = cartBody.querySelector("[data-checkout-message]");
-  if (errorMessage) errorMessage.textContent = response.data?.message || t("cart.checkoutError");
+  if (errorMessage) errorMessage.textContent = response.status === 0 || response.status === 503 ? t("cart.checkoutError") : response.data?.message || t("cart.checkoutError");
 }
 
 async function postJson(url, payload) {
@@ -1680,7 +1857,7 @@ async function refreshInventory() {
         state.selectedSizes[product.id] = product.sizes.find((size) => stockAvailable(product.id, size) > 0) || selected;
       }
     }
-    render();
+    render({ scroll: false });
     renderCart();
   } catch {
     // Static catalog stock remains as the fallback if the live endpoint is unavailable.
