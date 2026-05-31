@@ -1,8 +1,10 @@
+import { connectLambda } from "@netlify/blobs";
 import { securityHeaders } from "../../lib/checkout.mjs";
 import { handleStripeCommerceEvent } from "../../lib/inventory.mjs";
 import { verifyStripeSignature } from "../../lib/stripe-webhook.mjs";
 
 export async function handler(event) {
+  connectBlobs(event);
   if (event.httpMethod !== "POST") {
     return json(405, { message: "Method not allowed" });
   }
@@ -33,4 +35,12 @@ function json(statusCode, payload) {
     headers: securityHeaders(),
     body: JSON.stringify(payload)
   };
+}
+
+function connectBlobs(event) {
+  try {
+    if (event.blobs) connectLambda(event);
+  } catch {
+    // Blobs will fall back locally when Netlify does not provide a context.
+  }
 }

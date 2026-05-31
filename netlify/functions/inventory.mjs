@@ -1,7 +1,9 @@
+import { connectLambda } from "@netlify/blobs";
 import { corsHeaders, isAllowedOrigin, securityHeaders } from "../../lib/checkout.mjs";
 import { getInventorySnapshot } from "../../lib/inventory.mjs";
 
 export async function handler(event) {
+  connectBlobs(event);
   const origin = header(event, "origin");
   const siteUrl = process.env.PUBLIC_SITE_URL || "https://lantso.com";
   const allowedOrigins = [siteUrl, requestSiteUrl(event), process.env.URL, process.env.DEPLOY_PRIME_URL, process.env.DEPLOY_URL];
@@ -36,4 +38,12 @@ function json(statusCode, payload, origin, allowedOrigins) {
     },
     body: JSON.stringify(payload)
   };
+}
+
+function connectBlobs(event) {
+  try {
+    if (event.blobs) connectLambda(event);
+  } catch {
+    // Blobs will fall back locally when Netlify does not provide a context.
+  }
 }
