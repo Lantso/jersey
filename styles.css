@@ -197,23 +197,25 @@ a {
 }
 
 .bag-icon {
-  width: 15px;
-  height: 17px;
-  border: 1px solid currentColor;
-  border-radius: 2px;
   position: relative;
+  width: 18px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-radius: 1px 1px 3px 3px;
+  box-sizing: border-box;
 }
 
 .bag-icon::before {
   content: "";
   position: absolute;
-  left: 4px;
-  top: -7px;
-  width: 6px;
+  left: 50%;
+  top: -8px;
+  width: 8px;
   height: 8px;
-  border: 1px solid currentColor;
+  border: 2px solid currentColor;
   border-bottom: 0;
   border-radius: 8px 8px 0 0;
+  transform: translateX(-50%);
 }
 
 .cart-count {
@@ -309,7 +311,6 @@ a {
 
 .button-primary,
 .button-secondary,
-.button-paypal,
 .button-ghost {
   display: inline-grid;
   place-items: center;
@@ -341,24 +342,12 @@ a {
   color: var(--ink);
 }
 
-.button-paypal {
-  border-color: #ffc439;
-  background: #ffc439;
-  color: #15345b;
-  text-transform: none;
-}
-
 .button-primary:disabled,
 .button-secondary:disabled,
-.button-paypal:disabled,
 .button-ghost:disabled,
 .plus-button:disabled {
   cursor: not-allowed;
   opacity: 0.48;
-}
-
-.button-paypal strong {
-  color: #0070ba;
 }
 
 .split-band {
@@ -856,57 +845,26 @@ textarea {
   margin-top: 14px;
 }
 
-.payment-strip {
-  display: flex;
+.secure-checkout-note {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  max-width: 760px;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
-.payment-icon {
-  display: block;
-  width: 42px;
-  height: 22px;
+.secure-checkout-note svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-
-.payment-icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.payment-icon rect {
-  fill: #fff;
-  stroke: rgba(17, 17, 17, 0.18);
-}
-
-.payment-icon text {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  text-anchor: middle;
-  fill: #111;
-}
-
-.payment-icon.amex rect { fill: #169bd5; }
-.payment-icon.amex text { fill: #fff; font-size: 10px; }
-.payment-icon.apple rect { fill: #f8f8f8; }
-.payment-icon.bancontact path:first-of-type { fill: #ffe400; }
-.payment-icon.bancontact path:nth-of-type(2) { fill: #1e65a7; }
-.payment-icon.gpay text { fill: #4285f4; }
-.payment-icon.ideal rect { fill: #fff4a8; }
-.payment-icon.klarna rect { fill: #ff9cca; }
-.payment-icon.maestro circle:first-of-type,
-.payment-icon.mastercard circle:first-of-type { fill: #eb001b; opacity: .88; }
-.payment-icon.maestro circle:nth-of-type(2),
-.payment-icon.mastercard circle:nth-of-type(2) { fill: #f79e1b; opacity: .88; }
-.payment-icon.maestro text { font-size: 5px; }
-.payment-icon.shoppay rect { fill: #5a31f4; }
-.payment-icon.shoppay text { fill: #fff; font-size: 12px; }
-.payment-icon.unionpay rect { fill: #00a3ad; }
-.payment-icon.unionpay text { fill: #fff; font-size: 8px; }
-.payment-icon.visa text { fill: #1a1f71; font-size: 12px; }
 
 .payments em {
   color: var(--ink);
@@ -1399,7 +1357,6 @@ textarea {
 
   .button-primary,
   .button-secondary,
-  .button-paypal,
   .button-ghost {
     min-height: 44px;
     padding: 0 18px;

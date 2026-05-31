@@ -169,7 +169,6 @@ const I18N = {
       limited: "Limited pieces",
       claim: "Claim piece",
       access: "Access the jersey",
-      paypal: "Pay with",
       size: "Size",
       price: "Price",
       color: "Color",
@@ -204,20 +203,22 @@ const I18N = {
     },
     info: {
       title: "Information",
-      shippingBody: "Orders ship from Europe with tracked delivery. France, the European Union, the United Kingdom, Morocco, and selected international destinations are enabled in checkout.",
-      returnsBody: "Returns are accepted within 14 days after delivery when pieces are unworn, unwashed, and returned with their original packaging. Limited drops cannot be exchanged once a size sells out.",
+      shippingBody: "Orders are prepared after payment and ship from Europe with tracked delivery. The cart shows the live shipping rate, estimated delivery time, and every eligible destination before checkout. Customers outside the European Union may be charged local duties or import taxes by the carrier.",
+      returnsBody: "Returns can be requested within 14 days of delivery by emailing contact@lantso.com before sending anything back. Items must be unworn, unwashed, undamaged, and returned with original packaging and tags. Return shipping is paid by the customer unless the item is faulty or the wrong product was sent. Refunds are issued to the original payment method after inspection.",
       faqTitle: "FAQ",
-      q1: "When will the jerseys release?",
-      a1: "The store is prepared for the 2026 World Cup drop. Exact release dates can be updated in the catalog copy.",
-      q2: "Can I order outside Europe?",
-      a2: "Yes, selected international countries are enabled. More countries can be added from the shipping config.",
-      q3: "How do I know my size?",
-      a3: "The final size guide should be added after the sample measurements from the shooting."
+      q1: "When will my order ship?",
+      a1: "Paid orders are prepared within 1-3 business days during a drop. Tracking is sent by email as soon as the parcel is handed to the carrier.",
+      q2: "Which countries can receive delivery?",
+      a2: "Checkout supports France, Monaco, EU countries, Switzerland, the United Kingdom, Morocco, the United States, Canada, Japan, Saudi Arabia, Norway, and the other enabled destinations listed in the cart.",
+      q3: "How should I choose my size?",
+      a3: "Use the measurements on each product page and compare them with a jersey you already wear. If you are between M and L, choose L for a more relaxed fit.",
+      q4: "Can I exchange a size?",
+      a4: "Because each colour is limited to 25 pieces, exchanges depend on remaining stock. If a replacement is unavailable, we can process an eligible return instead."
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Lantso sells limited edition jerseys in EUR. No VAT number is displayed on the storefront. An order is confirmed only after successful payment through Stripe Checkout. Delivery is prepared manually after payment and sent with tracked home delivery. For support, contact contact@lantso.com.",
-      privacyBody: "Customer details are used for checkout, delivery, support, fraud prevention, and optional newsletter access. Payment data is handled by Stripe and is not stored by this website.",
+      termsBody: "Lantso sells limited edition jerseys in EUR through this storefront. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details. The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, contact contact@lantso.com.",
+      privacyBody: "Lantso collects the details needed to run the shop: contact details, delivery address, cart contents, language and access preferences, support messages, and optional newsletter consent. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and email updates when requested. To access or delete eligible data, contact contact@lantso.com.",
       contactBody: "For order support, sizing, press, or wholesale requests, use the form below or write to contact@lantso.com.",
       name: "Name",
       email: "Email",
@@ -305,7 +306,6 @@ const I18N = {
       limited: "Pieces limitees",
       claim: "Reclamer la piece",
       access: "Acceder au maillot",
-      paypal: "Payer avec",
       size: "Taille",
       price: "Prix",
       color: "Couleur",
@@ -340,20 +340,22 @@ const I18N = {
     },
     info: {
       title: "Informations",
-      shippingBody: "Les commandes partent d'Europe avec livraison suivie. France, Union europeenne, Royaume-Uni, Maroc et certaines destinations internationales sont activees au paiement.",
-      returnsBody: "Les retours sont acceptes sous 14 jours apres livraison si les pieces sont non portees, non lavees et renvoyees dans leur packaging d'origine. Les drops limites ne peuvent pas etre echanges lorsqu'une taille est epuisee.",
+      shippingBody: "Les commandes sont preparees apres paiement puis expediees depuis l'Europe avec suivi. Le panier affiche le tarif de livraison, le delai estime et les destinations disponibles avant le paiement. Hors Union europeenne, des droits ou taxes d'import peuvent etre demandes par le transporteur.",
+      returnsBody: "Les retours peuvent etre demandes sous 14 jours apres livraison en ecrivant a contact@lantso.com avant tout renvoi. Les pieces doivent etre non portees, non lavees, non abimees et renvoyees avec leur packaging et etiquettes. Les frais de retour sont a la charge du client, sauf article defectueux ou erreur d'envoi. Le remboursement est effectue sur le moyen de paiement d'origine apres verification.",
       faqTitle: "FAQ",
-      q1: "Quand sortent les maillots ?",
-      a1: "La boutique est preparee pour le drop Coupe du Monde 2026. Les dates exactes peuvent etre ajoutees dans les textes du catalogue.",
-      q2: "Puis-je commander hors Europe ?",
-      a2: "Oui, certains pays internationaux sont actives. D'autres pays peuvent etre ajoutes dans la configuration livraison.",
+      q1: "Quand ma commande sera-t-elle expediee ?",
+      a1: "Les commandes payees sont preparees sous 1 a 3 jours ouvres pendant un drop. Le suivi est envoye par email des que le colis est remis au transporteur.",
+      q2: "Quels pays sont livrables ?",
+      a2: "Le checkout prend en charge la France, Monaco, les pays de l'Union europeenne, la Suisse, le Royaume-Uni, le Maroc, les Etats-Unis, le Canada, le Japon, l'Arabie saoudite, la Norvege et les autres destinations listees dans le panier.",
       q3: "Comment choisir ma taille ?",
-      a3: "Le guide des tailles final doit etre ajoute apres les mesures des samples du shooting."
+      a3: "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes deja. Entre M et L, choisis L pour une coupe plus relax.",
+      q4: "Puis-je echanger une taille ?",
+      a4: "Chaque couleur etant limitee a 25 pieces, les echanges dependent du stock restant. Si le remplacement n'est pas disponible, un retour eligible peut etre rembourse."
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Lantso vend des maillots en edition limitee en EUR. Aucun numero de TVA n'est affiche sur la boutique. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout. La preparation est faite manuellement apres paiement puis envoyee en livraison suivie a domicile. Pour le support : contact@lantso.com.",
-      privacyBody: "Les donnees client servent au paiement, a la livraison, au support, a la prevention de fraude et a la newsletter optionnelle. Les donnees de paiement sont gerees par Stripe et ne sont pas stockees par ce site.",
+      termsBody: "Lantso vend des maillots en edition limitee en EUR via cette boutique. Les stocks sont limites et une piece est reservee uniquement au moment ou Stripe Checkout s'ouvre; la commande est confirmee apres paiement reussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incompletes. Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliques hors Union europeenne. Pour le support commande : contact@lantso.com.",
+      privacyBody: "Lantso collecte les informations necessaires au fonctionnement de la boutique : coordonnees, adresse de livraison, contenu du panier, preferences de langue et d'acces, messages support et consentement newsletter optionnel. Les donnees de paiement sont traitees par Stripe et ne sont pas stockees par ce site. Les donnees servent au paiement, a la preparation, au support, a la prevention de fraude, aux obligations comptables et aux emails demandes. Pour acceder aux donnees eligibles ou demander leur suppression : contact@lantso.com.",
       contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous ou ecris a contact@lantso.com.",
       name: "Nom",
       email: "Email",
@@ -441,7 +443,6 @@ const I18N = {
       limited: "قطع محدودة",
       claim: "احجز القطعة",
       access: "ادخل إلى القميص",
-      paypal: "ادفع عبر",
       size: "المقاس",
       price: "السعر",
       color: "اللون",
@@ -476,20 +477,22 @@ const I18N = {
     },
     info: {
       title: "معلومات",
-      shippingBody: "تشحن الطلبات من أوروبا مع تتبع. فرنسا، الاتحاد الأوروبي، المملكة المتحدة، المغرب وبعض الوجهات الدولية مفعلة عند الدفع.",
-      returnsBody: "يقبل الإرجاع خلال 14 يوما بعد التسليم إذا كانت القطع غير مستعملة وغير مغسولة ومع تغليفها الأصلي. القطع المحدودة لا تستبدل عند نفاد المقاس.",
+      shippingBody: "يتم تجهيز الطلبات بعد الدفع ثم شحنها من أوروبا مع رقم تتبع. تعرض السلة سعر الشحن، مدة التوصيل المتوقعة والوجهات المتاحة قبل الدفع. خارج الاتحاد الأوروبي قد يطلب الناقل رسوما أو ضرائب استيراد محلية.",
+      returnsBody: "يمكن طلب الإرجاع خلال 14 يوما من التسليم عبر contact@lantso.com قبل إرسال أي قطعة. يجب أن تكون القطعة غير مستعملة، غير مغسولة، غير متضررة ومع التغليف والملصقات الأصلية. يتحمل العميل تكلفة الإرجاع إلا إذا كانت القطعة معيبة أو تم إرسال منتج خاطئ. يتم رد المبلغ إلى وسيلة الدفع الأصلية بعد الفحص.",
       faqTitle: "الأسئلة",
-      q1: "متى تصدر القمصان؟",
-      a1: "المتجر جاهز لإصدار كأس العالم 2026. يمكن تحديث تاريخ الإطلاق في نصوص الكتالوج.",
-      q2: "هل يمكن الطلب من خارج أوروبا؟",
-      a2: "نعم، بعض الدول الدولية مفعلة ويمكن إضافة دول أخرى من إعدادات الشحن.",
+      q1: "متى يتم شحن طلبي؟",
+      a1: "يتم تجهيز الطلبات المدفوعة خلال 1 إلى 3 أيام عمل أثناء الإصدار. يصلك رقم التتبع عبر البريد الإلكتروني عند تسليم الطرد للناقل.",
+      q2: "ما الدول المتاحة للتوصيل؟",
+      a2: "يدعم الدفع فرنسا، موناكو، دول الاتحاد الأوروبي، سويسرا، المملكة المتحدة، المغرب، الولايات المتحدة، كندا، اليابان، السعودية، النرويج وباقي الوجهات الظاهرة في السلة.",
       q3: "كيف أختار المقاس؟",
-      a3: "يجب إضافة دليل المقاسات النهائي بعد قياس العينات في جلسة التصوير."
+      a3: "استعمل القياسات في صفحة كل منتج وقارنها بقميص تلبسه حاليا. إذا كنت بين M و L فاختر L لقصة أوسع.",
+      q4: "هل يمكن تبديل المقاس؟",
+      a4: "لأن كل لون محدود في 25 قطعة، يعتمد التبديل على المخزون المتبقي. إذا لم يتوفر البديل يمكن معالجة إرجاع مؤهل."
     },
     legal: {
       title: "القانوني والتواصل",
-      termsBody: "تبيع Lantso قمصانا محدودة باليورو. لا يتم عرض رقم ضريبة VAT في المتجر. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout. يتم تجهيز الطلب يدويا بعد الدفع ثم إرساله بتوصيل متتبع إلى المنزل. للدعم: contact@lantso.com.",
-      privacyBody: "تستخدم بيانات العميل للدفع والتوصيل والدعم ومنع الاحتيال والنشرة الاختيارية. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع.",
+      termsBody: "تبيع Lantso قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ Lantso إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة. يتحمل العميل مسؤولية العنوان الصحيح وأي رسوم أو ضرائب استيراد أو تكاليف ناقل خارج الاتحاد الأوروبي. للدعم: contact@lantso.com.",
+      privacyBody: "تجمع Lantso البيانات الضرورية لتشغيل المتجر: بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم والموافقة الاختيارية على النشرة. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة. لطلب الوصول إلى البيانات المؤهلة أو حذفها: contact@lantso.com.",
       contactBody: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، استخدم النموذج أدناه أو اكتب إلى contact@lantso.com.",
       name: "الاسم",
       email: "البريد الإلكتروني",
@@ -627,7 +630,7 @@ function pageMeta(current = route()) {
       title: `${name} - Limited Moroccan Jersey | Lantso`,
       description: `${name} by Lantso. ${description} 100% polyester. Limited to 25 pieces per colour.`,
       path: `/product/${product.id}`,
-      image: `/assets/photos/${product.id}.png`,
+      image: `/assets/photos/fallback/${product.id}.jpg`,
       schema: productSchema(product)
     };
   }
@@ -635,8 +638,8 @@ function pageMeta(current = route()) {
     en: {
       home: ["Lantso - From the Roots to the World", "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period."],
       shop: ["Shop Moroccan Football Jerseys | Lantso", "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period."],
-      info: ["Shipping, Returns and FAQ | Lantso", "Shipping, returns, sizing and FAQ information for Lantso limited Moroccan jerseys."],
-      legal: ["Legal and Contact | Lantso", "Legal information, privacy information and contact form for Lantso."],
+      info: ["Shipping, Returns and FAQ | Lantso", "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys."],
+      legal: ["Legal and Contact | Lantso", "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys."],
       roots: ["Discover the Roots | Lantso", "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world."],
       success: ["Order Received | Lantso", "Lantso order confirmation."],
       cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
@@ -644,8 +647,8 @@ function pageMeta(current = route()) {
     fr: {
       home: ["Lantso - From the Roots to the World", "Maillots de football marocains limites par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pieces par couleur, pour la periode Coupe du Monde 2026."],
       shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limites pour la periode Coupe du Monde 2026."],
-      info: ["Livraison, retours et FAQ | Lantso", "Informations livraison, retours, tailles et FAQ pour les maillots marocains limites Lantso."],
-      legal: ["Legal et contact | Lantso", "Informations legales, confidentialite et contact pour Lantso."],
+      info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limites Lantso."],
+      legal: ["Legal et contact | Lantso", "Conditions, confidentialite et contact pour acheter les maillots de football marocains limites Lantso."],
       roots: ["Decouvrir les Roots | Lantso", "L'histoire Lantso derriere Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
       success: ["Commande recue | Lantso", "Confirmation de commande Lantso."],
       cancel: ["Paiement annule | Lantso", "Paiement Lantso annule."]
@@ -653,8 +656,8 @@ function pageMeta(current = route()) {
     ar: {
       home: ["Lantso - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض، 25 قطعة من كل لون لفترة كأس العالم 2026."],
       shop: ["متجر قمصان كرة القدم المغربية | Lantso", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."],
-      info: ["الشحن والإرجاع والأسئلة | Lantso", "معلومات الشحن والإرجاع والمقاسات والأسئلة لقمصان Lantso المغربية المحدودة."],
-      legal: ["القانوني والتواصل | Lantso", "معلومات قانونية وخصوصية وتواصل مع Lantso."],
+      info: ["الشحن والإرجاع والأسئلة | Lantso", "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان Lantso المغربية المحدودة."],
+      legal: ["القانوني والتواصل | Lantso", "الشروط والخصوصية ومعلومات التواصل لشراء قمصان Lantso المغربية المحدودة."],
       roots: ["اكتشف الجذور | Lantso", "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."],
       success: ["تم استلام الطلب | Lantso", "تأكيد طلب Lantso."],
       cancel: ["تم إلغاء الدفع | Lantso", "تم إلغاء دفع Lantso."]
@@ -662,19 +665,19 @@ function pageMeta(current = route()) {
   };
   const copy = localizedMeta[state.lang] || localizedMeta.en;
   const pages = {
-    shop: { title: copy.shop[0], description: copy.shop[1], path: "/shop", image: "/assets/photos/hero.png", schema: collectionSchema() },
-    info: { title: copy.info[0], description: copy.info[1], path: "/info", image: "/assets/photos/story.png", schema: faqSchema() },
-    legal: { title: copy.legal[0], description: copy.legal[1], path: "/legal", image: "/assets/photos/story.png", schema: organizationSchema() },
-    roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/story.png", schema: organizationSchema() },
-    success: { title: copy.success[0], description: copy.success[1], path: "/success", image: "/assets/photos/hero.png", schema: organizationSchema(), robots: "noindex, nofollow" },
-    cancel: { title: copy.cancel[0], description: copy.cancel[1], path: "/cancel", image: "/assets/photos/hero.png", schema: organizationSchema(), robots: "noindex, nofollow" }
+    shop: { title: copy.shop[0], description: copy.shop[1], path: "/shop", image: "/assets/photos/fallback/hero.jpg", schema: collectionSchema() },
+    info: { title: copy.info[0], description: copy.info[1], path: "/info", image: "/assets/photos/fallback/story.jpg", schema: faqSchema() },
+    legal: { title: copy.legal[0], description: copy.legal[1], path: "/legal", image: "/assets/photos/fallback/story.jpg", schema: organizationSchema() },
+    roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/fallback/story.jpg", schema: organizationSchema() },
+    success: { title: copy.success[0], description: copy.success[1], path: "/success", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema(), robots: "noindex, nofollow" },
+    cancel: { title: copy.cancel[0], description: copy.cancel[1], path: "/cancel", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema(), robots: "noindex, nofollow" }
   };
   return (
     pages[current.name] || {
       title: copy.home[0],
       description: copy.home[1],
       path: "/",
-      image: "/assets/photos/hero.png",
+      image: "/assets/photos/fallback/hero.jpg",
       schema: collectionSchema()
     }
   );
@@ -910,18 +913,12 @@ function trapCartFocus(event) {
 
 function paymentBadges() {
   return `
-    <div class="payment-strip" aria-label="secure payments">
-      <span class="payment-icon amex" aria-label="American Express"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="14">AM</text><text x="32" y="25">EX</text></svg></span>
-      <span class="payment-icon apple" aria-label="Apple Pay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">Pay</text></svg></span>
-      <span class="payment-icon bancontact" aria-label="Bancontact"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><path d="M8 18h48v8H8z"/><path d="M8 8h48v8H8z"/><text x="32" y="22">bc</text></svg></span>
-      <span class="payment-icon gpay" aria-label="Google Pay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">G Pay</text></svg></span>
-      <span class="payment-icon ideal" aria-label="iDEAL"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">iDEAL</text></svg></span>
-      <span class="payment-icon klarna" aria-label="Klarna"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">Klarna</text></svg></span>
-      <span class="payment-icon maestro" aria-label="Maestro"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><circle cx="26" cy="17" r="10"/><circle cx="38" cy="17" r="10"/><text x="32" y="28">Maestro</text></svg></span>
-      <span class="payment-icon mastercard" aria-label="Mastercard"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><circle cx="26" cy="17" r="10"/><circle cx="38" cy="17" r="10"/></svg></span>
-      <span class="payment-icon shoppay" aria-label="Shop Pay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">shop</text></svg></span>
-      <span class="payment-icon unionpay" aria-label="UnionPay"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="15">Union</text><text x="32" y="25">Pay</text></svg></span>
-      <span class="payment-icon visa" aria-label="Visa"><svg viewBox="0 0 64 34"><rect width="64" height="34" rx="4"/><text x="32" y="22">VISA</text></svg></span>
+    <div class="secure-checkout-note" aria-label="secure checkout">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7.5 10V7.8a4.5 4.5 0 0 1 9 0V10"/>
+        <rect x="5.5" y="10" width="13" height="10" rx="1.6"/>
+      </svg>
+      <span>Secure checkout by Stripe</span>
     </div>
   `;
 }
@@ -933,7 +930,7 @@ function placeholder(label = "") {
     <figure class="photo-frame ${visual.className}" aria-label="${escapeHtml(label)}">
       <picture>
         <source srcset="${visual.srcset}" sizes="${visual.sizes}" type="image/webp">
-        <img src="${visual.src}" alt="${escapeHtml(alt)}" loading="${visual.loading || "lazy"}" width="${visual.width}" height="${visual.height}">
+        <img src="${visual.src}" alt="${escapeHtml(alt)}" loading="${visual.loading || "lazy"}" decoding="async" fetchpriority="${visual.loading === "eager" ? "high" : "auto"}" width="${visual.width}" height="${visual.height}">
       </picture>
     </figure>
   `;
@@ -941,7 +938,7 @@ function placeholder(label = "") {
 
 function photo(file, className, alt, width, height, loading = "lazy") {
   return {
-    src: `/assets/photos/${file}.png`,
+    src: `/assets/photos/fallback/${file}.jpg`,
     webp: `/assets/photos/${file}.webp`,
     srcset: `/assets/photos/responsive/${file}-480.webp 480w, /assets/photos/responsive/${file}-800.webp 800w, /assets/photos/responsive/${file}-1200.webp 1200w, /assets/photos/${file}.webp ${width}w`,
     sizes: className === "hero-visual" ? "100vw" : "(max-width: 760px) 100vw, 50vw",
@@ -995,7 +992,7 @@ function gatePage() {
       <figure class="gate-media" aria-hidden="true">
         <picture>
           <source srcset="/assets/photos/responsive/hero-480.webp 480w, /assets/photos/responsive/hero-800.webp 800w, /assets/photos/responsive/hero-1200.webp 1200w, /assets/photos/hero.webp 1672w" sizes="100vw" type="image/webp">
-          <img src="/assets/photos/hero.png" alt="" width="1672" height="941">
+          <img src="/assets/photos/fallback/hero.jpg" alt="" width="1672" height="941" decoding="async" fetchpriority="high">
         </picture>
       </figure>
       <div class="gate-language" aria-label="Language">
@@ -1288,6 +1285,7 @@ function infoPage() {
             ${faq(t("info.q1"), t("info.a1"))}
             ${faq(t("info.q2"), t("info.a2"))}
             ${faq(t("info.q3"), t("info.a3"))}
+            ${faq(t("info.q4"), t("info.a4"))}
           </div>
         </article>
       </section>
@@ -1706,7 +1704,7 @@ function productSchema(product) {
     "@id": absoluteUrl(`${localizedPath(`/product/${product.id}`)}#product`),
     name: product.name[state.lang] || product.name.en,
     description: product.description[state.lang] || product.description.en,
-    image: [absoluteUrl(`/assets/photos/${product.id}.png`)],
+    image: [absoluteUrl(`/assets/photos/fallback/${product.id}.jpg`)],
     sku: product.sku,
     brand: { "@type": "Brand", name: "Lantso" },
     material: product.material[state.lang] || product.material.en,
@@ -1804,7 +1802,8 @@ function faqSchema() {
     mainEntity: [
       { "@type": "Question", name: t("info.q1"), acceptedAnswer: { "@type": "Answer", text: t("info.a1") } },
       { "@type": "Question", name: t("info.q2"), acceptedAnswer: { "@type": "Answer", text: t("info.a2") } },
-      { "@type": "Question", name: t("info.q3"), acceptedAnswer: { "@type": "Answer", text: t("info.a3") } }
+      { "@type": "Question", name: t("info.q3"), acceptedAnswer: { "@type": "Answer", text: t("info.a3") } },
+      { "@type": "Question", name: t("info.q4"), acceptedAnswer: { "@type": "Answer", text: t("info.a4") } }
     ]
   };
 }

@@ -46,43 +46,43 @@ const COPY = {
   franceShipping: { en: "France shipping estimate", fr: "Estimation livraison France", ar: "تقدير الشحن إلى فرنسا" },
   infoTitle: { en: "Shipping, Returns and FAQ | Lantso", fr: "Livraison, retours et FAQ | Lantso", ar: "الشحن والإرجاع والأسئلة | Lantso" },
   infoDescription: {
-    en: "Shipping, returns, sizing and FAQ information for Lantso limited Moroccan jerseys.",
-    fr: "Informations livraison, retours, tailles et FAQ pour les maillots marocains limites Lantso.",
-    ar: "معلومات الشحن والإرجاع والمقاسات والأسئلة لقمصان Lantso المغربية المحدودة."
+    en: "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys.",
+    fr: "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limites Lantso.",
+    ar: "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان Lantso المغربية المحدودة."
   },
   shippingReturnsFaq: { en: "Shipping, returns and FAQ", fr: "Livraison, retours et FAQ", ar: "الشحن والإرجاع والأسئلة" },
   shippingBody: {
-    en: "Orders ship from Europe with tracked delivery. France, the European Union, the United Kingdom, Morocco, and selected international destinations are enabled in checkout.",
-    fr: "Les commandes partent d'Europe avec livraison suivie. France, Union europeenne, Royaume-Uni, Maroc et certaines destinations internationales sont actives au paiement.",
-    ar: "تشحن الطلبات من أوروبا مع تتبع. فرنسا، الاتحاد الأوروبي، المملكة المتحدة، المغرب وبعض الوجهات الدولية مفعلة عند الدفع."
+    en: "Orders are prepared after payment and ship from Europe with tracked delivery. The cart shows the live shipping rate, estimated delivery time, and every eligible destination before checkout. Customers outside the European Union may be charged local duties or import taxes by the carrier.",
+    fr: "Les commandes sont preparees apres paiement puis expediees depuis l'Europe avec suivi. Le panier affiche le tarif de livraison, le delai estime et les destinations disponibles avant le paiement. Hors Union europeenne, des droits ou taxes d'import peuvent etre demandes par le transporteur.",
+    ar: "يتم تجهيز الطلبات بعد الدفع ثم شحنها من أوروبا مع رقم تتبع. تعرض السلة سعر الشحن، مدة التوصيل المتوقعة والوجهات المتاحة قبل الدفع. خارج الاتحاد الأوروبي قد يطلب الناقل رسوما أو ضرائب استيراد محلية."
   },
   returns: { en: "Returns", fr: "Retours", ar: "الإرجاع" },
   returnsBody: {
-    en: "Returns are accepted within 14 days after delivery when pieces are unworn, unwashed, and returned with their original packaging.",
-    fr: "Les retours sont acceptes sous 14 jours apres livraison si les pieces sont non portees, non lavees et renvoyees dans leur packaging d'origine.",
-    ar: "يقبل الإرجاع خلال 14 يوما بعد التسليم إذا كانت القطع غير مستعملة وغير مغسولة ومع تغليفها الأصلي."
+    en: "Returns can be requested within 14 days of delivery by emailing contact@lantso.com before sending anything back. Items must be unworn, unwashed, undamaged, and returned with original packaging and tags. Return shipping is paid by the customer unless the item is faulty or the wrong product was sent. Refunds are issued to the original payment method after inspection.",
+    fr: "Les retours peuvent etre demandes sous 14 jours apres livraison en ecrivant a contact@lantso.com avant tout renvoi. Les pieces doivent etre non portees, non lavees, non abimees et renvoyees avec leur packaging et etiquettes. Les frais de retour sont a la charge du client, sauf article defectueux ou erreur d'envoi. Le remboursement est effectue sur le moyen de paiement d'origine apres verification.",
+    ar: "يمكن طلب الإرجاع خلال 14 يوما من التسليم عبر contact@lantso.com قبل إرسال أي قطعة. يجب أن تكون القطعة غير مستعملة، غير مغسولة، غير متضررة ومع التغليف والملصقات الأصلية. يتحمل العميل تكلفة الإرجاع إلا إذا كانت القطعة معيبة أو تم إرسال منتج خاطئ. يتم رد المبلغ إلى وسيلة الدفع الأصلية بعد الفحص."
   },
   legalTitle: { en: "Legal and Contact | Lantso", fr: "Legal et contact | Lantso", ar: "القانوني والتواصل | Lantso" },
   legalDescription: {
-    en: "Legal information, privacy information and contact form for Lantso.",
-    fr: "Informations legales, confidentialite et contact pour Lantso.",
-    ar: "معلومات قانونية وخصوصية وتواصل مع Lantso."
+    en: "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys.",
+    fr: "Conditions, confidentialite et contact pour acheter les maillots de football marocains limites Lantso.",
+    ar: "الشروط والخصوصية ومعلومات التواصل لشراء قمصان Lantso المغربية المحدودة."
   },
   legalHeading: { en: "Legal and contact", fr: "Legal et contact", ar: "القانوني والتواصل" },
   legalBody: {
-    en: "Lantso sells limited edition jerseys in EUR. No VAT number is displayed on the storefront. An order is confirmed only after successful payment through Stripe Checkout.",
-    fr: "Lantso vend des maillots en edition limitee en EUR. Aucun numero de TVA n'est affiche sur la boutique. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout.",
-    ar: "تبيع Lantso قمصانا محدودة باليورو. لا يتم عرض رقم ضريبة VAT في المتجر. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout."
+    en: "Lantso sells limited edition jerseys in EUR through this storefront. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details.",
+    fr: "Lantso vend des maillots en edition limitee en EUR via cette boutique. Les stocks sont limites et une piece est reservee uniquement au moment ou Stripe Checkout s'ouvre; la commande est confirmee apres paiement reussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incompletes.",
+    ar: "تبيع Lantso قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ Lantso إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة."
   },
   legalSupport: {
-    en: "For support, sizing, press, or wholesale requests, write to contact@lantso.com.",
-    fr: "Pour le support, les tailles, la presse ou les demandes wholesale, ecris a contact@lantso.com.",
-    ar: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، اكتب إلى contact@lantso.com."
+    en: "The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, sizing, press, or wholesale requests, write to contact@lantso.com.",
+    fr: "Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliques hors Union europeenne. Pour le support, les tailles, la presse ou les demandes wholesale, ecris a contact@lantso.com.",
+    ar: "يتحمل العميل مسؤولية العنوان الصحيح وأي رسوم أو ضرائب استيراد أو تكاليف ناقل خارج الاتحاد الأوروبي. للدعم أو المقاسات أو الصحافة أو طلبات الجملة، اكتب إلى contact@lantso.com."
   },
   legalPrivacy: {
-    en: "Customer details are used for checkout, delivery, support, fraud prevention, and optional newsletter access. Payment data is handled by Stripe.",
-    fr: "Les donnees client servent au paiement, a la livraison, au support, a la prevention de fraude et a la newsletter optionnelle. Les donnees de paiement sont gerees par Stripe.",
-    ar: "تستخدم بيانات العميل للدفع والتوصيل والدعم ومنع الاحتيال والنشرة الاختيارية. بيانات الدفع يعالجها Stripe."
+    en: "Lantso collects contact details, delivery address, cart contents, language and access preferences, support messages, and optional newsletter consent. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and requested emails.",
+    fr: "Lantso collecte les coordonnees, l'adresse de livraison, le contenu du panier, les preferences de langue et d'acces, les messages support et le consentement newsletter optionnel. Les donnees de paiement sont traitees par Stripe et ne sont pas stockees par ce site. Les donnees servent au paiement, a la preparation, au support, a la prevention de fraude, aux obligations comptables et aux emails demandes.",
+    ar: "تجمع Lantso بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم والموافقة الاختيارية على النشرة. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة."
   },
   legalSocial: {
     en: "Instagram: lantso.at. TikTok: @lantsobrand.",
@@ -127,7 +127,7 @@ const routes = [
     path: "/",
     title: "Lantso - From the Roots to the World",
     description: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period.",
-    image: "/assets/photos/hero.png",
+    image: "/assets/photos/fallback/hero.jpg",
     body: homeBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), collectionSchema(lang)]
   },
@@ -135,7 +135,7 @@ const routes = [
     path: "/shop",
     title: "Shop Moroccan Football Jerseys | Lantso",
     description: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period.",
-    image: "/assets/photos/hero.png",
+    image: "/assets/photos/fallback/hero.jpg",
     body: shopBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), collectionSchema(lang)]
   },
@@ -143,23 +143,23 @@ const routes = [
     path: `/product/${product.id}`,
     title: `${product.name.en} - Limited Moroccan Jersey | Lantso`,
     description: `${product.name.en} by Lantso. ${product.description.en} 100% polyester. Limited to 25 pieces per colour.`,
-    image: `/assets/photos/${product.id}.png`,
+    image: `/assets/photos/fallback/${product.id}.jpg`,
     body: (lang) => productBody(product, lang),
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), productSchema(product, lang)]
   })),
   {
     path: "/info",
     title: "Shipping, Returns and FAQ | Lantso",
-    description: "Shipping, returns, sizing and FAQ information for Lantso limited Moroccan jerseys.",
-    image: "/assets/photos/story.png",
+    description: "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys.",
+    image: "/assets/photos/fallback/story.jpg",
     body: infoBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), faqSchema(lang)]
   },
   {
     path: "/legal",
     title: "Legal and Contact | Lantso",
-    description: "Legal information, privacy information and contact form for Lantso.",
-    image: "/assets/photos/story.png",
+    description: "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys.",
+    image: "/assets/photos/fallback/story.jpg",
     body: legalBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   },
@@ -167,7 +167,7 @@ const routes = [
     path: "/roots",
     title: "Discover the Roots | Lantso",
     description: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
-    image: "/assets/photos/story.png",
+    image: "/assets/photos/fallback/story.jpg",
     body: rootsBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   },
@@ -175,7 +175,7 @@ const routes = [
     path: "/success",
     title: "Order Received | Lantso",
     description: "Lantso order confirmation.",
-    image: "/assets/photos/hero.png",
+    image: "/assets/photos/fallback/hero.jpg",
     body: (lang) => noticeBody(noticeHeading("successTitle", lang), text("successBody", lang), lang),
     noindex: true,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
@@ -184,7 +184,7 @@ const routes = [
     path: "/cancel",
     title: "Checkout Cancelled | Lantso",
     description: "Lantso checkout cancelled.",
-    image: "/assets/photos/hero.png",
+    image: "/assets/photos/fallback/hero.jpg",
     body: (lang) => noticeBody(noticeHeading("cancelTitle", lang), text("cancelBody", lang), lang),
     noindex: true,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
@@ -267,22 +267,25 @@ function locale(lang = DEFAULT_LANG) {
 function faqRows(lang = DEFAULT_LANG) {
   if (lang === "fr") {
     return [
-      ["Quand sortent les maillots ?", "La boutique est preparee pour le drop Coupe du Monde 2026."],
-      ["Puis-je commander hors Europe ?", "Certains pays internationaux sont actives au paiement."],
-      ["Comment choisir ma taille ?", "La page produit liste les mesures des tailles M et L."]
+      ["Quand ma commande sera-t-elle expediee ?", "Les commandes payees sont preparees sous 1 a 3 jours ouvres pendant un drop. Le suivi est envoye par email des que le colis est remis au transporteur."],
+      ["Quels pays sont livrables ?", "Le checkout prend en charge la France, Monaco, les pays de l'Union europeenne, la Suisse, le Royaume-Uni, le Maroc, les Etats-Unis, le Canada, le Japon, l'Arabie saoudite, la Norvege et les autres destinations listees dans le panier."],
+      ["Comment choisir ma taille ?", "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes deja. Entre M et L, choisis L pour une coupe plus relax."],
+      ["Puis-je echanger une taille ?", "Chaque couleur etant limitee a 25 pieces, les echanges dependent du stock restant. Si le remplacement n'est pas disponible, un retour eligible peut etre rembourse."]
     ];
   }
   if (lang === "ar") {
     return [
-      ["متى تصدر القمصان؟", "المتجر جاهز لإصدار كأس العالم 2026."],
-      ["هل يمكن الطلب من خارج أوروبا؟", "بعض الدول الدولية مفعلة عند الدفع."],
-      ["كيف أختار المقاس؟", "تعرض صفحة المنتج قياسات M و L."]
+      ["متى يتم شحن طلبي؟", "يتم تجهيز الطلبات المدفوعة خلال 1 إلى 3 أيام عمل أثناء الإصدار. يصلك رقم التتبع عبر البريد الإلكتروني عند تسليم الطرد للناقل."],
+      ["ما الدول المتاحة للتوصيل؟", "يدعم الدفع فرنسا، موناكو، دول الاتحاد الأوروبي، سويسرا، المملكة المتحدة، المغرب، الولايات المتحدة، كندا، اليابان، السعودية، النرويج وباقي الوجهات الظاهرة في السلة."],
+      ["كيف أختار المقاس؟", "استعمل القياسات في صفحة كل منتج وقارنها بقميص تلبسه حاليا. إذا كنت بين M و L فاختر L لقصة أوسع."],
+      ["هل يمكن تبديل المقاس؟", "لأن كل لون محدود في 25 قطعة، يعتمد التبديل على المخزون المتبقي. إذا لم يتوفر البديل يمكن معالجة إرجاع مؤهل."]
     ];
   }
   return [
-    ["When will the jerseys release?", "The store is prepared for the 2026 World Cup drop."],
-    ["Can I order outside Europe?", "Selected international countries are enabled in checkout."],
-    ["How do I know my size?", "The product page lists garment measurements for sizes M and L."]
+    ["When will my order ship?", "Paid orders are prepared within 1-3 business days during a drop. Tracking is sent by email as soon as the parcel is handed to the carrier."],
+    ["Which countries can receive delivery?", "Checkout supports France, Monaco, EU countries, Switzerland, the United Kingdom, Morocco, the United States, Canada, Japan, Saudi Arabia, Norway, and the other enabled destinations listed in the cart."],
+    ["How should I choose my size?", "Use the measurements on each product page and compare them with a jersey you already wear. If you are between M and L, choose L for a more relaxed fit."],
+    ["Can I exchange a size?", "Because each colour is limited to 25 pieces, exchanges depend on remaining stock. If a replacement is unavailable, we can process an eligible return instead."]
   ];
 }
 
@@ -485,7 +488,7 @@ function productSchema(product, lang = DEFAULT_LANG) {
     "@id": `${absolute(localizedPath(`/product/${product.id}`, lang))}#product`,
     name: product.name[lang] || product.name.en,
     description: product.description[lang] || product.description.en,
-    image: [`${SITE_URL}/assets/photos/${product.id}.png`],
+    image: [`${SITE_URL}/assets/photos/fallback/${product.id}.jpg`],
     sku: product.sku,
     brand: { "@type": "Brand", name: "Lantso" },
     material: product.material[lang] || product.material.en,
@@ -559,9 +562,10 @@ function productImageAlt(product, lang = DEFAULT_LANG) {
 }
 
 function pictureHtml(file, alt, width, height, sizes) {
+  const loading = file === "hero" ? `loading="eager" fetchpriority="high"` : `loading="lazy"`;
   return `<picture>
             <source srcset="/assets/photos/responsive/${file}-480.webp 480w, /assets/photos/responsive/${file}-800.webp 800w, /assets/photos/responsive/${file}-1200.webp 1200w, /assets/photos/${file}.webp ${width}w" sizes="${escapeHtml(sizes)}" type="image/webp">
-            <img src="/assets/photos/${file}.png" alt="${escapeHtml(alt)}" width="${width}" height="${height}">
+            <img src="/assets/photos/fallback/${file}.jpg" alt="${escapeHtml(alt)}" ${loading} decoding="async" width="${width}" height="${height}">
           </picture>`;
 }
 
