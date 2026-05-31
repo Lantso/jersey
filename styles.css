@@ -311,10 +311,13 @@ a {
 .button-secondary,
 .button-paypal,
 .button-ghost {
+  display: inline-grid;
+  place-items: center;
   min-height: 48px;
   padding: 0 34px;
   border: 1px solid var(--ink);
   font-weight: 700;
+  line-height: 1;
   text-align: center;
   text-transform: uppercase;
 }
@@ -356,15 +359,6 @@ a {
 
 .button-paypal strong {
   color: #0070ba;
-}
-
-.hero-arrow {
-  width: 18px;
-  height: 18px;
-  margin-top: -18px;
-  border-right: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  transform: rotate(45deg);
 }
 
 .split-band {
@@ -482,7 +476,7 @@ a {
 }
 
 .mosaic .photo-frame {
-  min-height: 430px;
+  min-height: 300px;
   border-top: 0;
   border-left: 0;
 }
@@ -1363,7 +1357,7 @@ textarea {
   }
 
   .mosaic .photo-frame {
-    min-height: 310px;
+    min-height: 240px;
   }
 
   .site-footer {

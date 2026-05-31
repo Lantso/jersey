@@ -856,14 +856,12 @@ function updateQuantity(productId, size, delta) {
   }
   saveCart();
   renderCart();
-  render();
 }
 
 function removeItem(productId, size) {
   state.cart = state.cart.filter((entry) => !(entry.productId === productId && entry.size === size));
   saveCart();
   renderCart();
-  render();
 }
 
 function openCart() {
@@ -1107,8 +1105,7 @@ function homePage() {
       ${placeholder("Lantso campaign image")}
       <div class="hero-content">
         <h1 class="script-title">${t("hero.title").replace("\n", "<br>")}</h1>
-        <a class="button-primary" href="${localizedPath("/shop")}" data-link>${t("hero.step")}</a>
-        <span class="hero-arrow" aria-hidden="true"></span>
+        <a class="button-primary" href="#shirts" data-scroll-link>${t("hero.step")}</a>
       </div>
     </section>
     <section class="split-band">
@@ -1119,7 +1116,7 @@ function homePage() {
       </div>
       ${placeholder("Chapter visual")}
     </section>
-    <section class="product-feature-grid">
+    <section class="product-feature-grid" id="shirts">
       ${PRODUCTS.map((product, index) => productFeature(product, index)).join("")}
     </section>
     <section class="mosaic" aria-label="Campaign gallery">
@@ -1214,7 +1211,6 @@ function shopCard(product) {
         <button class="button-primary" type="button" data-add="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : t("product.claim")}</button>
         <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}" ${soldOut ? "disabled" : ""}>+</button>
       </div>
-      <button class="button-paypal" type="button" data-paypal="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : `${t("product.paypal")} <strong>PayPal</strong>`}</button>
     </article>
   `;
 }
@@ -1263,7 +1259,6 @@ function productPage(productId) {
             <button class="button-primary" type="button" data-add="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : t("product.add")}</button>
             <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}" ${soldOut ? "disabled" : ""}>+</button>
           </div>
-          <button class="button-paypal" type="button" data-paypal="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : `${t("product.paypal")} <strong>PayPal</strong>`}</button>
         </article>
       </section>
       ${footer()}
@@ -1484,6 +1479,15 @@ function bindPageEvents() {
     });
   });
 
+  app.querySelectorAll("[data-scroll-link]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector(link.getAttribute("href"));
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
   app.querySelectorAll("[data-size]").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
@@ -1497,15 +1501,6 @@ function bindPageEvents() {
     button.addEventListener("click", () => {
       const productId = button.dataset.add || button.dataset.quickAdd;
       addToCart(productId);
-    });
-  });
-
-  app.querySelectorAll("[data-paypal]").forEach((button) => {
-    button.addEventListener("click", async () => {
-      const productId = button.dataset.paypal;
-      addToCart(productId, state.selectedSizes[productId], 1, false);
-      openCart();
-      await checkout("paypal");
     });
   });
 
