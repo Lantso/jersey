@@ -6,7 +6,7 @@ import { CURRENCY, PRODUCTS, calculateShipping, formatMoney } from "../catalog.m
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
-const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://www.lantso.com").replace(/\/$/, "");
+const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
@@ -21,16 +21,16 @@ const COPY = {
     ar: "Lantso - From the Roots to the World"
   },
   homeDescription: {
-    en: "Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White.",
-    fr: "Lantso, maillots marocains tres limites pour la Coupe du Monde 2026. Roots 01 Khaki et Atlas 02 White.",
-    ar: "Lantso، قمصان مغربية محدودة جدا لكأس العالم 2026. روتس 01 كاكي وأطلس 02 أبيض."
+    en: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period.",
+    fr: "Maillots de football marocains limites par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pieces par couleur, pour la periode Coupe du Monde 2026.",
+    ar: "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض، 25 قطعة من كل لون لفترة كأس العالم 2026."
   },
   stepInside: { en: "Step inside", fr: "Entrer", ar: "ادخل" },
-  shopTitle: { en: "Shop Moroccan Jerseys | Lantso", fr: "Boutique maillots marocains | Lantso", ar: "متجر القمصان المغربية | Lantso" },
+  shopTitle: { en: "Shop Moroccan Football Jerseys | Lantso", fr: "Boutique maillots de football marocains | Lantso", ar: "متجر قمصان كرة القدم المغربية | Lantso" },
   shopDescription: {
-    en: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan jerseys for the 2026 World Cup.",
-    fr: "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots marocains limites pour la Coupe du Monde 2026.",
-    ar: "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان مغربية محدودة لكأس العالم 2026."
+    en: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period.",
+    fr: "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limites pour la periode Coupe du Monde 2026.",
+    ar: "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."
   },
   shopHeading: { en: "Shop Lantso Moroccan jerseys", fr: "Boutique Lantso maillots marocains", ar: "متجر قمصان Lantso المغربية" },
   shopBody: {
@@ -74,6 +74,21 @@ const COPY = {
     fr: "Lantso vend des maillots en edition limitee en EUR. Aucun numero de TVA n'est affiche sur la boutique. Une commande est confirmee uniquement apres paiement reussi via Stripe Checkout.",
     ar: "تبيع Lantso قمصانا محدودة باليورو. لا يتم عرض رقم ضريبة VAT في المتجر. يؤكد الطلب فقط بعد نجاح الدفع عبر Stripe Checkout."
   },
+  legalSupport: {
+    en: "For support, sizing, press, or wholesale requests, write to contact@lantso.com.",
+    fr: "Pour le support, les tailles, la presse ou les demandes wholesale, ecris a contact@lantso.com.",
+    ar: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، اكتب إلى contact@lantso.com."
+  },
+  legalPrivacy: {
+    en: "Customer details are used for checkout, delivery, support, fraud prevention, and optional newsletter access. Payment data is handled by Stripe.",
+    fr: "Les donnees client servent au paiement, a la livraison, au support, a la prevention de fraude et a la newsletter optionnelle. Les donnees de paiement sont gerees par Stripe.",
+    ar: "تستخدم بيانات العميل للدفع والتوصيل والدعم ومنع الاحتيال والنشرة الاختيارية. بيانات الدفع يعالجها Stripe."
+  },
+  legalSocial: {
+    en: "Instagram: lantso.at. TikTok: @lantsobrand.",
+    fr: "Instagram : lantso.at. TikTok : @lantsobrand.",
+    ar: "Instagram: lantso.at. TikTok: @lantsobrand."
+  },
   rootsTitle: { en: "Discover the Roots | Lantso", fr: "Decouvrir les Roots | Lantso", ar: "اكتشف الجذور | Lantso" },
   rootsDescription: {
     en: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
@@ -82,9 +97,19 @@ const COPY = {
   },
   rootsHeading: { en: "Discover the Roots", fr: "Decouvrir les Roots", ar: "اكتشف الجذور" },
   rootsBody: {
-    en: "This page is reserved for the Lantso story, pencil sketches, and the path from the roots to the world.",
-    fr: "Cette page est reservee a l'histoire de Lantso, aux sketchs au crayon et au parcours from the roots to the world.",
-    ar: "هذه الصفحة مخصصة لقصة Lantso والرسومات الأولية ومسار العلامة من الجذور إلى العالم."
+    en: "Lantso starts from a simple idea: rebuild the emotion of Moroccan football heritage for the people who carry it today.",
+    fr: "Lantso part d'une idee simple : reconstruire l'emotion du football marocain pour ceux qui la portent aujourd'hui.",
+    ar: "تبدأ Lantso من فكرة بسيطة: إعادة إحساس كرة القدم المغربية لمن يحمل هذا الإرث اليوم."
+  },
+  rootsBody2: {
+    en: "Roots 01 - Khaki looks back to the deep green, red, and match-day memory of 98. Atlas 02 - White keeps the same line brighter, lighter, and made for movement.",
+    fr: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la memoire match-day de 98. Atlas 02 - White garde la meme ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
+    ar: "Roots 01 - Khaki يعود إلى الأخضر العميق والأحمر وذاكرة 98. Atlas 02 - White يحافظ على نفس الروح بنسخة أكثر صفاء وخفة وحركة."
+  },
+  rootsBody3: {
+    en: "This first limited chapter is small by intention: two jerseys, 25 pieces per colour, built to travel from the roots to the world.",
+    fr: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pieces par couleur, penses pour voyager from the roots to the world.",
+    ar: "هذا الفصل الأول محدود عن قصد: قميصان، 25 قطعة من كل لون، من الجذور إلى العالم."
   },
   successTitle: { en: "Order Received | Lantso", fr: "Commande recue | Lantso", ar: "تم استلام الطلب | Lantso" },
   successBody: {
@@ -101,15 +126,15 @@ const routes = [
   {
     path: "/",
     title: "Lantso - From the Roots to the World",
-    description: "Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White.",
+    description: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period.",
     image: "/assets/photos/hero.png",
     body: homeBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), collectionSchema(lang)]
   },
   {
     path: "/shop",
-    title: "Shop Moroccan Jerseys | Lantso",
-    description: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan jerseys for the 2026 World Cup.",
+    title: "Shop Moroccan Football Jerseys | Lantso",
+    description: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period.",
     image: "/assets/photos/hero.png",
     body: shopBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), collectionSchema(lang)]
@@ -151,7 +176,7 @@ const routes = [
     title: "Order Received | Lantso",
     description: "Lantso order confirmation.",
     image: "/assets/photos/hero.png",
-    body: (lang) => noticeBody(text("successTitle", lang), text("successBody", lang), lang),
+    body: (lang) => noticeBody(noticeHeading("successTitle", lang), text("successBody", lang), lang),
     noindex: true,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   },
@@ -160,7 +185,7 @@ const routes = [
     title: "Checkout Cancelled | Lantso",
     description: "Lantso checkout cancelled.",
     image: "/assets/photos/hero.png",
-    body: (lang) => noticeBody(text("cancelTitle", lang), text("cancelBody", lang), lang),
+    body: (lang) => noticeBody(noticeHeading("cancelTitle", lang), text("cancelBody", lang), lang),
     noindex: true,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   }
@@ -171,7 +196,7 @@ const template = await readFile(path.join(ROOT, "index.html"), "utf8");
 await rm(DIST, { recursive: true, force: true });
 await mkdir(DIST, { recursive: true });
 await Promise.all(
-  ["app.js", "catalog.mjs", "styles.css", "lantso_logo.svg", "Lantso_text.svg", "robots.txt"].map((file) =>
+  ["app.js", "catalog.mjs", "styles.css", "lantso_logo.svg", "Lantso_text.svg", "robots.txt", "llms.txt", "site.webmanifest"].map((file) =>
     cp(path.join(ROOT, file), path.join(DIST, file), { recursive: true })
   )
 );
@@ -190,14 +215,19 @@ function renderRoute(route, lang = DEFAULT_LANG) {
   const canonical = absolute(localizedPath(route.path, lang));
   const graph = [...route.schema(lang), breadcrumbSchema(route.path, title, lang)];
   let html = template;
-  html = html.replace(/<html lang="[^"]*">/, `<html lang="${escapeHtml(lang)}">`);
+  html = html.replace(/<html lang="[^"]*">/, `<html lang="${escapeHtml(lang)}"${lang === "ar" ? ' class="is-arabic"' : ""}>`);
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(title)}</title>`);
   html = upsertMeta(html, "name", "description", description);
   html = upsertMeta(html, "property", "og:title", title);
   html = upsertMeta(html, "property", "og:description", description);
   html = upsertMeta(html, "property", "og:image", absolute(route.image));
   html = upsertMeta(html, "property", "og:url", canonical);
-  html = route.noindex ? upsertMeta(html, "name", "robots", "noindex, nofollow") : html;
+  html = upsertMeta(html, "property", "og:site_name", "Lantso");
+  html = upsertMeta(html, "name", "twitter:title", title);
+  html = upsertMeta(html, "name", "twitter:description", description);
+  html = upsertMeta(html, "name", "twitter:image", absolute(route.image));
+  html = upsertMeta(html, "name", "theme-color", "#d9d9d7");
+  html = upsertMeta(html, "name", "robots", route.noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large");
   html = upsertCanonical(html, canonical);
   html = upsertAlternates(html, route.path);
   html = html.replace(
@@ -222,6 +252,10 @@ async function writeRoute(routePath, html) {
 
 function text(key, lang = DEFAULT_LANG) {
   return COPY[key]?.[lang] || COPY[key]?.en || key;
+}
+
+function noticeHeading(key, lang = DEFAULT_LANG) {
+  return text(key, lang).replace(" | Lantso", "");
 }
 
 function locale(lang = DEFAULT_LANG) {
@@ -351,9 +385,9 @@ function legalBody(lang = DEFAULT_LANG) {
         <section class="seo-section">
           <h1>${escapeHtml(text("legalHeading", lang))}</h1>
           <p>${escapeHtml(text("legalBody", lang))}</p>
-          <p>For support, sizing, press, or wholesale requests, write to contact@lantso.com.</p>
-          <p>Instagram: <a href="${SOCIAL_LINKS.instagram}">lantso.at</a>. TikTok: <a href="${SOCIAL_LINKS.tiktok}">@lantsobrand</a>.</p>
-          <p>Customer details are used for checkout, delivery, support, fraud prevention, and optional newsletter access. Payment data is handled by Stripe.</p>
+          <p>${escapeHtml(text("legalSupport", lang))}</p>
+          <p>${escapeHtml(text("legalSocial", lang))}</p>
+          <p>${escapeHtml(text("legalPrivacy", lang))}</p>
         </section>
       `;
 }
@@ -364,6 +398,8 @@ function rootsBody(lang = DEFAULT_LANG) {
           ${pictureHtml("story", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085, "100vw")}
           <h1>${escapeHtml(text("rootsHeading", lang))}</h1>
           <p>${escapeHtml(text("rootsBody", lang))}</p>
+          <p>${escapeHtml(text("rootsBody2", lang))}</p>
+          <p>${escapeHtml(text("rootsBody3", lang))}</p>
         </section>
       `;
 }
@@ -411,7 +447,8 @@ function organizationSchema(lang = DEFAULT_LANG) {
     "@id": `${absolute(localizedPath("/", lang))}#organization`,
     name: "Lantso",
     url: absolute(localizedPath("/", lang)),
-    logo: `${SITE_URL}/lantso_logo.svg`,
+    logo: `${SITE_URL}/assets/icons/lantso-icon-512.png`,
+    description: "Limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White.",
     email: "contact@lantso.com",
     sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok]
   };
@@ -422,7 +459,8 @@ function webSiteSchema(lang = DEFAULT_LANG) {
     "@type": "WebSite",
     "@id": `${absolute(localizedPath("/", lang))}#website`,
     name: "Lantso",
-    url: absolute(localizedPath("/", lang))
+    url: absolute(localizedPath("/", lang)),
+    inLanguage: LANGS
   };
 }
 

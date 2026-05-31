@@ -1,12 +1,12 @@
 :root {
-  --ink: #f7f3ec;
-  --paper: #202922;
-  --white: #202922;
-  --wash: #a90000;
-  --line: rgba(247, 243, 236, 0.62);
-  --muted: rgba(247, 243, 236, 0.72);
+  --ink: #111111;
+  --paper: #d9d9d7;
+  --white: #f8f8f6;
+  --wash: #d9d9d7;
+  --line: rgba(17, 17, 17, 0.42);
+  --muted: rgba(17, 17, 17, 0.68);
   --dark-ink: #111111;
-  --cream: #f7f3ec;
+  --cream: #f8f8f6;
   --mono: "Atkinson Hyperlegible Mono", "Courier New", monospace;
   --script: "Snell Roundhand", "Luxurious Script", "Apple Chancery", cursive;
   --logo-script: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive;
@@ -113,13 +113,13 @@ a {
 }
 
 .site-header[data-floating="false"] {
-  background: rgba(32, 41, 34, 0.9);
+  background: rgba(248, 248, 246, 0.92);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(8px);
 }
 
 .site-header[data-floating="false"] .brand-word img {
-  filter: invert(1);
+  filter: none;
 }
 
 .site-header[data-floating="false"] .join-button,
@@ -343,6 +343,15 @@ a {
   background: #ffc439;
   color: #15345b;
   text-transform: none;
+}
+
+.button-primary:disabled,
+.button-secondary:disabled,
+.button-paypal:disabled,
+.button-ghost:disabled,
+.plus-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .button-paypal strong {
@@ -723,8 +732,19 @@ a {
 }
 
 .is-arabic .prose,
+.is-arabic .product-panel h1,
 .is-arabic .product-panel p,
-.is-arabic .club-card label {
+.is-arabic .detail-list,
+.is-arabic .info-section,
+.is-arabic .legal-section,
+.is-arabic .roots-section,
+.is-arabic .faq-list,
+.is-arabic .club-card label,
+.is-arabic .club-card p,
+.is-arabic .cart-panel,
+.is-arabic .seo-section,
+.is-arabic .seo-product > div,
+.is-arabic .seo-products article {
   direction: rtl;
   text-align: right;
 }
@@ -804,7 +824,7 @@ textarea {
   display: block;
   width: 58px;
   height: auto;
-  filter: invert(1);
+  filter: none;
 }
 
 .footer-col {
@@ -907,7 +927,7 @@ textarea {
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #950000;
+  background: var(--wash);
   color: var(--cream);
   text-align: center;
 }
@@ -923,7 +943,7 @@ textarea {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(35, 17, 8, 0.28), rgba(32, 41, 34, 0.72)),
+    linear-gradient(rgba(17, 17, 17, 0.18), rgba(17, 17, 17, 0.56)),
     radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.08), transparent 42%);
 }
 
@@ -994,7 +1014,7 @@ textarea {
   place-items: center;
   gap: 2px;
   border: 1px solid rgba(247, 243, 236, 0.72);
-  background: rgba(32, 41, 34, 0.28);
+  background: rgba(17, 17, 17, 0.24);
   backdrop-filter: blur(6px);
 }
 

@@ -17,7 +17,7 @@ http://127.0.0.1:3000
 ## Launch Setup
 
 1. Copy `.env.example` to `.env` locally, and set the same variables in Netlify.
-2. Set `PUBLIC_SITE_URL=https://www.lantso.com` in Netlify.
+2. Set `PUBLIC_SITE_URL=https://lantso.com` in Netlify.
 3. Add `STRIPE_SECRET_KEY` in Netlify.
 4. Add `STRIPE_WEBHOOK_SECRET` after creating the Stripe webhook.
 5. In Stripe, enable the payment methods the business can legally support in its region. Leave `STRIPE_PAYMENT_METHOD_TYPES` empty to let Stripe show eligible dashboard-enabled methods, or set a comma list such as `card,klarna,paypal` after confirming account eligibility.
@@ -29,7 +29,7 @@ http://127.0.0.1:3000
 
 ## Launch Gate
 
-The site opens on a password/countdown page for the 06/06/2026 drop. The unlock check is available at `/api/access`, with a committed hash fallback for the requested password.
+The site is public by default so Google and AI search tools can index the storefront. Only set `LANTSO_GATE_ENABLED=true` for a private pre-launch gate. When the gate is enabled, the edge page deliberately returns `noindex, nofollow`, so it should not be used for public launch SEO. If the gate is enabled, set `LANTSO_ACCESS_HASH` in Netlify; there is no production fallback if the variable is missing or malformed.
 
 ## Fonts
 
@@ -74,4 +74,4 @@ The site verifies Stripe signatures when `STRIPE_WEBHOOK_SECRET` is set. The web
 npm run build
 ```
 
-The build writes pre-rendered HTML files to `dist/` for `/`, `/shop`, both product pages, `/info`, `/legal`, and `/roots`. Netlify publishes `dist/`.
+The build writes pre-rendered HTML files to `dist/` for `/`, `/shop`, both product pages, `/info`, `/legal`, `/roots`, checkout result pages, localized routes, `sitemap.xml`, `robots.txt`, and `llms.txt`. Netlify publishes `dist/`.

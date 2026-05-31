@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White."
+      content="Lantso is a limited Moroccan football jersey drop: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period."
     >
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="application-name" content="Lantso">
+    <meta name="theme-color" content="#d9d9d7">
     <meta property="og:title" content="Lantso - From the Roots to the World">
-    <meta property="og:description" content="Very limited Moroccan jerseys for the 2026 World Cup. 25 pieces per colour.">
-    <meta property="og:image" content="https://www.lantso.com/assets/photos/hero.png">
-    <meta property="og:url" content="https://www.lantso.com/">
+    <meta property="og:description" content="Very limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White. 25 pieces per colour.">
+    <meta property="og:image" content="https://lantso.com/assets/photos/hero.png">
+    <meta property="og:url" content="https://lantso.com/">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Lantso">
+    <meta property="og:locale" content="en_GB">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lantso - From the Roots to the World">
+    <meta name="twitter:description" content="Limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White. 25 pieces per colour.">
+    <meta name="twitter:image" content="https://lantso.com/assets/photos/hero.png">
+    <link rel="canonical" href="https://lantso.com/">
+    <link rel="icon" href="/assets/icons/lantso-icon-192.png" sizes="192x192" type="image/png">
+    <link rel="apple-touch-icon" href="/assets/icons/lantso-icon-192.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="icon" href="/lantso_logo.svg" type="image/svg+xml">
     <link
       rel="preload"
@@ -29,30 +41,35 @@
         "@graph": [
           {
             "@type": "Organization",
-            "@id": "https://www.lantso.com/#organization",
+            "@id": "https://lantso.com/#organization",
             "name": "Lantso",
-            "url": "https://www.lantso.com/",
-            "logo": "https://www.lantso.com/lantso_logo.svg",
-            "email": "contact@lantso.com"
+            "url": "https://lantso.com/",
+            "logo": "https://lantso.com/assets/icons/lantso-icon-512.png",
+            "email": "contact@lantso.com",
+            "sameAs": [
+              "https://www.instagram.com/lantso.at",
+              "https://www.tiktok.com/@lantsobrand"
+            ]
           },
           {
             "@type": "WebSite",
-            "@id": "https://www.lantso.com/#website",
+            "@id": "https://lantso.com/#website",
             "name": "Lantso",
-            "url": "https://www.lantso.com/"
+            "url": "https://lantso.com/",
+            "inLanguage": ["en", "fr", "ar"]
           },
           {
             "@type": "Product",
-            "@id": "https://www.lantso.com/product/roots-01-khaki#product",
+            "@id": "https://lantso.com/product/roots-01-khaki#product",
             "name": "Roots 01 - Khaki",
             "description": "A very limited Morocco-inspired jersey in khaki green, designed for match days, summer nights, and collectors.",
-            "image": "https://www.lantso.com/assets/photos/roots-01-khaki.png",
+            "image": "https://lantso.com/assets/photos/roots-01-khaki.png",
             "sku": "ROOTS-01-KHAKI",
             "brand": { "@type": "Brand", "name": "Lantso" },
             "material": "100% polyester",
             "offers": {
               "@type": "Offer",
-              "url": "https://www.lantso.com/product/roots-01-khaki",
+              "url": "https://lantso.com/product/roots-01-khaki",
               "priceCurrency": "EUR",
               "price": "59.99",
               "availability": "https://schema.org/LimitedAvailability",
@@ -61,16 +78,16 @@
           },
           {
             "@type": "Product",
-            "@id": "https://www.lantso.com/product/atlas-02-white#product",
+            "@id": "https://lantso.com/product/atlas-02-white#product",
             "name": "Atlas 02 - White",
             "description": "A very limited white jersey from the same heritage line, built around contrast, movement, and Moroccan detail.",
-            "image": "https://www.lantso.com/assets/photos/atlas-02-white.png",
+            "image": "https://lantso.com/assets/photos/atlas-02-white.png",
             "sku": "ATLAS-02-WHITE",
             "brand": { "@type": "Brand", "name": "Lantso" },
             "material": "100% polyester",
             "offers": {
               "@type": "Offer",
-              "url": "https://www.lantso.com/product/atlas-02-white",
+              "url": "https://lantso.com/product/atlas-02-white",
               "priceCurrency": "EUR",
               "price": "59.99",
               "availability": "https://schema.org/LimitedAvailability",
@@ -86,7 +103,7 @@
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Luxurious+Script&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="/styles.css?v=20260517">
+    <link rel="stylesheet" href="/styles.css?v=20260531b">
   </head>
   <body>
     <a class="skip-link" href="#app">Skip to content</a>
@@ -179,6 +196,6 @@
       <button class="button-secondary" type="button" data-accept-cookie data-i18n="cookie.accept">Accept</button>
     </aside>
 
-    <script type="module" src="/app.js?v=20260517b"></script>
+    <script type="module" src="/app.js?v=20260531"></script>
   </body>
 </html>

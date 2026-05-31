@@ -11,6 +11,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at",
   tiktok: "https://www.tiktok.com/@lantsobrand"
 };
+const SITE_URL = "https://lantso.com";
 
 const I18N = {
   en: {
@@ -54,6 +55,7 @@ const I18N = {
       care: "Care",
       measurements: "Measurements",
       selectSize: "Select size",
+      soldOut: "Sold out",
       added: "Added to cart.",
       shippingEstimate: "Shipping estimate",
       stock: "Limited run"
@@ -100,7 +102,9 @@ const I18N = {
     },
     roots: {
       title: "Before the design,\nthere was a story",
-      body: "This page is reserved for the Lantso story, pencil sketches, and the path from the roots to the world. The structure is ready so final writing and artwork can be added without changing the storefront."
+      body: "Lantso starts from a simple idea: rebuild the emotion of Moroccan football heritage for the people who carry it today.",
+      body2: "Roots 01 - Khaki looks back to the deep green, red, and match-day memory of 98. Atlas 02 - White keeps the same line brighter, lighter, and made for movement.",
+      body3: "This first limited chapter is small by intention: two jerseys, 25 pieces per colour, built to travel from the roots to the world."
     },
     club: {
       title: "Join the club",
@@ -187,6 +191,7 @@ const I18N = {
       care: "Entretien",
       measurements: "Mesures",
       selectSize: "Choisir une taille",
+      soldOut: "Epuise",
       added: "Ajoute au panier.",
       shippingEstimate: "Estimation livraison",
       stock: "Serie limitee"
@@ -233,7 +238,9 @@ const I18N = {
     },
     roots: {
       title: "Avant le design,\nil y avait une histoire",
-      body: "Cette page est reservee a l'histoire de Lantso, aux sketchs au crayon et au parcours from the roots to the world. La structure est prete pour ajouter les textes et visuels finaux sans modifier la boutique."
+      body: "Lantso part d'une idee simple : reconstruire l'emotion du football marocain pour ceux qui la portent aujourd'hui.",
+      body2: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la memoire match-day de 98. Atlas 02 - White garde la meme ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
+      body3: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pieces par couleur, penses pour voyager from the roots to the world."
     },
     club: {
       title: "Join the club",
@@ -320,6 +327,7 @@ const I18N = {
       care: "العناية",
       measurements: "المقاسات",
       selectSize: "اختر المقاس",
+      soldOut: "نفد المخزون",
       added: "تمت الإضافة إلى السلة.",
       shippingEstimate: "تقدير الشحن",
       stock: "إصدار محدود"
@@ -366,7 +374,9 @@ const I18N = {
     },
     roots: {
       title: "قبل التصميم،\nكانت هناك قصة",
-      body: "هذه الصفحة مخصصة لقصة Lantso والرسومات الأولية ومسار العلامة من الجذور إلى العالم. البنية جاهزة لإضافة النصوص والرسومات النهائية دون تغيير المتجر."
+      body: "تبدأ Lantso من فكرة بسيطة: إعادة إحساس كرة القدم المغربية لمن يحمل هذا الإرث اليوم.",
+      body2: "Roots 01 - Khaki يعود إلى الأخضر العميق والأحمر وذاكرة 98. Atlas 02 - White يحافظ على نفس الروح بنسخة أكثر صفاء وخفة وحركة.",
+      body3: "هذا الفصل الأول محدود عن قصد: قميصان، 25 قطعة من كل لون، من الجذور إلى العالم."
     },
     club: {
       title: "Join the club",
@@ -441,7 +451,7 @@ function localizedPath(path, lang = state?.lang || DEFAULT_LANG) {
 const state = {
   lang: languageFromPath() || localStorage.getItem("lantso:lang") || DEFAULT_LANG,
   cart: loadCart(),
-  locked: localStorage.getItem("lantso:access") !== "granted",
+  locked: false,
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, product.sizes[0]])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
   inventory: null,
@@ -497,25 +507,31 @@ function pageMeta(current = route()) {
   }
   const localizedMeta = {
     en: {
-      home: ["Lantso - From the Roots to the World", "Lantso, very limited Moroccan jerseys for the 2026 World Cup. Roots 01 Khaki and Atlas 02 White."],
-      shop: ["Shop Moroccan Jerseys | Lantso", "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan jerseys for the 2026 World Cup."],
+      home: ["Lantso - From the Roots to the World", "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period."],
+      shop: ["Shop Moroccan Football Jerseys | Lantso", "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period."],
       info: ["Shipping, Returns and FAQ | Lantso", "Shipping, returns, sizing and FAQ information for Lantso limited Moroccan jerseys."],
       legal: ["Legal and Contact | Lantso", "Legal information, privacy information and contact form for Lantso."],
-      roots: ["Discover the Roots | Lantso", "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world."]
+      roots: ["Discover the Roots | Lantso", "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world."],
+      success: ["Order Received | Lantso", "Lantso order confirmation."],
+      cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
     },
     fr: {
-      home: ["Lantso - From the Roots to the World", "Lantso, maillots marocains tres limites pour la Coupe du Monde 2026. Roots 01 Khaki et Atlas 02 White."],
-      shop: ["Boutique maillots marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots marocains limites pour la Coupe du Monde 2026."],
+      home: ["Lantso - From the Roots to the World", "Maillots de football marocains limites par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pieces par couleur, pour la periode Coupe du Monde 2026."],
+      shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limites pour la periode Coupe du Monde 2026."],
       info: ["Livraison, retours et FAQ | Lantso", "Informations livraison, retours, tailles et FAQ pour les maillots marocains limites Lantso."],
       legal: ["Legal et contact | Lantso", "Informations legales, confidentialite et contact pour Lantso."],
-      roots: ["Decouvrir les Roots | Lantso", "L'histoire Lantso derriere Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."]
+      roots: ["Decouvrir les Roots | Lantso", "L'histoire Lantso derriere Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
+      success: ["Commande recue | Lantso", "Confirmation de commande Lantso."],
+      cancel: ["Paiement annule | Lantso", "Paiement Lantso annule."]
     },
     ar: {
-      home: ["Lantso - From the Roots to the World", "Lantso، قمصان مغربية محدودة جدا لكأس العالم 2026. روتس 01 كاكي وأطلس 02 أبيض."],
-      shop: ["متجر القمصان المغربية | Lantso", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان مغربية محدودة لكأس العالم 2026."],
+      home: ["Lantso - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض، 25 قطعة من كل لون لفترة كأس العالم 2026."],
+      shop: ["متجر قمصان كرة القدم المغربية | Lantso", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."],
       info: ["الشحن والإرجاع والأسئلة | Lantso", "معلومات الشحن والإرجاع والمقاسات والأسئلة لقمصان Lantso المغربية المحدودة."],
       legal: ["القانوني والتواصل | Lantso", "معلومات قانونية وخصوصية وتواصل مع Lantso."],
-      roots: ["اكتشف الجذور | Lantso", "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."]
+      roots: ["اكتشف الجذور | Lantso", "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."],
+      success: ["تم استلام الطلب | Lantso", "تأكيد طلب Lantso."],
+      cancel: ["تم إلغاء الدفع | Lantso", "تم إلغاء دفع Lantso."]
     }
   };
   const copy = localizedMeta[state.lang] || localizedMeta.en;
@@ -523,7 +539,9 @@ function pageMeta(current = route()) {
     shop: { title: copy.shop[0], description: copy.shop[1], path: "/shop", image: "/assets/photos/hero.png", schema: collectionSchema() },
     info: { title: copy.info[0], description: copy.info[1], path: "/info", image: "/assets/photos/story.png", schema: faqSchema() },
     legal: { title: copy.legal[0], description: copy.legal[1], path: "/legal", image: "/assets/photos/story.png", schema: organizationSchema() },
-    roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/story.png", schema: organizationSchema() }
+    roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/story.png", schema: organizationSchema() },
+    success: { title: copy.success[0], description: copy.success[1], path: "/success", image: "/assets/photos/hero.png", schema: organizationSchema(), robots: "noindex, nofollow" },
+    cancel: { title: copy.cancel[0], description: copy.cancel[1], path: "/cancel", image: "/assets/photos/hero.png", schema: organizationSchema(), robots: "noindex, nofollow" }
   };
   return (
     pages[current.name] || {
@@ -545,7 +563,12 @@ function updateSeo(current = route()) {
   setMeta("og:description", meta.description, "property");
   setMeta("og:url", url, "property");
   setMeta("og:image", absoluteUrl(meta.image), "property");
+  setMeta("og:site_name", "Lantso", "property");
   setMeta("twitter:card", "summary_large_image");
+  setMeta("twitter:title", meta.title);
+  setMeta("twitter:description", meta.description);
+  setMeta("twitter:image", absoluteUrl(meta.image));
+  setMeta("robots", meta.robots || "index, follow, max-image-preview:large");
   let canonical = document.querySelector("link[rel='canonical']");
   if (!canonical) {
     canonical = document.createElement("link");
@@ -568,7 +591,7 @@ function setMeta(name, content, key = "name") {
 }
 
 function absoluteUrl(path) {
-  return new URL(path, "https://www.lantso.com").href;
+  return new URL(path, `${SITE_URL}/`).href;
 }
 
 function setAlternateLinks(basePath) {
@@ -667,8 +690,12 @@ function stockAvailable(productId, size) {
 
 function stockSummary(product) {
   const total = product.sizes.reduce((sum, size) => sum + stockAvailable(product.id, size), 0);
-  if (total <= 0) return state.lang === "fr" ? "Epuisé" : state.lang === "ar" ? "نفد المخزون" : "Sold out";
+  if (total <= 0) return t("product.soldOut");
   return `${t("product.limited")} · ${total}`;
+}
+
+function productIsSoldOut(product) {
+  return product.sizes.every((size) => stockAvailable(product.id, size) <= 0);
 }
 
 function cartQuantity() {
@@ -981,6 +1008,8 @@ function homePage() {
 
 function productFeature(product, index) {
   const productName = product.shortName[state.lang] || product.shortName.en;
+  const soldOut = productIsSoldOut(product);
+  const primaryLabel = soldOut ? t("product.soldOut") : index === 1 && state.lang !== "en" ? t("product.access") : t("product.claim");
   return `
     <article class="product-card">
       <a href="${localizedPath(`/product/${product.id}`)}" data-link>${placeholder(productName)}</a>
@@ -993,8 +1022,8 @@ function productFeature(product, index) {
         <span>${index === 1 && state.lang === "fr" ? "pieces limitees" : t("product.limited")}</span>
       </div>
       <div class="claim-row">
-        <button class="button-primary" type="button" data-add="${product.id}">${index === 1 && state.lang !== "en" ? t("product.access") : t("product.claim")}</button>
-        <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}">+</button>
+        <button class="button-primary" type="button" data-add="${product.id}" ${soldOut ? "disabled" : ""}>${primaryLabel}</button>
+        <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}" ${soldOut ? "disabled" : ""}>+</button>
       </div>
     </article>
   `;
@@ -1023,6 +1052,7 @@ function shopPage() {
 function shopCard(product) {
   const productName = product.shortName[state.lang] || product.shortName.en;
   const selected = state.selectedSizes[product.id];
+  const soldOut = productIsSoldOut(product);
   return `
     <article class="shop-card">
       <div>
@@ -1044,10 +1074,10 @@ function shopCard(product) {
           .join("")}
       </div>
       <div class="claim-row">
-        <button class="button-primary" type="button" data-add="${product.id}">${t("product.claim")}</button>
-        <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}">+</button>
+        <button class="button-primary" type="button" data-add="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : t("product.claim")}</button>
+        <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}" ${soldOut ? "disabled" : ""}>+</button>
       </div>
-      <button class="button-paypal" type="button" data-paypal="${product.id}">${t("product.paypal")} <strong>PayPal</strong></button>
+      <button class="button-paypal" type="button" data-paypal="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : `${t("product.paypal")} <strong>PayPal</strong>`}</button>
     </article>
   `;
 }
@@ -1057,6 +1087,7 @@ function productPage(productId) {
   const productName = product.shortName[state.lang] || product.shortName.en;
   const selected = state.selectedSizes[product.id];
   const shipping = calculateShipping(state.shippingCountry, product.price, 1);
+  const soldOut = productIsSoldOut(product);
   return `
     <div class="page-shell">
       ${breadcrumb(productName)}
@@ -1092,10 +1123,10 @@ function productPage(productId) {
               .join("")}
           </div>
           <div class="claim-row">
-            <button class="button-primary" type="button" data-add="${product.id}">${t("product.add")}</button>
-            <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}">+</button>
+            <button class="button-primary" type="button" data-add="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : t("product.add")}</button>
+            <button class="plus-button" type="button" data-quick-add="${product.id}" aria-label="${t("product.add")}" ${soldOut ? "disabled" : ""}>+</button>
           </div>
-          <button class="button-paypal" type="button" data-paypal="${product.id}">${t("product.paypal")} <strong>PayPal</strong></button>
+          <button class="button-paypal" type="button" data-paypal="${product.id}" ${soldOut ? "disabled" : ""}>${soldOut ? t("product.soldOut") : `${t("product.paypal")} <strong>PayPal</strong>`}</button>
         </article>
       </section>
       ${footer()}
@@ -1200,7 +1231,11 @@ function rootsPage() {
       <section class="roots-layout">
         <article class="roots-section">
           <h1>${t("roots.title").replace("\n", "<br>")}</h1>
-          <div class="prose"><p>${t("roots.body")}</p></div>
+          <div class="prose">
+            <p>${t("roots.body")}</p>
+            <p>${t("roots.body2")}</p>
+            <p>${t("roots.body3")}</p>
+          </div>
         </article>
         <article class="split-band">
           ${placeholder("Pencil sketch one")}
@@ -1550,7 +1585,8 @@ function organizationSchema() {
     "@id": absoluteUrl("/#organization"),
     name: "Lantso",
     url: absoluteUrl("/"),
-    logo: absoluteUrl("/lantso_logo.svg"),
+    logo: absoluteUrl("/assets/icons/lantso-icon-512.png"),
+    description: "Limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White.",
     email: "contact@lantso.com",
     sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok]
   };
@@ -1561,7 +1597,8 @@ function webSiteSchema() {
     "@type": "WebSite",
     "@id": absoluteUrl("/#website"),
     name: "Lantso",
-    url: absoluteUrl("/")
+    url: absoluteUrl("/"),
+    inLanguage: LANGS
   };
 }
 
