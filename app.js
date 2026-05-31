@@ -768,7 +768,7 @@ function setLanguage(lang, options = {}) {
   state.lang = lang;
   localStorage.setItem("lantso:lang", lang);
   document.documentElement.lang = lang;
-  document.documentElement.dir = "ltr";
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   document.documentElement.classList.toggle("is-arabic", lang === "ar");
   document.querySelectorAll("[data-lang]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.lang === lang);
@@ -1134,6 +1134,7 @@ function homePage() {
 
 function productFeature(product, index) {
   const productName = product.shortName[state.lang] || product.shortName.en;
+  const selected = state.selectedSizes[product.id];
   const soldOut = productIsSoldOut(product);
   const primaryLabel = soldOut ? t("product.soldOut") : index === 1 && state.lang !== "en" ? t("product.access") : t("product.claim");
   return `
@@ -1146,6 +1147,16 @@ function productFeature(product, index) {
       <div class="product-card__meta">
         <span>${formatMoney(product.price, locale())}</span>
         <span>${index === 1 && state.lang === "fr" ? "pieces limitees" : t("product.limited")}</span>
+      </div>
+      <div class="size-row" role="group" aria-label="${t("product.size")}">
+        ${product.sizes
+          .map((size) => {
+            const available = stockAvailable(product.id, size);
+            const low = available > 0 && available <= 4 ? " is-low" : "";
+            const soldOut = available <= 0 ? " is-sold-out" : "";
+            return `<button class="size-button${low}${soldOut}" type="button" data-size="${product.id}:${size}" aria-pressed="${selected === size}" ${available <= 0 ? "disabled" : ""}>${size}</button>`;
+          })
+          .join("")}
       </div>
       <div class="claim-row">
         <button class="button-primary" type="button" data-add="${product.id}" ${soldOut ? "disabled" : ""}>${primaryLabel}</button>
