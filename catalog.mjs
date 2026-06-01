@@ -29,12 +29,12 @@ export const PRODUCTS = [
     },
     story: {
       en: "Inspired by 98. Rebuilt for now.",
-      fr: "Inspire de 98. Reconstruit pour maintenant.",
+      fr: "Inspiré de 98. Reconstruit pour maintenant.",
       ar: "مستوحى من 98. مصمم للحاضر."
     },
     description: {
       en: "A very limited Morocco-inspired jersey in khaki green, designed for match days, summer nights, and collectors.",
-      fr: "Un maillot vert khaki en edition tres limitee, inspire du Maroc et pense pour les jours de match, les soirs d'ete et les collectionneurs.",
+      fr: "Un maillot vert khaki en édition très limitée, inspiré du Maroc et pensé pour les jours de match, les soirs d'été et les collectionneurs.",
       ar: "قميص أخضر كاكي بإصدار محدود جدا، مستوحى من المغرب ومصمم للمباريات والأمسيات الصيفية والمهتمين بالقطع الخاصة."
     },
     material: {
@@ -44,7 +44,7 @@ export const PRODUCTS = [
     },
     care: {
       en: "Machine wash cold at 30C, wash inside out with similar colours, do not bleach, do not tumble dry, cool iron inside out, do not dry clean.",
-      fr: "Lavage en machine a froid a 30C, laver sur l'envers avec des couleurs similaires, ne pas blanchir, ne pas secher en machine, repassage doux sur l'envers, nettoyage a sec interdit.",
+      fr: "Lavage en machine à froid à 30 °C, laver sur l'envers avec des couleurs similaires, ne pas blanchir, ne pas sécher en machine, repassage doux sur l'envers, nettoyage à sec interdit.",
       ar: "يغسل في الغسالة على 30 درجة، يقلب القميص قبل الغسل، يغسل مع ألوان مشابهة، يمنع المبيض والتجفيف الآلي، كي خفيف من الداخل، يمنع التنظيف الجاف."
     },
     measurements: {
@@ -52,10 +52,12 @@ export const PRODUCTS = [
       L: { length: 73, width: 53 }
     },
     price: 5999,
-    sizes: ["M", "L"],
+    sizes: ["S", "M", "L", "XL"],
     inventory: {
+      S: 0,
       M: 13,
-      L: 12
+      L: 12,
+      XL: 0
     },
     accent: "#a30000"
   },
@@ -80,12 +82,12 @@ export const PRODUCTS = [
     },
     story: {
       en: "Seen up close. Felt from afar.",
-      fr: "Vu de pres. Ressenti de loin.",
+      fr: "Vu de près. Ressenti de loin.",
       ar: "يظهر عن قرب. ويصل إحساسه من بعيد."
     },
     description: {
       en: "A very limited white jersey from the same heritage line, built around contrast, movement, and Moroccan detail.",
-      fr: "Un maillot blanc en edition tres limitee dans la meme ligne heritage, construit autour du contraste, du mouvement et du detail marocain.",
+      fr: "Un maillot blanc en édition très limitée dans la même ligne héritage, construit autour du contraste, du mouvement et du détail marocain.",
       ar: "قميص أبيض بإصدار محدود جدا من نفس خط التراث، مبني على التباين والحركة والتفاصيل المغربية."
     },
     material: {
@@ -95,7 +97,7 @@ export const PRODUCTS = [
     },
     care: {
       en: "Machine wash cold at 30C, wash inside out with similar colours, do not bleach, do not tumble dry, cool iron inside out, do not dry clean.",
-      fr: "Lavage en machine a froid a 30C, laver sur l'envers avec des couleurs similaires, ne pas blanchir, ne pas secher en machine, repassage doux sur l'envers, nettoyage a sec interdit.",
+      fr: "Lavage en machine à froid à 30 °C, laver sur l'envers avec des couleurs similaires, ne pas blanchir, ne pas sécher en machine, repassage doux sur l'envers, nettoyage à sec interdit.",
       ar: "يغسل في الغسالة على 30 درجة، يقلب القميص قبل الغسل، يغسل مع ألوان مشابهة، يمنع المبيض والتجفيف الآلي، كي خفيف من الداخل، يمنع التنظيف الجاف."
     },
     measurements: {
@@ -103,10 +105,12 @@ export const PRODUCTS = [
       L: { length: 73, width: 53 }
     },
     price: 5999,
-    sizes: ["M", "L"],
+    sizes: ["S", "M", "L", "XL"],
     inventory: {
+      S: 0,
       M: 13,
-      L: 12
+      L: 12,
+      XL: 0
     },
     accent: "#a30000"
   }
@@ -135,7 +139,7 @@ export const SHIPPING_ZONES = [
     ],
     eta: {
       en: "2-4 business days",
-      fr: "2 a 4 jours ouvres",
+      fr: "2 à 4 jours ouvrés",
       ar: "2 إلى 4 أيام عمل"
     }
   },
@@ -143,7 +147,7 @@ export const SHIPPING_ZONES = [
     id: "EU",
     label: {
       en: "European Union and Switzerland",
-      fr: "Union europeenne et Suisse",
+      fr: "Union européenne et Suisse",
       ar: "الاتحاد الأوروبي وسويسرا"
     },
     countries: [
@@ -184,7 +188,7 @@ export const SHIPPING_ZONES = [
     ],
     eta: {
       en: "4-7 business days",
-      fr: "4 a 7 jours ouvres",
+      fr: "4 à 7 jours ouvrés",
       ar: "4 إلى 7 أيام عمل"
     }
   },
@@ -205,7 +209,7 @@ export const SHIPPING_ZONES = [
     ],
     eta: {
       en: "5-8 business days",
-      fr: "5 a 8 jours ouvres",
+      fr: "5 à 8 jours ouvrés",
       ar: "5 إلى 8 أيام عمل"
     }
   },
@@ -226,7 +230,7 @@ export const SHIPPING_ZONES = [
     ],
     eta: {
       en: "5-9 business days",
-      fr: "5 a 9 jours ouvres",
+      fr: "5 à 9 jours ouvrés",
       ar: "5 إلى 9 أيام عمل"
     }
   },
@@ -247,7 +251,7 @@ export const SHIPPING_ZONES = [
     ],
     eta: {
       en: "7-14 business days",
-      fr: "7 a 14 jours ouvres",
+      fr: "7 à 14 jours ouvrés",
       ar: "7 إلى 14 يوم عمل"
     }
   }

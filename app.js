@@ -8,8 +8,7 @@ import {
 } from "./catalog.mjs";
 
 const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/lantso.at",
-  tiktok: "https://www.tiktok.com/@lantsobrand"
+  instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
 const COUNTRY_NAMES = {
@@ -258,7 +257,8 @@ const I18N = {
       seconds: "Seconds"
     },
     form: {
-      processing: "Saving..."
+      processing: "Saving...",
+      emailInvalid: "Enter a valid email address."
     },
     cookie: {
       body: "Lantso uses essential cookies and local storage for cart, language, private access, and checkout security.",
@@ -286,40 +286,40 @@ const I18N = {
       shipping: "Livraison",
       returns: "Retours",
       faq: "FAQ",
-      legal: "Legal",
-      terms: "Conditions generales",
-      privacy: "Confidentialite",
+      legal: "Mentions légales",
+      terms: "Conditions générales",
+      privacy: "Confidentialité",
       contact: "Contact",
-      locked: "Reste connecte"
+      locked: "Reste connecté"
     },
     hero: {
       title: "From the Roots\nto the World",
       step: "Entrer",
       chapter: "Chapitre 01 - Roots",
-      headline: "Deux pieces\nun heritage\nreimagine",
-      discoverShop: "Decouvrir la boutique",
+      headline: "Deux pièces\nun héritage\nréimaginé",
+      discoverShop: "Découvrir la boutique",
       origin: "Origine",
       before: "Avant le design,\nil y avait une histoire",
-      discoverRoots: "Decouvrir les roots"
+      discoverRoots: "Découvrir les roots"
     },
     product: {
-      limited: "Pieces limitees",
-      claim: "Reclamer la piece",
-      access: "Acceder au maillot",
+      limited: "Pièces limitées",
+      claim: "Réclamer la pièce",
+      access: "Accéder au maillot",
       size: "Taille",
       price: "Prix",
       color: "Couleur",
       add: "Ajouter au panier",
       checkout: "Paiement",
       description: "Description",
-      material: "Matiere",
+      material: "Matière",
       care: "Entretien",
       measurements: "Mesures",
       selectSize: "Choisir une taille",
-      soldOut: "Epuise",
-      added: "Ajoute au panier.",
+      soldOut: "Épuisé",
+      added: "Ajouté au panier.",
       shippingEstimate: "Estimation livraison",
-      stock: "Serie limitee"
+      stock: "Série limitée"
     },
     cart: {
       title: "Panier",
@@ -332,51 +332,51 @@ const I18N = {
       total: "Total",
       free: "Offerte",
       remove: "Retirer",
-      qty: "Qte",
-      checkout: "Paiement securise",
+      qty: "Qté",
+      checkout: "Paiement sécurisé",
       processing: "Ouverture du paiement...",
-      checkoutError: "Le paiement n'a pas pu s'ouvrir. Actualise la page et reessaie, ou contacte contact@lantso.com.",
-      estimate: "Livraison estimee"
+      checkoutError: "Le paiement n'a pas pu s'ouvrir. Actualise la page et réessaie, ou contacte contact@lantso.com.",
+      estimate: "Livraison estimée"
     },
     info: {
       title: "Informations",
-      shippingBody: "Les commandes sont preparees apres paiement puis expediees depuis l'Europe avec suivi. Le panier affiche le tarif de livraison, le delai estime et les destinations disponibles avant le paiement. Hors Union europeenne, des droits ou taxes d'import peuvent etre demandes par le transporteur.",
-      returnsBody: "Les retours peuvent etre demandes sous 14 jours apres livraison en ecrivant a contact@lantso.com avant tout renvoi. Les pieces doivent etre non portees, non lavees, non abimees et renvoyees avec leur packaging et etiquettes. Les frais de retour sont a la charge du client, sauf article defectueux ou erreur d'envoi. Le remboursement est effectue sur le moyen de paiement d'origine apres verification.",
+      shippingBody: "Les commandes sont préparées après paiement puis expédiées depuis l'Europe avec suivi. Le panier affiche le tarif de livraison, le délai estimé et les destinations disponibles avant le paiement. Hors Union européenne, des droits ou taxes d'import peuvent être demandés par le transporteur.",
+      returnsBody: "Les retours peuvent être demandés sous 14 jours après livraison en écrivant à contact@lantso.com avant tout renvoi. Les pièces doivent être non portées, non lavées, non abîmées et renvoyées avec leur packaging et leurs étiquettes. Les frais de retour sont à la charge du client, sauf article défectueux ou erreur d'envoi. Le remboursement est effectué sur le moyen de paiement d'origine après vérification.",
       faqTitle: "FAQ",
-      q1: "Quand ma commande sera-t-elle expediee ?",
-      a1: "Les commandes payees sont preparees sous 1 a 3 jours ouvres pendant un drop. Le suivi est envoye par email des que le colis est remis au transporteur.",
+      q1: "Quand ma commande sera-t-elle expédiée ?",
+      a1: "Les commandes payées sont préparées sous 1 à 3 jours ouvrés pendant un drop. Le suivi est envoyé par email dès que le colis est remis au transporteur.",
       q2: "Quels pays sont livrables ?",
-      a2: "Le checkout prend en charge la France, Monaco, les pays de l'Union europeenne, la Suisse, le Royaume-Uni, le Maroc, les Etats-Unis, le Canada, le Japon, l'Arabie saoudite, la Norvege et les autres destinations listees dans le panier.",
+      a2: "Le checkout prend en charge la France, Monaco, les pays de l'Union européenne, la Suisse, le Royaume-Uni, le Maroc, les États-Unis, le Canada, le Japon, l'Arabie saoudite, la Norvège et les autres destinations listées dans le panier.",
       q3: "Comment choisir ma taille ?",
-      a3: "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes deja. Entre M et L, choisis L pour une coupe plus relax.",
-      q4: "Puis-je echanger une taille ?",
-      a4: "Chaque couleur etant limitee a 25 pieces, les echanges dependent du stock restant. Si le remplacement n'est pas disponible, un retour eligible peut etre rembourse."
+      a3: "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes déjà. Entre M et L, choisis L pour une coupe plus relax.",
+      q4: "Puis-je échanger une taille ?",
+      a4: "Chaque couleur étant limitée à 25 pièces, les échanges dépendent du stock restant. Si le remplacement n'est pas disponible, un retour éligible peut être remboursé."
     },
     legal: {
-      title: "Legal & contact",
-      termsBody: "Lantso vend des maillots en edition limitee en EUR via cette boutique. Les stocks sont limites et une piece est reservee uniquement au moment ou Stripe Checkout s'ouvre; la commande est confirmee apres paiement reussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incompletes. Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliques hors Union europeenne. Pour le support commande : contact@lantso.com.",
-      privacyBody: "Lantso collecte les informations necessaires au fonctionnement de la boutique : coordonnees, adresse de livraison, contenu du panier, preferences de langue et d'acces, messages support et consentement newsletter optionnel. Les donnees de paiement sont traitees par Stripe et ne sont pas stockees par ce site. Les donnees servent au paiement, a la preparation, au support, a la prevention de fraude, aux obligations comptables et aux emails demandes. Pour acceder aux donnees eligibles ou demander leur suppression : contact@lantso.com.",
-      contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous ou ecris a contact@lantso.com.",
+      title: "Mentions légales & contact",
+      termsBody: "Lantso vend des maillots en édition limitée en EUR via cette boutique. Les stocks sont limités et une pièce est réservée uniquement au moment où Stripe Checkout s'ouvre; la commande est confirmée après paiement réussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incomplètes. Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliqués hors Union européenne. Pour le support commande : contact@lantso.com.",
+      privacyBody: "Lantso collecte les informations nécessaires au fonctionnement de la boutique : coordonnées, adresse de livraison, contenu du panier, préférences de langue et d'accès, messages support et consentement newsletter optionnel. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés. Pour accéder aux données éligibles ou demander leur suppression : contact@lantso.com.",
+      contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous ou écris à contact@lantso.com.",
       name: "Nom",
       email: "Email",
       message: "Message",
       send: "Envoyer",
-      sent: "Message enregistre. Nous repondrons par email."
+      sent: "Message enregistré. Nous répondrons par email."
     },
     roots: {
       title: "Avant le design,\nil y avait une histoire",
-      body: "Lantso part d'une idee simple : reconstruire l'emotion du football marocain pour ceux qui la portent aujourd'hui.",
-      body2: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la memoire match-day de 98. Atlas 02 - White garde la meme ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
-      body3: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pieces par couleur, penses pour voyager from the roots to the world."
+      body: "Lantso part d'une idée simple : reconstruire l'émotion du football marocain pour ceux qui la portent aujourd'hui.",
+      body2: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la mémoire match-day de 98. Atlas 02 - White garde la même ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
+      body3: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pièces par couleur, pensés pour voyager from the roots to the world."
     },
     club: {
       title: "Join the club",
       name: "Nom",
       email: "Email",
-      newsletter: "Newsletter et acces en avance",
+      newsletter: "Newsletter et accès en avance",
       submit: "Rejoindre la liste",
       success: "Tu es dans la liste.",
-      error: "Le profil n'a pas pu etre enregistre."
+      error: "Le profil n'a pas pu être enregistré."
     },
     gate: {
       title: "From the Roots\nto the World",
@@ -384,7 +384,7 @@ const I18N = {
       password: "Mot de passe",
       unlock: "Entrer",
       invalid: "Mot de passe incorrect.",
-      intro: "Acces prive avant le drop.",
+      intro: "Accès privé avant le drop.",
       email: "Email",
       subscribe: "Join the club",
       subscribed: "Tu es dans la liste.",
@@ -395,21 +395,22 @@ const I18N = {
       seconds: "Secondes"
     },
     form: {
-      processing: "Enregistrement..."
+      processing: "Enregistrement...",
+      emailInvalid: "Entre une adresse email valide."
     },
     cookie: {
-      body: "Lantso utilise des cookies essentiels et le stockage local pour le panier, la langue, l'acces prive et la securite du paiement.",
+      body: "Lantso utilise des cookies essentiels et le stockage local pour le panier, la langue, l'accès privé et la sécurité du paiement.",
       accept: "Accepter"
     },
     checkout: {
-      successTitle: "Commande recue",
-      successBody: "Le paiement est termine. Cette page pourra afficher le suivi lorsque le workflow logistique sera connecte.",
-      cancelTitle: "Paiement annule",
-      cancelBody: "Ton panier reste sauvegarde.",
+      successTitle: "Commande reçue",
+      successBody: "Le paiement est terminé. Cette page pourra afficher le suivi lorsque le workflow logistique sera connecté.",
+      cancelTitle: "Paiement annulé",
+      cancelBody: "Ton panier reste sauvegardé.",
       back: "Retour boutique"
     },
     footer: {
-      rights: "© 2026 Lantso\nAll rights reserved.",
+      rights: "© 2026 Lantso\nTous droits réservés.",
       secure: "paiements sécurisés"
     }
   },
@@ -532,7 +533,8 @@ const I18N = {
       seconds: "ثوان"
     },
     form: {
-      processing: "جاري الحفظ..."
+      processing: "جاري الحفظ...",
+      emailInvalid: "أدخل بريدا إلكترونيا صحيحا."
     },
     cookie: {
       body: "تستخدم Lantso ملفات تعريف ارتباط أساسية والتخزين المحلي للسلة واللغة والدخول الخاص وأمان الدفع.",
@@ -555,6 +557,7 @@ const I18N = {
 const LAUNCH_DATE = new Date("2026-06-06T00:00:00+02:00");
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function languageFromPath(path = window.location.pathname) {
   const firstSegment = path.split("/").filter(Boolean)[0];
@@ -580,7 +583,7 @@ const state = {
   lang: languageFromPath() || localStorage.getItem("lantso:lang") || DEFAULT_LANG,
   cart: loadCart(),
   locked: false,
-  selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, product.sizes[0]])),
+  selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, defaultSize(product)])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
   postalCode: localStorage.getItem("lantso:postalCode") || "",
   inventory: null,
@@ -645,13 +648,13 @@ function pageMeta(current = route()) {
       cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
     },
     fr: {
-      home: ["Lantso - From the Roots to the World", "Maillots de football marocains limites par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pieces par couleur, pour la periode Coupe du Monde 2026."],
-      shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limites pour la periode Coupe du Monde 2026."],
-      info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limites Lantso."],
-      legal: ["Legal et contact | Lantso", "Conditions, confidentialite et contact pour acheter les maillots de football marocains limites Lantso."],
-      roots: ["Decouvrir les Roots | Lantso", "L'histoire Lantso derriere Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
-      success: ["Commande recue | Lantso", "Confirmation de commande Lantso."],
-      cancel: ["Paiement annule | Lantso", "Paiement Lantso annule."]
+      home: ["Lantso - From the Roots to the World", "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pièces par couleur, pour la période Coupe du Monde 2026."],
+      shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026."],
+      info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso."],
+      legal: ["Mentions légales et contact | Lantso", "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso."],
+      roots: ["Découvrir les Roots | Lantso", "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
+      success: ["Commande reçue | Lantso", "Confirmation de commande Lantso."],
+      cancel: ["Paiement annulé | Lantso", "Paiement Lantso annulé."]
     },
     ar: {
       home: ["Lantso - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض، 25 قطعة من كل لون لفترة كأس العالم 2026."],
@@ -817,6 +820,10 @@ function stockAvailable(productId, size) {
   return Math.max(0, Number(product?.inventory?.[size] || 0));
 }
 
+function defaultSize(product) {
+  return product.sizes.find((size) => Number(product.inventory?.[size] || 0) > 0) || product.sizes[0];
+}
+
 function stockSummary(product) {
   const total = product.sizes.reduce((sum, size) => sum + stockAvailable(product.id, size), 0);
   if (total <= 0) return t("product.soldOut");
@@ -936,6 +943,40 @@ function placeholder(label = "") {
   `;
 }
 
+function productGallery(product, productName) {
+  const slides = [productName, `${productName} detail one`, `${productName} detail two`, `${productName} detail three`];
+  return `
+    <div class="product-gallery" data-product-gallery="${product.id}">
+      <div class="gallery-stage" aria-label="${escapeHtml(productName)} photos">
+        <button class="gallery-nav gallery-nav--prev" type="button" data-gallery-step="${product.id}:-1" aria-label="Previous photo">&lsaquo;</button>
+        <div class="gallery-slides">
+          ${slides
+            .map(
+              (label, index) => `
+                <div class="gallery-slide" data-gallery-slide="${product.id}:${index}" ${index === 0 ? "" : "hidden"}>
+                  ${placeholder(label)}
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+        <button class="gallery-nav gallery-nav--next" type="button" data-gallery-step="${product.id}:1" aria-label="Next photo">&rsaquo;</button>
+      </div>
+      <div class="thumb-grid gallery-thumbs" role="group" aria-label="${escapeHtml(productName)} photo choices">
+        ${slides
+          .map(
+            (label, index) => `
+              <button class="gallery-thumb" type="button" data-gallery-thumb="${product.id}:${index}" aria-pressed="${index === 0}">
+                ${placeholder(label)}
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
 function photo(file, className, alt, width, height, loading = "lazy") {
   return {
     src: `/assets/photos/fallback/${file}.jpg`,
@@ -1022,7 +1063,7 @@ function gatePage() {
         <form class="gate-form gate-newsletter" data-gate-newsletter>
           <label>
             <span>${t("gate.email")}</span>
-            <input name="email" type="email" autocomplete="email" required>
+            <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="320" required>
           </label>
           <button class="button-secondary" type="submit">${t("gate.subscribe")}</button>
           <p class="form-message" data-gate-newsletter-message role="status"></p>
@@ -1065,8 +1106,7 @@ function footer() {
       <div class="footer-col">
         <h3>${t("nav.locked")}</h3>
         <div class="social-row">
-          <a href="${SOCIAL_LINKS.instagram}" rel="noreferrer" target="_blank" aria-label="Instagram">IG</a>
-          <a href="${SOCIAL_LINKS.tiktok}" rel="noreferrer" target="_blank" aria-label="TikTok">TT</a>
+          <a href="${SOCIAL_LINKS.instagram}" rel="noreferrer" target="_blank" aria-label="Instagram">INSTAGRAM</a>
         </div>
       </div>
       <div class="payments">
@@ -1140,7 +1180,7 @@ function productFeature(product, index) {
       </div>
       <div class="product-card__meta">
         <span>${formatMoney(product.price, locale())}</span>
-        <span>${index === 1 && state.lang === "fr" ? "pieces limitees" : t("product.limited")}</span>
+        <span>${t("product.limited")}</span>
       </div>
       <div class="size-row" role="group" aria-label="${t("product.size")}">
         ${product.sizes
@@ -1222,14 +1262,7 @@ function productPage(productId) {
     <div class="page-shell">
       ${breadcrumb(productName)}
       <section class="product-detail">
-        <div class="product-gallery">
-          ${placeholder(productName)}
-          <div class="thumb-grid">
-            ${placeholder(`${productName} detail one`)}
-            ${placeholder(`${productName} detail two`)}
-            ${placeholder(`${productName} detail three`)}
-          </div>
-        </div>
+        ${productGallery(product, productName)}
         <article class="product-panel">
           <p class="eyebrow">${product.chapter}</p>
           <h1>${productName}</h1>
@@ -1342,7 +1375,7 @@ function legalPage() {
             <p>${t("legal.contactBody")}</p>
             <form class="contact-form" data-contact-form>
               <label><span>${t("legal.name")}</span><input name="name" autocomplete="name" required></label>
-              <label><span>${t("legal.email")}</span><input name="email" type="email" autocomplete="email" required></label>
+              <label><span>${t("legal.email")}</span><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="320" required></label>
               <label><span>${t("legal.message")}</span><textarea name="message" required></textarea></label>
               <button class="button-secondary" type="submit">${t("legal.send")}</button>
               <p class="form-message" data-contact-message role="status"></p>
@@ -1453,7 +1486,8 @@ function bindGateEvents() {
   newsletterForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const message = newsletterForm.querySelector("[data-gate-newsletter-message]");
-    const email = new FormData(newsletterForm).get("email");
+    const email = normalizeEmailField(newsletterForm, message);
+    if (!email) return;
     message.textContent = t("form.processing");
     setFormPending(newsletterForm, true);
     const response = await submitForm("club", {
@@ -1495,6 +1529,20 @@ function bindPageEvents() {
     });
   });
 
+  app.querySelectorAll("[data-gallery-thumb]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const [productId, index] = button.dataset.galleryThumb.split(":");
+      setGallerySlide(productId, Number(index));
+    });
+  });
+
+  app.querySelectorAll("[data-gallery-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const [productId, direction] = button.dataset.galleryStep.split(":");
+      stepGallerySlide(productId, Number(direction));
+    });
+  });
+
   app.querySelectorAll("[data-add], [data-quick-add]").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.add || button.dataset.quickAdd;
@@ -1531,6 +1579,9 @@ function bindPageEvents() {
       event.preventDefault();
       const message = contactForm.querySelector("[data-contact-message]");
       const payload = Object.fromEntries(new FormData(contactForm));
+      const email = normalizeEmailField(contactForm, message);
+      if (!email) return;
+      payload.email = email;
       message.textContent = t("form.processing");
       setFormPending(contactForm, true);
       const response = await submitForm("contact", payload);
@@ -1677,12 +1728,32 @@ function updateSizeButtons(productId, selectedSize) {
   });
 }
 
+function stepGallerySlide(productId, direction) {
+  const slides = [...app.querySelectorAll(`[data-gallery-slide^="${productId}:"]`)];
+  const current = slides.findIndex((slide) => !slide.hidden);
+  const next = (current + direction + slides.length) % slides.length;
+  setGallerySlide(productId, next);
+}
+
+function setGallerySlide(productId, index) {
+  app.querySelectorAll(`[data-gallery-slide^="${productId}:"]`).forEach((slide) => {
+    const slideIndex = Number(slide.dataset.gallerySlide.split(":").at(-1));
+    slide.hidden = slideIndex !== index;
+  });
+  app.querySelectorAll(`[data-gallery-thumb^="${productId}:"]`).forEach((button) => {
+    const thumbIndex = Number(button.dataset.galleryThumb.split(":").at(-1));
+    button.setAttribute("aria-pressed", String(thumbIndex === index));
+  });
+}
+
 function sizeGuide(product) {
   return product.sizes
     .map((size) => {
       const measure = product.measurements[size];
+      if (!measure) return "";
       return `${size}: ${measure.length}cm x ${measure.width}cm`;
     })
+    .filter(Boolean)
     .join(" / ");
 }
 
@@ -1768,7 +1839,7 @@ function organizationSchema() {
     logo: absoluteUrl("/assets/icons/lantso-icon-512.png"),
     description: "Limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White.",
     email: "contact@lantso.com",
-    sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok]
+    sameAs: [SOCIAL_LINKS.instagram]
   };
 }
 
@@ -1848,6 +1919,26 @@ async function postJson(url, payload) {
   }
 }
 
+function normalizeEmailField(form, message) {
+  const input = form.querySelector("input[name='email']");
+  const email = String(input?.value || "").trim().toLowerCase();
+  input?.setCustomValidity("");
+  if (!isValidEmail(email)) {
+    const error = t("form.emailInvalid");
+    if (message) message.textContent = error;
+    input?.setCustomValidity(error);
+    input?.reportValidity?.();
+    input?.addEventListener("input", () => input.setCustomValidity(""), { once: true });
+    return "";
+  }
+  return email;
+}
+
+function isValidEmail(value) {
+  const email = String(value || "").trim();
+  return email.length > 0 && email.length <= 320 && EMAIL_PATTERN.test(email);
+}
+
 async function refreshInventory() {
   try {
     const response = await fetch("/api/inventory", {
@@ -1870,6 +1961,10 @@ async function refreshInventory() {
 }
 
 async function submitForm(name, payload) {
+  const endpoint = name === "contact" ? "/api/contact" : "/api/club";
+  const apiResponse = await postJson(endpoint, payload);
+  if (apiResponse.ok) return apiResponse;
+
   const body = new URLSearchParams({ "form-name": name, ...payload }).toString();
   try {
     const response = await fetch("/", {
@@ -1879,10 +1974,9 @@ async function submitForm(name, payload) {
     });
     if (response.ok) return { ok: true, data: {} };
   } catch {
-    // Local development falls back to the JSON endpoints below.
+    // The API response above remains the source of the visible error.
   }
-  const endpoint = name === "contact" ? "/api/contact" : "/api/club";
-  return postJson(endpoint, payload);
+  return apiResponse;
 }
 
 async function verifyAccess(password) {
@@ -1985,6 +2079,9 @@ document.querySelector("[data-club-form]").addEventListener("submit", async (eve
   const form = event.currentTarget;
   const message = form.querySelector("[data-club-message]");
   const payload = Object.fromEntries(new FormData(form));
+  const email = normalizeEmailField(form, message);
+  if (!email) return;
+  payload.email = email;
   payload.newsletter = form.newsletter.checked ? "yes" : "no";
   message.textContent = t("form.processing");
   setFormPending(form, true);

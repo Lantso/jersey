@@ -23,6 +23,16 @@
   status = 200
 
 [[redirects]]
+  from = "/api/club"
+  to = "/.netlify/functions/club"
+  status = 200
+
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+
+[[redirects]]
   from = "/api/create-checkout-session"
   to = "/.netlify/functions/create-checkout-session"
   status = 200

@@ -8,14 +8,13 @@ Lantso is a limited Moroccan football jersey storefront for the 2026 World Cup p
 - Shop: https://lantso.com/shop
 - Contact: contact@lantso.com
 - Instagram: https://www.instagram.com/lantso.at
-- TikTok: https://www.tiktok.com/@lantsobrand
 
 ## Products
 
 - Roots 01 - Khaki: limited khaki green Morocco-inspired jersey. URL: https://lantso.com/product/roots-01-khaki
 - Atlas 02 - White: limited white Morocco-inspired jersey. URL: https://lantso.com/product/atlas-02-white
 - Price: 59.99 EUR per jersey.
-- Sizes: M and L.
+- Sizes: S, M, L, and XL. S and XL are out of stock.
 - Material: 100% polyester.
 - Quantity: 25 pieces per colour.
 

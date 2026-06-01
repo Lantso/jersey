@@ -24,7 +24,7 @@ http://127.0.0.1:3000
 6. Netlify Blobs stores production stock reservations and paid orders. No extra database account is needed on Netlify, but the dependency must install during the Netlify build.
 7. Review `PRODUCTS`, prices, inventory, and copy in `catalog.mjs`.
 8. Review `SHIPPING_ZONES` in `catalog.mjs`. Current tiers use the 300g / 32x45x4cm parcel data and calculate a tracked home-delivery rate by country and quantity. France uses the requested launch tiers: 1 jersey `8.59€`, 2 jerseys `9.99€`, 3-4 jerseys `11.99€`, 5+ jerseys `13.59€`. EU/Switzerland, UK, Morocco, and rest-of-world use Colissimo-style weight tiers with a 1 euro buffer.
-9. Netlify Forms captures launch newsletter, club, and contact submissions. Configure Netlify email notifications to `contact@lantso.com`.
+9. Club, newsletter, and contact submissions go through `/api/club` and `/api/contact`, with Netlify Forms as a fallback. Configure Netlify email notifications to `contact@lantso.com` if you want form notifications as well.
 10. Have the business validate legal registration details, tax settings, privacy wording, and terms before taking live orders.
 
 ## Launch Gate
@@ -45,7 +45,7 @@ The local server appends operational records under `data/`:
 - `contact-messages.jsonl`
 - `inventory-state.json`
 
-For production, Netlify Forms captures club/contact submissions. Netlify Blobs stores checkout reservations, inventory sold counts, and paid-order records outside the Stripe Dashboard.
+For production, Netlify Blobs stores checkout reservations, inventory sold counts, paid-order records, and API-captured club/contact submissions outside the Stripe Dashboard. Netlify Forms remains available as a fallback capture path.
 
 ## Inventory Safety
 

@@ -47,8 +47,7 @@
             "logo": "https://lantso.com/assets/icons/lantso-icon-512.png",
             "email": "contact@lantso.com",
             "sameAs": [
-              "https://www.instagram.com/lantso.at",
-              "https://www.tiktok.com/@lantsobrand"
+              "https://www.instagram.com/lantso.at"
             ]
           },
           {
@@ -103,7 +102,7 @@
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Luxurious+Script&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="/styles.css?v=20260531d">
+    <link rel="stylesheet" href="/styles.css?v=20260601a">
   </head>
   <body>
     <a class="skip-link" href="#app">Skip to content</a>
@@ -111,7 +110,7 @@
     <header class="site-header" data-floating="true">
       <nav class="language-switch" aria-label="Language">
         <button class="lang-button is-active" type="button" data-lang="en" aria-label="English">🇬🇧</button>
-        <button class="lang-button" type="button" data-lang="fr" aria-label="Francais">🇫🇷</button>
+        <button class="lang-button" type="button" data-lang="fr" aria-label="Français">🇫🇷</button>
         <button class="lang-button" type="button" data-lang="ar" aria-label="العربية">🇲🇦</button>
       </nav>
       <a href="/" class="brand-word" data-link aria-label="Lantso home">
@@ -133,12 +132,12 @@
           <p>Very limited Moroccan jerseys for the 2026 World Cup.</p>
           <article>
             <h2>Roots 01 - Khaki</h2>
-            <p>Limited khaki green Moroccan jersey. 59.99 EUR. 100% polyester. Sizes M and L.</p>
+            <p>Limited khaki green Moroccan jersey. 59.99 EUR. 100% polyester. Sizes S, M, L and XL.</p>
             <a href="/product/roots-01-khaki">Roots 01 - Khaki</a>
           </article>
           <article>
             <h2>Atlas 02 - White</h2>
-            <p>Limited white Moroccan jersey. 59.99 EUR. 100% polyester. Sizes M and L.</p>
+            <p>Limited white Moroccan jersey. 59.99 EUR. 100% polyester. Sizes S, M, L and XL.</p>
             <a href="/product/atlas-02-white">Atlas 02 - White</a>
           </article>
         </section>
@@ -167,7 +166,7 @@
         </label>
         <label>
           <span data-i18n="club.email">Email</span>
-          <input name="email" type="email" autocomplete="email" required>
+          <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="320" required>
         </label>
         <label class="check-row">
           <input name="newsletter" type="checkbox" checked>
@@ -180,13 +179,13 @@
 
     <form name="club" netlify netlify-honeypot="bot-field" hidden>
       <input name="name">
-      <input name="email">
+      <input name="email" type="email" maxlength="320">
       <input name="newsletter">
       <input name="bot-field">
     </form>
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
       <input name="name">
-      <input name="email">
+      <input name="email" type="email" maxlength="320">
       <textarea name="message"></textarea>
       <input name="bot-field">
     </form>
@@ -196,6 +195,6 @@
       <button class="button-secondary" type="button" data-accept-cookie data-i18n="cookie.accept">Accept</button>
     </aside>
 
-    <script type="module" src="/app.js?v=20260531f"></script>
+    <script type="module" src="/app.js?v=20260601a"></script>
   </body>
 </html>

@@ -10,8 +10,7 @@ const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/lantso.at",
-  tiktok: "https://www.tiktok.com/@lantsobrand"
+  instagram: "https://www.instagram.com/lantso.at"
 };
 
 const COPY = {
@@ -22,24 +21,24 @@ const COPY = {
   },
   homeDescription: {
     en: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period.",
-    fr: "Maillots de football marocains limites par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pieces par couleur, pour la periode Coupe du Monde 2026.",
+    fr: "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pièces par couleur, pour la période Coupe du Monde 2026.",
     ar: "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض، 25 قطعة من كل لون لفترة كأس العالم 2026."
   },
   stepInside: { en: "Step inside", fr: "Entrer", ar: "ادخل" },
   shopTitle: { en: "Shop Moroccan Football Jerseys | Lantso", fr: "Boutique maillots de football marocains | Lantso", ar: "متجر قمصان كرة القدم المغربية | Lantso" },
   shopDescription: {
     en: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period.",
-    fr: "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limites pour la periode Coupe du Monde 2026.",
+    fr: "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026.",
     ar: "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."
   },
   shopHeading: { en: "Shop Lantso Moroccan jerseys", fr: "Boutique Lantso maillots marocains", ar: "متجر قمصان Lantso المغربية" },
   shopBody: {
-    en: "Very limited 2026 World Cup-inspired jerseys. 25 pieces per colour, sizes M and L.",
-    fr: "Maillots tres limites inspires par la Coupe du Monde 2026. 25 pieces par couleur, tailles M et L.",
-    ar: "قمصان محدودة جدا مستوحاة من كأس العالم 2026. 25 قطعة لكل لون، مقاسات M و L."
+    en: "Very limited 2026 World Cup-inspired jerseys. 25 pieces per colour, sizes S, M, L and XL.",
+    fr: "Maillots très limités inspirés par la Coupe du Monde 2026. 25 pièces par couleur, tailles S, M, L et XL.",
+    ar: "قمصان محدودة جدا مستوحاة من كأس العالم 2026. 25 قطعة لكل لون، مقاسات S و M و L و XL."
   },
-  limited: { en: "Limited pieces", fr: "Pieces limitees", ar: "قطع محدودة" },
-  material: { en: "Material", fr: "Matiere", ar: "الخامة" },
+  limited: { en: "Limited pieces", fr: "Pièces limitées", ar: "قطع محدودة" },
+  material: { en: "Material", fr: "Matière", ar: "الخامة" },
   sizes: { en: "Sizes", fr: "Tailles", ar: "المقاسات" },
   measurements: { en: "Measurements", fr: "Mesures", ar: "المقاسات" },
   care: { en: "Care", fr: "Entretien", ar: "العناية" },
@@ -47,78 +46,78 @@ const COPY = {
   infoTitle: { en: "Shipping, Returns and FAQ | Lantso", fr: "Livraison, retours et FAQ | Lantso", ar: "الشحن والإرجاع والأسئلة | Lantso" },
   infoDescription: {
     en: "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys.",
-    fr: "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limites Lantso.",
+    fr: "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso.",
     ar: "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان Lantso المغربية المحدودة."
   },
   shippingReturnsFaq: { en: "Shipping, returns and FAQ", fr: "Livraison, retours et FAQ", ar: "الشحن والإرجاع والأسئلة" },
   shippingBody: {
     en: "Orders are prepared after payment and ship from Europe with tracked delivery. The cart shows the live shipping rate, estimated delivery time, and every eligible destination before checkout. Customers outside the European Union may be charged local duties or import taxes by the carrier.",
-    fr: "Les commandes sont preparees apres paiement puis expediees depuis l'Europe avec suivi. Le panier affiche le tarif de livraison, le delai estime et les destinations disponibles avant le paiement. Hors Union europeenne, des droits ou taxes d'import peuvent etre demandes par le transporteur.",
+    fr: "Les commandes sont préparées après paiement puis expédiées depuis l'Europe avec suivi. Le panier affiche le tarif de livraison, le délai estimé et les destinations disponibles avant le paiement. Hors Union européenne, des droits ou taxes d'import peuvent être demandés par le transporteur.",
     ar: "يتم تجهيز الطلبات بعد الدفع ثم شحنها من أوروبا مع رقم تتبع. تعرض السلة سعر الشحن، مدة التوصيل المتوقعة والوجهات المتاحة قبل الدفع. خارج الاتحاد الأوروبي قد يطلب الناقل رسوما أو ضرائب استيراد محلية."
   },
   returns: { en: "Returns", fr: "Retours", ar: "الإرجاع" },
   returnsBody: {
     en: "Returns can be requested within 14 days of delivery by emailing contact@lantso.com before sending anything back. Items must be unworn, unwashed, undamaged, and returned with original packaging and tags. Return shipping is paid by the customer unless the item is faulty or the wrong product was sent. Refunds are issued to the original payment method after inspection.",
-    fr: "Les retours peuvent etre demandes sous 14 jours apres livraison en ecrivant a contact@lantso.com avant tout renvoi. Les pieces doivent etre non portees, non lavees, non abimees et renvoyees avec leur packaging et etiquettes. Les frais de retour sont a la charge du client, sauf article defectueux ou erreur d'envoi. Le remboursement est effectue sur le moyen de paiement d'origine apres verification.",
+    fr: "Les retours peuvent être demandés sous 14 jours après livraison en écrivant à contact@lantso.com avant tout renvoi. Les pièces doivent être non portées, non lavées, non abîmées et renvoyées avec leur packaging et leurs étiquettes. Les frais de retour sont à la charge du client, sauf article défectueux ou erreur d'envoi. Le remboursement est effectué sur le moyen de paiement d'origine après vérification.",
     ar: "يمكن طلب الإرجاع خلال 14 يوما من التسليم عبر contact@lantso.com قبل إرسال أي قطعة. يجب أن تكون القطعة غير مستعملة، غير مغسولة، غير متضررة ومع التغليف والملصقات الأصلية. يتحمل العميل تكلفة الإرجاع إلا إذا كانت القطعة معيبة أو تم إرسال منتج خاطئ. يتم رد المبلغ إلى وسيلة الدفع الأصلية بعد الفحص."
   },
-  legalTitle: { en: "Legal and Contact | Lantso", fr: "Legal et contact | Lantso", ar: "القانوني والتواصل | Lantso" },
+  legalTitle: { en: "Legal and Contact | Lantso", fr: "Mentions légales et contact | Lantso", ar: "القانوني والتواصل | Lantso" },
   legalDescription: {
     en: "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys.",
-    fr: "Conditions, confidentialite et contact pour acheter les maillots de football marocains limites Lantso.",
+    fr: "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso.",
     ar: "الشروط والخصوصية ومعلومات التواصل لشراء قمصان Lantso المغربية المحدودة."
   },
-  legalHeading: { en: "Legal and contact", fr: "Legal et contact", ar: "القانوني والتواصل" },
+  legalHeading: { en: "Legal and contact", fr: "Mentions légales et contact", ar: "القانوني والتواصل" },
   legalBody: {
     en: "Lantso sells limited edition jerseys in EUR through this storefront. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details.",
-    fr: "Lantso vend des maillots en edition limitee en EUR via cette boutique. Les stocks sont limites et une piece est reservee uniquement au moment ou Stripe Checkout s'ouvre; la commande est confirmee apres paiement reussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incompletes.",
+    fr: "Lantso vend des maillots en édition limitée en EUR via cette boutique. Les stocks sont limités et une pièce est réservée uniquement au moment où Stripe Checkout s'ouvre; la commande est confirmée après paiement réussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incomplètes.",
     ar: "تبيع Lantso قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ Lantso إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة."
   },
   legalSupport: {
     en: "The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, sizing, press, or wholesale requests, write to contact@lantso.com.",
-    fr: "Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliques hors Union europeenne. Pour le support, les tailles, la presse ou les demandes wholesale, ecris a contact@lantso.com.",
+    fr: "Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliqués hors Union européenne. Pour le support, les tailles, la presse ou les demandes wholesale, écris à contact@lantso.com.",
     ar: "يتحمل العميل مسؤولية العنوان الصحيح وأي رسوم أو ضرائب استيراد أو تكاليف ناقل خارج الاتحاد الأوروبي. للدعم أو المقاسات أو الصحافة أو طلبات الجملة، اكتب إلى contact@lantso.com."
   },
   legalPrivacy: {
     en: "Lantso collects contact details, delivery address, cart contents, language and access preferences, support messages, and optional newsletter consent. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and requested emails.",
-    fr: "Lantso collecte les coordonnees, l'adresse de livraison, le contenu du panier, les preferences de langue et d'acces, les messages support et le consentement newsletter optionnel. Les donnees de paiement sont traitees par Stripe et ne sont pas stockees par ce site. Les donnees servent au paiement, a la preparation, au support, a la prevention de fraude, aux obligations comptables et aux emails demandes.",
+    fr: "Lantso collecte les coordonnées, l'adresse de livraison, le contenu du panier, les préférences de langue et d'accès, les messages support et le consentement newsletter optionnel. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés.",
     ar: "تجمع Lantso بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم والموافقة الاختيارية على النشرة. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة."
   },
   legalSocial: {
-    en: "Instagram: lantso.at. TikTok: @lantsobrand.",
-    fr: "Instagram : lantso.at. TikTok : @lantsobrand.",
-    ar: "Instagram: lantso.at. TikTok: @lantsobrand."
+    en: "Instagram: lantso.at.",
+    fr: "Instagram : lantso.at.",
+    ar: "Instagram: lantso.at."
   },
-  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Decouvrir les Roots | Lantso", ar: "اكتشف الجذور | Lantso" },
+  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Découvrir les Roots | Lantso", ar: "اكتشف الجذور | Lantso" },
   rootsDescription: {
     en: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
-    fr: "L'histoire Lantso derriere Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde.",
+    fr: "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde.",
     ar: "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."
   },
-  rootsHeading: { en: "Discover the Roots", fr: "Decouvrir les Roots", ar: "اكتشف الجذور" },
+  rootsHeading: { en: "Discover the Roots", fr: "Découvrir les Roots", ar: "اكتشف الجذور" },
   rootsBody: {
     en: "Lantso starts from a simple idea: rebuild the emotion of Moroccan football heritage for the people who carry it today.",
-    fr: "Lantso part d'une idee simple : reconstruire l'emotion du football marocain pour ceux qui la portent aujourd'hui.",
+    fr: "Lantso part d'une idée simple : reconstruire l'émotion du football marocain pour ceux qui la portent aujourd'hui.",
     ar: "تبدأ Lantso من فكرة بسيطة: إعادة إحساس كرة القدم المغربية لمن يحمل هذا الإرث اليوم."
   },
   rootsBody2: {
     en: "Roots 01 - Khaki looks back to the deep green, red, and match-day memory of 98. Atlas 02 - White keeps the same line brighter, lighter, and made for movement.",
-    fr: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la memoire match-day de 98. Atlas 02 - White garde la meme ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
+    fr: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la mémoire match-day de 98. Atlas 02 - White garde la même ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
     ar: "Roots 01 - Khaki يعود إلى الأخضر العميق والأحمر وذاكرة 98. Atlas 02 - White يحافظ على نفس الروح بنسخة أكثر صفاء وخفة وحركة."
   },
   rootsBody3: {
     en: "This first limited chapter is small by intention: two jerseys, 25 pieces per colour, built to travel from the roots to the world.",
-    fr: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pieces par couleur, penses pour voyager from the roots to the world.",
+    fr: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pièces par couleur, pensés pour voyager from the roots to the world.",
     ar: "هذا الفصل الأول محدود عن قصد: قميصان، 25 قطعة من كل لون، من الجذور إلى العالم."
   },
-  successTitle: { en: "Order Received | Lantso", fr: "Commande recue | Lantso", ar: "تم استلام الطلب | Lantso" },
+  successTitle: { en: "Order Received | Lantso", fr: "Commande reçue | Lantso", ar: "تم استلام الطلب | Lantso" },
   successBody: {
     en: "Payment is complete. You will receive the delivery follow-up by email.",
-    fr: "Le paiement est termine. Le suivi de livraison sera envoye par email.",
+    fr: "Le paiement est terminé. Le suivi de livraison sera envoyé par email.",
     ar: "اكتملت عملية الدفع. سيصلك تتبع التوصيل عبر البريد الإلكتروني."
   },
-  cancelTitle: { en: "Checkout Cancelled | Lantso", fr: "Paiement annule | Lantso", ar: "تم إلغاء الدفع | Lantso" },
-  cancelBody: { en: "Your cart is still saved.", fr: "Ton panier reste sauvegarde.", ar: "سلتك ما زالت محفوظة." },
+  cancelTitle: { en: "Checkout Cancelled | Lantso", fr: "Paiement annulé | Lantso", ar: "تم إلغاء الدفع | Lantso" },
+  cancelBody: { en: "Your cart is still saved.", fr: "Ton panier reste sauvegardé.", ar: "سلتك ما زالت محفوظة." },
   backToShop: { en: "Back to shop", fr: "Retour boutique", ar: "العودة إلى المتجر" }
 };
 
@@ -267,10 +266,10 @@ function locale(lang = DEFAULT_LANG) {
 function faqRows(lang = DEFAULT_LANG) {
   if (lang === "fr") {
     return [
-      ["Quand ma commande sera-t-elle expediee ?", "Les commandes payees sont preparees sous 1 a 3 jours ouvres pendant un drop. Le suivi est envoye par email des que le colis est remis au transporteur."],
-      ["Quels pays sont livrables ?", "Le checkout prend en charge la France, Monaco, les pays de l'Union europeenne, la Suisse, le Royaume-Uni, le Maroc, les Etats-Unis, le Canada, le Japon, l'Arabie saoudite, la Norvege et les autres destinations listees dans le panier."],
-      ["Comment choisir ma taille ?", "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes deja. Entre M et L, choisis L pour une coupe plus relax."],
-      ["Puis-je echanger une taille ?", "Chaque couleur etant limitee a 25 pieces, les echanges dependent du stock restant. Si le remplacement n'est pas disponible, un retour eligible peut etre rembourse."]
+      ["Quand ma commande sera-t-elle expédiée ?", "Les commandes payées sont préparées sous 1 à 3 jours ouvrés pendant un drop. Le suivi est envoyé par email dès que le colis est remis au transporteur."],
+      ["Quels pays sont livrables ?", "Le checkout prend en charge la France, Monaco, les pays de l'Union européenne, la Suisse, le Royaume-Uni, le Maroc, les États-Unis, le Canada, le Japon, l'Arabie saoudite, la Norvège et les autres destinations listées dans le panier."],
+      ["Comment choisir ma taille ?", "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes déjà. Entre M et L, choisis L pour une coupe plus relax."],
+      ["Puis-je échanger une taille ?", "Chaque couleur étant limitée à 25 pièces, les échanges dépendent du stock restant. Si le remplacement n'est pas disponible, un retour éligible peut être remboursé."]
     ];
   }
   if (lang === "ar") {
@@ -439,8 +438,10 @@ function sizeGuide(product) {
   return product.sizes
     .map((size) => {
       const measure = product.measurements[size];
+      if (!measure) return "";
       return `${size}: ${measure.length}cm x ${measure.width}cm`;
     })
+    .filter(Boolean)
     .join(" / ");
 }
 
@@ -453,7 +454,7 @@ function organizationSchema(lang = DEFAULT_LANG) {
     logo: `${SITE_URL}/assets/icons/lantso-icon-512.png`,
     description: "Limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White.",
     email: "contact@lantso.com",
-    sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok]
+    sameAs: [SOCIAL_LINKS.instagram]
   };
 }
 

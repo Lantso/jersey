@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { accessCookieHeader, verifyAccessPassword } from "./lib/access.mjs";
 import { corsHeaders, createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
+import { normalizeClubProfile, normalizeContactMessage } from "./lib/forms.mjs";
 import { getInventorySnapshot, handleStripeCommerceEvent } from "./lib/inventory.mjs";
 import { verifyStripeSignature } from "./lib/stripe-webhook.mjs";
 
@@ -115,30 +116,16 @@ async function verifyAccess(request, response) {
 }
 
 async function saveClubProfile(request, response) {
-  const body = await readJson(request);
-  if (!body.email || !body.name || !isValidEmail(body.email)) {
-    return json(response, 400, { message: "Missing profile fields" }, request);
-  }
-  await appendJsonl("club-profiles.jsonl", {
-    createdAt: new Date().toISOString(),
-    name: clean(body.name),
-    email: clean(body.email).toLowerCase(),
-    newsletter: Boolean(body.newsletter)
-  });
+  const normalized = normalizeClubProfile(await readJson(request));
+  if (!normalized.ok) return json(response, normalized.status, { message: normalized.message }, request);
+  await appendJsonl("club-profiles.jsonl", normalized.record);
   return json(response, 200, { ok: true }, request);
 }
 
 async function saveContactMessage(request, response) {
-  const body = await readJson(request);
-  if (!body.email || !body.message || !body.name || !isValidEmail(body.email)) {
-    return json(response, 400, { message: "Missing contact fields" }, request);
-  }
-  await appendJsonl("contact-messages.jsonl", {
-    createdAt: new Date().toISOString(),
-    name: clean(body.name),
-    email: clean(body.email).toLowerCase(),
-    message: clean(body.message)
-  });
+  const normalized = normalizeContactMessage(await readJson(request));
+  if (!normalized.ok) return json(response, normalized.status, { message: normalized.message }, request);
+  await appendJsonl("contact-messages.jsonl", normalized.record);
   return json(response, 200, { ok: true }, request);
 }
 
@@ -219,15 +206,6 @@ function json(response, statusCode, payload, request = null, extraHeaders = {}) 
 async function appendJsonl(fileName, payload) {
   await mkdir(DATA_DIR, { recursive: true });
   await appendFile(path.join(DATA_DIR, fileName), `${JSON.stringify(payload)}\n`, "utf8");
-}
-
-function clean(value) {
-  return String(value || "").trim().slice(0, 2000);
-}
-
-function isValidEmail(value) {
-  const email = clean(value).toLowerCase();
-  return email.length <= 320 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function loadDotEnv() {

@@ -21,6 +21,7 @@ const COPY = {
     saving: "Saving...",
     saved: "You are on the list.",
     failed: "Please try again.",
+    invalidEmail: "Enter a valid email address.",
     days: "Days",
     hours: "Hours",
     minutes: "Minutes",
@@ -28,18 +29,19 @@ const COPY = {
   },
   fr: {
     title: "From the Roots<br>to the World",
-    documentTitle: "Lantso - Acces prive",
-    intro: "Acces prive avant le drop.",
+    documentTitle: "Lantso - Accès privé",
+    intro: "Accès privé avant le drop.",
     countdown: "Ouverture du drop dans",
     password: "Mot de passe",
     enter: "Entrer",
-    checking: "Verification...",
+    checking: "Vérification...",
     invalid: "Mot de passe incorrect.",
     email: "Email",
     join: "Rejoindre le club",
     saving: "Enregistrement...",
     saved: "Tu es dans la liste.",
-    failed: "Reessaie dans un instant.",
+    failed: "Réessaie dans un instant.",
+    invalidEmail: "Entre une adresse email valide.",
     days: "Jours",
     hours: "Heures",
     minutes: "Minutes",
@@ -59,6 +61,7 @@ const COPY = {
     saving: "جاري الحفظ...",
     saved: "أنت الآن في القائمة.",
     failed: "حاول مرة أخرى.",
+    invalidEmail: "أدخل بريدا إلكترونيا صحيحا.",
     days: "أيام",
     hours: "ساعات",
     minutes: "دقائق",
@@ -181,7 +184,7 @@ function gateHtml(pathname, lang, nonce) {
         <p class="message" data-access-message role="status"></p>
       </form>
       <form class="newsletter" data-newsletter-form>
-        <label>${escapeHtml(copy.email)}<input name="email" type="email" autocomplete="email" required></label>
+        <label>${escapeHtml(copy.email)}<input name="email" type="email" inputmode="email" autocomplete="email" maxlength="320" required></label>
         <button type="submit">${escapeHtml(copy.join)}</button>
         <p class="message" data-newsletter-message role="status"></p>
       </form>
@@ -194,7 +197,8 @@ function gateHtml(pathname, lang, nonce) {
         invalid: copy.invalid,
         saving: copy.saving,
         saved: copy.saved,
-        failed: copy.failed
+        failed: copy.failed,
+        invalidEmail: copy.invalidEmail
       })};
       const accessForm = document.querySelector("[data-access-form]");
       const newsletterForm = document.querySelector("[data-newsletter-form]");
@@ -236,10 +240,28 @@ function gateHtml(pathname, lang, nonce) {
         event.preventDefault();
         const message = document.querySelector("[data-newsletter-message]");
         const button = newsletterForm.querySelector("button");
-        const body = new URLSearchParams({ "form-name": "club", name: "Launch list", email: new FormData(newsletterForm).get("email"), newsletter: "yes" });
+        const emailInput = newsletterForm.querySelector('input[name="email"]');
+        const email = String(emailInput.value || "").trim().toLowerCase();
+        emailInput.setCustomValidity("");
+        if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || email.length > 320) {
+          message.textContent = copy.invalidEmail;
+          emailInput.setCustomValidity(copy.invalidEmail);
+          emailInput.reportValidity();
+          emailInput.addEventListener("input", () => emailInput.setCustomValidity(""), { once: true });
+          return;
+        }
+        const payload = { name: "Launch list", email, newsletter: "yes" };
+        const body = new URLSearchParams({ "form-name": "club", ...payload });
         message.textContent = copy.saving;
         button.disabled = true;
-        const response = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body }).catch(() => null);
+        const apiResponse = await fetch("/api/club", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(() => null);
+        const response = apiResponse && apiResponse.ok
+          ? apiResponse
+          : await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body }).catch(() => null);
         button.disabled = false;
         message.textContent = response && response.ok ? copy.saved : copy.failed;
         if (response && response.ok) newsletterForm.reset();
