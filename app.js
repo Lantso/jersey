@@ -195,6 +195,13 @@ const I18N = {
       free: "Free",
       remove: "Remove",
       qty: "Qty",
+      promo: "Promo code",
+      promoApply: "Apply",
+      promoRemove: "Remove code",
+      promoApplied: "Test support code applied: each shirt is €1, no shirt will be delivered, and stock will not change.",
+      promoInvalid: "This promo code is not active.",
+      supportPrice: "Test support price",
+      supportNoDelivery: "No delivery for this test",
       checkout: "Checkout securely",
       processing: "Opening checkout...",
       checkoutError: "Checkout could not open. Refresh the page and try again, or contact contact@lantso.com.",
@@ -212,7 +219,7 @@ const I18N = {
       q3: "How should I choose my size?",
       a3: "Use the measurements on each product page and compare them with a jersey you already wear. If you are between M and L, choose L for a more relaxed fit.",
       q4: "Can I exchange a size?",
-      a4: "Because each colour is limited to 25 pieces, exchanges depend on remaining stock. If a replacement is unavailable, we can process an eligible return instead."
+      a4: "Exchanges depend on remaining stock. If a replacement is unavailable, we can process an eligible return instead."
     },
     legal: {
       title: "Legal & contact",
@@ -229,7 +236,7 @@ const I18N = {
       title: "Before the design,\nthere was a story",
       body: "Lantso starts from a simple idea: rebuild the emotion of Moroccan football heritage for the people who carry it today.",
       body2: "Roots 01 - Khaki looks back to the deep green, red, and match-day memory of 98. Atlas 02 - White keeps the same line brighter, lighter, and made for movement.",
-      body3: "This first limited chapter is small by intention: two jerseys, 25 pieces per colour, built to travel from the roots to the world."
+      body3: "This first limited chapter is small by intention: two jerseys built to travel from the roots to the world."
     },
     club: {
       title: "Join the club",
@@ -333,6 +340,13 @@ const I18N = {
       free: "Offerte",
       remove: "Retirer",
       qty: "Qté",
+      promo: "Code promo",
+      promoApply: "Appliquer",
+      promoRemove: "Retirer le code",
+      promoApplied: "Code test appliqué : chaque maillot passe à 1 €, aucun maillot ne sera livré et le stock ne change pas.",
+      promoInvalid: "Ce code promo n'est pas actif.",
+      supportPrice: "Prix test support",
+      supportNoDelivery: "Pas de livraison pour ce test",
       checkout: "Paiement sécurisé",
       processing: "Ouverture du paiement...",
       checkoutError: "Le paiement n'a pas pu s'ouvrir. Actualise la page et réessaie, ou contacte contact@lantso.com.",
@@ -350,7 +364,7 @@ const I18N = {
       q3: "Comment choisir ma taille ?",
       a3: "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes déjà. Entre M et L, choisis L pour une coupe plus relax.",
       q4: "Puis-je échanger une taille ?",
-      a4: "Chaque couleur étant limitée à 25 pièces, les échanges dépendent du stock restant. Si le remplacement n'est pas disponible, un retour éligible peut être remboursé."
+      a4: "Les échanges dépendent du stock restant. Si le remplacement n'est pas disponible, un retour éligible peut être remboursé."
     },
     legal: {
       title: "Mentions légales & contact",
@@ -367,7 +381,7 @@ const I18N = {
       title: "Avant le design,\nil y avait une histoire",
       body: "Lantso part d'une idée simple : reconstruire l'émotion du football marocain pour ceux qui la portent aujourd'hui.",
       body2: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la mémoire match-day de 98. Atlas 02 - White garde la même ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
-      body3: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pièces par couleur, pensés pour voyager from the roots to the world."
+      body3: "Ce premier chapitre reste volontairement rare : deux maillots pensés pour voyager from the roots to the world."
     },
     club: {
       title: "Join the club",
@@ -471,6 +485,13 @@ const I18N = {
       free: "مجاني",
       remove: "حذف",
       qty: "الكمية",
+      promo: "رمز ترويجي",
+      promoApply: "تطبيق",
+      promoRemove: "حذف الرمز",
+      promoApplied: "تم تطبيق رمز الاختبار: كل قميص بسعر 1€، لن يتم تسليم أي قميص ولن يتغير المخزون.",
+      promoInvalid: "هذا الرمز الترويجي غير نشط.",
+      supportPrice: "سعر اختبار الدعم",
+      supportNoDelivery: "لا يوجد تسليم لهذا الاختبار",
       checkout: "دفع آمن",
       processing: "جاري فتح صفحة الدفع...",
       checkoutError: "تعذر فتح الدفع. حدث الصفحة وحاول مرة أخرى أو تواصل عبر contact@lantso.com.",
@@ -488,7 +509,7 @@ const I18N = {
       q3: "كيف أختار المقاس؟",
       a3: "استعمل القياسات في صفحة كل منتج وقارنها بقميص تلبسه حاليا. إذا كنت بين M و L فاختر L لقصة أوسع.",
       q4: "هل يمكن تبديل المقاس؟",
-      a4: "لأن كل لون محدود في 25 قطعة، يعتمد التبديل على المخزون المتبقي. إذا لم يتوفر البديل يمكن معالجة إرجاع مؤهل."
+      a4: "يعتمد التبديل على المخزون المتبقي. إذا لم يتوفر البديل يمكن معالجة إرجاع مؤهل."
     },
     legal: {
       title: "القانوني والتواصل",
@@ -505,7 +526,7 @@ const I18N = {
       title: "قبل التصميم،\nكانت هناك قصة",
       body: "تبدأ Lantso من فكرة بسيطة: إعادة إحساس كرة القدم المغربية لمن يحمل هذا الإرث اليوم.",
       body2: "Roots 01 - Khaki يعود إلى الأخضر العميق والأحمر وذاكرة 98. Atlas 02 - White يحافظ على نفس الروح بنسخة أكثر صفاء وخفة وحركة.",
-      body3: "هذا الفصل الأول محدود عن قصد: قميصان، 25 قطعة من كل لون، من الجذور إلى العالم."
+      body3: "هذا الفصل الأول محدود عن قصد: قميصان من الجذور إلى العالم."
     },
     club: {
       title: "Join the club",
@@ -558,6 +579,8 @@ const LAUNCH_DATE = new Date("2026-06-06T00:00:00+02:00");
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SUPPORT_PROMO_CODE = "supercalifragilisticexpialidocious";
+const SUPPORT_PROMO_UNIT_AMOUNT = 100;
 
 function languageFromPath(path = window.location.pathname) {
   const firstSegment = path.split("/").filter(Boolean)[0];
@@ -586,6 +609,7 @@ const state = {
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, defaultSize(product)])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
   postalCode: localStorage.getItem("lantso:postalCode") || "",
+  promoCode: localStorage.getItem("lantso:promoCode") || "",
   inventory: null,
   checkoutPending: false
 };
@@ -631,7 +655,7 @@ function pageMeta(current = route()) {
     const description = product.description[state.lang] || product.description.en;
     return {
       title: `${name} - Limited Moroccan Jersey | Lantso`,
-      description: `${name} by Lantso. ${description} 100% polyester. Limited to 25 pieces per colour.`,
+      description: `${name} by Lantso. ${description} 100% polyester.`,
       path: `/product/${product.id}`,
       image: `/assets/photos/fallback/${product.id}.jpg`,
       schema: productSchema(product)
@@ -639,7 +663,7 @@ function pageMeta(current = route()) {
   }
   const localizedMeta = {
     en: {
-      home: ["Lantso - From the Roots to the World", "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period."],
+      home: ["Lantso - From the Roots to the World", "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, made for the 2026 World Cup period."],
       shop: ["Shop Moroccan Football Jerseys | Lantso", "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period."],
       info: ["Shipping, Returns and FAQ | Lantso", "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys."],
       legal: ["Legal and Contact | Lantso", "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys."],
@@ -648,7 +672,7 @@ function pageMeta(current = route()) {
       cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
     },
     fr: {
-      home: ["Lantso - From the Roots to the World", "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pièces par couleur, pour la période Coupe du Monde 2026."],
+      home: ["Lantso - From the Roots to the World", "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, pour la période Coupe du Monde 2026."],
       shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026."],
       info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso."],
       legal: ["Mentions légales et contact | Lantso", "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso."],
@@ -657,7 +681,7 @@ function pageMeta(current = route()) {
       cancel: ["Paiement annulé | Lantso", "Paiement Lantso annulé."]
     },
     ar: {
-      home: ["Lantso - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض، 25 قطعة من كل لون لفترة كأس العالم 2026."],
+      home: ["Lantso - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."],
       shop: ["متجر قمصان كرة القدم المغربية | Lantso", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."],
       info: ["الشحن والإرجاع والأسئلة | Lantso", "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان Lantso المغربية المحدودة."],
       legal: ["القانوني والتواصل | Lantso", "الشروط والخصوصية ومعلومات التواصل لشراء قمصان Lantso المغربية المحدودة."],
@@ -800,10 +824,12 @@ function lineItems() {
     .map((item) => {
       const product = findProduct(item.productId);
       if (!product) return null;
+      const unitAmount = activePromo() ? SUPPORT_PROMO_UNIT_AMOUNT : product.price;
       return {
         ...item,
         product,
-        lineTotal: product.price * item.quantity
+        unitAmount,
+        lineTotal: unitAmount * item.quantity
       };
     })
     .filter(Boolean);
@@ -811,6 +837,32 @@ function lineItems() {
 
 function subtotal() {
   return lineItems().reduce((sum, item) => sum + item.lineTotal, 0);
+}
+
+function normalizePromoCode(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function activePromo() {
+  return normalizePromoCode(state.promoCode) === SUPPORT_PROMO_CODE ? SUPPORT_PROMO_CODE : "";
+}
+
+function supportShipping() {
+  return {
+    amount: 0,
+    zone: {
+      label: {
+        en: "Test support",
+        fr: "Test support",
+        ar: "اختبار الدعم"
+      },
+      eta: {
+        en: t("cart.supportNoDelivery"),
+        fr: t("cart.supportNoDelivery"),
+        ar: t("cart.supportNoDelivery")
+      }
+    }
+  };
 }
 
 function stockAvailable(productId, size) {
@@ -827,7 +879,7 @@ function defaultSize(product) {
 function stockSummary(product) {
   const total = product.sizes.reduce((sum, size) => sum + stockAvailable(product.id, size), 0);
   if (total <= 0) return t("product.soldOut");
-  return `${t("product.limited")} · ${total}`;
+  return t("product.limited");
 }
 
 function productIsSoldOut(product) {
@@ -1614,9 +1666,13 @@ function renderCart() {
     return;
   }
 
+  const promo = activePromo();
+  const promoInvalid = Boolean(state.promoCode && !promo);
   const sub = subtotal();
-  const shipping = calculateShipping(state.shippingCountry, sub, cartQuantity());
+  const shipping = promo ? supportShipping() : calculateShipping(state.shippingCountry, sub, cartQuantity());
   const total = sub + shipping.amount;
+  const shippingLabel = promo ? t("cart.supportNoDelivery") : `${t("cart.shipping")} · ${countryName(state.shippingCountry)}`;
+  const estimate = promo ? t("cart.supportNoDelivery") : shipping.zone.eta[state.lang] || shipping.zone.eta.en;
   renderMarkup(cartBody, `
     <div class="cart-items">
       ${lines.map((line) => cartItem(line)).join("")}
@@ -1631,9 +1687,18 @@ function renderCart() {
         <input data-cart-postal autocomplete="postal-code" list="cart-postal-options" value="${escapeHtml(state.postalCode)}">
         <datalist id="cart-postal-options">${postalOptions(state.shippingCountry, state.postalCode)}</datalist>
       </label>
+      <form class="promo-form" data-promo-form>
+        <label>
+          <span>${t("cart.promo")}</span>
+          <input data-promo-code autocomplete="off" autocapitalize="none" spellcheck="false" value="${escapeHtml(state.promoCode)}">
+        </label>
+        <button class="button-secondary" type="submit">${t("cart.promoApply")}</button>
+        ${state.promoCode ? `<button class="button-ghost" type="button" data-promo-remove>${t("cart.promoRemove")}</button>` : ""}
+      </form>
+      <p class="promo-message${promo ? " is-applied" : ""}${promoInvalid ? " is-invalid" : ""}" data-promo-message role="status">${promo ? t("cart.promoApplied") : promoInvalid ? t("cart.promoInvalid") : ""}</p>
       <div class="summary-line"><span>${t("cart.subtotal")}</span><strong>${formatMoney(sub, locale())}</strong></div>
-      <div class="summary-line"><span>${t("cart.shipping")} · ${countryName(state.shippingCountry)}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatMoney(shipping.amount, locale())}</strong></div>
-      <div class="summary-line"><span>${t("cart.estimate")}</span><strong>${shipping.zone.eta[state.lang] || shipping.zone.eta.en}</strong></div>
+      <div class="summary-line"><span>${shippingLabel}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatMoney(shipping.amount, locale())}</strong></div>
+      <div class="summary-line"><span>${t("cart.estimate")}</span><strong>${estimate}</strong></div>
       <div class="summary-line summary-total"><span>${t("cart.total")}</span><strong>${formatMoney(total, locale())}</strong></div>
       <button class="button-primary" type="button" data-checkout ${state.checkoutPending ? "disabled" : ""}>${state.checkoutPending ? t("cart.processing") : t("cart.checkout")}</button>
       <p class="checkout-message" data-checkout-message role="status"></p>
@@ -1670,6 +1735,22 @@ function renderCart() {
     }
     if (postalList) postalList.innerHTML = postalOptions(state.shippingCountry, state.postalCode);
   });
+  cartBody.querySelector("[data-promo-form]")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const input = cartBody.querySelector("[data-promo-code]");
+    state.promoCode = String(input?.value || "").trim();
+    if (state.promoCode) {
+      localStorage.setItem("lantso:promoCode", state.promoCode);
+    } else {
+      localStorage.removeItem("lantso:promoCode");
+    }
+    renderCart();
+  });
+  cartBody.querySelector("[data-promo-remove]")?.addEventListener("click", () => {
+    state.promoCode = "";
+    localStorage.removeItem("lantso:promoCode");
+    renderCart();
+  });
   cartBody.querySelector("[data-checkout]").addEventListener("click", () => checkout());
 }
 
@@ -1682,7 +1763,7 @@ function cartItem(line) {
       <div>
         <h3>${productName}</h3>
         <p>${t("product.size")}: ${line.size}</p>
-        <p>${formatMoney(line.product.price, locale())}</p>
+        <p>${formatMoney(line.unitAmount, locale())}${activePromo() ? ` · ${t("cart.supportPrice")}` : ""}</p>
         <div class="qty-row">
           <button type="button" data-qty="${line.productId}:${line.size}:-1" aria-label="-">-</button>
           <span>${t("cart.qty")} ${line.quantity}</span>
@@ -1881,6 +1962,12 @@ function faqSchema() {
 
 async function checkout(preferredMethod = "") {
   if (state.checkoutPending) return;
+  if (state.promoCode && !activePromo()) {
+    renderCart();
+    const errorMessage = cartBody.querySelector("[data-checkout-message]");
+    if (errorMessage) errorMessage.textContent = t("cart.promoInvalid");
+    return;
+  }
   state.checkoutPending = true;
   renderCart();
   const message = cartBody.querySelector("[data-checkout-message]");
@@ -1891,6 +1978,7 @@ async function checkout(preferredMethod = "") {
     postalCode: state.postalCode,
     language: state.lang,
     preferredMethod,
+    promoCode: state.promoCode,
     idempotencyKey: globalThis.crypto?.randomUUID ? crypto.randomUUID() : `checkout-${Date.now()}-${Math.random().toString(36).slice(2)}`
   };
   const response = await postJson("/api/create-checkout-session", payload);

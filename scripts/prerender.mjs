@@ -20,9 +20,9 @@ const COPY = {
     ar: "Lantso - From the Roots to the World"
   },
   homeDescription: {
-    en: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period.",
-    fr: "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, 25 pièces par couleur, pour la période Coupe du Monde 2026.",
-    ar: "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض، 25 قطعة من كل لون لفترة كأس العالم 2026."
+    en: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, made for the 2026 World Cup period.",
+    fr: "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, pour la période Coupe du Monde 2026.",
+    ar: "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."
   },
   stepInside: { en: "Step inside", fr: "Entrer", ar: "ادخل" },
   shopTitle: { en: "Shop Moroccan Football Jerseys | Lantso", fr: "Boutique maillots de football marocains | Lantso", ar: "متجر قمصان كرة القدم المغربية | Lantso" },
@@ -33,9 +33,9 @@ const COPY = {
   },
   shopHeading: { en: "Shop Lantso Moroccan jerseys", fr: "Boutique Lantso maillots marocains", ar: "متجر قمصان Lantso المغربية" },
   shopBody: {
-    en: "Very limited 2026 World Cup-inspired jerseys. 25 pieces per colour, sizes S, M, L and XL.",
-    fr: "Maillots très limités inspirés par la Coupe du Monde 2026. 25 pièces par couleur, tailles S, M, L et XL.",
-    ar: "قمصان محدودة جدا مستوحاة من كأس العالم 2026. 25 قطعة لكل لون، مقاسات S و M و L و XL."
+    en: "Very limited 2026 World Cup-inspired jerseys. Sizes S, M, L and XL.",
+    fr: "Maillots très limités inspirés par la Coupe du Monde 2026. Tailles S, M, L et XL.",
+    ar: "قمصان محدودة جدا مستوحاة من كأس العالم 2026. مقاسات S و M و L و XL."
   },
   limited: { en: "Limited pieces", fr: "Pièces limitées", ar: "قطع محدودة" },
   material: { en: "Material", fr: "Matière", ar: "الخامة" },
@@ -106,9 +106,9 @@ const COPY = {
     ar: "Roots 01 - Khaki يعود إلى الأخضر العميق والأحمر وذاكرة 98. Atlas 02 - White يحافظ على نفس الروح بنسخة أكثر صفاء وخفة وحركة."
   },
   rootsBody3: {
-    en: "This first limited chapter is small by intention: two jerseys, 25 pieces per colour, built to travel from the roots to the world.",
-    fr: "Ce premier chapitre reste volontairement rare : deux maillots, 25 pièces par couleur, pensés pour voyager from the roots to the world.",
-    ar: "هذا الفصل الأول محدود عن قصد: قميصان، 25 قطعة من كل لون، من الجذور إلى العالم."
+    en: "This first limited chapter is small by intention: two jerseys built to travel from the roots to the world.",
+    fr: "Ce premier chapitre reste volontairement rare : deux maillots pensés pour voyager from the roots to the world.",
+    ar: "هذا الفصل الأول محدود عن قصد: قميصان من الجذور إلى العالم."
   },
   successTitle: { en: "Order Received | Lantso", fr: "Commande reçue | Lantso", ar: "تم استلام الطلب | Lantso" },
   successBody: {
@@ -125,7 +125,7 @@ const routes = [
   {
     path: "/",
     title: "Lantso - From the Roots to the World",
-    description: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, 25 pieces per colour, made for the 2026 World Cup period.",
+    description: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, made for the 2026 World Cup period.",
     image: "/assets/photos/fallback/hero.jpg",
     body: homeBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), collectionSchema(lang)]
@@ -141,7 +141,7 @@ const routes = [
   ...PRODUCTS.map((product) => ({
     path: `/product/${product.id}`,
     title: `${product.name.en} - Limited Moroccan Jersey | Lantso`,
-    description: `${product.name.en} by Lantso. ${product.description.en} 100% polyester. Limited to 25 pieces per colour.`,
+    description: `${product.name.en} by Lantso. ${product.description.en} 100% polyester.`,
     image: `/assets/photos/fallback/${product.id}.jpg`,
     body: (lang) => productBody(product, lang),
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), productSchema(product, lang)]
@@ -269,7 +269,7 @@ function faqRows(lang = DEFAULT_LANG) {
       ["Quand ma commande sera-t-elle expédiée ?", "Les commandes payées sont préparées sous 1 à 3 jours ouvrés pendant un drop. Le suivi est envoyé par email dès que le colis est remis au transporteur."],
       ["Quels pays sont livrables ?", "Le checkout prend en charge la France, Monaco, les pays de l'Union européenne, la Suisse, le Royaume-Uni, le Maroc, les États-Unis, le Canada, le Japon, l'Arabie saoudite, la Norvège et les autres destinations listées dans le panier."],
       ["Comment choisir ma taille ?", "Utilise les mesures sur chaque page produit et compare-les avec un maillot que tu portes déjà. Entre M et L, choisis L pour une coupe plus relax."],
-      ["Puis-je échanger une taille ?", "Chaque couleur étant limitée à 25 pièces, les échanges dépendent du stock restant. Si le remplacement n'est pas disponible, un retour éligible peut être remboursé."]
+      ["Puis-je échanger une taille ?", "Les échanges dépendent du stock restant. Si le remplacement n'est pas disponible, un retour éligible peut être remboursé."]
     ];
   }
   if (lang === "ar") {
@@ -277,14 +277,14 @@ function faqRows(lang = DEFAULT_LANG) {
       ["متى يتم شحن طلبي؟", "يتم تجهيز الطلبات المدفوعة خلال 1 إلى 3 أيام عمل أثناء الإصدار. يصلك رقم التتبع عبر البريد الإلكتروني عند تسليم الطرد للناقل."],
       ["ما الدول المتاحة للتوصيل؟", "يدعم الدفع فرنسا، موناكو، دول الاتحاد الأوروبي، سويسرا، المملكة المتحدة، المغرب، الولايات المتحدة، كندا، اليابان، السعودية، النرويج وباقي الوجهات الظاهرة في السلة."],
       ["كيف أختار المقاس؟", "استعمل القياسات في صفحة كل منتج وقارنها بقميص تلبسه حاليا. إذا كنت بين M و L فاختر L لقصة أوسع."],
-      ["هل يمكن تبديل المقاس؟", "لأن كل لون محدود في 25 قطعة، يعتمد التبديل على المخزون المتبقي. إذا لم يتوفر البديل يمكن معالجة إرجاع مؤهل."]
+      ["هل يمكن تبديل المقاس؟", "يعتمد التبديل على المخزون المتبقي. إذا لم يتوفر البديل يمكن معالجة إرجاع مؤهل."]
     ];
   }
   return [
     ["When will my order ship?", "Paid orders are prepared within 1-3 business days during a drop. Tracking is sent by email as soon as the parcel is handed to the carrier."],
     ["Which countries can receive delivery?", "Checkout supports France, Monaco, EU countries, Switzerland, the United Kingdom, Morocco, the United States, Canada, Japan, Saudi Arabia, Norway, and the other enabled destinations listed in the cart."],
     ["How should I choose my size?", "Use the measurements on each product page and compare them with a jersey you already wear. If you are between M and L, choose L for a more relaxed fit."],
-    ["Can I exchange a size?", "Because each colour is limited to 25 pieces, exchanges depend on remaining stock. If a replacement is unavailable, we can process an eligible return instead."]
+    ["Can I exchange a size?", "Exchanges depend on remaining stock. If a replacement is unavailable, we can process an eligible return instead."]
   ];
 }
 
@@ -306,7 +306,7 @@ function routeDescription(route, lang = DEFAULT_LANG) {
   if (product) {
     const name = product.name[lang] || product.name.en;
     const description = product.description[lang] || product.description.en;
-    return `${name} by Lantso. ${description} 100% polyester. Limited to 25 pieces per colour.`;
+    return `${name} by Lantso. ${description} 100% polyester.`;
   }
   if (route.path === "/") return text("homeDescription", lang);
   if (route.path === "/shop") return text("shopDescription", lang);
