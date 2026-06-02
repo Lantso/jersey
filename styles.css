@@ -36,6 +36,38 @@ body.modal-open {
   overflow: hidden;
 }
 
+body:not(.is-gated)::before,
+body:not(.is-gated)::after {
+  pointer-events: none;
+  position: fixed;
+  z-index: 61;
+  mix-blend-mode: difference;
+}
+
+body:not(.is-gated)::before {
+  content: "";
+  top: 14px;
+  left: 50%;
+  width: 120px;
+  height: 38px;
+  background: #ffffff;
+  transform: translateX(-50%);
+  -webkit-mask: url("/Lantso_text.svg") center / contain no-repeat;
+  mask: url("/Lantso_text.svg") center / contain no-repeat;
+}
+
+body:not(.is-gated)::after {
+  content: "Join the club";
+  top: 22px;
+  right: 50px;
+  color: #ffffff;
+  font-family: var(--script);
+  font-size: 24px;
+  line-height: 1;
+  text-transform: none;
+  white-space: nowrap;
+}
+
 :focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
@@ -162,8 +194,7 @@ a {
   width: 120px;
   height: 38px;
   margin-top: -8px;
-  background: #ffffff;
-  mix-blend-mode: difference;
+  background: transparent;
   -webkit-mask: url("/Lantso_text.svg") center / contain no-repeat;
   mask: url("/Lantso_text.svg") center / contain no-repeat;
 }
@@ -178,14 +209,17 @@ a {
 .join-button {
   border: 0;
   background: transparent;
-  color: #ffffff;
+  color: transparent;
   filter: none;
   font-family: var(--script);
   font-size: 24px;
   line-height: 1;
-  mix-blend-mode: difference;
   white-space: nowrap;
   text-transform: none;
+}
+
+.join-button:focus-visible {
+  outline-color: var(--ink);
 }
 
 .cart-button {
@@ -1354,6 +1388,17 @@ textarea {
 }
 
 @media (max-width: 900px) {
+  body:not(.is-gated)::before {
+    top: 12px;
+    width: 100px;
+  }
+
+  body:not(.is-gated)::after {
+    top: 20px;
+    right: 18px;
+    font-size: 19px;
+  }
+
   .site-header {
     min-height: 62px;
     padding: 20px 18px 0;
@@ -1422,6 +1467,10 @@ textarea {
 }
 
 @media (max-width: 580px) {
+  body:not(.is-gated)::after {
+    font-size: 17px;
+  }
+
   body {
     font-size: 13px;
   }
