@@ -144,18 +144,13 @@ function gateHtml(pathname, lang, nonce) {
     <style nonce="${escapeHtml(nonce)}">
       :root { color-scheme: dark; --cream: #f8f8f6; --paper: #d9d9d7; --line: rgba(248, 248, 246, .66); }
       * { box-sizing: border-box; }
-      body { margin: 0; min-width: 320px; min-height: 100svh; display: grid; place-items: center; overflow-x: hidden; overflow-y: auto; background: var(--paper); color: var(--cream); font-family: "Courier New", monospace; text-transform: uppercase; }
+      body { margin: 0; min-width: 320px; height: 100svh; min-height: 100svh; display: grid; place-items: center; overflow: hidden; background: var(--paper); color: var(--cream); font-family: "Courier New", monospace; text-transform: uppercase; }
       body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(rgba(17, 17, 17, .18), rgba(17, 17, 17, .56)), url("/foot.jpg") center / cover; }
       body::after { content: ""; position: fixed; inset: 0; opacity: .08; background-image: radial-gradient(circle at 15% 20%, #000 0 1px, transparent 1px), radial-gradient(circle at 78% 13%, #000 0 1px, transparent 1px); background-size: 13px 17px, 19px 23px; pointer-events: none; }
-      main { position: relative; z-index: 1; width: min(760px, calc(100vw - 34px)); display: grid; justify-items: center; gap: 16px; padding: 34px 0; text-align: center; }
+      main { position: relative; z-index: 1; width: min(760px, calc(100vw - 34px)); display: grid; justify-items: center; gap: 14px; padding: 34px 0 calc(34px + env(safe-area-inset-bottom)); text-align: center; }
       h1 { margin: 8px 0 0; max-width: 720px; font-family: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive; font-size: clamp(58px, 8vw, 106px); line-height: .9; font-weight: 400; text-transform: none; }
       p { margin: 0; max-width: 560px; color: rgba(247, 243, 236, .82); line-height: 1.6; text-transform: none; }
-      .logo-3d { position: relative; width: min(300px, 72vw); aspect-ratio: 1.36; display: grid; place-items: center; cursor: grab; touch-action: none; }
-      .logo-3d:active { cursor: grabbing; }
-      .logo-3d canvas { width: 100%; height: 100%; display: block; }
-      .logo-3d img { position: absolute; width: 128px; filter: invert(1); opacity: 0; }
-      .logo-3d.is-fallback img { opacity: 1; }
-      .logo-3d.is-fallback canvas { display: none; }
+      .gate-logo { width: 116px; filter: invert(1); }
       form { width: min(430px, 100%); display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
       label { display: grid; gap: 8px; text-align: left; font-size: 12px; }
       input, button { min-height: 48px; border: 1px solid transparent; border-radius: 0; font: inherit; }
@@ -165,15 +160,12 @@ function gateHtml(pathname, lang, nonce) {
       .message { grid-column: 1 / -1; min-height: 22px; color: rgba(247, 243, 236, .9); font-size: 12px; text-align: left; }
       .newsletter { margin-top: 4px; }
       .is-arabic p, .is-arabic label, .is-arabic .message { unicode-bidi: plaintext; }
-      @media (max-width: 560px) { form { grid-template-columns: 1fr; } h1 { font-size: 58px; } }
+      @media (max-width: 560px) { main { width: min(420px, calc(100vw - 28px)); gap: 8px; padding: 52px 0 calc(14px + env(safe-area-inset-bottom)); } .gate-logo { width: 96px; } form { grid-template-columns: 1fr; gap: 7px; } h1 { font-size: clamp(42px, 13vw, 58px); line-height: .92; } p { font-size: 12px; line-height: 1.35; } input, button { min-height: 42px; padding-top: 9px; padding-bottom: 9px; } .message { min-height: 14px; } }
     </style>
   </head>
   <body>
     <main>
-      <div class="logo-3d" data-rotating-logo data-model-url="/assets/3d/logo.glb" role="img" aria-label="Lantso">
-        <canvas width="300" height="220"></canvas>
-        <img src="/Lantso_text.svg" alt="">
-      </div>
+      <img class="gate-logo" src="/Lantso_text.svg" alt="Lantso">
       <h1>${copy.title}</h1>
       <p>${escapeHtml(copy.intro)}</p>
       <form data-access-form>
@@ -187,9 +179,7 @@ function gateHtml(pathname, lang, nonce) {
         <p class="message" data-newsletter-message role="status"></p>
       </form>
     </main>
-    <script type="module" nonce="${escapeHtml(nonce)}">
-      import { initRotatingLogos } from "/logo-3d.mjs?v=20260604d";
-      initRotatingLogos("[data-rotating-logo]", { autoSpeed: 0.00024 });
+    <script nonce="${escapeHtml(nonce)}">
       const returnPath = ${scriptJson(pathname || "/")};
       const copy = ${scriptJson({
         checking: copy.checking,

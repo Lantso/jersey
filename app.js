@@ -8,8 +8,7 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260604d";
-import { initRotatingLogo } from "./logo-3d.mjs?v=20260604d";
+} from "./catalog.mjs?v=20260604e";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
@@ -643,7 +642,6 @@ const clubModal = document.querySelector("[data-club-modal]");
 const cookieNotice = document.querySelector("[data-cookie-notice]");
 let countdownTimer;
 let previousCartFocus;
-let gateLogoController;
 
 function t(path) {
   return path.split(".").reduce((value, key) => value?.[key], I18N[state.lang]) || path;
@@ -1169,10 +1167,7 @@ function gatePage() {
           .join("")}
       </div>
       <div class="gate-content">
-        <div class="gate-logo-3d" data-rotating-logo data-model-url="/assets/3d/logo.glb" role="img" aria-label="Lantso">
-          <canvas width="300" height="220"></canvas>
-          <img src="/Lantso_text.svg" alt="">
-        </div>
+        <img class="gate-logo" src="/Lantso_text.svg" alt="Lantso">
         <h1 class="script-title">${t("gate.title").replace("\n", "<br>")}</h1>
         <p class="gate-intro">${t("gate.intro")}</p>
         <form class="gate-form" data-access-form>
@@ -1597,12 +1592,10 @@ function render(options = {}) {
     document.querySelector(".site-header").hidden = true;
     renderMarkup(app, `<div class="page">${gatePage()}</div>`);
     bindGateEvents();
-    initGateLogo();
     if (shouldScroll) window.scrollTo({ top: 0, behavior: "instant" });
     return;
   }
 
-  destroyGateLogo();
   stopCountdown();
   document.body.classList.remove("is-gated");
   document.querySelector(".site-header").hidden = false;
@@ -1663,26 +1656,6 @@ function bindGateEvents() {
     message.textContent = response.ok ? t("gate.subscribed") : t("club.error");
     if (response.ok) newsletterForm.reset();
   });
-}
-
-function initGateLogo() {
-  destroyGateLogo();
-  const holder = app.querySelector("[data-rotating-logo]");
-  if (!holder) return;
-  initRotatingLogo(holder, { autoSpeed: 0.00024 }).then((controller) => {
-    if (!holder.isConnected || !document.body.classList.contains("is-gated")) {
-      controller?.destroy?.();
-      return;
-    }
-    gateLogoController = controller;
-  }).catch(() => {
-    holder.classList.add("is-fallback");
-  });
-}
-
-function destroyGateLogo() {
-  gateLogoController?.destroy?.();
-  gateLogoController = undefined;
 }
 
 function bindPageEvents() {
