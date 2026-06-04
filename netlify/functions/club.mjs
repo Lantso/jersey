@@ -1,6 +1,6 @@
 import { connectLambda } from "@netlify/blobs";
 import { corsHeaders, isAllowedOrigin, rateLimit, securityHeaders } from "../../lib/checkout.mjs";
-import { normalizeClubProfile, saveFormSubmission } from "../../lib/forms.mjs";
+import { normalizeClubProfile, saveClubProfile } from "../../lib/forms.mjs";
 
 export async function handler(event) {
   connectBlobs(event);
@@ -21,7 +21,7 @@ export async function handler(event) {
   if (!normalized.ok) return json(normalized.status, { message: normalized.message }, origin, allowedOrigins);
 
   try {
-    await saveFormSubmission("club", normalized.record);
+    await saveClubProfile(normalized.record);
     return json(200, { ok: true }, origin, allowedOrigins);
   } catch {
     return json(503, { message: "Profile storage is temporarily unavailable. Contact contact@lantso.com." }, origin, allowedOrigins);

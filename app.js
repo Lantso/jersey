@@ -3,9 +3,13 @@ import {
   PRODUCTS,
   SHIPPING_ZONES,
   calculateShipping,
+  convertMoney,
+  currencyForCountry,
   findProduct,
+  formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs";
+} from "./catalog.mjs?v=20260604c";
+import { initRotatingLogo } from "./logo-3d.mjs?v=20260604c";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
@@ -223,7 +227,7 @@ const I18N = {
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Lantso sells limited edition jerseys in EUR through this storefront. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details. The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, contact contact@lantso.com.",
+      termsBody: "Lantso sells limited edition jerseys through this storefront. Prices can be presented in the customer's local currency where Stripe supports it. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details. The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, contact contact@lantso.com.",
       privacyBody: "Lantso collects the details needed to run the shop: contact details, delivery address, cart contents, language and access preferences, support messages, and optional newsletter consent. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and email updates when requested. To access or delete eligible data, contact contact@lantso.com.",
       contactBody: "For order support, sizing, press, or wholesale requests, use the form below or write to contact@lantso.com.",
       name: "Name",
@@ -272,8 +276,12 @@ const I18N = {
       accept: "Accept"
     },
     checkout: {
-      successTitle: "Order received",
-      successBody: "Payment is complete. A confirmation page can be expanded with order tracking once the fulfillment workflow is connected.",
+      successTitle: "Thank you for your order",
+      successBody: "Payment is complete. Your order is confirmed and preparation can start.",
+      successReference: "Order reference",
+      successEmail: "A payment confirmation email is sent to the address used at checkout.",
+      successTracking: "Tracking",
+      successTrackingPending: "Your tracking number will be sent by email as soon as the parcel is handed to the carrier.",
       cancelTitle: "Checkout cancelled",
       cancelBody: "Your cart is still saved.",
       back: "Back to shop"
@@ -368,7 +376,7 @@ const I18N = {
     },
     legal: {
       title: "Mentions légales & contact",
-      termsBody: "Lantso vend des maillots en édition limitée en EUR via cette boutique. Les stocks sont limités et une pièce est réservée uniquement au moment où Stripe Checkout s'ouvre; la commande est confirmée après paiement réussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incomplètes. Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliqués hors Union européenne. Pour le support commande : contact@lantso.com.",
+      termsBody: "Lantso vend des maillots en édition limitée via cette boutique. Les prix peuvent être présentés dans la devise locale du client lorsque Stripe la prend en charge. Les stocks sont limités et une pièce est réservée uniquement au moment où Stripe Checkout s'ouvre; la commande est confirmée après paiement réussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incomplètes. Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliqués hors Union européenne. Pour le support commande : contact@lantso.com.",
       privacyBody: "Lantso collecte les informations nécessaires au fonctionnement de la boutique : coordonnées, adresse de livraison, contenu du panier, préférences de langue et d'accès, messages support et consentement newsletter optionnel. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés. Pour accéder aux données éligibles ou demander leur suppression : contact@lantso.com.",
       contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous ou écris à contact@lantso.com.",
       name: "Nom",
@@ -413,12 +421,16 @@ const I18N = {
       emailInvalid: "Entre une adresse email valide."
     },
     cookie: {
-      body: "Lantso utilise des cookies essentiels et le stockage local pour le panier, la langue, l'accès privé et la sécurité du paiement.",
+      body: "Pour que ton maillot arrive sans hors-jeu, on utilise les cookies indispensables au bon fonctionnement du site.",
       accept: "Accepter"
     },
     checkout: {
-      successTitle: "Commande reçue",
-      successBody: "Le paiement est terminé. Cette page pourra afficher le suivi lorsque le workflow logistique sera connecté.",
+      successTitle: "Merci pour ton achat",
+      successBody: "Le paiement est terminé. Ta commande est confirmée et la préparation peut commencer.",
+      successReference: "Numéro de commande",
+      successEmail: "Un email de confirmation de paiement est envoyé à l'adresse utilisée au paiement.",
+      successTracking: "Suivi",
+      successTrackingPending: "Ton numéro de suivi sera envoyé par email dès que le colis sera remis au transporteur.",
       cancelTitle: "Paiement annulé",
       cancelBody: "Ton panier reste sauvegardé.",
       back: "Retour boutique"
@@ -562,8 +574,12 @@ const I18N = {
       accept: "موافق"
     },
     checkout: {
-      successTitle: "تم استلام الطلب",
-      successBody: "اكتملت عملية الدفع. يمكن توسيع هذه الصفحة بإضافة تتبع الطلب بعد ربط سير التجهيز.",
+      successTitle: "شكرا على طلبك",
+      successBody: "اكتمل الدفع. تم تأكيد طلبك ويمكن بدء التحضير.",
+      successReference: "رقم الطلب",
+      successEmail: "سيتم إرسال تأكيد الدفع إلى البريد الإلكتروني المستخدم أثناء الدفع.",
+      successTracking: "التتبع",
+      successTrackingPending: "سيتم إرسال رقم التتبع عبر البريد الإلكتروني عند تسليم الطرد إلى شركة الشحن.",
       cancelTitle: "تم إلغاء الدفع",
       cancelBody: "سلتك ما زالت محفوظة.",
       back: "العودة إلى المتجر"
@@ -605,7 +621,7 @@ function localizedPath(path, lang = state?.lang || DEFAULT_LANG) {
 const state = {
   lang: languageFromPath() || localStorage.getItem("lantso:lang") || DEFAULT_LANG,
   cart: loadCart(),
-  locked: false,
+  locked: Date.now() < LAUNCH_DATE.getTime() && localStorage.getItem("lantso:access") !== "granted",
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, defaultSize(product)])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
   postalCode: localStorage.getItem("lantso:postalCode") || "",
@@ -618,10 +634,16 @@ const app = document.querySelector("#app");
 const drawer = document.querySelector("[data-cart-drawer]");
 const cartBody = document.querySelector("[data-cart-body]");
 const cartCount = document.querySelector("[data-cart-count]");
+const visualCartCount = document.querySelector("[data-cart-count-visual]");
+const headerNegativeLayer = document.querySelector("[data-header-negative-layer]");
+const headerLogoVisual = document.querySelector("[data-header-logo-visual]");
+const headerCartVisual = document.querySelector("[data-header-cart-visual]");
+const headerJoinVisual = document.querySelector("[data-header-join-visual]");
 const clubModal = document.querySelector("[data-club-modal]");
 const cookieNotice = document.querySelector("[data-cookie-notice]");
 let countdownTimer;
 let previousCartFocus;
+let gateLogoController;
 
 function t(path) {
   return path.split(".").reduce((value, key) => value?.[key], I18N[state.lang]) || path;
@@ -631,6 +653,22 @@ function locale() {
   if (state.lang === "fr") return "fr-FR";
   if (state.lang === "ar") return "ar-MA";
   return "en-GB";
+}
+
+function moneyCountry() {
+  return activePromo() ? "FR" : state.shippingCountry;
+}
+
+function formatStoreMoney(cents, countryCode = moneyCountry()) {
+  return formatMoney(cents, locale(), countryCode);
+}
+
+function storeMoneyAmount(cents, countryCode = moneyCountry()) {
+  return activePromo() ? Number(cents || 0) : convertMoney(cents, countryCode);
+}
+
+function formatStoreCurrencyAmount(cents, countryCode = moneyCountry()) {
+  return formatCurrencyAmount(cents, locale(), currencyForCountry(countryCode));
 }
 
 function route() {
@@ -798,7 +836,7 @@ function setLanguage(lang, options = {}) {
   state.lang = lang;
   localStorage.setItem("lantso:lang", lang);
   document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.documentElement.dir = "ltr";
   document.documentElement.classList.toggle("is-arabic", lang === "ar");
   document.querySelectorAll("[data-lang]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.lang === lang);
@@ -808,15 +846,44 @@ function setLanguage(lang, options = {}) {
   });
   const clubButton = document.querySelector("[data-open-club]");
   if (clubButton) clubButton.textContent = t("club.title");
+  if (headerJoinVisual) headerJoinVisual.textContent = t("club.title");
   updateCookieNotice();
   render();
   renderCart();
+  updateHeaderChrome();
 }
 
 function updateCookieNotice() {
   if (!cookieNotice) return;
   const accepted = localStorage.getItem("lantso:cookie") === "accepted";
   cookieNotice.hidden = accepted;
+}
+
+function updateHeaderChrome() {
+  updateHeaderScrollState();
+  if (!headerNegativeLayer) return;
+  const header = document.querySelector(".site-header");
+  const hidden = !header || header.hidden || document.body.classList.contains("is-gated");
+  headerNegativeLayer.hidden = hidden;
+  headerNegativeLayer.classList.toggle("is-ready", !hidden);
+  if (hidden) return;
+  syncVisualBox(headerLogoVisual, document.querySelector(".brand-word"));
+  syncVisualBox(headerCartVisual, document.querySelector(".cart-button"));
+  syncVisualBox(headerJoinVisual, document.querySelector(".join-button"));
+  headerNegativeLayer.classList.add("is-ready");
+}
+
+function syncVisualBox(visual, source) {
+  if (!(visual instanceof HTMLElement) || !(source instanceof HTMLElement)) return;
+  const rect = source.getBoundingClientRect();
+  visual.style.left = `${rect.left}px`;
+  visual.style.top = `${rect.top}px`;
+  visual.style.width = `${rect.width}px`;
+  visual.style.height = `${rect.height}px`;
+}
+
+function updateHeaderScrollState() {
+  document.body.classList.toggle("is-scrolled", window.scrollY > 2);
 }
 
 function lineItems() {
@@ -926,8 +993,13 @@ function removeItem(productId, size) {
   renderCart();
 }
 
-function openCart() {
-  previousCartFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+function openCart(options = {}) {
+  const { pushHistory = true, restoreFocus = true } = options;
+  if (drawer.classList.contains("is-open")) return;
+  previousCartFocus = restoreFocus && document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  if (pushHistory && !history.state?.cartOpen) {
+    history.pushState({ ...(history.state || {}), cartOpen: true }, "", window.location.href);
+  }
   drawer.classList.add("is-open");
   drawer.setAttribute("aria-hidden", "false");
   document.body.classList.add("drawer-open");
@@ -938,13 +1010,18 @@ function openCart() {
   }, 0);
 }
 
-function closeCart() {
+function closeCart(options = {}) {
+  const { fromHistory = false, restoreFocus = true } = options;
+  if (!drawer.classList.contains("is-open")) return;
   drawer.classList.remove("is-open");
   drawer.setAttribute("aria-hidden", "true");
   document.body.classList.remove("drawer-open");
   document.removeEventListener("keydown", trapCartFocus);
-  previousCartFocus?.focus?.();
+  if (restoreFocus) previousCartFocus?.focus?.();
   previousCartFocus = null;
+  if (!fromHistory && history.state?.cartOpen) {
+    history.back();
+  }
 }
 
 function trapCartFocus(event) {
@@ -1094,7 +1171,10 @@ function gatePage() {
           .join("")}
       </div>
       <div class="gate-content">
-        <img class="gate-logo" src="/Lantso_text.svg" alt="Lantso">
+        <div class="gate-logo-3d" data-rotating-logo data-model-url="/assets/3d/logo.glb" role="img" aria-label="Lantso">
+          <canvas width="300" height="220"></canvas>
+          <img src="/Lantso_text.svg" alt="">
+        </div>
         <p class="gate-date">${t("gate.date")}</p>
         <h1 class="script-title">${t("gate.title").replace("\n", "<br>")}</h1>
         <p class="gate-intro">${t("gate.intro")}</p>
@@ -1231,7 +1311,7 @@ function productFeature(product, index) {
         <em>${product.story[state.lang] || product.story.en}</em>
       </div>
       <div class="product-card__meta">
-        <span>${formatMoney(product.price, locale())}</span>
+        <span>${formatStoreMoney(product.price, state.shippingCountry)}</span>
         <span>${t("product.limited")}</span>
       </div>
       <div class="size-row" role="group" aria-label="${t("product.size")}">
@@ -1284,7 +1364,7 @@ function shopCard(product) {
       <a href="${localizedPath(`/product/${product.id}`)}" data-link>${placeholder(productName)}</a>
       <div class="shop-meta">
         <span>${t("product.limited")}</span>
-        <span>${formatMoney(product.price, locale())}</span>
+        <span>${formatStoreMoney(product.price, state.shippingCountry)}</span>
       </div>
       <div class="size-row" role="group" aria-label="${t("product.size")}">
         ${product.sizes
@@ -1320,12 +1400,12 @@ function productPage(productId) {
           <h1>${productName}</h1>
           <p>${product.description[state.lang] || product.description.en}</p>
           <div class="detail-list">
-            <div><span>${t("product.price")}</span><strong>${formatMoney(product.price, locale())}</strong></div>
+            <div><span>${t("product.price")}</span><strong>${formatStoreMoney(product.price, state.shippingCountry)}</strong></div>
             <div><span>${t("product.color")}</span><strong>${product.color[state.lang] || product.color.en}</strong></div>
             <div><span>${t("product.material")}</span><strong>${product.material[state.lang] || product.material.en}</strong></div>
             <div><span>${t("product.measurements")}</span><strong>${sizeGuide(product)}</strong></div>
             <div><span>${t("product.stock")}</span><strong>${stockSummary(product)}</strong></div>
-            <div><span>${t("product.shippingEstimate")}</span><strong>${formatMoney(shipping.amount, locale())} · ${shipping.zone.eta[state.lang] || shipping.zone.eta.en}</strong></div>
+            <div><span>${t("product.shippingEstimate")}</span><strong>${formatStoreMoney(shipping.amount, state.shippingCountry)} · ${shipping.zone.eta[state.lang] || shipping.zone.eta.en}</strong></div>
             <div class="detail-long"><span>${t("product.care")}</span><strong>${product.care[state.lang] || product.care.en}</strong></div>
           </div>
           <div class="size-row" role="group" aria-label="${t("product.size")}">
@@ -1463,20 +1543,59 @@ function rootsPage() {
   `;
 }
 
+function checkoutConfirmation() {
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get("session_id") || "";
+  let stored = {};
+  try {
+    stored = JSON.parse(localStorage.getItem("lantso:lastCheckout") || "{}");
+  } catch {
+    stored = {};
+  }
+  const matchedStoredCheckout = Boolean(sessionId && stored.sessionId === sessionId);
+  const orderRef = matchedStoredCheckout || !sessionId ? stored.orderRef : "";
+  return {
+    sessionId,
+    matchedStoredCheckout,
+    orderRef: orderRef || sessionId.slice(-10).toUpperCase()
+  };
+}
+
 function noticePage(kind) {
   const isSuccess = kind === "success";
+  const confirmation = isSuccess ? checkoutConfirmation() : null;
+  if (isSuccess) completeStoredCheckout(confirmation);
   return `
     <div class="page-shell">
       <section class="notice-page">
         <div class="notice-box">
           <h1>${isSuccess ? t("checkout.successTitle") : t("checkout.cancelTitle")}</h1>
           <p>${isSuccess ? t("checkout.successBody") : t("checkout.cancelBody")}</p>
+          ${
+            isSuccess
+              ? `<div class="notice-details">
+                  <div><span>${t("checkout.successReference")}</span><strong>${escapeHtml(confirmation.orderRef || "")}</strong></div>
+                  <div><span>${t("checkout.successTracking")}</span><strong>${t("checkout.successTrackingPending")}</strong></div>
+                  <p>${t("checkout.successEmail")}</p>
+                </div>`
+              : ""
+          }
           <a class="button-primary" href="${localizedPath("/shop")}" data-link>${t("checkout.back")}</a>
         </div>
       </section>
       ${footer()}
     </div>
   `;
+}
+
+function completeStoredCheckout(confirmation) {
+  if (!confirmation?.matchedStoredCheckout || !confirmation.sessionId) return;
+  if (localStorage.getItem("lantso:completedCheckout") === confirmation.sessionId) return;
+  state.cart = [];
+  state.promoCode = "";
+  saveCart();
+  localStorage.removeItem("lantso:promoCode");
+  localStorage.setItem("lantso:completedCheckout", confirmation.sessionId);
 }
 
 function render(options = {}) {
@@ -1487,11 +1606,13 @@ function render(options = {}) {
     document.querySelector(".site-header").hidden = true;
     renderMarkup(app, `<div class="page">${gatePage()}</div>`);
     bindGateEvents();
+    initGateLogo();
     startCountdown();
     if (shouldScroll) window.scrollTo({ top: 0, behavior: "instant" });
     return;
   }
 
+  destroyGateLogo();
   stopCountdown();
   document.body.classList.remove("is-gated");
   document.querySelector(".site-header").hidden = false;
@@ -1509,6 +1630,7 @@ function render(options = {}) {
   bindPageEvents();
   renderCart();
   if (shouldScroll) window.scrollTo({ top: 0, behavior: "instant" });
+  updateHeaderChrome();
 }
 
 function bindGateEvents() {
@@ -1551,6 +1673,26 @@ function bindGateEvents() {
     message.textContent = response.ok ? t("gate.subscribed") : t("club.error");
     if (response.ok) newsletterForm.reset();
   });
+}
+
+function initGateLogo() {
+  destroyGateLogo();
+  const holder = app.querySelector("[data-rotating-logo]");
+  if (!holder) return;
+  initRotatingLogo(holder, { autoSpeed: 0.00018 }).then((controller) => {
+    if (!holder.isConnected || !document.body.classList.contains("is-gated")) {
+      controller?.destroy?.();
+      return;
+    }
+    gateLogoController = controller;
+  }).catch(() => {
+    holder.classList.add("is-fallback");
+  });
+}
+
+function destroyGateLogo() {
+  gateLogoController?.destroy?.();
+  gateLogoController = undefined;
 }
 
 function bindPageEvents() {
@@ -1620,7 +1762,7 @@ function bindPageEvents() {
       localStorage.setItem("lantso:shippingCountry", state.shippingCountry);
       localStorage.setItem("lantso:postalCode", state.postalCode);
       const result = calculateShipping(state.shippingCountry, subtotal() || PRODUCTS[0].price, cartQuantity() || 1);
-      calculator.querySelector("[data-calc-result]").textContent = `${result.zone.label[state.lang] || result.zone.label.en}: ${formatMoney(result.amount, locale())} · ${result.zone.eta[state.lang] || result.zone.eta.en}`;
+      calculator.querySelector("[data-calc-result]").textContent = `${result.zone.label[state.lang] || result.zone.label.en}: ${formatStoreMoney(result.amount, state.shippingCountry)} · ${result.zone.eta[state.lang] || result.zone.eta.en}`;
       renderCart();
     });
   }
@@ -1652,7 +1794,10 @@ function setFormPending(form, pending) {
 }
 
 function renderCart() {
-  cartCount.textContent = cartQuantity();
+  const quantity = cartQuantity();
+  cartCount.textContent = quantity;
+  if (visualCartCount) visualCartCount.textContent = quantity;
+  updateHeaderChrome();
   const lines = lineItems();
   if (!lines.length) {
     renderMarkup(cartBody, `
@@ -1670,7 +1815,9 @@ function renderCart() {
   const promoInvalid = Boolean(state.promoCode && !promo);
   const sub = subtotal();
   const shipping = promo ? supportShipping() : calculateShipping(state.shippingCountry, sub, cartQuantity());
-  const total = sub + shipping.amount;
+  const displaySub = lines.reduce((sum, line) => sum + storeMoneyAmount(line.unitAmount) * line.quantity, 0);
+  const displayShipping = promo ? 0 : storeMoneyAmount(shipping.amount);
+  const displayTotal = displaySub + displayShipping;
   const shippingLabel = promo ? t("cart.supportNoDelivery") : `${t("cart.shipping")} · ${countryName(state.shippingCountry)}`;
   const estimate = promo ? t("cart.supportNoDelivery") : shipping.zone.eta[state.lang] || shipping.zone.eta.en;
   renderMarkup(cartBody, `
@@ -1696,10 +1843,10 @@ function renderCart() {
         ${state.promoCode ? `<button class="button-ghost" type="button" data-promo-remove>${t("cart.promoRemove")}</button>` : ""}
       </form>
       <p class="promo-message${promo ? " is-applied" : ""}${promoInvalid ? " is-invalid" : ""}" data-promo-message role="status">${promo ? t("cart.promoApplied") : promoInvalid ? t("cart.promoInvalid") : ""}</p>
-      <div class="summary-line"><span>${t("cart.subtotal")}</span><strong>${formatMoney(sub, locale())}</strong></div>
-      <div class="summary-line"><span>${shippingLabel}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatMoney(shipping.amount, locale())}</strong></div>
+      <div class="summary-line"><span>${t("cart.subtotal")}</span><strong>${formatStoreCurrencyAmount(displaySub)}</strong></div>
+      <div class="summary-line"><span>${shippingLabel}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatStoreCurrencyAmount(displayShipping)}</strong></div>
       <div class="summary-line"><span>${t("cart.estimate")}</span><strong>${estimate}</strong></div>
-      <div class="summary-line summary-total"><span>${t("cart.total")}</span><strong>${formatMoney(total, locale())}</strong></div>
+      <div class="summary-line summary-total"><span>${t("cart.total")}</span><strong>${formatStoreCurrencyAmount(displayTotal)}</strong></div>
       <button class="button-primary" type="button" data-checkout ${state.checkoutPending ? "disabled" : ""}>${state.checkoutPending ? t("cart.processing") : t("cart.checkout")}</button>
       <p class="checkout-message" data-checkout-message role="status"></p>
     </div>
@@ -1722,7 +1869,7 @@ function renderCart() {
     state.postalCode = "";
     localStorage.setItem("lantso:shippingCountry", state.shippingCountry);
     localStorage.removeItem("lantso:postalCode");
-    renderCart();
+    render({ scroll: false });
   });
   const postalInput = cartBody.querySelector("[data-cart-postal]");
   const postalList = cartBody.querySelector("#cart-postal-options");
@@ -1763,7 +1910,7 @@ function cartItem(line) {
       <div>
         <h3>${productName}</h3>
         <p>${t("product.size")}: ${line.size}</p>
-        <p>${formatMoney(line.unitAmount, locale())}${activePromo() ? ` · ${t("cart.supportPrice")}` : ""}</p>
+        <p>${formatStoreMoney(line.unitAmount)}${activePromo() ? ` · ${t("cart.supportPrice")}` : ""}</p>
         <div class="qty-row">
           <button type="button" data-qty="${line.productId}:${line.size}:-1" aria-label="-">-</button>
           <span>${t("cart.qty")} ${line.quantity}</span>
@@ -1983,6 +2130,8 @@ async function checkout(preferredMethod = "") {
   };
   const response = await postJson("/api/create-checkout-session", payload);
   if (response.ok && response.data.url) {
+    rememberCheckout(response.data);
+    prepareForCheckoutRedirect();
     window.location.assign(response.data.url);
     return;
   }
@@ -1991,6 +2140,24 @@ async function checkout(preferredMethod = "") {
   renderCart();
   const errorMessage = cartBody.querySelector("[data-checkout-message]");
   if (errorMessage) errorMessage.textContent = response.status === 0 || response.status === 503 ? t("cart.checkoutError") : response.data?.message || t("cart.checkoutError");
+}
+
+function prepareForCheckoutRedirect() {
+  closeCart({ fromHistory: true, restoreFocus: false });
+  if (history.state?.cartOpen) {
+    history.replaceState({ ...(history.state || {}), cartOpen: false }, "", window.location.href);
+  }
+}
+
+function rememberCheckout(data = {}) {
+  localStorage.setItem(
+    "lantso:lastCheckout",
+    JSON.stringify({
+      sessionId: data.id || "",
+      orderRef: data.orderRef || "",
+      createdAt: new Date().toISOString()
+    })
+  );
 }
 
 async function postJson(url, payload) {
@@ -2184,6 +2351,16 @@ document.querySelector("[data-accept-cookie]")?.addEventListener("click", () => 
   updateCookieNotice();
 });
 
-window.addEventListener("popstate", render);
+window.addEventListener("popstate", (event) => {
+  if (event.state?.cartOpen) {
+    openCart({ pushHistory: false, restoreFocus: false });
+    return;
+  }
+  closeCart({ fromHistory: true, restoreFocus: false });
+  render();
+});
+window.addEventListener("scroll", updateHeaderScrollState, { passive: true });
+window.addEventListener("resize", updateHeaderChrome);
+document.fonts?.ready?.then(updateHeaderChrome).catch(() => {});
 setLanguage(state.lang);
 refreshInventory();

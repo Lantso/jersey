@@ -90,7 +90,7 @@ export default async function accessGate(request, context) {
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
       "Content-Security-Policy":
-        `default-src 'self'; script-src 'nonce-${nonce}'; style-src 'nonce-${nonce}'; img-src 'self'; connect-src 'self'; base-uri 'self'; object-src 'none'`
+        `default-src 'self'; script-src 'self' 'nonce-${nonce}'; style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; base-uri 'self'; object-src 'none'`
     }
   });
 }
@@ -138,16 +138,24 @@ function gateHtml(pathname, lang, nonce) {
     <meta name="robots" content="noindex, nofollow">
     <title>${escapeHtml(copy.documentTitle)}</title>
     <link rel="icon" href="/lantso_logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Script&display=swap" rel="stylesheet">
     <style nonce="${escapeHtml(nonce)}">
       :root { color-scheme: dark; --cream: #f8f8f6; --paper: #d9d9d7; --line: rgba(248, 248, 246, .66); }
       * { box-sizing: border-box; }
-      body { margin: 0; min-width: 320px; min-height: 100vh; display: grid; place-items: center; overflow: hidden; background: var(--paper); color: var(--cream); font-family: "Courier New", monospace; text-transform: uppercase; }
+      body { margin: 0; min-width: 320px; min-height: 100svh; display: grid; place-items: center; overflow-x: hidden; overflow-y: auto; background: var(--paper); color: var(--cream); font-family: "Courier New", monospace; text-transform: uppercase; }
       body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(rgba(17, 17, 17, .18), rgba(17, 17, 17, .56)), url("/assets/photos/hero.png") center / cover; }
       body::after { content: ""; position: fixed; inset: 0; opacity: .08; background-image: radial-gradient(circle at 15% 20%, #000 0 1px, transparent 1px), radial-gradient(circle at 78% 13%, #000 0 1px, transparent 1px); background-size: 13px 17px, 19px 23px; pointer-events: none; }
       main { position: relative; z-index: 1; width: min(760px, calc(100vw - 34px)); display: grid; justify-items: center; gap: 16px; padding: 34px 0; text-align: center; }
-      img { width: 128px; filter: invert(1); }
-      h1 { margin: 8px 0 0; max-width: 720px; font-family: "Snell Roundhand", "Apple Chancery", cursive; font-size: clamp(58px, 8vw, 106px); line-height: .9; font-weight: 400; text-transform: none; }
+      h1 { margin: 8px 0 0; max-width: 720px; font-family: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive; font-size: clamp(58px, 8vw, 106px); line-height: .9; font-weight: 400; text-transform: none; }
       p { margin: 0; max-width: 560px; color: rgba(247, 243, 236, .82); line-height: 1.6; text-transform: none; }
+      .logo-3d { position: relative; width: min(300px, 72vw); aspect-ratio: 1.36; display: grid; place-items: center; cursor: grab; touch-action: none; }
+      .logo-3d:active { cursor: grabbing; }
+      .logo-3d canvas { width: 100%; height: 100%; display: block; }
+      .logo-3d img { position: absolute; width: 128px; filter: invert(1); opacity: 0; }
+      .logo-3d.is-fallback img { opacity: 1; }
+      .logo-3d.is-fallback canvas { display: none; }
       .date { font-weight: 700; color: var(--cream); }
       .countdown { width: min(520px, 100%); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 10px 0 6px; }
       .unit { min-height: 76px; display: grid; place-items: center; gap: 2px; border: 1px solid var(--line); background: rgba(17, 17, 17, .24); }
@@ -161,14 +169,16 @@ function gateHtml(pathname, lang, nonce) {
       button:disabled { opacity: .58; cursor: not-allowed; }
       .message { grid-column: 1 / -1; min-height: 22px; color: rgba(247, 243, 236, .9); font-size: 12px; text-align: left; }
       .newsletter { margin-top: 4px; }
-      .is-arabic p, .is-arabic label, .is-arabic .message { direction: rtl; text-align: right; }
-      .is-arabic main, .is-arabic h1, .is-arabic .countdown { direction: ltr; text-align: center; }
+      .is-arabic p, .is-arabic label, .is-arabic .message { unicode-bidi: plaintext; }
       @media (max-width: 560px) { .countdown { grid-template-columns: repeat(2, 1fr); } form { grid-template-columns: 1fr; } h1 { font-size: 58px; } }
     </style>
   </head>
   <body>
     <main>
-      <img src="/Lantso_text.svg" alt="Lantso">
+      <div class="logo-3d" data-rotating-logo data-model-url="/assets/3d/logo.glb" role="img" aria-label="Lantso">
+        <canvas width="300" height="220"></canvas>
+        <img src="/Lantso_text.svg" alt="">
+      </div>
       <p class="date">06 / 06 / 2026</p>
       <h1>${copy.title}</h1>
       <p>${escapeHtml(copy.intro)}</p>
@@ -189,7 +199,9 @@ function gateHtml(pathname, lang, nonce) {
         <p class="message" data-newsletter-message role="status"></p>
       </form>
     </main>
-    <script nonce="${escapeHtml(nonce)}">
+    <script type="module" nonce="${escapeHtml(nonce)}">
+      import { initRotatingLogos } from "/logo-3d.mjs?v=20260604c";
+      initRotatingLogos();
       const launch = new Date("2026-06-06T00:00:00+02:00").getTime();
       const returnPath = ${scriptJson(pathname || "/")};
       const copy = ${scriptJson({

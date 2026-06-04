@@ -1,11 +1,11 @@
 import { createReadStream, existsSync, readFileSync } from "node:fs";
-import { mkdir, stat, appendFile } from "node:fs/promises";
+import { mkdir, stat, appendFile, readFile, writeFile } from "node:fs/promises";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { accessCookieHeader, verifyAccessPassword } from "./lib/access.mjs";
 import { corsHeaders, createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
-import { normalizeClubProfile, normalizeContactMessage } from "./lib/forms.mjs";
+import { emailKey, normalizeClubProfile, normalizeContactMessage } from "./lib/forms.mjs";
 import { getInventorySnapshot, handleStripeCommerceEvent } from "./lib/inventory.mjs";
 import { verifyStripeSignature } from "./lib/stripe-webhook.mjs";
 
@@ -29,7 +29,8 @@ const mimeTypes = new Map([
   [".jpeg", "image/jpeg"],
   [".png", "image/png"],
   [".webp", "image/webp"],
-  [".ico", "image/x-icon"]
+  [".ico", "image/x-icon"],
+  [".glb", "model/gltf-binary"]
 ]);
 
 const server = http.createServer(async (request, response) => {
@@ -92,9 +93,14 @@ async function createCheckoutSession(request, response) {
     createdAt: new Date().toISOString(),
     sessionId: result.data.id,
     orderRef: result.checkout.orderRef,
+    currency: result.checkout.currency,
+    baseCurrency: result.checkout.baseCurrency,
     items: result.checkout.items,
+    baseSubtotal: result.checkout.baseSubtotal,
     subtotal: result.checkout.subtotal,
+    baseShipping: result.checkout.shipping.baseAmount,
     shipping: result.checkout.shipping.amount,
+    baseTotal: result.checkout.baseTotal,
     total: result.checkout.total,
     country: result.checkout.shippingCountry
   });
@@ -118,7 +124,7 @@ async function verifyAccess(request, response) {
 async function saveClubProfile(request, response) {
   const normalized = normalizeClubProfile(await readJson(request));
   if (!normalized.ok) return json(response, normalized.status, { message: normalized.message }, request);
-  await appendJsonl("club-profiles.jsonl", normalized.record);
+  await upsertJsonRecord("club-profiles.json", emailKey(normalized.record.email), normalized.record);
   return json(response, 200, { ok: true }, request);
 }
 
@@ -206,6 +212,26 @@ function json(response, statusCode, payload, request = null, extraHeaders = {}) 
 async function appendJsonl(fileName, payload) {
   await mkdir(DATA_DIR, { recursive: true });
   await appendFile(path.join(DATA_DIR, fileName), `${JSON.stringify(payload)}\n`, "utf8");
+}
+
+async function upsertJsonRecord(fileName, key, record) {
+  await mkdir(DATA_DIR, { recursive: true });
+  const filePath = path.join(DATA_DIR, fileName);
+  let current = {};
+  try {
+    current = JSON.parse(await readFile(filePath, "utf8"));
+  } catch {
+    current = {};
+  }
+  const existing = current[key] || {};
+  current[key] = {
+    ...existing,
+    ...record,
+    createdAt: existing.createdAt || record.createdAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    submissionCount: Math.max(1, Number(existing.submissionCount || 0) + 1)
+  };
+  await writeFile(filePath, `${JSON.stringify(current, null, 2)}\n`, "utf8");
 }
 
 function loadDotEnv() {
