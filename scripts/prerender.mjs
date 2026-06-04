@@ -195,7 +195,7 @@ const template = await readFile(path.join(ROOT, "index.html"), "utf8");
 await rm(DIST, { recursive: true, force: true });
 await mkdir(DIST, { recursive: true });
 await Promise.all(
-  ["app.js", "catalog.mjs", "logo-3d.mjs", "styles.css", "lantso_logo.svg", "Lantso_text.svg", "robots.txt", "llms.txt", "site.webmanifest"].map((file) =>
+  ["app.js", "catalog.mjs", "logo-3d.mjs", "styles.css", "lantso_logo.svg", "Lantso_text.svg", "foot.jpg", "robots.txt", "llms.txt", "site.webmanifest"].map((file) =>
     cp(path.join(ROOT, file), path.join(DIST, file), { recursive: true })
   )
 );

@@ -8,8 +8,8 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260604c";
-import { initRotatingLogo } from "./logo-3d.mjs?v=20260604c";
+} from "./catalog.mjs?v=20260604d";
+import { initRotatingLogo } from "./logo-3d.mjs?v=20260604d";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
@@ -1156,13 +1156,11 @@ function visualFor(label) {
 }
 
 function gatePage() {
-  const parts = countdownParts();
   return `
     <section class="gate-page">
       <figure class="gate-media" aria-hidden="true">
         <picture>
-          <source srcset="/assets/photos/responsive/hero-480.webp 480w, /assets/photos/responsive/hero-800.webp 800w, /assets/photos/responsive/hero-1200.webp 1200w, /assets/photos/hero.webp 1672w" sizes="100vw" type="image/webp">
-          <img src="/assets/photos/fallback/hero.jpg" alt="" width="1672" height="941" decoding="async" fetchpriority="high">
+          <img src="/foot.jpg" alt="" width="6720" height="4480" decoding="async" fetchpriority="high">
         </picture>
       </figure>
       <div class="gate-language" aria-label="Language">
@@ -1175,15 +1173,8 @@ function gatePage() {
           <canvas width="300" height="220"></canvas>
           <img src="/Lantso_text.svg" alt="">
         </div>
-        <p class="gate-date">${t("gate.date")}</p>
         <h1 class="script-title">${t("gate.title").replace("\n", "<br>")}</h1>
         <p class="gate-intro">${t("gate.intro")}</p>
-        <div class="countdown" aria-label="${t("gate.countdown")}">
-          ${countdownUnit("days", parts.days)}
-          ${countdownUnit("hours", parts.hours)}
-          ${countdownUnit("minutes", parts.minutes)}
-          ${countdownUnit("seconds", parts.seconds)}
-        </div>
         <form class="gate-form" data-access-form>
           <label>
             <span>${t("gate.password")}</span>
@@ -1607,7 +1598,6 @@ function render(options = {}) {
     renderMarkup(app, `<div class="page">${gatePage()}</div>`);
     bindGateEvents();
     initGateLogo();
-    startCountdown();
     if (shouldScroll) window.scrollTo({ top: 0, behavior: "instant" });
     return;
   }
@@ -1679,7 +1669,7 @@ function initGateLogo() {
   destroyGateLogo();
   const holder = app.querySelector("[data-rotating-logo]");
   if (!holder) return;
-  initRotatingLogo(holder, { autoSpeed: 0.00018 }).then((controller) => {
+  initRotatingLogo(holder, { autoSpeed: 0.00024 }).then((controller) => {
     if (!holder.isConnected || !document.body.classList.contains("is-gated")) {
       controller?.destroy?.();
       return;

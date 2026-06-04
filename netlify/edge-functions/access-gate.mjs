@@ -145,7 +145,7 @@ function gateHtml(pathname, lang, nonce) {
       :root { color-scheme: dark; --cream: #f8f8f6; --paper: #d9d9d7; --line: rgba(248, 248, 246, .66); }
       * { box-sizing: border-box; }
       body { margin: 0; min-width: 320px; min-height: 100svh; display: grid; place-items: center; overflow-x: hidden; overflow-y: auto; background: var(--paper); color: var(--cream); font-family: "Courier New", monospace; text-transform: uppercase; }
-      body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(rgba(17, 17, 17, .18), rgba(17, 17, 17, .56)), url("/assets/photos/hero.png") center / cover; }
+      body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(rgba(17, 17, 17, .18), rgba(17, 17, 17, .56)), url("/foot.jpg") center / cover; }
       body::after { content: ""; position: fixed; inset: 0; opacity: .08; background-image: radial-gradient(circle at 15% 20%, #000 0 1px, transparent 1px), radial-gradient(circle at 78% 13%, #000 0 1px, transparent 1px); background-size: 13px 17px, 19px 23px; pointer-events: none; }
       main { position: relative; z-index: 1; width: min(760px, calc(100vw - 34px)); display: grid; justify-items: center; gap: 16px; padding: 34px 0; text-align: center; }
       h1 { margin: 8px 0 0; max-width: 720px; font-family: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive; font-size: clamp(58px, 8vw, 106px); line-height: .9; font-weight: 400; text-transform: none; }
@@ -156,11 +156,6 @@ function gateHtml(pathname, lang, nonce) {
       .logo-3d img { position: absolute; width: 128px; filter: invert(1); opacity: 0; }
       .logo-3d.is-fallback img { opacity: 1; }
       .logo-3d.is-fallback canvas { display: none; }
-      .date { font-weight: 700; color: var(--cream); }
-      .countdown { width: min(520px, 100%); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 10px 0 6px; }
-      .unit { min-height: 76px; display: grid; place-items: center; gap: 2px; border: 1px solid var(--line); background: rgba(17, 17, 17, .24); }
-      .unit strong { font-size: 26px; line-height: 1; }
-      .unit span { font-size: 10px; }
       form { width: min(430px, 100%); display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
       label { display: grid; gap: 8px; text-align: left; font-size: 12px; }
       input, button { min-height: 48px; border: 1px solid transparent; border-radius: 0; font: inherit; }
@@ -170,7 +165,7 @@ function gateHtml(pathname, lang, nonce) {
       .message { grid-column: 1 / -1; min-height: 22px; color: rgba(247, 243, 236, .9); font-size: 12px; text-align: left; }
       .newsletter { margin-top: 4px; }
       .is-arabic p, .is-arabic label, .is-arabic .message { unicode-bidi: plaintext; }
-      @media (max-width: 560px) { .countdown { grid-template-columns: repeat(2, 1fr); } form { grid-template-columns: 1fr; } h1 { font-size: 58px; } }
+      @media (max-width: 560px) { form { grid-template-columns: 1fr; } h1 { font-size: 58px; } }
     </style>
   </head>
   <body>
@@ -179,15 +174,8 @@ function gateHtml(pathname, lang, nonce) {
         <canvas width="300" height="220"></canvas>
         <img src="/Lantso_text.svg" alt="">
       </div>
-      <p class="date">06 / 06 / 2026</p>
       <h1>${copy.title}</h1>
       <p>${escapeHtml(copy.intro)}</p>
-      <div class="countdown" aria-label="${escapeHtml(copy.countdown)}">
-        <div class="unit"><strong data-countdown="days">00</strong><span>${escapeHtml(copy.days)}</span></div>
-        <div class="unit"><strong data-countdown="hours">00</strong><span>${escapeHtml(copy.hours)}</span></div>
-        <div class="unit"><strong data-countdown="minutes">00</strong><span>${escapeHtml(copy.minutes)}</span></div>
-        <div class="unit"><strong data-countdown="seconds">00</strong><span>${escapeHtml(copy.seconds)}</span></div>
-      </div>
       <form data-access-form>
         <label>${escapeHtml(copy.password)}<input name="password" type="password" autocomplete="current-password" required></label>
         <button type="submit">${escapeHtml(copy.enter)}</button>
@@ -200,9 +188,8 @@ function gateHtml(pathname, lang, nonce) {
       </form>
     </main>
     <script type="module" nonce="${escapeHtml(nonce)}">
-      import { initRotatingLogos } from "/logo-3d.mjs?v=20260604c";
-      initRotatingLogos();
-      const launch = new Date("2026-06-06T00:00:00+02:00").getTime();
+      import { initRotatingLogos } from "/logo-3d.mjs?v=20260604d";
+      initRotatingLogos("[data-rotating-logo]", { autoSpeed: 0.00024 });
       const returnPath = ${scriptJson(pathname || "/")};
       const copy = ${scriptJson({
         checking: copy.checking,
@@ -214,21 +201,6 @@ function gateHtml(pathname, lang, nonce) {
       })};
       const accessForm = document.querySelector("[data-access-form]");
       const newsletterForm = document.querySelector("[data-newsletter-form]");
-      function tick() {
-        const diff = Math.max(0, launch - Date.now());
-        const seconds = Math.floor(diff / 1000);
-        const parts = {
-          days: Math.floor(seconds / 86400),
-          hours: Math.floor((seconds % 86400) / 3600),
-          minutes: Math.floor((seconds % 3600) / 60),
-          seconds: seconds % 60
-        };
-        Object.entries(parts).forEach(([key, value]) => {
-          document.querySelector('[data-countdown="' + key + '"]').textContent = String(value).padStart(2, "0");
-        });
-      }
-      tick();
-      setInterval(tick, 1000);
       accessForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const message = document.querySelector("[data-access-message]");
