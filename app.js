@@ -14,7 +14,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260606c";
+const PHOTO_VERSION = "20260606d";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -152,6 +152,26 @@ const PRODUCT_GALLERY_DETAILS = {
     ["atlas-02-white-studio-84", "Atlas 02 White jersey worn detail"]
   ]
 };
+const ARCHIVE_ITEMS = [
+  { date: "26/07/2026", title: "Ryan" },
+  { date: "26/07/2026", title: "Lorem" },
+  { date: "26/07/2026", title: "Ipsum" },
+  { date: "26/07/2026", title: "Dolor" },
+  { date: "26/07/2026", title: "Sit" },
+  { date: "26/07/2026", title: "Amet" },
+  { date: "26/07/2026", title: "Studio" },
+  { date: "26/07/2026", title: "Roots" }
+];
+const ACKNOWLEDGMENTS = [
+  "Lorem Ipsum",
+  "Dolor Sit",
+  "Amet Consectetur",
+  "Adipiscing Elit",
+  "Sed Do",
+  "Eiusmod Tempor",
+  "Incididunt Ut",
+  "Labore Et"
+];
 
 const I18N = {
   en: {
@@ -169,7 +189,8 @@ const I18N = {
       terms: "Terms & conditions",
       privacy: "Privacy policy",
       contact: "Contact",
-      locked: "Stay locked in"
+      locked: "Stay locked in",
+      archives: "Archives"
     },
     hero: {
       title: "From the Roots\nto the World",
@@ -265,6 +286,12 @@ const I18N = {
         "Only a vision. And the decision to believe it deserves to exist."
       ]
     },
+    archives: {
+      title: "Archives",
+      intro: "Photo traces from the Lantso shooting days.",
+      acknowledgments: "Acknowledgments",
+      close: "Close"
+    },
     club: {
       title: "Join the club",
       name: "Name",
@@ -328,7 +355,8 @@ const I18N = {
       terms: "Conditions générales",
       privacy: "Confidentialité",
       contact: "Contact",
-      locked: "Reste connecté"
+      locked: "Reste connecté",
+      archives: "Archives"
     },
     hero: {
       title: "From the Roots\nto the World",
@@ -424,6 +452,12 @@ const I18N = {
         "Seulement avec une vision. Et la décision de croire qu'elle mérite d'exister."
       ]
     },
+    archives: {
+      title: "Archives",
+      intro: "Traces photo des jours de shooting Lantso.",
+      acknowledgments: "Remerciements",
+      close: "Fermer"
+    },
     club: {
       title: "Join the club",
       name: "Nom",
@@ -487,7 +521,8 @@ const I18N = {
       terms: "الشروط والأحكام",
       privacy: "سياسة الخصوصية",
       contact: "تواصل",
-      locked: "ابق قريبا"
+      locked: "ابق قريبا",
+      archives: "الأرشيف"
     },
     hero: {
       title: "From the Roots\nto the World",
@@ -582,6 +617,12 @@ const I18N = {
         "لم تولد LANTSO لأن كل شيء كان جاهزا. وُلدت العلامة لأن علينا أن نقبل أن أي مغامرة كبيرة لا تبدأ باليقين.",
         "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
       ]
+    },
+    archives: {
+      title: "الأرشيف",
+      intro: "آثار مصورة من أيام تصوير Lantso.",
+      acknowledgments: "الشكر",
+      close: "إغلاق"
     },
     club: {
       title: "Join the club",
@@ -717,6 +758,7 @@ function route() {
   if (active === "/info") return { name: "info" };
   if (active === "/legal") return { name: "legal" };
   if (active === "/roots") return { name: "roots" };
+  if (active === "/archives") return { name: "archives" };
   if (active === "/success") return { name: "success" };
   if (active === "/cancel") return { name: "cancel" };
   return { name: "home" };
@@ -742,6 +784,7 @@ function pageMeta(current = route()) {
       info: ["Shipping, Returns and FAQ | Lantso", "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys."],
       legal: ["Legal and Contact | Lantso", "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys."],
       roots: ["Discover the Roots | Lantso", "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world."],
+      archives: ["Archives | Lantso", "Minimal photo archive from Lantso shooting days and brand acknowledgments."],
       success: ["Order Received | Lantso", "Lantso order confirmation."],
       cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
     },
@@ -751,6 +794,7 @@ function pageMeta(current = route()) {
       info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso."],
       legal: ["Mentions légales et contact | Lantso", "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso."],
       roots: ["Découvrir les Roots | Lantso", "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
+      archives: ["Archives | Lantso", "Archive photo minimaliste des jours de shooting Lantso et remerciements de la marque."],
       success: ["Commande reçue | Lantso", "Confirmation de commande Lantso."],
       cancel: ["Paiement annulé | Lantso", "Paiement Lantso annulé."]
     },
@@ -760,6 +804,7 @@ function pageMeta(current = route()) {
       info: ["الشحن والإرجاع والأسئلة | Lantso", "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان Lantso المغربية المحدودة."],
       legal: ["القانوني والتواصل | Lantso", "الشروط والخصوصية ومعلومات التواصل لشراء قمصان Lantso المغربية المحدودة."],
       roots: ["اكتشف الجذور | Lantso", "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."],
+      archives: ["الأرشيف | Lantso", "أرشيف صور بسيط من أيام تصوير Lantso وقائمة شكر العلامة."],
       success: ["تم استلام الطلب | Lantso", "تأكيد طلب Lantso."],
       cancel: ["تم إلغاء الدفع | Lantso", "تم إلغاء دفع Lantso."]
     }
@@ -767,9 +812,10 @@ function pageMeta(current = route()) {
   const copy = localizedMeta[state.lang] || localizedMeta.en;
   const pages = {
     shop: { title: copy.shop[0], description: copy.shop[1], path: "/shop", image: "/assets/photos/fallback/hero.jpg", schema: collectionSchema() },
-    info: { title: copy.info[0], description: copy.info[1], path: "/info", image: "/assets/photos/fallback/story.jpg", schema: faqSchema() },
-    legal: { title: copy.legal[0], description: copy.legal[1], path: "/legal", image: "/assets/photos/fallback/story.jpg", schema: organizationSchema() },
-    roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/fallback/story.jpg", schema: organizationSchema() },
+    info: { title: copy.info[0], description: copy.info[1], path: "/info", image: "/assets/photos/fallback/hero.jpg", schema: faqSchema() },
+    legal: { title: copy.legal[0], description: copy.legal[1], path: "/legal", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema() },
+    roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/fallback/origin-1.jpg", schema: organizationSchema() },
+    archives: { title: copy.archives[0], description: copy.archives[1], path: "/archives", image: "/assets/photos/fallback/origin-2.jpg", schema: organizationSchema() },
     success: { title: copy.success[0], description: copy.success[1], path: "/success", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema(), robots: "noindex, nofollow" },
     cancel: { title: copy.cancel[0], description: copy.cancel[1], path: "/cancel", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema(), robots: "noindex, nofollow" }
   };
@@ -1190,7 +1236,7 @@ function visualFor(label) {
     return fallbackPhoto("1998-4", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
   }
   if (key.includes("origin") || key.includes("pencil") || key.includes("chapter")) {
-    return photo("story", "campaign-visual", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085);
+    return photo("origin-1", "campaign-visual", "Lantso origin shooting image", 1080, 1350);
   }
   return photo("hero", "hero-visual", "Lantso Moroccan jersey campaign in a Casablanca street", 1672, 941, "eager");
 }
@@ -1268,6 +1314,7 @@ function footer() {
         <h3>${t("nav.locked")}</h3>
         <div class="social-row">
           <a href="${SOCIAL_LINKS.instagram}" rel="noreferrer" target="_blank" aria-label="Instagram">INSTAGRAM</a>
+          <a href="${localizedPath("/archives")}" data-link>${t("nav.archives")}</a>
         </div>
       </div>
       <div class="payments">
@@ -1550,24 +1597,82 @@ function legalPage() {
 }
 
 function rootsPage() {
-  const paragraphs = t("roots.body");
+  const paragraphs = normalizeParagraphs(t("roots.body"));
   return `
     <div class="page-shell">
       ${breadcrumb(t("hero.discoverRoots"))}
       <section class="roots-layout">
-        <article class="roots-section">
-          <h1>${t("roots.title").replace("\n", "<br>")}</h1>
-          <div class="prose">
-            ${(Array.isArray(paragraphs) ? paragraphs : [paragraphs]).map((body) => `<p>${escapeHtml(body)}</p>`).join("")}
+        <article class="roots-story">
+          <div class="roots-copy roots-copy--intro">
+            <h1>${t("roots.title").replace("\n", "<br>")}</h1>
+            <div class="prose">${paragraphsHtml(paragraphs.slice(0, 5))}</div>
           </div>
-        </article>
-        <article class="split-band">
-          ${placeholder("Pencil sketch one")}
-          ${placeholder("Pencil sketch two")}
+          <div class="roots-image roots-image--right">
+            ${visualFrame(photo("origin-1", "campaign-visual", "Lantso origin shooting portrait", 1080, 1350), "Origin image one")}
+          </div>
+          <div class="roots-image roots-image--left">
+            ${visualFrame(photo("origin-2", "campaign-visual", "Lantso origin shooting detail", 1080, 1350), "Origin image two")}
+          </div>
+          <div class="roots-copy roots-copy--rest">
+            <div class="prose">${paragraphsHtml(paragraphs.slice(5))}</div>
+          </div>
         </article>
       </section>
       ${footer()}
     </div>
+  `;
+}
+
+function normalizeParagraphs(value) {
+  return Array.isArray(value) ? value : [value];
+}
+
+function paragraphsHtml(paragraphs) {
+  return paragraphs.map((body) => `<p>${escapeHtml(body)}</p>`).join("");
+}
+
+function archivesPage() {
+  return `
+    <div class="page-shell">
+      ${breadcrumb(t("nav.archives"))}
+      <section class="archive-page">
+        <div class="archive-head">
+          <h1>${t("archives.title")}</h1>
+          <p>${t("archives.intro")}</p>
+        </div>
+        <div class="archive-grid">
+          ${ARCHIVE_ITEMS.map((item, index) => archiveCard(item, index)).join("")}
+        </div>
+        <section class="acknowledgments">
+          <h2>${t("archives.acknowledgments")}</h2>
+          <ul>
+            ${ACKNOWLEDGMENTS.map((name) => `<li>${escapeHtml(name)}</li>`).join("")}
+          </ul>
+        </section>
+      </section>
+      ${archiveDialog()}
+      ${footer()}
+    </div>
+  `;
+}
+
+function archiveCard(item, index) {
+  const label = `${item.date} - ${item.title}`;
+  return `
+    <article class="archive-card">
+      <button class="archive-thumb" type="button" data-archive-open="${index}" aria-label="${escapeHtml(label)}"></button>
+      <p>${escapeHtml(label)}</p>
+    </article>
+  `;
+}
+
+function archiveDialog() {
+  return `
+    <dialog class="archive-modal" data-archive-modal>
+      <button class="modal-close" type="button" data-archive-close aria-label="${t("archives.close")}">×</button>
+      <div class="archive-modal-visual" aria-hidden="true"></div>
+      <p data-archive-caption></p>
+    </dialog>
   `;
 }
 
@@ -1650,6 +1755,7 @@ function render(options = {}) {
   if (current.name === "info") renderMarkup(app, `<div class="page">${infoPage()}</div>`);
   if (current.name === "legal") renderMarkup(app, `<div class="page">${legalPage()}</div>`);
   if (current.name === "roots") renderMarkup(app, `<div class="page">${rootsPage()}</div>`);
+  if (current.name === "archives") renderMarkup(app, `<div class="page">${archivesPage()}</div>`);
   if (current.name === "success") renderMarkup(app, `<div class="page">${noticePage("success")}</div>`);
   if (current.name === "cancel") renderMarkup(app, `<div class="page">${noticePage("cancel")}</div>`);
   bindPageEvents();
@@ -1771,6 +1877,24 @@ function bindPageEvents() {
       calculator.querySelector("[data-calc-result]").textContent = `${result.zone.label[state.lang] || result.zone.label.en}: ${formatStoreMoney(result.amount, state.shippingCountry)} · ${result.zone.eta[state.lang] || result.zone.eta.en}`;
       renderCart();
     });
+  }
+
+  const archiveModal = app.querySelector("[data-archive-modal]");
+  if (archiveModal) {
+    const caption = archiveModal.querySelector("[data-archive-caption]");
+    app.querySelectorAll("[data-archive-open]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const item = ARCHIVE_ITEMS[Number(button.dataset.archiveOpen)];
+        caption.textContent = item ? `${item.date} - ${item.title}` : "";
+        archiveModal.showModal();
+        document.body.classList.add("modal-open");
+      });
+    });
+    archiveModal.querySelector("[data-archive-close]")?.addEventListener("click", () => archiveModal.close());
+    archiveModal.addEventListener("click", (event) => {
+      if (event.target === archiveModal) archiveModal.close();
+    });
+    archiveModal.addEventListener("close", () => document.body.classList.remove("modal-open"));
   }
 
   const contactForm = app.querySelector("[data-contact-form]");

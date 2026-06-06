@@ -419,6 +419,8 @@ body.is-scrolled .site-header::before {
 .info-section,
 .legal-section,
 .roots-section,
+.roots-story,
+.archive-page,
 .site-footer,
 .notice-page {
   background-color: var(--white);
@@ -831,10 +833,167 @@ body.is-scrolled .site-header::before {
 .legal-section h1,
 .legal-section h2,
 .roots-section h1,
-.roots-section h2 {
+.roots-section h2,
+.roots-story h1,
+.archive-head h1,
+.acknowledgments h2 {
   margin: 0;
   font-size: clamp(24px, 3vw, 42px);
   line-height: 1.12;
+}
+
+.roots-story {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 42px 34px;
+  padding: 72px 8vw 86px;
+  border-bottom: 1px solid var(--line);
+}
+
+.roots-copy--intro {
+  grid-column: 1 / 8;
+  display: grid;
+  align-content: start;
+  gap: 34px;
+}
+
+.roots-copy--rest {
+  grid-column: 5 / 13;
+  align-self: center;
+}
+
+.roots-image--right {
+  grid-column: 8 / 13;
+  justify-self: end;
+  width: min(100%, 430px);
+  padding-top: 26px;
+}
+
+.roots-image--left {
+  grid-column: 1 / 5;
+  justify-self: start;
+  width: min(100%, 360px);
+  margin-top: -20px;
+}
+
+.roots-image .photo-frame {
+  aspect-ratio: 4 / 5;
+}
+
+.archive-page {
+  display: grid;
+  gap: 52px;
+  padding: 64px 8vw 78px;
+  border-bottom: 1px solid var(--line);
+}
+
+.archive-head {
+  display: grid;
+  grid-template-columns: 0.34fr minmax(0, 0.66fr);
+  gap: 36px;
+  align-items: end;
+}
+
+.archive-head p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+  text-transform: none;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.archive-card {
+  display: grid;
+  gap: 10px;
+}
+
+.archive-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: none;
+}
+
+.archive-thumb {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--line);
+  padding: 0;
+  background: #050505;
+}
+
+.archive-thumb:hover {
+  background: #111111;
+}
+
+.acknowledgments {
+  display: grid;
+  grid-template-columns: 0.34fr minmax(0, 0.66fr);
+  gap: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.acknowledgments ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  line-height: 1.6;
+  text-transform: none;
+}
+
+.archive-modal {
+  width: min(560px, calc(100vw - 28px));
+  border: 1px solid rgba(248, 248, 246, 0.34);
+  padding: 18px;
+  background: #050505;
+  color: var(--white);
+}
+
+.archive-modal[open] {
+  display: grid;
+}
+
+.archive-modal:not([open]) {
+  display: none;
+}
+
+.archive-modal::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.archive-modal .modal-close {
+  justify-self: end;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(248, 248, 246, 0.42);
+  background: transparent;
+  color: var(--white);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.archive-modal-visual {
+  aspect-ratio: 9 / 16;
+  margin-top: 10px;
+  border: 1px solid rgba(248, 248, 246, 0.18);
+  background: #000000;
+}
+
+.archive-modal p {
+  margin: 14px 0 0;
+  color: rgba(248, 248, 246, 0.82);
+  font-size: 12px;
+  text-transform: none;
 }
 
 .prose {
@@ -1472,9 +1631,12 @@ textarea {
   .origin-band,
   .product-detail,
   .site-footer,
+  .archive-head,
+  .acknowledgments,
   .info-section,
   .legal-section,
-  .roots-section {
+  .roots-section,
+  .roots-story {
     grid-template-columns: 1fr;
   }
 
@@ -1638,6 +1800,43 @@ textarea {
   .roots-section {
     padding: 46px 24px;
     gap: 24px;
+  }
+
+  .roots-story {
+    padding: 46px 24px 56px;
+    gap: 26px;
+  }
+
+  .roots-copy--intro,
+  .roots-copy--rest,
+  .roots-image--right,
+  .roots-image--left {
+    grid-column: auto;
+  }
+
+  .roots-image--right,
+  .roots-image--left {
+    width: min(78vw, 360px);
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .roots-image--right {
+    justify-self: end;
+  }
+
+  .archive-page {
+    padding: 46px 24px 56px;
+    gap: 36px;
+  }
+
+  .archive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .acknowledgments ul {
+    grid-template-columns: 1fr;
   }
 
   .cookie-notice {

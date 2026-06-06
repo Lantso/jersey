@@ -7,12 +7,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
-const PHOTO_VERSION = "20260606c";
+const PHOTO_VERSION = "20260606d";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
+const ARCHIVE_ITEMS = [
+  { date: "26/07/2026", title: "Ryan" },
+  { date: "26/07/2026", title: "Lorem" },
+  { date: "26/07/2026", title: "Ipsum" },
+  { date: "26/07/2026", title: "Dolor" },
+  { date: "26/07/2026", title: "Sit" },
+  { date: "26/07/2026", title: "Amet" },
+  { date: "26/07/2026", title: "Studio" },
+  { date: "26/07/2026", title: "Roots" }
+];
+const ACKNOWLEDGMENTS = ["Lorem Ipsum", "Dolor Sit", "Amet Consectetur", "Adipiscing Elit", "Sed Do", "Eiusmod Tempor", "Incididunt Ut", "Labore Et"];
 
 const COPY = {
   homeTitle: {
@@ -137,6 +148,19 @@ const COPY = {
       "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
     ]
   },
+  archivesTitle: { en: "Archives | Lantso", fr: "Archives | Lantso", ar: "الأرشيف | Lantso" },
+  archivesDescription: {
+    en: "Minimal photo archive from Lantso shooting days and brand acknowledgments.",
+    fr: "Archive photo minimaliste des jours de shooting Lantso et remerciements de la marque.",
+    ar: "أرشيف صور بسيط من أيام تصوير Lantso وقائمة شكر العلامة."
+  },
+  archivesHeading: { en: "Archives", fr: "Archives", ar: "الأرشيف" },
+  archivesIntro: {
+    en: "Photo traces from the Lantso shooting days.",
+    fr: "Traces photo des jours de shooting Lantso.",
+    ar: "آثار مصورة من أيام تصوير Lantso."
+  },
+  acknowledgments: { en: "Acknowledgments", fr: "Remerciements", ar: "الشكر" },
   successTitle: { en: "Order Received | Lantso", fr: "Commande reçue | Lantso", ar: "تم استلام الطلب | Lantso" },
   successBody: {
     en: "Payment is complete. You will receive the delivery follow-up by email.",
@@ -177,7 +201,7 @@ const routes = [
     path: "/info",
     title: "Shipping, Returns and FAQ | Lantso",
     description: "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys.",
-    image: "/assets/photos/fallback/story.jpg",
+    image: "/assets/photos/fallback/hero.jpg",
     body: infoBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), faqSchema(lang)]
   },
@@ -185,7 +209,7 @@ const routes = [
     path: "/legal",
     title: "Legal and Contact | Lantso",
     description: "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys.",
-    image: "/assets/photos/fallback/story.jpg",
+    image: "/assets/photos/fallback/hero.jpg",
     body: legalBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   },
@@ -193,8 +217,16 @@ const routes = [
     path: "/roots",
     title: "Discover the Roots | Lantso",
     description: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
-    image: "/assets/photos/fallback/story.jpg",
+    image: "/assets/photos/fallback/origin-1.jpg",
     body: rootsBody,
+    schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
+  },
+  {
+    path: "/archives",
+    title: "Archives | Lantso",
+    description: "Minimal photo archive from Lantso shooting days and brand acknowledgments.",
+    image: "/assets/photos/fallback/origin-2.jpg",
+    body: archivesBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   },
   {
@@ -323,6 +355,7 @@ function routeTitle(route, lang = DEFAULT_LANG) {
   if (route.path === "/info") return text("infoTitle", lang);
   if (route.path === "/legal") return text("legalTitle", lang);
   if (route.path === "/roots") return text("rootsTitle", lang);
+  if (route.path === "/archives") return text("archivesTitle", lang);
   if (route.path === "/success") return text("successTitle", lang);
   if (route.path === "/cancel") return text("cancelTitle", lang);
   return route.title;
@@ -340,6 +373,7 @@ function routeDescription(route, lang = DEFAULT_LANG) {
   if (route.path === "/info") return text("infoDescription", lang);
   if (route.path === "/legal") return text("legalDescription", lang);
   if (route.path === "/roots") return text("rootsDescription", lang);
+  if (route.path === "/archives") return text("archivesDescription", lang);
   if (route.path === "/success") return text("successBody", lang);
   if (route.path === "/cancel") return text("cancelBody", lang);
   return route.description;
@@ -423,13 +457,48 @@ function legalBody(lang = DEFAULT_LANG) {
 
 function rootsBody(lang = DEFAULT_LANG) {
   const paragraphs = text("rootsParagraphs", lang);
+  const list = Array.isArray(paragraphs) ? paragraphs : [paragraphs];
   return `
-        <section class="seo-section">
-          ${pictureHtml("story", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085, "100vw")}
-          <h1>${escapeHtml(text("rootsHeading", lang))}</h1>
-          ${(Array.isArray(paragraphs) ? paragraphs : [paragraphs]).map((body) => `<p>${escapeHtml(body)}</p>`).join("")}
+        <section class="roots-layout">
+          <article class="roots-story">
+            <div class="roots-copy roots-copy--intro">
+              <h1>${escapeHtml(text("rootsHeading", lang))}</h1>
+              <div class="prose">${paragraphsHtml(list.slice(0, 5))}</div>
+            </div>
+            <div class="roots-image roots-image--right">
+              <figure class="photo-frame campaign-visual">${pictureHtml("origin-1", "Lantso origin shooting portrait", 1080, 1350, "(max-width: 760px) 78vw, 34vw")}</figure>
+            </div>
+            <div class="roots-image roots-image--left">
+              <figure class="photo-frame campaign-visual">${pictureHtml("origin-2", "Lantso origin shooting detail", 1080, 1350, "(max-width: 760px) 78vw, 28vw")}</figure>
+            </div>
+            <div class="roots-copy roots-copy--rest">
+              <div class="prose">${paragraphsHtml(list.slice(5))}</div>
+            </div>
+          </article>
         </section>
       `;
+}
+
+function archivesBody(lang = DEFAULT_LANG) {
+  return `
+        <section class="archive-page">
+          <div class="archive-head">
+            <h1>${escapeHtml(text("archivesHeading", lang))}</h1>
+            <p>${escapeHtml(text("archivesIntro", lang))}</p>
+          </div>
+          <div class="archive-grid">
+            ${ARCHIVE_ITEMS.map((item) => `<article class="archive-card"><div class="archive-thumb"></div><p>${escapeHtml(`${item.date} - ${item.title}`)}</p></article>`).join("")}
+          </div>
+          <section class="acknowledgments">
+            <h2>${escapeHtml(text("acknowledgments", lang))}</h2>
+            <ul>${ACKNOWLEDGMENTS.map((name) => `<li>${escapeHtml(name)}</li>`).join("")}</ul>
+          </section>
+        </section>
+      `;
+}
+
+function paragraphsHtml(paragraphs) {
+  return paragraphs.map((body) => `<p>${escapeHtml(body)}</p>`).join("");
 }
 
 function noticeBody(title, body, lang = DEFAULT_LANG) {

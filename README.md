@@ -34,6 +34,12 @@ Netlify publishes `dist/`.
 - `netlify/edge-functions/access-gate.mjs` = private gate
 - `scripts/prerender.mjs` = seo pages
 
+## pages
+
+- `/roots` = origin story + 2 images
+- `/archives` = photo archive placeholders + thanks list
+- archive cards / names live in `app.js`
+
 ## data
 
 - Stripe checkout takes payment.
