@@ -137,7 +137,7 @@ function gateHtml(pathname, lang, nonce) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <title>${escapeHtml(copy.documentTitle)}</title>
-    <link rel="icon" href="/lantso_logo.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/brand/lantso-logo.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Luxurious+Script&display=swap" rel="stylesheet">
@@ -145,7 +145,7 @@ function gateHtml(pathname, lang, nonce) {
       :root { color-scheme: dark; --cream: #f8f8f6; --paper: #d9d9d7; --line: rgba(248, 248, 246, .66); }
       * { box-sizing: border-box; }
       body { margin: 0; min-width: 320px; height: 100svh; min-height: 100svh; display: grid; place-items: center; overflow: hidden; background: var(--paper); color: var(--cream); font-family: "Courier New", monospace; text-transform: uppercase; }
-      body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(rgba(17, 17, 17, .18), rgba(17, 17, 17, .56)), url("/foot.jpg") center / cover; }
+      body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(rgba(17, 17, 17, .18), rgba(17, 17, 17, .56)), url("/assets/photos/gate/foot.jpg") center / cover; }
       body::after { content: ""; position: fixed; inset: 0; opacity: .08; background-image: radial-gradient(circle at 15% 20%, #000 0 1px, transparent 1px), radial-gradient(circle at 78% 13%, #000 0 1px, transparent 1px); background-size: 13px 17px, 19px 23px; pointer-events: none; }
       main { position: relative; z-index: 1; width: min(760px, calc(100vw - 34px)); display: grid; justify-items: center; gap: 14px; padding: 34px 0 calc(34px + env(safe-area-inset-bottom)); text-align: center; }
       h1 { margin: 8px 0 0; max-width: 720px; font-family: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive; font-size: clamp(58px, 8vw, 106px); line-height: .9; font-weight: 400; text-transform: none; }
@@ -165,7 +165,7 @@ function gateHtml(pathname, lang, nonce) {
   </head>
   <body>
     <main>
-      <img class="gate-logo" src="/Lantso_text.svg" alt="Lantso">
+      <img class="gate-logo" src="/assets/brand/lantso-text.svg" alt="Lantso">
       <h1>${copy.title}</h1>
       <p>${escapeHtml(copy.intro)}</p>
       <form data-access-form>

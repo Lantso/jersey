@@ -59,6 +59,5 @@ function connectBlobs(event) {
   try {
     if (event.blobs) connectLambda(event);
   } catch {
-    // Blobs will fall back locally when Netlify does not provide a context.
   }
 }

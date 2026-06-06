@@ -207,8 +207,8 @@ body.is-scrolled .site-header::before {
   height: 38px;
   margin-top: -8px;
   background: #ffffff;
-  -webkit-mask: url("/Lantso_text.svg") center / contain no-repeat;
-  mask: url("/Lantso_text.svg") center / contain no-repeat;
+  -webkit-mask: url("/assets/brand/lantso-text.svg") center / contain no-repeat;
+  mask: url("/assets/brand/lantso-text.svg") center / contain no-repeat;
 }
 
 .brand-word img {

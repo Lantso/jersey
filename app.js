@@ -1147,7 +1147,7 @@ function gatePage() {
     <section class="gate-page">
       <figure class="gate-media" aria-hidden="true">
         <picture>
-          <img src="/foot.jpg" alt="" width="6720" height="4480" decoding="async" fetchpriority="high">
+          <img src="/assets/photos/gate/foot.jpg" alt="" width="6720" height="4480" decoding="async" fetchpriority="high">
         </picture>
       </figure>
       <div class="gate-language" aria-label="Language">
@@ -1156,7 +1156,7 @@ function gatePage() {
           .join("")}
       </div>
       <div class="gate-content">
-        <img class="gate-logo" src="/Lantso_text.svg" alt="Lantso">
+        <img class="gate-logo" src="/assets/brand/lantso-text.svg" alt="Lantso">
         <h1 class="script-title">${t("gate.title").replace("\n", "<br>")}</h1>
         <p class="gate-intro">${t("gate.intro")}</p>
         <form class="gate-form" data-access-form>
@@ -1193,7 +1193,7 @@ function footer() {
   return `
     <footer class="site-footer">
       <div class="footer-mark">
-        <img class="mark-symbol" src="/lantso_logo.svg" alt="Lantso">
+        <img class="mark-symbol" src="/assets/brand/lantso-logo.svg" alt="Lantso">
         <span>${t("footer.rights").replace("\n", "<br>")}</span>
       </div>
       ${footerColumn(t("nav.shop"), [
@@ -2164,7 +2164,6 @@ async function refreshInventory() {
     render({ scroll: false });
     renderCart();
   } catch {
-    // Static catalog stock remains as the fallback if the live endpoint is unavailable.
   }
 }
 
@@ -2187,7 +2186,6 @@ async function submitNetlifyForm(name, payload) {
     });
     if (response.ok) return { ok: true, data: {} };
   } catch {
-    // API storage remains the source of truth when static form capture is unavailable locally.
   }
   return { ok: false, status: 0, data: {} };
 }
