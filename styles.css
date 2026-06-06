@@ -10,6 +10,7 @@
   --mono: "Atkinson Hyperlegible Mono", "Courier New", monospace;
   --script: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive;
   --logo-script: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive;
+  --white-texture: linear-gradient(rgba(248, 248, 246, 0.82), rgba(248, 248, 246, 0.82)), url("/assets/textures/grainy.jpg");
 }
 
 * {
@@ -181,34 +182,22 @@ body.is-scrolled .site-header::before {
   height: 18px;
   overflow: hidden;
   border: 1px solid rgba(248, 248, 246, 0.74);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.1);
 }
 
 .flag-icon--fr {
-  background: linear-gradient(90deg, #002395 0 33.333%, #ffffff 33.333% 66.666%, #ed2939 66.666% 100%);
+  background-image: url("/assets/flags/fr.jpg");
 }
 
 .flag-icon--ma {
-  background: #c1272d;
+  background-image: url("/assets/flags/ma.jpg");
 }
 
-.flag-icon--ma::before {
-  content: "";
-  position: absolute;
-  inset: 3px 6px;
-  background: #006233;
-  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 56%, 79% 91%, 50% 69%, 21% 91%, 32% 56%, 2% 35%, 39% 35%);
-}
-
-.flag-icon--gb {
-  background:
-    linear-gradient(0deg, transparent 38%, #ffffff 38% 62%, transparent 62%),
-    linear-gradient(90deg, transparent 42%, #ffffff 42% 58%, transparent 58%),
-    linear-gradient(0deg, transparent 44%, #c8102e 44% 56%, transparent 56%),
-    linear-gradient(90deg, transparent 46%, #c8102e 46% 54%, transparent 54%),
-    linear-gradient(32deg, transparent 43%, #ffffff 43% 48%, #c8102e 48% 52%, #ffffff 52% 57%, transparent 57%),
-    linear-gradient(-32deg, transparent 43%, #ffffff 43% 48%, #c8102e 48% 52%, #ffffff 52% 57%, transparent 57%),
-    #012169;
+.flag-icon--uk {
+  background-image: url("/assets/flags/uk.jpg");
 }
 
 .brand-word {
@@ -412,10 +401,35 @@ body.is-scrolled .site-header::before {
   opacity: 0.48;
 }
 
+.split-band,
+.split-copy,
+.product-feature-grid,
+.page-shell,
+.breadcrumb,
+.shop-grid,
+.shop-card,
+.origin-band,
+.origin-copy,
+.product-detail,
+.product-gallery,
+.product-panel,
+.info-layout,
+.legal-layout,
+.roots-layout,
+.info-section,
+.legal-section,
+.roots-section,
+.site-footer,
+.notice-page {
+  background-color: var(--white);
+  background-image: var(--white-texture);
+  background-repeat: repeat;
+  background-size: auto, 940px auto;
+}
+
 .split-band {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
@@ -429,7 +443,6 @@ body.is-scrolled .site-header::before {
   justify-content: center;
   gap: 36px;
   padding: 66px 8.5vw;
-  background: var(--white);
   border-right: 1px solid var(--line);
 }
 
@@ -462,7 +475,6 @@ body.is-scrolled .site-header::before {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 72px;
   padding: 46px 8.8vw 48px;
-  background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
@@ -538,7 +550,6 @@ body.is-scrolled .site-header::before {
 
 .page-shell {
   padding-top: 72px;
-  background: var(--white);
 }
 
 .breadcrumb {
@@ -547,7 +558,6 @@ body.is-scrolled .site-header::before {
   gap: 20px;
   min-height: 160px;
   padding: 0 8vw;
-  background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
@@ -563,7 +573,6 @@ body.is-scrolled .site-header::before {
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
@@ -652,7 +661,6 @@ body.is-scrolled .site-header::before {
 .origin-band {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
-  background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
@@ -674,7 +682,6 @@ body.is-scrolled .site-header::before {
 .product-detail {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
-  background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
@@ -800,7 +807,6 @@ body.is-scrolled .site-header::before {
 .legal-layout,
 .roots-layout {
   display: grid;
-  background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
@@ -904,7 +910,6 @@ textarea {
   grid-template-columns: 1.25fr repeat(4, 1fr);
   gap: 48px;
   padding: 64px 8.5vw 38px;
-  background: var(--white);
   border-top: 1px solid var(--line);
 }
 
@@ -1354,7 +1359,6 @@ textarea {
   display: grid;
   place-items: center;
   padding: 160px 24px 80px;
-  background: var(--white);
   text-align: center;
 }
 

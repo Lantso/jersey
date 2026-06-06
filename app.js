@@ -1103,7 +1103,7 @@ function fallbackPhoto(file, className, alt, width, height, loading = "lazy") {
 }
 
 function languageFlag(lang) {
-  const flag = lang === "fr" ? "fr" : lang === "ar" ? "ma" : "gb";
+  const flag = lang === "fr" ? "fr" : lang === "ar" ? "ma" : "uk";
   return `<span class="flag-icon flag-icon--${flag}" aria-hidden="true"></span>`;
 }
 
