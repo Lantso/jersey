@@ -8,7 +8,7 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260606a";
+} from "./catalog.mjs?v=20260606b";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"

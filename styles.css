@@ -10,7 +10,7 @@
   --mono: "Atkinson Hyperlegible Mono", "Courier New", monospace;
   --script: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive;
   --logo-script: "Luxurious Script", "Snell Roundhand", "Apple Chancery", cursive;
-  --white-texture: linear-gradient(rgba(248, 248, 246, 0.82), rgba(248, 248, 246, 0.82)), url("/assets/textures/grainy.jpg");
+  --white-texture: linear-gradient(rgba(248, 248, 246, 0.82), rgba(248, 248, 246, 0.82)), url("/assets/textures/cardboard-texture.jpg");
 }
 
 * {
