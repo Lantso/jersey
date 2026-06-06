@@ -148,9 +148,9 @@ export const SHIPPING_ZONES = [
       { maxWeight: 5000, amount: 1359 }
     ],
     eta: {
-      en: "2-4 business days",
-      fr: "2 à 4 jours ouvrés",
-      ar: "2 إلى 4 أيام عمل"
+      en: "3 business days",
+      fr: "3 jours ouvrés",
+      ar: "3 أيام عمل"
     }
   },
   {
@@ -197,9 +197,9 @@ export const SHIPPING_ZONES = [
       { maxWeight: 10000, amount: 4799 }
     ],
     eta: {
-      en: "4-7 business days",
-      fr: "4 à 7 jours ouvrés",
-      ar: "4 إلى 7 أيام عمل"
+      en: "6-7 business days",
+      fr: "6 à 7 jours ouvrés",
+      ar: "6 إلى 7 أيام عمل"
     }
   },
   {
@@ -218,9 +218,9 @@ export const SHIPPING_ZONES = [
       { maxWeight: 10000, amount: 5799 }
     ],
     eta: {
-      en: "5-8 business days",
-      fr: "5 à 8 jours ouvrés",
-      ar: "5 إلى 8 أيام عمل"
+      en: "7-8 business days",
+      fr: "7 à 8 jours ouvrés",
+      ar: "7 إلى 8 أيام عمل"
     }
   },
   {
@@ -239,9 +239,9 @@ export const SHIPPING_ZONES = [
       { maxWeight: 10000, amount: 7599 }
     ],
     eta: {
-      en: "5-9 business days",
-      fr: "5 à 9 jours ouvrés",
-      ar: "5 إلى 9 أيام عمل"
+      en: "7-8 business days",
+      fr: "7 à 8 jours ouvrés",
+      ar: "7 إلى 8 أيام عمل"
     }
   },
   {
@@ -260,9 +260,9 @@ export const SHIPPING_ZONES = [
       { maxWeight: 10000, amount: 15799 }
     ],
     eta: {
-      en: "7-14 business days",
-      fr: "7 à 14 jours ouvrés",
-      ar: "7 إلى 14 يوم عمل"
+      en: "7-8 business days",
+      fr: "7 à 8 jours ouvrés",
+      ar: "7 إلى 8 أيام عمل"
     }
   }
 ];

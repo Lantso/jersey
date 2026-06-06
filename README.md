@@ -24,8 +24,10 @@ http://127.0.0.1:3000
 6. Netlify Blobs stores production stock reservations and paid orders. No extra database account is needed on Netlify, but the dependency must install during the Netlify build.
 7. Review `PRODUCTS`, prices, inventory, and copy in `catalog.mjs`.
 8. Review `SHIPPING_ZONES` in `catalog.mjs`. Current tiers use the 300g / 32x45x4cm parcel data and calculate a tracked home-delivery rate by country and quantity. France uses the requested launch tiers: 1 jersey `8.59€`, 2 jerseys `9.99€`, 3-4 jerseys `11.99€`, 5+ jerseys `13.59€`. EU/Switzerland, UK, Morocco, and rest-of-world use Colissimo-style weight tiers with a 1 euro buffer.
-9. Club, newsletter, and contact submissions go through `/api/club` and `/api/contact`, with Netlify Forms as a fallback. Configure Netlify email notifications to `contact@lantso.com` if you want form notifications as well.
-10. Have the business validate legal registration details, tax settings, privacy wording, and terms before taking live orders.
+9. Club/newsletter signups go through `/api/club` and are stored in Netlify Blobs under the `lantso-forms` store. The browser also mirrors them to the Netlify `club` form so you have a free Netlify Forms dashboard/export copy.
+10. Contact submissions go through `/api/contact`, are stored in Netlify Blobs, and are mirrored to the Netlify `contact` form. In Netlify, add a form submission email notification for the `contact` form to `contact@lantso.com`.
+11. For direct support emails from the API, use Resend's free tier: set `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` from a verified sending domain, and `CONTACT_TO_EMAIL=contact@lantso.com`. Set `CONTACT_EMAIL_REQUIRED=true` only if the contact form should fail whenever the direct email cannot be sent.
+12. Have the business validate legal registration details, tax settings, privacy wording, and terms before taking live orders.
 
 ## Launch Gate
 
@@ -41,11 +43,11 @@ The local server appends operational records under `data/`:
 
 - `checkout-sessions.jsonl`
 - `paid-orders.jsonl`
-- `club-profiles.jsonl`
+- `club-profiles.json`
 - `contact-messages.jsonl`
 - `inventory-state.json`
 
-For production, Netlify Blobs stores checkout reservations, inventory sold counts, paid-order records, and API-captured club/contact submissions outside the Stripe Dashboard. Netlify Forms remains available as a fallback capture path.
+For production, Netlify Blobs stores checkout reservations, inventory sold counts, paid-order records, newsletter/club profiles, and contact submissions outside the Stripe Dashboard. Netlify Forms also receives club/contact submissions for free dashboard access, CSV export, and contact email notifications.
 
 ## Inventory Safety
 

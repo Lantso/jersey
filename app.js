@@ -8,7 +8,7 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260604e";
+} from "./catalog.mjs?v=20260606a";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
@@ -227,13 +227,13 @@ const I18N = {
     legal: {
       title: "Legal & contact",
       termsBody: "Lantso sells limited edition jerseys through this storefront. Prices can be presented in the customer's local currency where Stripe supports it. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details. The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, contact contact@lantso.com.",
-      privacyBody: "Lantso collects the details needed to run the shop: contact details, delivery address, cart contents, language and access preferences, support messages, and optional newsletter consent. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and email updates when requested. To access or delete eligible data, contact contact@lantso.com.",
+      privacyBody: "Lantso collects the details needed to run the shop: contact details, delivery address, cart contents, language and access preferences, support messages, and club sign-up details. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and email updates when requested. To access or delete eligible data, contact contact@lantso.com.",
       contactBody: "For order support, sizing, press, or wholesale requests, use the form below or write to contact@lantso.com.",
       name: "Name",
       email: "Email",
       message: "Message",
       send: "Send",
-      sent: "Message saved. We will reply by email."
+      sent: "Message sent. We will reply by email."
     },
     roots: {
       title: "Before the design,\nthere was a story",
@@ -245,7 +245,6 @@ const I18N = {
       title: "Join the club",
       name: "Name",
       email: "Email",
-      newsletter: "Newsletter and early access",
       submit: "Join the list",
       success: "You are on the list.",
       error: "The profile could not be saved."
@@ -376,13 +375,13 @@ const I18N = {
     legal: {
       title: "Mentions légales & contact",
       termsBody: "Lantso vend des maillots en édition limitée via cette boutique. Les prix peuvent être présentés dans la devise locale du client lorsque Stripe la prend en charge. Les stocks sont limités et une pièce est réservée uniquement au moment où Stripe Checkout s'ouvre; la commande est confirmée après paiement réussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incomplètes. Le client doit fournir une adresse exacte et reste responsable des droits, taxes ou frais transporteur appliqués hors Union européenne. Pour le support commande : contact@lantso.com.",
-      privacyBody: "Lantso collecte les informations nécessaires au fonctionnement de la boutique : coordonnées, adresse de livraison, contenu du panier, préférences de langue et d'accès, messages support et consentement newsletter optionnel. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés. Pour accéder aux données éligibles ou demander leur suppression : contact@lantso.com.",
+      privacyBody: "Lantso collecte les informations nécessaires au fonctionnement de la boutique : coordonnées, adresse de livraison, contenu du panier, préférences de langue et d'accès, messages support et inscriptions club. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés. Pour accéder aux données éligibles ou demander leur suppression : contact@lantso.com.",
       contactBody: "Pour le support commande, les tailles, la presse ou les demandes wholesale, utilise le formulaire ci-dessous ou écris à contact@lantso.com.",
       name: "Nom",
       email: "Email",
       message: "Message",
       send: "Envoyer",
-      sent: "Message enregistré. Nous répondrons par email."
+      sent: "Message envoyé. Nous répondrons par email."
     },
     roots: {
       title: "Avant le design,\nil y avait une histoire",
@@ -394,7 +393,6 @@ const I18N = {
       title: "Join the club",
       name: "Nom",
       email: "Email",
-      newsletter: "Newsletter et accès en avance",
       submit: "Rejoindre la liste",
       success: "Tu es dans la liste.",
       error: "Le profil n'a pas pu être enregistré."
@@ -525,13 +523,13 @@ const I18N = {
     legal: {
       title: "القانوني والتواصل",
       termsBody: "تبيع Lantso قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ Lantso إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة. يتحمل العميل مسؤولية العنوان الصحيح وأي رسوم أو ضرائب استيراد أو تكاليف ناقل خارج الاتحاد الأوروبي. للدعم: contact@lantso.com.",
-      privacyBody: "تجمع Lantso البيانات الضرورية لتشغيل المتجر: بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم والموافقة الاختيارية على النشرة. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة. لطلب الوصول إلى البيانات المؤهلة أو حذفها: contact@lantso.com.",
+      privacyBody: "تجمع Lantso البيانات الضرورية لتشغيل المتجر: بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم وتسجيلات النادي. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة. لطلب الوصول إلى البيانات المؤهلة أو حذفها: contact@lantso.com.",
       contactBody: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، استخدم النموذج أدناه أو اكتب إلى contact@lantso.com.",
       name: "الاسم",
       email: "البريد الإلكتروني",
       message: "الرسالة",
       send: "إرسال",
-      sent: "تم حفظ الرسالة. سنرد عبر البريد الإلكتروني."
+      sent: "تم إرسال الرسالة. سنرد عبر البريد الإلكتروني."
     },
     roots: {
       title: "قبل التصميم،\nكانت هناك قصة",
@@ -543,7 +541,6 @@ const I18N = {
       title: "Join the club",
       name: "الاسم",
       email: "البريد الإلكتروني",
-      newsletter: "النشرة والوصول المبكر",
       submit: "انضم إلى القائمة",
       success: "أنت الآن في القائمة.",
       error: "تعذر حفظ الحساب."
@@ -633,11 +630,6 @@ const app = document.querySelector("#app");
 const drawer = document.querySelector("[data-cart-drawer]");
 const cartBody = document.querySelector("[data-cart-body]");
 const cartCount = document.querySelector("[data-cart-count]");
-const visualCartCount = document.querySelector("[data-cart-count-visual]");
-const headerNegativeLayer = document.querySelector("[data-header-negative-layer]");
-const headerLogoVisual = document.querySelector("[data-header-logo-visual]");
-const headerCartVisual = document.querySelector("[data-header-cart-visual]");
-const headerJoinVisual = document.querySelector("[data-header-join-visual]");
 const clubModal = document.querySelector("[data-club-modal]");
 const cookieNotice = document.querySelector("[data-cookie-notice]");
 let countdownTimer;
@@ -844,7 +836,6 @@ function setLanguage(lang, options = {}) {
   });
   const clubButton = document.querySelector("[data-open-club]");
   if (clubButton) clubButton.textContent = t("club.title");
-  if (headerJoinVisual) headerJoinVisual.textContent = t("club.title");
   updateCookieNotice();
   render();
   renderCart();
@@ -859,25 +850,6 @@ function updateCookieNotice() {
 
 function updateHeaderChrome() {
   updateHeaderScrollState();
-  if (!headerNegativeLayer) return;
-  const header = document.querySelector(".site-header");
-  const hidden = !header || header.hidden || document.body.classList.contains("is-gated");
-  headerNegativeLayer.hidden = hidden;
-  headerNegativeLayer.classList.toggle("is-ready", !hidden);
-  if (hidden) return;
-  syncVisualBox(headerLogoVisual, document.querySelector(".brand-word"));
-  syncVisualBox(headerCartVisual, document.querySelector(".cart-button"));
-  syncVisualBox(headerJoinVisual, document.querySelector(".join-button"));
-  headerNegativeLayer.classList.add("is-ready");
-}
-
-function syncVisualBox(visual, source) {
-  if (!(visual instanceof HTMLElement) || !(source instanceof HTMLElement)) return;
-  const rect = source.getBoundingClientRect();
-  visual.style.left = `${rect.left}px`;
-  visual.style.top = `${rect.top}px`;
-  visual.style.width = `${rect.width}px`;
-  visual.style.height = `${rect.height}px`;
 }
 
 function updateHeaderScrollState() {
@@ -1063,7 +1035,7 @@ function placeholder(label = "") {
   return `
     <figure class="photo-frame ${visual.className}" aria-label="${escapeHtml(label)}">
       <picture>
-        <source srcset="${visual.srcset}" sizes="${visual.sizes}" type="image/webp">
+        ${visual.srcset ? `<source srcset="${visual.srcset}" sizes="${visual.sizes}" type="image/webp">` : ""}
         <img src="${visual.src}" alt="${escapeHtml(alt)}" loading="${visual.loading || "lazy"}" decoding="async" fetchpriority="${visual.loading === "eager" ? "high" : "auto"}" width="${visual.width}" height="${visual.height}">
       </picture>
     </figure>
@@ -1118,6 +1090,23 @@ function photo(file, className, alt, width, height, loading = "lazy") {
   };
 }
 
+function fallbackPhoto(file, className, alt, width, height, loading = "lazy") {
+  return {
+    src: `/assets/photos/fallback/${file}.jpg`,
+    sizes: className === "hero-visual" ? "100vw" : "(max-width: 760px) 100vw, 50vw",
+    className,
+    alt,
+    width,
+    height,
+    loading
+  };
+}
+
+function languageFlag(lang) {
+  const flag = lang === "fr" ? "fr" : lang === "ar" ? "ma" : "gb";
+  return `<span class="flag-icon flag-icon--${flag}" aria-hidden="true"></span>`;
+}
+
 function visualFor(label) {
   const key = label.toLowerCase();
   if (key.includes("detail one")) {
@@ -1136,16 +1125,16 @@ function visualFor(label) {
     return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1448, 1086);
   }
   if (key.includes("campaign image one")) {
-    return photo("campaign-1", "campaign-visual", "Lantso Roots 01 Khaki jersey worn in a Moroccan interior campaign portrait", 1122, 1402);
+    return fallbackPhoto("1998-1", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
   }
   if (key.includes("campaign image two")) {
-    return photo("campaign-2", "campaign-visual", "Lantso campaign scene with two Moroccan jerseys on a rooftop", 1402, 1122);
+    return fallbackPhoto("1998-2", "campaign-visual", "Morocco and Scotland footballers competing during the 1998 World Cup", 1224, 794);
   }
   if (key.includes("campaign image three")) {
-    return photo("campaign-3", "campaign-visual", "Two children wearing Lantso Moroccan jerseys on a football pitch", 1122, 1402);
+    return fallbackPhoto("1998-3", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1224, 812);
   }
   if (key.includes("campaign image four")) {
-    return photo("campaign-4", "campaign-visual", "Lantso Atlas 02 White jersey detail with Moroccan crest and collar", 1121, 1403);
+    return fallbackPhoto("1998-4", "campaign-visual", "Moustafa Hadji of Morocco in a 1998 World Cup match", 1224, 812);
   }
   if (key.includes("origin") || key.includes("pencil") || key.includes("chapter")) {
     return photo("story", "campaign-visual", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085);
@@ -1163,7 +1152,7 @@ function gatePage() {
       </figure>
       <div class="gate-language" aria-label="Language">
         ${["en", "fr", "ar"]
-          .map((lang) => `<button class="lang-button${state.lang === lang ? " is-active" : ""}" type="button" data-gate-lang="${lang}">${lang === "en" ? "🇬🇧" : lang === "fr" ? "🇫🇷" : "🇲🇦"}</button>`)
+          .map((lang) => `<button class="lang-button${state.lang === lang ? " is-active" : ""}" type="button" data-gate-lang="${lang}">${languageFlag(lang)}</button>`)
           .join("")}
       </div>
       <div class="gate-content">
@@ -1650,7 +1639,8 @@ function bindGateEvents() {
     const response = await submitForm("club", {
       name: "Launch list",
       email,
-      newsletter: "yes"
+      newsletter: "yes",
+      source: "gate-newsletter"
     });
     setFormPending(newsletterForm, false);
     message.textContent = response.ok ? t("gate.subscribed") : t("club.error");
@@ -1739,6 +1729,7 @@ function bindPageEvents() {
       const email = normalizeEmailField(contactForm, message);
       if (!email) return;
       payload.email = email;
+      payload.source = "contact-page";
       message.textContent = t("form.processing");
       setFormPending(contactForm, true);
       const response = await submitForm("contact", payload);
@@ -1759,7 +1750,6 @@ function setFormPending(form, pending) {
 function renderCart() {
   const quantity = cartQuantity();
   cartCount.textContent = quantity;
-  if (visualCartCount) visualCartCount.textContent = quantity;
   updateHeaderChrome();
   const lines = lineItems();
   if (!lines.length) {
@@ -1989,7 +1979,7 @@ function productSchema(product) {
         },
         deliveryTime: {
           "@type": "ShippingDeliveryTime",
-          businessDays: { "@type": "QuantitativeValue", minValue: 2, maxValue: 4 }
+          businessDays: { "@type": "QuantitativeValue", minValue: 3, maxValue: 3 }
         }
       }
     }
@@ -2181,9 +2171,14 @@ async function refreshInventory() {
 async function submitForm(name, payload) {
   const endpoint = name === "contact" ? "/api/contact" : "/api/club";
   const apiResponse = await postJson(endpoint, payload);
+  const formResponse = await submitNetlifyForm(name, payload);
   if (apiResponse.ok) return apiResponse;
+  if (formResponse.ok) return formResponse;
+  return apiResponse;
+}
 
-  const body = new URLSearchParams({ "form-name": name, ...payload }).toString();
+async function submitNetlifyForm(name, payload) {
+  const body = new URLSearchParams({ "form-name": name, "bot-field": "", ...payload }).toString();
   try {
     const response = await fetch("/", {
       method: "POST",
@@ -2192,9 +2187,9 @@ async function submitForm(name, payload) {
     });
     if (response.ok) return { ok: true, data: {} };
   } catch {
-    // The API response above remains the source of the visible error.
+    // API storage remains the source of truth when static form capture is unavailable locally.
   }
-  return apiResponse;
+  return { ok: false, status: 0, data: {} };
 }
 
 async function verifyAccess(password) {
@@ -2300,7 +2295,8 @@ document.querySelector("[data-club-form]").addEventListener("submit", async (eve
   const email = normalizeEmailField(form, message);
   if (!email) return;
   payload.email = email;
-  payload.newsletter = form.newsletter.checked ? "yes" : "no";
+  payload.newsletter = "yes";
+  payload.source = "club-modal";
   message.textContent = t("form.processing");
   setFormPending(form, true);
   const response = await submitForm("club", payload);

@@ -1,6 +1,6 @@
 import { connectLambda } from "@netlify/blobs";
 import { corsHeaders, isAllowedOrigin, rateLimit, securityHeaders } from "../../lib/checkout.mjs";
-import { normalizeContactMessage, saveFormSubmission } from "../../lib/forms.mjs";
+import { normalizeContactMessage, saveFormSubmission, sendContactNotification } from "../../lib/forms.mjs";
 
 export async function handler(event) {
   connectBlobs(event);
@@ -22,7 +22,11 @@ export async function handler(event) {
 
   try {
     await saveFormSubmission("contact", normalized.record);
-    return json(200, { ok: true }, origin, allowedOrigins);
+    const notification = await sendContactNotification(normalized.record);
+    if (!notification.ok && process.env.CONTACT_EMAIL_REQUIRED === "true") {
+      return json(503, { message: "Message saved, but support email could not be sent. Contact contact@lantso.com." }, origin, allowedOrigins);
+    }
+    return json(200, { ok: true, emailed: notification.ok, emailStatus: notification.reason || notification.status || "sent" }, origin, allowedOrigins);
   } catch {
     return json(503, { message: "Message storage is temporarily unavailable. Contact contact@lantso.com." }, origin, allowedOrigins);
   }

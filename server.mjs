@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { accessCookieHeader, verifyAccessPassword } from "./lib/access.mjs";
 import { corsHeaders, createStripeCheckoutSession, isAllowedOrigin, rateLimit, securityHeaders } from "./lib/checkout.mjs";
-import { emailKey, normalizeClubProfile, normalizeContactMessage } from "./lib/forms.mjs";
+import { emailKey, normalizeClubProfile, normalizeContactMessage, sendContactNotification } from "./lib/forms.mjs";
 import { getInventorySnapshot, handleStripeCommerceEvent } from "./lib/inventory.mjs";
 import { verifyStripeSignature } from "./lib/stripe-webhook.mjs";
 
@@ -132,7 +132,11 @@ async function saveContactMessage(request, response) {
   const normalized = normalizeContactMessage(await readJson(request));
   if (!normalized.ok) return json(response, normalized.status, { message: normalized.message }, request);
   await appendJsonl("contact-messages.jsonl", normalized.record);
-  return json(response, 200, { ok: true }, request);
+  const notification = await sendContactNotification(normalized.record);
+  if (!notification.ok && process.env.CONTACT_EMAIL_REQUIRED === "true") {
+    return json(response, 503, { message: "Message saved, but support email could not be sent. Contact contact@lantso.com." }, request);
+  }
+  return json(response, 200, { ok: true, emailed: notification.ok, emailStatus: notification.reason || notification.status || "sent" }, request);
 }
 
 async function handleStripeWebhook(request, response) {

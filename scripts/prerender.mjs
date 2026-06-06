@@ -79,9 +79,9 @@ const COPY = {
     ar: "يتحمل العميل مسؤولية العنوان الصحيح وأي رسوم أو ضرائب استيراد أو تكاليف ناقل خارج الاتحاد الأوروبي. للدعم أو المقاسات أو الصحافة أو طلبات الجملة، اكتب إلى contact@lantso.com."
   },
   legalPrivacy: {
-    en: "Lantso collects contact details, delivery address, cart contents, language and access preferences, support messages, and optional newsletter consent. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and requested emails.",
-    fr: "Lantso collecte les coordonnées, l'adresse de livraison, le contenu du panier, les préférences de langue et d'accès, les messages support et le consentement newsletter optionnel. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés.",
-    ar: "تجمع Lantso بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم والموافقة الاختيارية على النشرة. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة."
+    en: "Lantso collects contact details, delivery address, cart contents, language and access preferences, support messages, and club sign-up details. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and requested emails.",
+    fr: "Lantso collecte les coordonnées, l'adresse de livraison, le contenu du panier, les préférences de langue et d'accès, les messages support et les inscriptions club. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés.",
+    ar: "تجمع Lantso بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم وتسجيلات النادي. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة."
   },
   legalSocial: {
     en: "Instagram: lantso.at.",

@@ -36,65 +36,6 @@ body.modal-open {
   overflow: hidden;
 }
 
-.header-negative-layer[hidden] {
-  display: none;
-}
-
-.header-negative-layer:not(.is-ready) .header-negative-logo,
-.header-negative-layer:not(.is-ready) .header-negative-cart,
-.header-negative-layer:not(.is-ready) .header-negative-join {
-  opacity: 0;
-}
-
-.header-negative-logo,
-.header-negative-cart,
-.header-negative-join {
-  pointer-events: none;
-  position: fixed;
-  z-index: 61;
-  mix-blend-mode: difference;
-}
-
-.header-negative-logo {
-  background: #ffffff;
-  -webkit-mask: url("/Lantso_text.svg") center / contain no-repeat;
-  mask: url("/Lantso_text.svg") center / contain no-repeat;
-}
-
-.header-negative-cart {
-  display: inline-grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  color: #ffffff;
-}
-
-.header-negative-count {
-  position: absolute;
-  right: -4px;
-  bottom: -2px;
-  display: inline-grid;
-  place-items: center;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 4px;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #000000;
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.header-negative-join {
-  color: #ffffff;
-  font-family: var(--script);
-  font-size: 24px;
-  line-height: 1;
-  text-transform: none;
-  white-space: nowrap;
-}
-
 :focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
@@ -177,14 +118,19 @@ a {
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: rgba(248, 248, 246, 0.16);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background: rgba(17, 17, 17, 0.22);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   transition: opacity 180ms ease;
 }
 
 body.is-scrolled .site-header::before {
   opacity: 1;
+}
+
+.site-header > * {
+  position: relative;
+  z-index: 1;
 }
 
 .site-header[data-floating="false"] {
@@ -193,13 +139,8 @@ body.is-scrolled .site-header::before {
   backdrop-filter: none;
 }
 
-.site-header[data-floating="false"] .cart-button {
-  color: transparent;
-}
-
-.site-header[data-floating="false"] .cart-count {
-  background: transparent;
-  color: transparent;
+.site-header[data-floating="false"]::before {
+  opacity: 1;
 }
 
 .language-switch,
@@ -221,7 +162,9 @@ body.is-scrolled .site-header::before {
 }
 
 .lang-button {
-  width: 18px;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
   height: 18px;
   padding: 0;
   opacity: 0.55;
@@ -231,13 +174,50 @@ body.is-scrolled .site-header::before {
   opacity: 1;
 }
 
+.flag-icon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(248, 248, 246, 0.74);
+  box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.1);
+}
+
+.flag-icon--fr {
+  background: linear-gradient(90deg, #002395 0 33.333%, #ffffff 33.333% 66.666%, #ed2939 66.666% 100%);
+}
+
+.flag-icon--ma {
+  background: #c1272d;
+}
+
+.flag-icon--ma::before {
+  content: "";
+  position: absolute;
+  inset: 3px 6px;
+  background: #006233;
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 56%, 79% 91%, 50% 69%, 21% 91%, 32% 56%, 2% 35%, 39% 35%);
+}
+
+.flag-icon--gb {
+  background:
+    linear-gradient(0deg, transparent 38%, #ffffff 38% 62%, transparent 62%),
+    linear-gradient(90deg, transparent 42%, #ffffff 42% 58%, transparent 58%),
+    linear-gradient(0deg, transparent 44%, #c8102e 44% 56%, transparent 56%),
+    linear-gradient(90deg, transparent 46%, #c8102e 46% 54%, transparent 54%),
+    linear-gradient(32deg, transparent 43%, #ffffff 43% 48%, #c8102e 48% 52%, #ffffff 52% 57%, transparent 57%),
+    linear-gradient(-32deg, transparent 43%, #ffffff 43% 48%, #c8102e 48% 52%, #ffffff 52% 57%, transparent 57%),
+    #012169;
+}
+
 .brand-word {
   display: grid;
   place-items: center;
   width: 120px;
   height: 38px;
   margin-top: -8px;
-  background: transparent;
+  background: #ffffff;
   -webkit-mask: url("/Lantso_text.svg") center / contain no-repeat;
   mask: url("/Lantso_text.svg") center / contain no-repeat;
 }
@@ -252,7 +232,7 @@ body.is-scrolled .site-header::before {
 .join-button {
   border: 0;
   background: transparent;
-  color: transparent;
+  color: #ffffff;
   filter: none;
   font-family: var(--script);
   font-size: 24px;
@@ -271,7 +251,7 @@ body.is-scrolled .site-header::before {
   place-items: center;
   width: 30px;
   height: 30px;
-  color: transparent;
+  color: #ffffff;
 }
 
 .cart-button:focus-visible {
@@ -308,8 +288,8 @@ body.is-scrolled .site-header::before {
   height: 15px;
   padding: 0 3px;
   border-radius: 10px;
-  background: transparent;
-  color: transparent;
+  background: #ffffff;
+  color: #111111;
   font-size: 9px;
   line-height: 15px;
   text-align: center;
@@ -628,15 +608,15 @@ body.is-scrolled .site-header::before {
   text-decoration: none;
 }
 
-.size-button.is-sold-out::after {
+.size-button.is-sold-out::before {
   content: "";
   position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 2px;
-  height: calc(100% - 16px);
+  top: 50%;
+  left: -18%;
+  width: 136%;
+  height: 2px;
   background: currentColor;
-  transform: translateX(-50%) rotate(38deg);
+  transform: rotate(-34deg);
   transform-origin: center;
 }
 
@@ -1461,10 +1441,6 @@ textarea {
 }
 
 @media (max-width: 900px) {
-  .header-negative-join {
-    font-size: 19px;
-  }
-
   .site-header {
     min-height: 62px;
     padding: 20px 18px 0;
@@ -1533,10 +1509,6 @@ textarea {
 }
 
 @media (max-width: 580px) {
-  .header-negative-join {
-    font-size: 17px;
-  }
-
   body {
     font-size: 13px;
   }
@@ -1547,7 +1519,13 @@ textarea {
   }
 
   .lang-button {
-    width: 16px;
+    width: 22px;
+    height: 16px;
+  }
+
+  .flag-icon {
+    width: 22px;
+    height: 16px;
   }
 
   .cart-button {

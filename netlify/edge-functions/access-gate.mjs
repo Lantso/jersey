@@ -224,7 +224,7 @@ function gateHtml(pathname, lang, nonce) {
           emailInput.addEventListener("input", () => emailInput.setCustomValidity(""), { once: true });
           return;
         }
-        const payload = { name: "Launch list", email, newsletter: "yes" };
+        const payload = { name: "Launch list", email, newsletter: "yes", source: "edge-gate-newsletter" };
         const body = new URLSearchParams({ "form-name": "club", ...payload });
         message.textContent = copy.saving;
         button.disabled = true;
