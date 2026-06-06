@@ -14,6 +14,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
+const PHOTO_VERSION = "20260606c";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -139,6 +140,18 @@ const POSTAL_CODE_SAMPLES = {
   SK: [["811 01", "Bratislava"], ["040 01", "Kosice"], ["010 01", "Zilina"]],
   US: [["10001", "New York"], ["33101", "Miami"], ["60601", "Chicago"], ["90001", "Los Angeles"], ["94102", "San Francisco"]]
 };
+const PRODUCT_GALLERY_DETAILS = {
+  "roots-01-khaki": [
+    ["roots-01-khaki-logo", "Roots 01 Khaki logo detail"],
+    ["roots-01-khaki-mg-5580", "Roots 01 Khaki jersey studio detail"],
+    ["roots-01-khaki-mg-0420", "Roots 01 Khaki jersey worn detail"]
+  ],
+  "atlas-02-white": [
+    ["atlas-02-white-logo", "Atlas 02 White logo detail"],
+    ["atlas-02-white-pir05315", "Atlas 02 White jersey studio detail"],
+    ["atlas-02-white-studio-84", "Atlas 02 White jersey worn detail"]
+  ]
+};
 
 const I18N = {
   en: {
@@ -147,6 +160,7 @@ const I18N = {
       shop: "Shop",
       allProducts: "All products",
       jerseys: "Jerseys",
+      origin: "Origin",
       info: "Info",
       shipping: "Shipping",
       returns: "Returns",
@@ -237,9 +251,19 @@ const I18N = {
     },
     roots: {
       title: "Before the design,\nthere was a story",
-      body: "Lantso starts from a simple idea: rebuild the emotion of Moroccan football heritage for the people who carry it today.",
-      body2: "Roots 01 - Khaki looks back to the deep green, red, and match-day memory of 98. Atlas 02 - White keeps the same line brighter, lighter, and made for movement.",
-      body3: "This first limited chapter is small by intention: two jerseys built to travel from the roots to the world."
+      body: [
+        "Some people wait for the right moment. Others understand that it does not exist.",
+        "LANTSO was born between ideas left aside, projects that never saw daylight, and others that did not survive time. Still, each one brought a lesson, a meeting, or a new way of seeing things.",
+        "For years, the same fascination stayed intact: watching people start from almost nothing and build a universe able to gather, inspire, and leave a mark.",
+        "The question eventually became obvious: why not us?",
+        "Why wait for more resources? More time? More certainty? Why wait until everything is perfect to begin?",
+        "LANTSO was born from that conviction. The conviction that an idea does not need perfect conditions to exist. That a project can begin with little.",
+        "Little money. Few guarantees. But a lot of will.",
+        "ROOTS is the first chapter of this story.",
+        "A collection inspired by Moroccan heritage passed down through generations. A tribute to memories left by 1998 and dreams carried toward 2026.",
+        "LANTSO was not born because everything was ready. The brand was born because every great adventure starts by accepting that certainty never comes first.",
+        "Only a vision. And the decision to believe it deserves to exist."
+      ]
     },
     club: {
       title: "Join the club",
@@ -295,6 +319,7 @@ const I18N = {
       shop: "Boutique",
       allProducts: "Tous les produits",
       jerseys: "Maillots",
+      origin: "Origine",
       info: "Info",
       shipping: "Livraison",
       returns: "Retours",
@@ -385,9 +410,19 @@ const I18N = {
     },
     roots: {
       title: "Avant le design,\nil y avait une histoire",
-      body: "Lantso part d'une idée simple : reconstruire l'émotion du football marocain pour ceux qui la portent aujourd'hui.",
-      body2: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la mémoire match-day de 98. Atlas 02 - White garde la même ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
-      body3: "Ce premier chapitre reste volontairement rare : deux maillots pensés pour voyager from the roots to the world."
+      body: [
+        "Certaines personnes attendent le bon moment. D'autres comprennent qu'il n'existe pas.",
+        "LANTSO est né entre des idées laissées de côté, des projets qui n'ont jamais vu le jour et d'autres qui n'ont pas survécu au temps. Pourtant, chacun d'eux a apporté une leçon, une rencontre ou encore une nouvelle façon de voir les choses.",
+        "Pendant des années, une même fascination est restée intacte. Celle de voir des personnes partir de presque rien pour construire un univers capable de rassembler, d'inspirer et de laisser une empreinte.",
+        "La question a fini par s'imposer d'elle-même : pourquoi pas nous ?",
+        "Pourquoi attendre davantage de moyens ? Davantage de temps ? Davantage de certitudes ? Pourquoi attendre que tout soit parfait pour commencer ?",
+        "LANTSO est né de cette conviction. La conviction qu'une idée n'a pas besoin de conditions idéales pour exister. Qu'un projet peut commencer avec peu.",
+        "Peu de moyens. Peu de garanties. Mais beaucoup de volonté.",
+        "ROOTS est le premier chapitre de cette histoire.",
+        "Une collection inspirée d'un héritage marocain transmis au fil des générations. Un hommage aux souvenirs laissés par 1998 et les rêves portés vers 2026.",
+        "LANTSO n'est pas né parce que tout était prêt. La marque est née parce qu'il faut accepter qu'aucune grande aventure ne commence avec des certitudes.",
+        "Seulement avec une vision. Et la décision de croire qu'elle mérite d'exister."
+      ]
     },
     club: {
       title: "Join the club",
@@ -443,6 +478,7 @@ const I18N = {
       shop: "المتجر",
       allProducts: "كل المنتجات",
       jerseys: "القمصان",
+      origin: "الأصل",
       info: "معلومات",
       shipping: "الشحن",
       returns: "الإرجاع",
@@ -533,9 +569,19 @@ const I18N = {
     },
     roots: {
       title: "قبل التصميم،\nكانت هناك قصة",
-      body: "تبدأ Lantso من فكرة بسيطة: إعادة إحساس كرة القدم المغربية لمن يحمل هذا الإرث اليوم.",
-      body2: "Roots 01 - Khaki يعود إلى الأخضر العميق والأحمر وذاكرة 98. Atlas 02 - White يحافظ على نفس الروح بنسخة أكثر صفاء وخفة وحركة.",
-      body3: "هذا الفصل الأول محدود عن قصد: قميصان من الجذور إلى العالم."
+      body: [
+        "بعض الناس ينتظرون اللحظة المناسبة. وآخرون يفهمون أنها لا توجد.",
+        "وُلدت LANTSO بين أفكار تُركت جانبا، ومشاريع لم تر النور، وأخرى لم تصمد أمام الزمن. ومع ذلك، منح كل واحد منها درسا أو لقاء أو طريقة جديدة لرؤية الأشياء.",
+        "لسنوات، بقي نفس الانبهار حاضرا: رؤية أشخاص ينطلقون من شبه لا شيء لبناء عالم قادر على جمع الناس وإلهامهم وترك أثر.",
+        "وفي النهاية فرض السؤال نفسه: لماذا ليس نحن؟",
+        "لماذا ننتظر إمكانيات أكثر؟ وقتا أكثر؟ يقينا أكثر؟ لماذا ننتظر أن يصبح كل شيء مثاليا حتى نبدأ؟",
+        "وُلدت LANTSO من هذه القناعة. قناعة أن الفكرة لا تحتاج إلى ظروف مثالية كي توجد. وأن المشروع يمكن أن يبدأ بالقليل.",
+        "قليل من الإمكانيات. قليل من الضمانات. لكن الكثير من الإرادة.",
+        "ROOTS هو الفصل الأول من هذه القصة.",
+        "مجموعة مستوحاة من إرث مغربي انتقل عبر الأجيال. تحية لذكريات تركها عام 1998 ولأحلام تتجه نحو 2026.",
+        "لم تولد LANTSO لأن كل شيء كان جاهزا. وُلدت العلامة لأن علينا أن نقبل أن أي مغامرة كبيرة لا تبدأ باليقين.",
+        "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
+      ]
     },
     club: {
       title: "Join the club",
@@ -1031,6 +1077,10 @@ function paymentBadges() {
 
 function placeholder(label = "") {
   const visual = visualFor(label);
+  return visualFrame(visual, label);
+}
+
+function visualFrame(visual, label = "") {
   const alt = visual.alt || label;
   return `
     <figure class="photo-frame ${visual.className}" aria-label="${escapeHtml(label)}">
@@ -1043,7 +1093,7 @@ function placeholder(label = "") {
 }
 
 function productGallery(product, productName) {
-  const slides = [productName, `${productName} detail one`, `${productName} detail two`, `${productName} detail three`];
+  const slides = productGallerySlides(product, productName);
   return `
     <div class="product-gallery" data-product-gallery="${product.id}">
       <div class="gallery-stage" aria-label="${escapeHtml(productName)} photos">
@@ -1051,9 +1101,9 @@ function productGallery(product, productName) {
         <div class="gallery-slides">
           ${slides
             .map(
-              (label, index) => `
+              ({ label, visual }, index) => `
                 <div class="gallery-slide" data-gallery-slide="${product.id}:${index}" ${index === 0 ? "" : "hidden"}>
-                  ${placeholder(label)}
+                  ${visualFrame(visual, label)}
                 </div>
               `
             )
@@ -1064,9 +1114,9 @@ function productGallery(product, productName) {
       <div class="thumb-grid gallery-thumbs" role="group" aria-label="${escapeHtml(productName)} photo choices">
         ${slides
           .map(
-            (label, index) => `
+            ({ label, visual }, index) => `
               <button class="gallery-thumb" type="button" data-gallery-thumb="${product.id}:${index}" aria-pressed="${index === 0}">
-                ${placeholder(label)}
+                ${visualFrame(visual, label)}
               </button>
             `
           )
@@ -1076,11 +1126,19 @@ function productGallery(product, productName) {
   `;
 }
 
+function productGallerySlides(product, productName) {
+  const details = PRODUCT_GALLERY_DETAILS[product.id] || [];
+  return [
+    { label: productName, visual: visualFor(productName) },
+    ...details.map(([file, alt]) => ({ label: alt, visual: photo(file, "product-visual", alt, 1448, 1448) }))
+  ];
+}
+
 function photo(file, className, alt, width, height, loading = "lazy") {
   return {
-    src: `/assets/photos/fallback/${file}.jpg`,
-    webp: `/assets/photos/${file}.webp`,
-    srcset: `/assets/photos/responsive/${file}-480.webp 480w, /assets/photos/responsive/${file}-800.webp 800w, /assets/photos/responsive/${file}-1200.webp 1200w, /assets/photos/${file}.webp ${width}w`,
+    src: photoUrl(`/assets/photos/fallback/${file}.jpg`),
+    webp: photoUrl(`/assets/photos/${file}.webp`),
+    srcset: `${photoUrl(`/assets/photos/responsive/${file}-480.webp`)} 480w, ${photoUrl(`/assets/photos/responsive/${file}-800.webp`)} 800w, ${photoUrl(`/assets/photos/responsive/${file}-1200.webp`)} 1200w, ${photoUrl(`/assets/photos/${file}.webp`)} ${width}w`,
     sizes: className === "hero-visual" ? "100vw" : "(max-width: 760px) 100vw, 50vw",
     className,
     alt,
@@ -1092,7 +1150,7 @@ function photo(file, className, alt, width, height, loading = "lazy") {
 
 function fallbackPhoto(file, className, alt, width, height, loading = "lazy") {
   return {
-    src: `/assets/photos/fallback/${file}.jpg`,
+    src: photoUrl(`/assets/photos/fallback/${file}.jpg`),
     sizes: className === "hero-visual" ? "100vw" : "(max-width: 760px) 100vw, 50vw",
     className,
     alt,
@@ -1102,6 +1160,10 @@ function fallbackPhoto(file, className, alt, width, height, loading = "lazy") {
   };
 }
 
+function photoUrl(path) {
+  return `${path}?v=${PHOTO_VERSION}`;
+}
+
 function languageFlag(lang) {
   const flag = lang === "fr" ? "fr" : lang === "ar" ? "ma" : "uk";
   return `<span class="flag-icon flag-icon--${flag}" aria-hidden="true"></span>`;
@@ -1109,15 +1171,6 @@ function languageFlag(lang) {
 
 function visualFor(label) {
   const key = label.toLowerCase();
-  if (key.includes("detail one")) {
-    return photo("campaign-1", "campaign-visual", "Lantso campaign portrait wearing the Roots 01 Khaki jersey", 1122, 1402);
-  }
-  if (key.includes("detail two")) {
-    return photo("campaign-3", "campaign-visual", "Lantso campaign scene with the Atlas 02 White and Roots 01 Khaki jerseys", 1122, 1402);
-  }
-  if (key.includes("detail three")) {
-    return photo("campaign-4", "campaign-visual", "Close lifestyle detail of the Lantso Roots 01 Khaki jersey", 1121, 1403);
-  }
   if (key.includes("roots 01") || key.includes("روتس")) {
     return photo("roots-01-khaki", "product-visual", "Lantso Roots 01 Khaki limited Moroccan jersey front view", 1448, 1086);
   }
@@ -1125,16 +1178,16 @@ function visualFor(label) {
     return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1448, 1086);
   }
   if (key.includes("campaign image one")) {
-    return fallbackPhoto("1998-1", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
+    return fallbackPhoto("1998-1", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1224, 812);
   }
   if (key.includes("campaign image two")) {
     return fallbackPhoto("1998-2", "campaign-visual", "Morocco and Scotland footballers competing during the 1998 World Cup", 1224, 794);
   }
   if (key.includes("campaign image three")) {
-    return fallbackPhoto("1998-3", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1224, 812);
+    return fallbackPhoto("1998-3", "campaign-visual", "Moustafa Hadji of Morocco in a 1998 World Cup match", 1224, 812);
   }
   if (key.includes("campaign image four")) {
-    return fallbackPhoto("1998-4", "campaign-visual", "Moustafa Hadji of Morocco in a 1998 World Cup match", 1224, 812);
+    return fallbackPhoto("1998-4", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
   }
   if (key.includes("origin") || key.includes("pencil") || key.includes("chapter")) {
     return photo("story", "campaign-visual", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085);
@@ -1198,7 +1251,8 @@ function footer() {
       </div>
       ${footerColumn(t("nav.shop"), [
         [t("nav.allProducts"), "/shop"],
-        [t("nav.jerseys"), "/shop"]
+        [t("nav.jerseys"), "/shop"],
+        [t("nav.origin"), "/roots"]
       ])}
       ${footerColumn(t("nav.info"), [
         [t("nav.shipping"), "/info#shipping"],
@@ -1496,6 +1550,7 @@ function legalPage() {
 }
 
 function rootsPage() {
+  const paragraphs = t("roots.body");
   return `
     <div class="page-shell">
       ${breadcrumb(t("hero.discoverRoots"))}
@@ -1503,9 +1558,7 @@ function rootsPage() {
         <article class="roots-section">
           <h1>${t("roots.title").replace("\n", "<br>")}</h1>
           <div class="prose">
-            <p>${t("roots.body")}</p>
-            <p>${t("roots.body2")}</p>
-            <p>${t("roots.body3")}</p>
+            ${(Array.isArray(paragraphs) ? paragraphs : [paragraphs]).map((body) => `<p>${escapeHtml(body)}</p>`).join("")}
           </div>
         </article>
         <article class="split-band">

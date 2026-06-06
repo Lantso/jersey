@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
+const PHOTO_VERSION = "20260606c";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
@@ -95,20 +96,46 @@ const COPY = {
     ar: "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."
   },
   rootsHeading: { en: "Discover the Roots", fr: "Découvrir les Roots", ar: "اكتشف الجذور" },
-  rootsBody: {
-    en: "Lantso starts from a simple idea: rebuild the emotion of Moroccan football heritage for the people who carry it today.",
-    fr: "Lantso part d'une idée simple : reconstruire l'émotion du football marocain pour ceux qui la portent aujourd'hui.",
-    ar: "تبدأ Lantso من فكرة بسيطة: إعادة إحساس كرة القدم المغربية لمن يحمل هذا الإرث اليوم."
-  },
-  rootsBody2: {
-    en: "Roots 01 - Khaki looks back to the deep green, red, and match-day memory of 98. Atlas 02 - White keeps the same line brighter, lighter, and made for movement.",
-    fr: "Roots 01 - Khaki regarde vers le vert profond, le rouge et la mémoire match-day de 98. Atlas 02 - White garde la même ligne en version plus claire, plus lumineuse, faite pour le mouvement.",
-    ar: "Roots 01 - Khaki يعود إلى الأخضر العميق والأحمر وذاكرة 98. Atlas 02 - White يحافظ على نفس الروح بنسخة أكثر صفاء وخفة وحركة."
-  },
-  rootsBody3: {
-    en: "This first limited chapter is small by intention: two jerseys built to travel from the roots to the world.",
-    fr: "Ce premier chapitre reste volontairement rare : deux maillots pensés pour voyager from the roots to the world.",
-    ar: "هذا الفصل الأول محدود عن قصد: قميصان من الجذور إلى العالم."
+  rootsParagraphs: {
+    en: [
+      "Some people wait for the right moment. Others understand that it does not exist.",
+      "LANTSO was born between ideas left aside, projects that never saw daylight, and others that did not survive time. Still, each one brought a lesson, a meeting, or a new way of seeing things.",
+      "For years, the same fascination stayed intact: watching people start from almost nothing and build a universe able to gather, inspire, and leave a mark.",
+      "The question eventually became obvious: why not us?",
+      "Why wait for more resources? More time? More certainty? Why wait until everything is perfect to begin?",
+      "LANTSO was born from that conviction. The conviction that an idea does not need perfect conditions to exist. That a project can begin with little.",
+      "Little money. Few guarantees. But a lot of will.",
+      "ROOTS is the first chapter of this story.",
+      "A collection inspired by Moroccan heritage passed down through generations. A tribute to memories left by 1998 and dreams carried toward 2026.",
+      "LANTSO was not born because everything was ready. The brand was born because every great adventure starts by accepting that certainty never comes first.",
+      "Only a vision. And the decision to believe it deserves to exist."
+    ],
+    fr: [
+      "Certaines personnes attendent le bon moment. D'autres comprennent qu'il n'existe pas.",
+      "LANTSO est né entre des idées laissées de côté, des projets qui n'ont jamais vu le jour et d'autres qui n'ont pas survécu au temps. Pourtant, chacun d'eux a apporté une leçon, une rencontre ou encore une nouvelle façon de voir les choses.",
+      "Pendant des années, une même fascination est restée intacte. Celle de voir des personnes partir de presque rien pour construire un univers capable de rassembler, d'inspirer et de laisser une empreinte.",
+      "La question a fini par s'imposer d'elle-même : pourquoi pas nous ?",
+      "Pourquoi attendre davantage de moyens ? Davantage de temps ? Davantage de certitudes ? Pourquoi attendre que tout soit parfait pour commencer ?",
+      "LANTSO est né de cette conviction. La conviction qu'une idée n'a pas besoin de conditions idéales pour exister. Qu'un projet peut commencer avec peu.",
+      "Peu de moyens. Peu de garanties. Mais beaucoup de volonté.",
+      "ROOTS est le premier chapitre de cette histoire.",
+      "Une collection inspirée d'un héritage marocain transmis au fil des générations. Un hommage aux souvenirs laissés par 1998 et les rêves portés vers 2026.",
+      "LANTSO n'est pas né parce que tout était prêt. La marque est née parce qu'il faut accepter qu'aucune grande aventure ne commence avec des certitudes.",
+      "Seulement avec une vision. Et la décision de croire qu'elle mérite d'exister."
+    ],
+    ar: [
+      "بعض الناس ينتظرون اللحظة المناسبة. وآخرون يفهمون أنها لا توجد.",
+      "وُلدت LANTSO بين أفكار تُركت جانبا، ومشاريع لم تر النور، وأخرى لم تصمد أمام الزمن. ومع ذلك، منح كل واحد منها درسا أو لقاء أو طريقة جديدة لرؤية الأشياء.",
+      "لسنوات، بقي نفس الانبهار حاضرا: رؤية أشخاص ينطلقون من شبه لا شيء لبناء عالم قادر على جمع الناس وإلهامهم وترك أثر.",
+      "وفي النهاية فرض السؤال نفسه: لماذا ليس نحن؟",
+      "لماذا ننتظر إمكانيات أكثر؟ وقتا أكثر؟ يقينا أكثر؟ لماذا ننتظر أن يصبح كل شيء مثاليا حتى نبدأ؟",
+      "وُلدت LANTSO من هذه القناعة. قناعة أن الفكرة لا تحتاج إلى ظروف مثالية كي توجد. وأن المشروع يمكن أن يبدأ بالقليل.",
+      "قليل من الإمكانيات. قليل من الضمانات. لكن الكثير من الإرادة.",
+      "ROOTS هو الفصل الأول من هذه القصة.",
+      "مجموعة مستوحاة من إرث مغربي انتقل عبر الأجيال. تحية لذكريات تركها عام 1998 ولأحلام تتجه نحو 2026.",
+      "لم تولد LANTSO لأن كل شيء كان جاهزا. وُلدت العلامة لأن علينا أن نقبل أن أي مغامرة كبيرة لا تبدأ باليقين.",
+      "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
+    ]
   },
   successTitle: { en: "Order Received | Lantso", fr: "Commande reçue | Lantso", ar: "تم استلام الطلب | Lantso" },
   successBody: {
@@ -395,13 +422,12 @@ function legalBody(lang = DEFAULT_LANG) {
 }
 
 function rootsBody(lang = DEFAULT_LANG) {
+  const paragraphs = text("rootsParagraphs", lang);
   return `
         <section class="seo-section">
           ${pictureHtml("story", "Lantso Roots 01 Khaki and Atlas 02 White jerseys worn in a Moroccan street story scene", 1449, 1085, "100vw")}
           <h1>${escapeHtml(text("rootsHeading", lang))}</h1>
-          <p>${escapeHtml(text("rootsBody", lang))}</p>
-          <p>${escapeHtml(text("rootsBody2", lang))}</p>
-          <p>${escapeHtml(text("rootsBody3", lang))}</p>
+          ${(Array.isArray(paragraphs) ? paragraphs : [paragraphs]).map((body) => `<p>${escapeHtml(body)}</p>`).join("")}
         </section>
       `;
 }
@@ -565,9 +591,13 @@ function productImageAlt(product, lang = DEFAULT_LANG) {
 function pictureHtml(file, alt, width, height, sizes) {
   const loading = file === "hero" ? `loading="eager" fetchpriority="high"` : `loading="lazy"`;
   return `<picture>
-            <source srcset="/assets/photos/responsive/${file}-480.webp 480w, /assets/photos/responsive/${file}-800.webp 800w, /assets/photos/responsive/${file}-1200.webp 1200w, /assets/photos/${file}.webp ${width}w" sizes="${escapeHtml(sizes)}" type="image/webp">
-            <img src="/assets/photos/fallback/${file}.jpg" alt="${escapeHtml(alt)}" ${loading} decoding="async" width="${width}" height="${height}">
+            <source srcset="${photoUrl(`/assets/photos/responsive/${file}-480.webp`)} 480w, ${photoUrl(`/assets/photos/responsive/${file}-800.webp`)} 800w, ${photoUrl(`/assets/photos/responsive/${file}-1200.webp`)} 1200w, ${photoUrl(`/assets/photos/${file}.webp`)} ${width}w" sizes="${escapeHtml(sizes)}" type="image/webp">
+            <img src="${photoUrl(`/assets/photos/fallback/${file}.jpg`)}" alt="${escapeHtml(alt)}" ${loading} decoding="async" width="${width}" height="${height}">
           </picture>`;
+}
+
+function photoUrl(assetPath) {
+  return `${assetPath}?v=${PHOTO_VERSION}`;
 }
 
 function sitemapXml() {
