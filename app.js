@@ -14,7 +14,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260607a";
+const PHOTO_VERSION = "20260607b";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -1156,10 +1156,10 @@ function languageFlag(lang) {
 function visualFor(label) {
   const key = label.toLowerCase();
   if (key.includes("roots 01") || key.includes("روتس")) {
-    return photo("roots-01-khaki", "product-visual", "Lantso Roots 01 Khaki limited Moroccan jersey front view", 1448, 1086);
+    return photo("roots-01-khaki", "product-visual", "Lantso Roots 01 Khaki limited Moroccan jersey front view", 1600, 1600);
   }
   if (key.includes("atlas") || key.includes("أطلس")) {
-    return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1448, 1086);
+    return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1600, 1600);
   }
   if (key.includes("campaign image one")) {
     return photo("1998-1", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1224, 812);
@@ -1174,12 +1174,15 @@ function visualFor(label) {
     return photo("1998-4", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
   }
   if (key.includes("chapter")) {
-    return photo("story", "campaign-visual", "Lantso Chapter 01 Roots story visual", 1449, 1085);
+    return photo("story", "campaign-visual", "Lantso Chapter 01 Roots story visual", 1200, 852);
+  }
+  if (key.includes("origin visual")) {
+    return photo("origin-shop", "campaign-visual", "Lantso shop origin story visual", 1920, 1280);
   }
   if (key.includes("origin") || key.includes("pencil")) {
     return photo("origin-1", "campaign-visual", "Lantso origin shooting image", 1080, 1350);
   }
-  return photo("hero", "hero-visual", "Lantso Moroccan jersey campaign in a Casablanca street", 1672, 941, "eager");
+  return photo("hero", "hero-visual", "Lantso Moroccan jersey campaign in a Casablanca street", 1920, 1280, "eager");
 }
 
 function gatePage() {

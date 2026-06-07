@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
-const PHOTO_VERSION = "20260607a";
+const PHOTO_VERSION = "20260607b";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
@@ -391,7 +391,7 @@ function linkTo(routePath, lang = DEFAULT_LANG) {
 function homeBody(lang = DEFAULT_LANG) {
   return `
         <section class="seo-hero">
-          ${pictureHtml("hero", "Lantso Moroccan jersey campaign in a Casablanca street", 1672, 941, "100vw")}
+          ${pictureHtml("hero", "Lantso Moroccan jersey campaign in a Casablanca street", 1920, 1280, "100vw")}
           <h1>From the Roots to the World</h1>
           <p>${escapeHtml(text("homeDescription", lang))}</p>
           <a class="button-primary" href="${linkTo("/shop", lang)}">${escapeHtml(text("stepInside", lang))}</a>
