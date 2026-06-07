@@ -75,7 +75,7 @@ Stripe webhook:
 https://lantso.com/api/webhook
 ```
 
-If Stripe is set to `https://www.lantso.com/api/webhook`, make sure `www` hits the same Netlify site/function.
+Use the apex URL directly. `www` can redirect, and Stripe wants this endpoint itself to answer `2xx`.
 
 events:
 

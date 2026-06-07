@@ -339,7 +339,7 @@ body.is-scrolled .site-header::before {
 }
 
 .hero .photo-frame img {
-  object-position: center 36%;
+  object-position: center 24%;
 }
 
 .hero-content {
@@ -666,7 +666,7 @@ body.is-scrolled .site-header::before {
 
 .origin-band {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 1.15fr);
   border-bottom: 1px solid var(--line);
 }
 
@@ -681,8 +681,12 @@ body.is-scrolled .site-header::before {
   flex-direction: column;
   justify-content: center;
   gap: 28px;
-  padding: 70px 10vw 70px 8vw;
+  padding: 70px 7vw;
   border-left: 1px solid var(--line);
+}
+
+.origin-copy .headline {
+  max-width: 680px;
 }
 
 .product-detail {

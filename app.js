@@ -14,7 +14,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260607b";
+const PHOTO_VERSION = "20260607d";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -585,15 +585,15 @@ const I18N = {
       title: "قبل التصميم،\nكانت هناك قصة",
       body: [
         "بعض الناس ينتظرون اللحظة المناسبة. وآخرون يفهمون أنها لا توجد.",
-        "وُلدت LANTSO بين أفكار تُركت جانبا، ومشاريع لم تر النور، وأخرى لم تصمد أمام الزمن. ومع ذلك، منح كل واحد منها درسا أو لقاء أو طريقة جديدة لرؤية الأشياء.",
+        "وُلدت لانطسو بين أفكار تُركت جانبا، ومشاريع لم تر النور، وأخرى لم تصمد أمام الزمن. ومع ذلك، منح كل واحد منها درسا أو لقاء أو طريقة جديدة لرؤية الأشياء.",
         "لسنوات، بقي نفس الانبهار حاضرا: رؤية أشخاص ينطلقون من شبه لا شيء لبناء عالم قادر على جمع الناس وإلهامهم وترك أثر.",
         "وفي النهاية فرض السؤال نفسه: لماذا ليس نحن؟",
         "لماذا ننتظر إمكانيات أكثر؟ وقتا أكثر؟ يقينا أكثر؟ لماذا ننتظر أن يصبح كل شيء مثاليا حتى نبدأ؟",
-        "وُلدت LANTSO من هذه القناعة. قناعة أن الفكرة لا تحتاج إلى ظروف مثالية كي توجد. وأن المشروع يمكن أن يبدأ بالقليل.",
+        "وُلدت لانطسو من هذه القناعة. قناعة أن الفكرة لا تحتاج إلى ظروف مثالية كي توجد. وأن المشروع يمكن أن يبدأ بالقليل.",
         "قليل من الإمكانيات. قليل من الضمانات. لكن الكثير من الإرادة.",
         "الجذور هو الفصل الأول من هذه القصة.",
         "مجموعة مستوحاة من إرث مغربي انتقل عبر الأجيال. تحية لذكريات تركها عام 1998 ولأحلام تتجه نحو 2026.",
-        "لم تولد LANTSO لأن كل شيء كان جاهزا. وُلدت العلامة لأن علينا أن نقبل أن أي مغامرة كبيرة لا تبدأ باليقين.",
+        "لم تولد لانطسو لأن كل شيء كان جاهزا. وُلدت العلامة لأن علينا أن نقبل أن أي مغامرة كبيرة لا تبدأ باليقين.",
         "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
       ]
     },
@@ -886,10 +886,11 @@ function saveCart() {
 
 function setLanguage(lang, options = {}) {
   if (!LANGS.includes(lang)) return;
+  const scrollY = window.scrollY;
   if (options.updateUrl) {
     const current = route();
     const basePath = pageMeta(current).path;
-    history.pushState({}, "", localizedPath(basePath, lang));
+    history.replaceState({ ...(history.state || {}) }, "", localizedPath(basePath, lang));
   }
   state.lang = lang;
   localStorage.setItem("lantso:lang", lang);
@@ -905,7 +906,8 @@ function setLanguage(lang, options = {}) {
   const clubButton = document.querySelector("[data-open-club]");
   if (clubButton) clubButton.textContent = t("club.title");
   updateCookieNotice();
-  render();
+  render({ scroll: false });
+  window.scrollTo(0, scrollY);
   renderCart();
   updateHeaderChrome();
 }
@@ -2254,8 +2256,8 @@ async function refreshInventory() {
 async function submitForm(name, payload) {
   const endpoint = name === "contact" ? "/api/contact" : "/api/club";
   const apiResponse = await postJson(endpoint, payload);
-  const formResponse = await submitNetlifyForm(name, payload);
   if (apiResponse.ok) return apiResponse;
+  const formResponse = await submitNetlifyForm(name, payload);
   if (formResponse.ok) return formResponse;
   return apiResponse;
 }
@@ -2399,6 +2401,11 @@ window.addEventListener("popstate", (event) => {
   }
   closeCart({ fromHistory: true, restoreFocus: false });
   render();
+});
+window.addEventListener("pageshow", () => {
+  if (!state.checkoutPending) return;
+  state.checkoutPending = false;
+  renderCart();
 });
 window.addEventListener("scroll", updateHeaderScrollState, { passive: true });
 window.addEventListener("resize", updateHeaderChrome);
