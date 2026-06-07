@@ -338,6 +338,10 @@ body.is-scrolled .site-header::before {
   border: 0;
 }
 
+.hero .photo-frame img {
+  object-position: center 36%;
+}
+
 .hero-content {
   position: relative;
   z-index: 1;
