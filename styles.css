@@ -1406,45 +1406,6 @@ textarea {
   font-size: 12px;
 }
 
-.promo-form {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: end;
-}
-
-.promo-form label {
-  min-width: 0;
-}
-
-.promo-form .button-secondary,
-.promo-form .button-ghost {
-  min-height: 42px;
-  padding: 0 14px;
-}
-
-.promo-form .button-ghost {
-  grid-column: 1 / -1;
-  justify-self: start;
-}
-
-.promo-message {
-  min-height: 20px;
-  margin: -4px 0 2px;
-  color: rgba(17, 17, 17, 0.62);
-  font-size: 12px;
-  line-height: 1.5;
-  text-transform: none;
-}
-
-.promo-message.is-applied {
-  color: #0f5f2f;
-}
-
-.promo-message.is-invalid {
-  color: #8f0000;
-}
-
 .summary-line {
   display: flex;
   justify-content: space-between;
@@ -1747,15 +1708,6 @@ textarea {
 
   .claim-row {
     grid-template-columns: 1fr 44px;
-  }
-
-  .promo-form {
-    grid-template-columns: 1fr;
-  }
-
-  .promo-form .button-secondary,
-  .promo-form .button-ghost {
-    justify-self: stretch;
   }
 
   .plus-button {

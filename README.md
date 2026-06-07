@@ -37,15 +37,18 @@ Netlify publishes `dist/`.
 ## pages
 
 - `/roots` = origin story + 2 images
-- `/archives` = photo archive placeholders + thanks list
+- `/archives` = hidden archive placeholders + thanks list
 - archive cards / names live in `app.js`
 
 ## data
 
 - Stripe checkout takes payment.
-- Netlify Blobs stores stock, orders, club signups, contact messages.
+- Stripe Dashboard has the paid checkout sessions.
+- Netlify Blobs stores stock, paid orders, club signups, contact messages.
+- Paid orders live in `lantso-commerce / inventory-v1 / orders`.
 - Netlify Forms mirrors club/contact so there is a free dashboard/export thing.
-- Resend can send contact emails if `RESEND_API_KEY` + `CONTACT_FROM_EMAIL` are set.
+- Resend sends contact + paid order emails if `RESEND_API_KEY` + `CONTACT_FROM_EMAIL` are set.
+- Order emails go to `CONTACT_TO_EMAIL`, then `STORE_EMAIL`, then `contact@lantso.com`.
 
 ## env
 
@@ -72,12 +75,16 @@ Stripe webhook:
 https://lantso.com/api/webhook
 ```
 
+If Stripe is set to `https://www.lantso.com/api/webhook`, make sure `www` hits the same Netlify site/function.
+
 events:
 
 - `checkout.session.completed`
 - `checkout.session.async_payment_succeeded`
 - `checkout.session.expired`
 - `checkout.session.async_payment_failed`
+
+If Stripe emails about webhook failures, fix this first: the webhook records paid orders and stock. Usual issue is wrong URL or wrong live `STRIPE_WEBHOOK_SECRET` for that exact endpoint.
 
 ## legal
 

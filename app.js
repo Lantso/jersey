@@ -14,7 +14,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260606d";
+const PHOTO_VERSION = "20260607a";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -233,13 +233,6 @@ const I18N = {
       free: "Free",
       remove: "Remove",
       qty: "Qty",
-      promo: "Promo code",
-      promoApply: "Apply",
-      promoRemove: "Remove code",
-      promoApplied: "Test support code applied: each shirt is €1, no shirt will be delivered, and stock will not change.",
-      promoInvalid: "This promo code is not active.",
-      supportPrice: "Test support price",
-      supportNoDelivery: "No delivery for this test",
       checkout: "Checkout securely",
       processing: "Opening checkout...",
       checkoutError: "Checkout could not open. Refresh the page and try again, or contact contact@lantso.com.",
@@ -366,12 +359,12 @@ const I18N = {
       discoverShop: "Découvrir la boutique",
       origin: "Origine",
       before: "Avant le design,\nil y avait une histoire",
-      discoverRoots: "Découvrir les roots"
+      discoverRoots: "Découvrir l'histoire"
     },
     product: {
       limited: "Pièces limitées",
-      claim: "Réclamer la pièce",
-      access: "Accéder au maillot",
+      claim: "Ajouter au panier",
+      access: "Ajouter au panier",
       size: "Taille",
       price: "Prix",
       color: "Couleur",
@@ -399,13 +392,6 @@ const I18N = {
       free: "Offerte",
       remove: "Retirer",
       qty: "Qté",
-      promo: "Code promo",
-      promoApply: "Appliquer",
-      promoRemove: "Retirer le code",
-      promoApplied: "Code test appliqué : chaque maillot passe à 1 €, aucun maillot ne sera livré et le stock ne change pas.",
-      promoInvalid: "Ce code promo n'est pas actif.",
-      supportPrice: "Prix test support",
-      supportNoDelivery: "Pas de livraison pour ce test",
       checkout: "Paiement sécurisé",
       processing: "Ouverture du paiement...",
       checkoutError: "Le paiement n'a pas pu s'ouvrir. Actualise la page et réessaie, ou contacte contact@lantso.com.",
@@ -565,13 +551,6 @@ const I18N = {
       free: "مجاني",
       remove: "حذف",
       qty: "الكمية",
-      promo: "رمز ترويجي",
-      promoApply: "تطبيق",
-      promoRemove: "حذف الرمز",
-      promoApplied: "تم تطبيق رمز الاختبار: كل قميص بسعر 1€، لن يتم تسليم أي قميص ولن يتغير المخزون.",
-      promoInvalid: "هذا الرمز الترويجي غير نشط.",
-      supportPrice: "سعر اختبار الدعم",
-      supportNoDelivery: "لا يوجد تسليم لهذا الاختبار",
       checkout: "دفع آمن",
       processing: "جاري فتح صفحة الدفع...",
       checkoutError: "تعذر فتح الدفع. حدث الصفحة وحاول مرة أخرى أو تواصل عبر contact@lantso.com.",
@@ -612,7 +591,7 @@ const I18N = {
         "لماذا ننتظر إمكانيات أكثر؟ وقتا أكثر؟ يقينا أكثر؟ لماذا ننتظر أن يصبح كل شيء مثاليا حتى نبدأ؟",
         "وُلدت LANTSO من هذه القناعة. قناعة أن الفكرة لا تحتاج إلى ظروف مثالية كي توجد. وأن المشروع يمكن أن يبدأ بالقليل.",
         "قليل من الإمكانيات. قليل من الضمانات. لكن الكثير من الإرادة.",
-        "ROOTS هو الفصل الأول من هذه القصة.",
+        "الجذور هو الفصل الأول من هذه القصة.",
         "مجموعة مستوحاة من إرث مغربي انتقل عبر الأجيال. تحية لذكريات تركها عام 1998 ولأحلام تتجه نحو 2026.",
         "لم تولد LANTSO لأن كل شيء كان جاهزا. وُلدت العلامة لأن علينا أن نقبل أن أي مغامرة كبيرة لا تبدأ باليقين.",
         "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
@@ -678,8 +657,6 @@ const LAUNCH_DATE = new Date("2026-06-06T00:00:00+02:00");
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const SUPPORT_PROMO_CODE = "supercalifragilisticexpialidocious";
-const SUPPORT_PROMO_UNIT_AMOUNT = 100;
 
 function languageFromPath(path = window.location.pathname) {
   const firstSegment = path.split("/").filter(Boolean)[0];
@@ -708,7 +685,6 @@ const state = {
   selectedSizes: Object.fromEntries(PRODUCTS.map((product) => [product.id, defaultSize(product)])),
   shippingCountry: localStorage.getItem("lantso:shippingCountry") || "FR",
   postalCode: localStorage.getItem("lantso:postalCode") || "",
-  promoCode: localStorage.getItem("lantso:promoCode") || "",
   inventory: null,
   checkoutPending: false
 };
@@ -733,7 +709,7 @@ function locale() {
 }
 
 function moneyCountry() {
-  return activePromo() ? "FR" : state.shippingCountry;
+  return state.shippingCountry;
 }
 
 function formatStoreMoney(cents, countryCode = moneyCountry()) {
@@ -741,7 +717,7 @@ function formatStoreMoney(cents, countryCode = moneyCountry()) {
 }
 
 function storeMoneyAmount(cents, countryCode = moneyCountry()) {
-  return activePromo() ? Number(cents || 0) : convertMoney(cents, countryCode);
+  return convertMoney(cents, countryCode);
 }
 
 function formatStoreCurrencyAmount(cents, countryCode = moneyCountry()) {
@@ -793,7 +769,7 @@ function pageMeta(current = route()) {
       shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026."],
       info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso."],
       legal: ["Mentions légales et contact | Lantso", "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso."],
-      roots: ["Découvrir les Roots | Lantso", "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
+      roots: ["Découvrir l'histoire | Lantso", "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
       archives: ["Archives | Lantso", "Archive photo minimaliste des jours de shooting Lantso et remerciements de la marque."],
       success: ["Commande reçue | Lantso", "Confirmation de commande Lantso."],
       cancel: ["Paiement annulé | Lantso", "Paiement Lantso annulé."]
@@ -953,7 +929,7 @@ function lineItems() {
     .map((item) => {
       const product = findProduct(item.productId);
       if (!product) return null;
-      const unitAmount = activePromo() ? SUPPORT_PROMO_UNIT_AMOUNT : product.price;
+      const unitAmount = product.price;
       return {
         ...item,
         product,
@@ -966,32 +942,6 @@ function lineItems() {
 
 function subtotal() {
   return lineItems().reduce((sum, item) => sum + item.lineTotal, 0);
-}
-
-function normalizePromoCode(value) {
-  return String(value || "").trim().toLowerCase();
-}
-
-function activePromo() {
-  return normalizePromoCode(state.promoCode) === SUPPORT_PROMO_CODE ? SUPPORT_PROMO_CODE : "";
-}
-
-function supportShipping() {
-  return {
-    amount: 0,
-    zone: {
-      label: {
-        en: "Test support",
-        fr: "Test support",
-        ar: "اختبار الدعم"
-      },
-      eta: {
-        en: t("cart.supportNoDelivery"),
-        fr: t("cart.supportNoDelivery"),
-        ar: t("cart.supportNoDelivery")
-      }
-    }
-  };
 }
 
 function stockAvailable(productId, size) {
@@ -1082,7 +1032,7 @@ function closeCart(options = {}) {
   if (restoreFocus) previousCartFocus?.focus?.();
   previousCartFocus = null;
   if (!fromHistory && history.state?.cartOpen) {
-    history.back();
+    history.replaceState({ ...(history.state || {}), cartOpen: false }, "", window.location.href);
   }
 }
 
@@ -1194,18 +1144,6 @@ function photo(file, className, alt, width, height, loading = "lazy") {
   };
 }
 
-function fallbackPhoto(file, className, alt, width, height, loading = "lazy") {
-  return {
-    src: photoUrl(`/assets/photos/fallback/${file}.jpg`),
-    sizes: className === "hero-visual" ? "100vw" : "(max-width: 760px) 100vw, 50vw",
-    className,
-    alt,
-    width,
-    height,
-    loading
-  };
-}
-
 function photoUrl(path) {
   return `${path}?v=${PHOTO_VERSION}`;
 }
@@ -1224,18 +1162,21 @@ function visualFor(label) {
     return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1448, 1086);
   }
   if (key.includes("campaign image one")) {
-    return fallbackPhoto("1998-1", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1224, 812);
+    return photo("1998-1", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1224, 812);
   }
   if (key.includes("campaign image two")) {
-    return fallbackPhoto("1998-2", "campaign-visual", "Morocco and Scotland footballers competing during the 1998 World Cup", 1224, 794);
+    return photo("1998-2", "campaign-visual", "Morocco and Scotland footballers competing during the 1998 World Cup", 1224, 794);
   }
   if (key.includes("campaign image three")) {
-    return fallbackPhoto("1998-3", "campaign-visual", "Moustafa Hadji of Morocco in a 1998 World Cup match", 1224, 812);
+    return photo("1998-3", "campaign-visual", "Moustafa Hadji of Morocco in a 1998 World Cup match", 1224, 812);
   }
   if (key.includes("campaign image four")) {
-    return fallbackPhoto("1998-4", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
+    return photo("1998-4", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
   }
-  if (key.includes("origin") || key.includes("pencil") || key.includes("chapter")) {
+  if (key.includes("chapter")) {
+    return photo("story", "campaign-visual", "Lantso Chapter 01 Roots story visual", 1449, 1085);
+  }
+  if (key.includes("origin") || key.includes("pencil")) {
     return photo("origin-1", "campaign-visual", "Lantso origin shooting image", 1080, 1350);
   }
   return photo("hero", "hero-visual", "Lantso Moroccan jersey campaign in a Casablanca street", 1672, 941, "eager");
@@ -1314,7 +1255,6 @@ function footer() {
         <h3>${t("nav.locked")}</h3>
         <div class="social-row">
           <a href="${SOCIAL_LINKS.instagram}" rel="noreferrer" target="_blank" aria-label="Instagram">INSTAGRAM</a>
-          <a href="${localizedPath("/archives")}" data-link>${t("nav.archives")}</a>
         </div>
       </div>
       <div class="payments">
@@ -1725,9 +1665,7 @@ function completeStoredCheckout(confirmation) {
   if (!confirmation?.matchedStoredCheckout || !confirmation.sessionId) return;
   if (localStorage.getItem("lantso:completedCheckout") === confirmation.sessionId) return;
   state.cart = [];
-  state.promoCode = "";
   saveCart();
-  localStorage.removeItem("lantso:promoCode");
   localStorage.setItem("lantso:completedCheckout", confirmation.sessionId);
 }
 
@@ -1852,7 +1790,7 @@ function bindPageEvents() {
   app.querySelectorAll("[data-add], [data-quick-add]").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.add || button.dataset.quickAdd;
-      addToCart(productId);
+      addToCart(productId, state.selectedSizes[productId], 1, Boolean(button.dataset.add));
     });
   });
 
@@ -1941,15 +1879,13 @@ function renderCart() {
     return;
   }
 
-  const promo = activePromo();
-  const promoInvalid = Boolean(state.promoCode && !promo);
   const sub = subtotal();
-  const shipping = promo ? supportShipping() : calculateShipping(state.shippingCountry, sub, cartQuantity());
+  const shipping = calculateShipping(state.shippingCountry, sub, cartQuantity());
   const displaySub = lines.reduce((sum, line) => sum + storeMoneyAmount(line.unitAmount) * line.quantity, 0);
-  const displayShipping = promo ? 0 : storeMoneyAmount(shipping.amount);
+  const displayShipping = storeMoneyAmount(shipping.amount);
   const displayTotal = displaySub + displayShipping;
-  const shippingLabel = promo ? t("cart.supportNoDelivery") : `${t("cart.shipping")} · ${countryName(state.shippingCountry)}`;
-  const estimate = promo ? t("cart.supportNoDelivery") : shipping.zone.eta[state.lang] || shipping.zone.eta.en;
+  const shippingLabel = `${t("cart.shipping")} · ${countryName(state.shippingCountry)}`;
+  const estimate = shipping.zone.eta[state.lang] || shipping.zone.eta.en;
   renderMarkup(cartBody, `
     <div class="cart-items">
       ${lines.map((line) => cartItem(line)).join("")}
@@ -1964,15 +1900,6 @@ function renderCart() {
         <input data-cart-postal autocomplete="postal-code" list="cart-postal-options" value="${escapeHtml(state.postalCode)}">
         <datalist id="cart-postal-options">${postalOptions(state.shippingCountry, state.postalCode)}</datalist>
       </label>
-      <form class="promo-form" data-promo-form>
-        <label>
-          <span>${t("cart.promo")}</span>
-          <input data-promo-code autocomplete="off" autocapitalize="none" spellcheck="false" value="${escapeHtml(state.promoCode)}">
-        </label>
-        <button class="button-secondary" type="submit">${t("cart.promoApply")}</button>
-        ${state.promoCode ? `<button class="button-ghost" type="button" data-promo-remove>${t("cart.promoRemove")}</button>` : ""}
-      </form>
-      <p class="promo-message${promo ? " is-applied" : ""}${promoInvalid ? " is-invalid" : ""}" data-promo-message role="status">${promo ? t("cart.promoApplied") : promoInvalid ? t("cart.promoInvalid") : ""}</p>
       <div class="summary-line"><span>${t("cart.subtotal")}</span><strong>${formatStoreCurrencyAmount(displaySub)}</strong></div>
       <div class="summary-line"><span>${shippingLabel}</span><strong>${shipping.amount === 0 ? t("cart.free") : formatStoreCurrencyAmount(displayShipping)}</strong></div>
       <div class="summary-line"><span>${t("cart.estimate")}</span><strong>${estimate}</strong></div>
@@ -2012,22 +1939,6 @@ function renderCart() {
     }
     if (postalList) postalList.innerHTML = postalOptions(state.shippingCountry, state.postalCode);
   });
-  cartBody.querySelector("[data-promo-form]")?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const input = cartBody.querySelector("[data-promo-code]");
-    state.promoCode = String(input?.value || "").trim();
-    if (state.promoCode) {
-      localStorage.setItem("lantso:promoCode", state.promoCode);
-    } else {
-      localStorage.removeItem("lantso:promoCode");
-    }
-    renderCart();
-  });
-  cartBody.querySelector("[data-promo-remove]")?.addEventListener("click", () => {
-    state.promoCode = "";
-    localStorage.removeItem("lantso:promoCode");
-    renderCart();
-  });
   cartBody.querySelector("[data-checkout]").addEventListener("click", () => checkout());
 }
 
@@ -2040,7 +1951,7 @@ function cartItem(line) {
       <div>
         <h3>${productName}</h3>
         <p>${t("product.size")}: ${line.size}</p>
-        <p>${formatStoreMoney(line.unitAmount)}${activePromo() ? ` · ${t("cart.supportPrice")}` : ""}</p>
+        <p>${formatStoreMoney(line.unitAmount)}</p>
         <div class="qty-row">
           <button type="button" data-qty="${line.productId}:${line.size}:-1" aria-label="-">-</button>
           <span>${t("cart.qty")} ${line.quantity}</span>
@@ -2239,12 +2150,6 @@ function faqSchema() {
 
 async function checkout(preferredMethod = "") {
   if (state.checkoutPending) return;
-  if (state.promoCode && !activePromo()) {
-    renderCart();
-    const errorMessage = cartBody.querySelector("[data-checkout-message]");
-    if (errorMessage) errorMessage.textContent = t("cart.promoInvalid");
-    return;
-  }
   state.checkoutPending = true;
   renderCart();
   const message = cartBody.querySelector("[data-checkout-message]");
@@ -2255,7 +2160,6 @@ async function checkout(preferredMethod = "") {
     postalCode: state.postalCode,
     language: state.lang,
     preferredMethod,
-    promoCode: state.promoCode,
     idempotencyKey: globalThis.crypto?.randomUUID ? crypto.randomUUID() : `checkout-${Date.now()}-${Math.random().toString(36).slice(2)}`
   };
   const response = await postJson("/api/create-checkout-session", payload);

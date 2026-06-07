@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
-const PHOTO_VERSION = "20260606d";
+const PHOTO_VERSION = "20260607a";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
@@ -100,13 +100,13 @@ const COPY = {
     fr: "Instagram : lantso.at.",
     ar: "Instagram: lantso.at."
   },
-  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Découvrir les Roots | Lantso", ar: "اكتشف الجذور | Lantso" },
+  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Découvrir l'histoire | Lantso", ar: "اكتشف الجذور | Lantso" },
   rootsDescription: {
     en: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
     fr: "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde.",
     ar: "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."
   },
-  rootsHeading: { en: "Discover the Roots", fr: "Découvrir les Roots", ar: "اكتشف الجذور" },
+  rootsHeading: { en: "Discover the Roots", fr: "Découvrir l'histoire", ar: "اكتشف الجذور" },
   rootsParagraphs: {
     en: [
       "Some people wait for the right moment. Others understand that it does not exist.",
@@ -142,7 +142,7 @@ const COPY = {
       "لماذا ننتظر إمكانيات أكثر؟ وقتا أكثر؟ يقينا أكثر؟ لماذا ننتظر أن يصبح كل شيء مثاليا حتى نبدأ؟",
       "وُلدت LANTSO من هذه القناعة. قناعة أن الفكرة لا تحتاج إلى ظروف مثالية كي توجد. وأن المشروع يمكن أن يبدأ بالقليل.",
       "قليل من الإمكانيات. قليل من الضمانات. لكن الكثير من الإرادة.",
-      "ROOTS هو الفصل الأول من هذه القصة.",
+      "الجذور هو الفصل الأول من هذه القصة.",
       "مجموعة مستوحاة من إرث مغربي انتقل عبر الأجيال. تحية لذكريات تركها عام 1998 ولأحلام تتجه نحو 2026.",
       "لم تولد LANTSO لأن كل شيء كان جاهزا. وُلدت العلامة لأن علينا أن نقبل أن أي مغامرة كبيرة لا تبدأ باليقين.",
       "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
