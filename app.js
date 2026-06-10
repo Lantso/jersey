@@ -14,7 +14,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260610a";
+const PHOTO_VERSION = "20260610b";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -1127,7 +1127,7 @@ function productGallerySlides(product, productName) {
   const details = PRODUCT_GALLERY_DETAILS[product.id] || [];
   return [
     { label: productName, visual: visualFor(productName) },
-    ...details.map(([file, alt]) => ({ label: alt, visual: photo(file, "product-visual", alt, 1448, 1448) }))
+    ...details.map(([file, alt]) => ({ label: alt, visual: photo(file, "product-visual", alt, 1280, 1280) }))
   ];
 }
 
@@ -1157,33 +1157,33 @@ function languageFlag(lang) {
 function visualFor(label) {
   const key = label.toLowerCase();
   if (key.includes("roots 01") || key.includes("روتس")) {
-    return photo("roots-01-khaki", "product-visual", "Lantso Roots 01 Khaki limited Moroccan jersey front view", 1600, 1600);
+    return photo("roots-01-khaki", "product-visual", "Lantso Roots 01 Khaki limited Moroccan jersey front view", 1280, 1280);
   }
   if (key.includes("atlas") || key.includes("أطلس")) {
-    return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1600, 1600);
+    return photo("atlas-02-white", "product-visual", "Lantso Atlas 02 White limited Moroccan jersey front view", 1280, 1280);
   }
   if (key.includes("campaign image one")) {
-    return photo("1998-1", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1224, 812);
+    return photo("1998-1", "campaign-visual", "Morocco and Norway footballers competing during the 1998 World Cup", 1100, 730);
   }
   if (key.includes("campaign image two")) {
-    return photo("1998-2", "campaign-visual", "Morocco and Scotland footballers competing during the 1998 World Cup", 1224, 794);
+    return photo("1998-2", "campaign-visual", "Morocco and Scotland footballers competing during the 1998 World Cup", 1100, 714);
   }
   if (key.includes("campaign image three")) {
-    return photo("1998-3", "campaign-visual", "Moustafa Hadji of Morocco in a 1998 World Cup match", 1224, 812);
+    return photo("1998-3", "campaign-visual", "Moustafa Hadji of Morocco in a 1998 World Cup match", 1100, 730);
   }
   if (key.includes("campaign image four")) {
-    return photo("1998-4", "campaign-visual", "Morocco national team match moment from the 1998 football era", 2000, 1126);
+    return photo("1998-4", "campaign-visual", "Morocco national team match moment from the 1998 football era", 1400, 788);
   }
   if (key.includes("chapter")) {
     return photo("story", "campaign-visual", "Lantso Chapter 01 Roots story visual", 1200, 852);
   }
   if (key.includes("origin visual")) {
-    return photo("origin-shop", "campaign-visual", "Lantso shop origin story visual", 1920, 1280);
+    return photo("origin-shop", "campaign-visual", "Lantso shop origin story visual", 1500, 1000);
   }
   if (key.includes("origin") || key.includes("pencil")) {
-    return photo("origin-1", "campaign-visual", "Lantso origin shooting image", 1080, 1350);
+    return photo("origin-1", "campaign-visual", "Lantso origin shooting image", 1000, 1250);
   }
-  return photo("hero", "hero-visual", "Lantso Moroccan jersey campaign in a Casablanca street", 1920, 1280, "eager");
+  return photo("hero", "hero-visual", "Lantso Moroccan jersey campaign in a Casablanca street", 1600, 1067, "eager");
 }
 
 function gatePage() {
@@ -1191,7 +1191,7 @@ function gatePage() {
     <section class="gate-page">
       <figure class="gate-media" aria-hidden="true">
         <picture>
-          <img src="/assets/photos/gate/foot.jpg" alt="" width="6720" height="4480" decoding="async" fetchpriority="high">
+          <img src="/assets/photos/gate/foot.jpg" alt="" width="1400" height="933" decoding="async" fetchpriority="high">
         </picture>
       </figure>
       <div class="gate-language" aria-label="Language">
@@ -1551,10 +1551,10 @@ function rootsPage() {
             <div class="prose">${paragraphsHtml(paragraphs.slice(0, 5))}</div>
           </div>
           <div class="roots-image roots-image--right">
-            ${visualFrame(photo("origin-1", "campaign-visual", "Lantso origin shooting portrait", 1080, 1350), "Origin image one")}
+            ${visualFrame(photo("origin-1", "campaign-visual", "Lantso origin shooting portrait", 1000, 1250), "Origin image one")}
           </div>
           <div class="roots-image roots-image--left">
-            ${visualFrame(photo("origin-2", "campaign-visual", "Lantso origin shooting detail", 1080, 1350), "Origin image two")}
+            ${visualFrame(photo("origin-2", "campaign-visual", "Lantso origin shooting detail", 1000, 1250), "Origin image two")}
           </div>
           <div class="roots-copy roots-copy--rest">
             <div class="prose">${paragraphsHtml(paragraphs.slice(5))}</div>

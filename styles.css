@@ -339,7 +339,7 @@ body.is-scrolled .site-header::before {
 }
 
 .hero .photo-frame img {
-  object-position: center top;
+  object-position: center 10%;
 }
 
 .hero-content {
@@ -922,8 +922,12 @@ body.is-scrolled .site-header::before {
 
 .acknowledgments a {
   color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration: none;
+}
+
+.acknowledgments a:hover,
+.acknowledgments a:focus-visible {
+  opacity: 0.72;
 }
 
 .prose {

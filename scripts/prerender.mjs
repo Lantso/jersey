@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
-const PHOTO_VERSION = "20260610a";
+const PHOTO_VERSION = "20260610b";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
@@ -402,7 +402,7 @@ function linkTo(routePath, lang = DEFAULT_LANG) {
 function homeBody(lang = DEFAULT_LANG) {
   return `
         <section class="seo-hero">
-          ${pictureHtml("hero", "Lantso Moroccan jersey campaign in a Casablanca street", 1920, 1280, "100vw")}
+          ${pictureHtml("hero", "Lantso Moroccan jersey campaign in a Casablanca street", 1600, 1067, "100vw")}
           <h1>From the Roots to the World</h1>
           <p>${escapeHtml(text("homeDescription", lang))}</p>
           <a class="button-primary" href="${linkTo("/shop", lang)}">${escapeHtml(text("stepInside", lang))}</a>
@@ -477,10 +477,10 @@ function rootsBody(lang = DEFAULT_LANG) {
               <div class="prose">${paragraphsHtml(list.slice(0, 5))}</div>
             </div>
             <div class="roots-image roots-image--right">
-              <figure class="photo-frame campaign-visual">${pictureHtml("origin-1", "Lantso origin shooting portrait", 1080, 1350, "(max-width: 760px) 78vw, 34vw")}</figure>
+              <figure class="photo-frame campaign-visual">${pictureHtml("origin-1", "Lantso origin shooting portrait", 1000, 1250, "(max-width: 760px) 78vw, 34vw")}</figure>
             </div>
             <div class="roots-image roots-image--left">
-              <figure class="photo-frame campaign-visual">${pictureHtml("origin-2", "Lantso origin shooting detail", 1080, 1350, "(max-width: 760px) 78vw, 28vw")}</figure>
+              <figure class="photo-frame campaign-visual">${pictureHtml("origin-2", "Lantso origin shooting detail", 1000, 1250, "(max-width: 760px) 78vw, 28vw")}</figure>
             </div>
             <div class="roots-copy roots-copy--rest">
               <div class="prose">${paragraphsHtml(list.slice(5))}</div>
