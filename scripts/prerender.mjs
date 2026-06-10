@@ -7,43 +7,56 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
-const PHOTO_VERSION = "20260607d";
+const PHOTO_VERSION = "20260610a";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
-const ARCHIVE_ITEMS = [
-  { date: "26/07/2026", title: "Ryan" },
-  { date: "26/07/2026", title: "Lorem" },
-  { date: "26/07/2026", title: "Ipsum" },
-  { date: "26/07/2026", title: "Dolor" },
-  { date: "26/07/2026", title: "Sit" },
-  { date: "26/07/2026", title: "Amet" },
-  { date: "26/07/2026", title: "Studio" },
-  { date: "26/07/2026", title: "Roots" }
+const ACKNOWLEDGMENTS = [
+  { name: "Mizan Studio" },
+  { name: "Wlad Derb", url: "https://wladderb.com" },
+  { name: "QS Photos" },
+  { name: "Walid S." },
+  { name: "Abderrahim R." },
+  { name: "Ahmed A." },
+  { name: "Ilan K." },
+  { name: "Jaoued M." },
+  { name: "Chahine C." },
+  { name: "Nizar N." },
+  { name: "Mohammed A." },
+  { name: "Rayan B." },
+  { name: "Terence H." },
+  { name: "Liam B." },
+  { name: "Jin K." },
+  { name: "Ramy A." },
+  { name: "Ziade T." },
+  { name: "Ismail O." },
+  { name: "Nilaksaan A." },
+  { name: "David M." },
+  { name: "Pierre L." },
+  { name: "Mustapha E." }
 ];
-const ACKNOWLEDGMENTS = ["Lorem Ipsum", "Dolor Sit", "Amet Consectetur", "Adipiscing Elit", "Sed Do", "Eiusmod Tempor", "Incididunt Ut", "Labore Et"];
 
 const COPY = {
   homeTitle: {
     en: "Lantso - From the Roots to the World",
     fr: "Lantso - From the Roots to the World",
-    ar: "Lantso - From the Roots to the World"
+    ar: "لانطسو - From the Roots to the World"
   },
   homeDescription: {
     en: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, made for the 2026 World Cup period.",
     fr: "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, pour la période Coupe du Monde 2026.",
-    ar: "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."
+    ar: "قمصان كرة قدم مغربية محدودة من لانطسو: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."
   },
   stepInside: { en: "Step inside", fr: "Entrer", ar: "ادخل" },
-  shopTitle: { en: "Shop Moroccan Football Jerseys | Lantso", fr: "Boutique maillots de football marocains | Lantso", ar: "متجر قمصان كرة القدم المغربية | Lantso" },
+  shopTitle: { en: "Shop Moroccan Football Jerseys | Lantso", fr: "Boutique maillots de football marocains | Lantso", ar: "متجر قمصان كرة القدم المغربية | لانطسو" },
   shopDescription: {
     en: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period.",
     fr: "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026.",
     ar: "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."
   },
-  shopHeading: { en: "Shop Lantso Moroccan jerseys", fr: "Boutique Lantso maillots marocains", ar: "متجر قمصان Lantso المغربية" },
+  shopHeading: { en: "Shop Lantso Moroccan jerseys", fr: "Boutique Lantso maillots marocains", ar: "متجر قمصان لانطسو المغربية" },
   shopBody: {
     en: "Very limited 2026 World Cup-inspired jerseys. Sizes S, M, L and XL.",
     fr: "Maillots très limités inspirés par la Coupe du Monde 2026. Tailles S, M, L et XL.",
@@ -55,11 +68,11 @@ const COPY = {
   measurements: { en: "Measurements", fr: "Mesures", ar: "المقاسات" },
   care: { en: "Care", fr: "Entretien", ar: "العناية" },
   franceShipping: { en: "France shipping estimate", fr: "Estimation livraison France", ar: "تقدير الشحن إلى فرنسا" },
-  infoTitle: { en: "Shipping, Returns and FAQ | Lantso", fr: "Livraison, retours et FAQ | Lantso", ar: "الشحن والإرجاع والأسئلة | Lantso" },
+  infoTitle: { en: "Shipping, Returns and FAQ | Lantso", fr: "Livraison, retours et FAQ | Lantso", ar: "الشحن والإرجاع والأسئلة | لانطسو" },
   infoDescription: {
     en: "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys.",
     fr: "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso.",
-    ar: "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان Lantso المغربية المحدودة."
+    ar: "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان لانطسو المغربية المحدودة."
   },
   shippingReturnsFaq: { en: "Shipping, returns and FAQ", fr: "Livraison, retours et FAQ", ar: "الشحن والإرجاع والأسئلة" },
   shippingBody: {
@@ -73,17 +86,17 @@ const COPY = {
     fr: "Les retours peuvent être demandés sous 14 jours après livraison en écrivant à contact@lantso.com avant tout renvoi. Les pièces doivent être non portées, non lavées, non abîmées et renvoyées avec leur packaging et leurs étiquettes. Les frais de retour sont à la charge du client, sauf article défectueux ou erreur d'envoi. Le remboursement est effectué sur le moyen de paiement d'origine après vérification.",
     ar: "يمكن طلب الإرجاع خلال 14 يوما من التسليم عبر contact@lantso.com قبل إرسال أي قطعة. يجب أن تكون القطعة غير مستعملة، غير مغسولة، غير متضررة ومع التغليف والملصقات الأصلية. يتحمل العميل تكلفة الإرجاع إلا إذا كانت القطعة معيبة أو تم إرسال منتج خاطئ. يتم رد المبلغ إلى وسيلة الدفع الأصلية بعد الفحص."
   },
-  legalTitle: { en: "Legal and Contact | Lantso", fr: "Mentions légales et contact | Lantso", ar: "القانوني والتواصل | Lantso" },
+  legalTitle: { en: "Legal and Contact | Lantso", fr: "Mentions légales et contact | Lantso", ar: "القانوني والتواصل | لانطسو" },
   legalDescription: {
     en: "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys.",
     fr: "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso.",
-    ar: "الشروط والخصوصية ومعلومات التواصل لشراء قمصان Lantso المغربية المحدودة."
+    ar: "الشروط والخصوصية ومعلومات التواصل لشراء قمصان لانطسو المغربية المحدودة."
   },
   legalHeading: { en: "Legal and contact", fr: "Mentions légales et contact", ar: "القانوني والتواصل" },
   legalBody: {
     en: "Lantso sells limited edition jerseys in EUR through this storefront. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details.",
     fr: "Lantso vend des maillots en édition limitée en EUR via cette boutique. Les stocks sont limités et une pièce est réservée uniquement au moment où Stripe Checkout s'ouvre; la commande est confirmée après paiement réussi. Lantso peut annuler et rembourser une commande en cas de fraude, erreur de stock ou informations de livraison incomplètes.",
-    ar: "تبيع Lantso قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ Lantso إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة."
+    ar: "تبيع لانطسو قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ لانطسو إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة."
   },
   legalSupport: {
     en: "The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, sizing, press, or wholesale requests, write to contact@lantso.com.",
@@ -93,18 +106,18 @@ const COPY = {
   legalPrivacy: {
     en: "Lantso collects contact details, delivery address, cart contents, language and access preferences, support messages, and club sign-up details. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and requested emails.",
     fr: "Lantso collecte les coordonnées, l'adresse de livraison, le contenu du panier, les préférences de langue et d'accès, les messages support et les inscriptions club. Les données de paiement sont traitées par Stripe et ne sont pas stockées par ce site. Les données servent au paiement, à la préparation, au support, à la prévention de fraude, aux obligations comptables et aux emails demandés.",
-    ar: "تجمع Lantso بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم وتسجيلات النادي. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة."
+    ar: "تجمع لانطسو بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم وتسجيلات النادي. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة."
   },
   legalSocial: {
     en: "Instagram: lantso.at.",
     fr: "Instagram : lantso.at.",
     ar: "Instagram: lantso.at."
   },
-  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Découvrir l'histoire | Lantso", ar: "اكتشف الجذور | Lantso" },
+  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Découvrir l'histoire | Lantso", ar: "اكتشف الجذور | لانطسو" },
   rootsDescription: {
     en: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
     fr: "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde.",
-    ar: "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."
+    ar: "قصة لانطسو خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."
   },
   rootsHeading: { en: "Discover the Roots", fr: "Découvrir l'histoire", ar: "اكتشف الجذور" },
   rootsParagraphs: {
@@ -148,26 +161,20 @@ const COPY = {
       "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
     ]
   },
-  archivesTitle: { en: "Archives | Lantso", fr: "Archives | Lantso", ar: "الأرشيف | Lantso" },
-  archivesDescription: {
-    en: "Minimal photo archive from Lantso shooting days and brand acknowledgments.",
-    fr: "Archive photo minimaliste des jours de shooting Lantso et remerciements de la marque.",
-    ar: "أرشيف صور بسيط من أيام تصوير Lantso وقائمة شكر العلامة."
+  creditsTitle: { en: "Acknowledgments | Lantso", fr: "Remerciements | Lantso", ar: "الشكر | لانطسو" },
+  creditsDescription: {
+    en: "Credits and acknowledgments from the Lantso Roots chapter.",
+    fr: "Crédits et remerciements du chapitre Roots de Lantso.",
+    ar: "قائمة شكر فصل الجذور من لانطسو."
   },
-  archivesHeading: { en: "Archives", fr: "Archives", ar: "الأرشيف" },
-  archivesIntro: {
-    en: "Photo traces from the Lantso shooting days.",
-    fr: "Traces photo des jours de shooting Lantso.",
-    ar: "آثار مصورة من أيام تصوير Lantso."
-  },
-  acknowledgments: { en: "Acknowledgments", fr: "Remerciements", ar: "الشكر" },
-  successTitle: { en: "Order Received | Lantso", fr: "Commande reçue | Lantso", ar: "تم استلام الطلب | Lantso" },
+  creditsHeading: { en: "Acknowledgments", fr: "Remerciements", ar: "الشكر" },
+  successTitle: { en: "Order Received | Lantso", fr: "Commande reçue | Lantso", ar: "تم استلام الطلب | لانطسو" },
   successBody: {
     en: "Payment is complete. You will receive the delivery follow-up by email.",
     fr: "Le paiement est terminé. Le suivi de livraison sera envoyé par email.",
     ar: "اكتملت عملية الدفع. سيصلك تتبع التوصيل عبر البريد الإلكتروني."
   },
-  cancelTitle: { en: "Checkout Cancelled | Lantso", fr: "Paiement annulé | Lantso", ar: "تم إلغاء الدفع | Lantso" },
+  cancelTitle: { en: "Checkout Cancelled | Lantso", fr: "Paiement annulé | Lantso", ar: "تم إلغاء الدفع | لانطسو" },
   cancelBody: { en: "Your cart is still saved.", fr: "Ton panier reste sauvegardé.", ar: "سلتك ما زالت محفوظة." },
   backToShop: { en: "Back to shop", fr: "Retour boutique", ar: "العودة إلى المتجر" }
 };
@@ -222,11 +229,11 @@ const routes = [
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   },
   {
-    path: "/archives",
-    title: "Archives | Lantso",
-    description: "Minimal photo archive from Lantso shooting days and brand acknowledgments.",
+    path: "/acknowledgments",
+    title: "Acknowledgments | Lantso",
+    description: "Credits and acknowledgments from the Lantso Roots chapter.",
     image: "/assets/photos/fallback/origin-2.jpg",
-    body: archivesBody,
+    body: creditsBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang)]
   },
   {
@@ -313,7 +320,11 @@ function text(key, lang = DEFAULT_LANG) {
 }
 
 function noticeHeading(key, lang = DEFAULT_LANG) {
-  return text(key, lang).replace(" | Lantso", "");
+  return stripBrandSuffix(text(key, lang));
+}
+
+function stripBrandSuffix(value) {
+  return String(value || "").replace(" | Lantso", "").replace(" | لانطسو", "");
 }
 
 function locale(lang = DEFAULT_LANG) {
@@ -355,7 +366,7 @@ function routeTitle(route, lang = DEFAULT_LANG) {
   if (route.path === "/info") return text("infoTitle", lang);
   if (route.path === "/legal") return text("legalTitle", lang);
   if (route.path === "/roots") return text("rootsTitle", lang);
-  if (route.path === "/archives") return text("archivesTitle", lang);
+  if (route.path === "/acknowledgments") return text("creditsTitle", lang);
   if (route.path === "/success") return text("successTitle", lang);
   if (route.path === "/cancel") return text("cancelTitle", lang);
   return route.title;
@@ -373,7 +384,7 @@ function routeDescription(route, lang = DEFAULT_LANG) {
   if (route.path === "/info") return text("infoDescription", lang);
   if (route.path === "/legal") return text("legalDescription", lang);
   if (route.path === "/roots") return text("rootsDescription", lang);
-  if (route.path === "/archives") return text("archivesDescription", lang);
+  if (route.path === "/acknowledgments") return text("creditsDescription", lang);
   if (route.path === "/success") return text("successBody", lang);
   if (route.path === "/cancel") return text("cancelBody", lang);
   return route.description;
@@ -479,22 +490,22 @@ function rootsBody(lang = DEFAULT_LANG) {
       `;
 }
 
-function archivesBody(lang = DEFAULT_LANG) {
+function creditsBody(lang = DEFAULT_LANG) {
   return `
-        <section class="archive-page">
-          <div class="archive-head">
-            <h1>${escapeHtml(text("archivesHeading", lang))}</h1>
-            <p>${escapeHtml(text("archivesIntro", lang))}</p>
-          </div>
-          <div class="archive-grid">
-            ${ARCHIVE_ITEMS.map((item) => `<article class="archive-card"><div class="archive-thumb"></div><p>${escapeHtml(`${item.date} - ${item.title}`)}</p></article>`).join("")}
-          </div>
-          <section class="acknowledgments">
-            <h2>${escapeHtml(text("acknowledgments", lang))}</h2>
-            <ul>${ACKNOWLEDGMENTS.map((name) => `<li>${escapeHtml(name)}</li>`).join("")}</ul>
+        <section class="credits-page">
+          <section class="acknowledgments acknowledgments--solo">
+            <h1>${escapeHtml(text("creditsHeading", lang))}</h1>
+            <ul>${ACKNOWLEDGMENTS.map(acknowledgmentItem).join("")}</ul>
           </section>
         </section>
       `;
+}
+
+function acknowledgmentItem(item) {
+  if (item.url) {
+    return `<li><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.name)}</a></li>`;
+  }
+  return `<li>${escapeHtml(item.name)}</li>`;
 }
 
 function paragraphsHtml(paragraphs) {
@@ -631,7 +642,7 @@ function breadcrumbSchema(routePath, title, lang = DEFAULT_LANG) {
     items.push({
       "@type": "ListItem",
       position: 2,
-      name: title.replace(" | Lantso", "").replace(" - Limited Moroccan Jersey", ""),
+      name: stripBrandSuffix(title).replace(" - Limited Moroccan Jersey", ""),
       item: absolute(localizedPath(routePath, lang))
     });
   }

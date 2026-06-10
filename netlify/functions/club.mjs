@@ -21,8 +21,8 @@ export async function handler(event) {
   if (!normalized.ok) return json(normalized.status, { message: normalized.message }, origin, allowedOrigins);
 
   try {
-    await saveClubProfile(normalized.record);
-    return json(200, { ok: true }, origin, allowedOrigins);
+    const saved = await saveClubProfile(normalized.record);
+    return json(200, { ok: true, duplicate: Boolean(saved.duplicate) }, origin, allowedOrigins);
   } catch {
     return json(503, { message: "Profile storage is temporarily unavailable. Contact contact@lantso.com." }, origin, allowedOrigins);
   }

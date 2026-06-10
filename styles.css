@@ -339,7 +339,7 @@ body.is-scrolled .site-header::before {
 }
 
 .hero .photo-frame img {
-  object-position: center 24%;
+  object-position: center top;
 }
 
 .hero-content {
@@ -424,7 +424,7 @@ body.is-scrolled .site-header::before {
 .legal-section,
 .roots-section,
 .roots-story,
-.archive-page,
+.credits-page,
 .site-footer,
 .notice-page {
   background-color: var(--white);
@@ -843,7 +843,7 @@ body.is-scrolled .site-header::before {
 .roots-section h1,
 .roots-section h2,
 .roots-story h1,
-.archive-head h1,
+.acknowledgments h1,
 .acknowledgments h2 {
   margin: 0;
   font-size: clamp(24px, 3vw, 42px);
@@ -888,55 +888,11 @@ body.is-scrolled .site-header::before {
   aspect-ratio: 4 / 5;
 }
 
-.archive-page {
+.credits-page {
   display: grid;
   gap: 52px;
   padding: 64px 8vw 78px;
   border-bottom: 1px solid var(--line);
-}
-
-.archive-head {
-  display: grid;
-  grid-template-columns: 0.34fr minmax(0, 0.66fr);
-  gap: 36px;
-  align-items: end;
-}
-
-.archive-head p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.65;
-  text-transform: none;
-}
-
-.archive-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.archive-card {
-  display: grid;
-  gap: 10px;
-}
-
-.archive-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-  text-transform: none;
-}
-
-.archive-thumb {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  border: 1px solid var(--line);
-  padding: 0;
-  background: #050505;
-}
-
-.archive-thumb:hover {
-  background: #111111;
 }
 
 .acknowledgments {
@@ -945,6 +901,11 @@ body.is-scrolled .site-header::before {
   gap: 36px;
   padding-top: 28px;
   border-top: 1px solid var(--line);
+}
+
+.acknowledgments--solo {
+  padding-top: 0;
+  border-top: 0;
 }
 
 .acknowledgments ul {
@@ -959,49 +920,10 @@ body.is-scrolled .site-header::before {
   text-transform: none;
 }
 
-.archive-modal {
-  width: min(560px, calc(100vw - 28px));
-  border: 1px solid rgba(248, 248, 246, 0.34);
-  padding: 18px;
-  background: #050505;
-  color: var(--white);
-}
-
-.archive-modal[open] {
-  display: grid;
-}
-
-.archive-modal:not([open]) {
-  display: none;
-}
-
-.archive-modal::backdrop {
-  background: rgba(0, 0, 0, 0.72);
-}
-
-.archive-modal .modal-close {
-  justify-self: end;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(248, 248, 246, 0.42);
-  background: transparent;
-  color: var(--white);
-  font-size: 22px;
-  line-height: 1;
-}
-
-.archive-modal-visual {
-  aspect-ratio: 9 / 16;
-  margin-top: 10px;
-  border: 1px solid rgba(248, 248, 246, 0.18);
-  background: #000000;
-}
-
-.archive-modal p {
-  margin: 14px 0 0;
-  color: rgba(248, 248, 246, 0.82);
-  font-size: 12px;
-  text-transform: none;
+.acknowledgments a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
 }
 
 .prose {
@@ -1600,7 +1522,6 @@ textarea {
   .origin-band,
   .product-detail,
   .site-footer,
-  .archive-head,
   .acknowledgments,
   .info-section,
   .legal-section,
@@ -1785,14 +1706,9 @@ textarea {
     justify-self: end;
   }
 
-  .archive-page {
+  .credits-page {
     padding: 46px 24px 56px;
     gap: 36px;
-  }
-
-  .archive-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
   }
 
   .acknowledgments ul {

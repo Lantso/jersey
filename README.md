@@ -37,8 +37,8 @@ Netlify publishes `dist/`.
 ## pages
 
 - `/roots` = origin story + 2 images
-- `/archives` = hidden archive placeholders + thanks list
-- archive cards / names live in `app.js`
+- `/acknowledgments` = thanks / credits list
+- credits names live in `app.js` and `scripts/prerender.mjs`
 
 ## data
 
@@ -46,7 +46,8 @@ Netlify publishes `dist/`.
 - Stripe Dashboard has the paid checkout sessions.
 - Netlify Blobs stores stock, paid orders, club signups, contact messages.
 - Paid orders live in `lantso-commerce / inventory-v1 / orders`.
-- Netlify Forms mirrors club/contact so there is a free dashboard/export thing.
+- Club signups are one record per email in Blobs.
+- Netlify Forms mirrors contact so there is a free dashboard/export thing.
 - Resend sends contact + paid order emails if `RESEND_API_KEY` + `CONTACT_FROM_EMAIL` are set.
 - Order emails go to `CONTACT_TO_EMAIL`, then `STORE_EMAIL`, then `contact@lantso.com`.
 

@@ -14,7 +14,7 @@ const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260607d";
+const PHOTO_VERSION = "20260610a";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -152,25 +152,29 @@ const PRODUCT_GALLERY_DETAILS = {
     ["atlas-02-white-studio-84", "Atlas 02 White jersey worn detail"]
   ]
 };
-const ARCHIVE_ITEMS = [
-  { date: "26/07/2026", title: "Ryan" },
-  { date: "26/07/2026", title: "Lorem" },
-  { date: "26/07/2026", title: "Ipsum" },
-  { date: "26/07/2026", title: "Dolor" },
-  { date: "26/07/2026", title: "Sit" },
-  { date: "26/07/2026", title: "Amet" },
-  { date: "26/07/2026", title: "Studio" },
-  { date: "26/07/2026", title: "Roots" }
-];
 const ACKNOWLEDGMENTS = [
-  "Lorem Ipsum",
-  "Dolor Sit",
-  "Amet Consectetur",
-  "Adipiscing Elit",
-  "Sed Do",
-  "Eiusmod Tempor",
-  "Incididunt Ut",
-  "Labore Et"
+  { name: "Mizan Studio" },
+  { name: "Wlad Derb", url: "https://wladderb.com" },
+  { name: "QS Photos" },
+  { name: "Walid S." },
+  { name: "Abderrahim R." },
+  { name: "Ahmed A." },
+  { name: "Ilan K." },
+  { name: "Jaoued M." },
+  { name: "Chahine C." },
+  { name: "Nizar N." },
+  { name: "Mohammed A." },
+  { name: "Rayan B." },
+  { name: "Terence H." },
+  { name: "Liam B." },
+  { name: "Jin K." },
+  { name: "Ramy A." },
+  { name: "Ziade T." },
+  { name: "Ismail O." },
+  { name: "Nilaksaan A." },
+  { name: "David M." },
+  { name: "Pierre L." },
+  { name: "Mustapha E." }
 ];
 
 const I18N = {
@@ -189,8 +193,8 @@ const I18N = {
       terms: "Terms & conditions",
       privacy: "Privacy policy",
       contact: "Contact",
-      locked: "Stay locked in",
-      archives: "Archives"
+      locked: "Brand",
+      archives: "Acknowledgments"
     },
     hero: {
       title: "From the Roots\nto the World",
@@ -279,11 +283,8 @@ const I18N = {
         "Only a vision. And the decision to believe it deserves to exist."
       ]
     },
-    archives: {
-      title: "Archives",
-      intro: "Photo traces from the Lantso shooting days.",
-      acknowledgments: "Acknowledgments",
-      close: "Close"
+    credits: {
+      title: "Acknowledgments"
     },
     club: {
       title: "Join the club",
@@ -291,6 +292,7 @@ const I18N = {
       email: "Email",
       submit: "Join the list",
       success: "You are on the list.",
+      duplicate: "This email is already on the list.",
       error: "The profile could not be saved."
     },
     gate: {
@@ -348,8 +350,8 @@ const I18N = {
       terms: "Conditions générales",
       privacy: "Confidentialité",
       contact: "Contact",
-      locked: "Reste connecté",
-      archives: "Archives"
+      locked: "Brand",
+      archives: "Remerciements"
     },
     hero: {
       title: "From the Roots\nto the World",
@@ -438,11 +440,8 @@ const I18N = {
         "Seulement avec une vision. Et la décision de croire qu'elle mérite d'exister."
       ]
     },
-    archives: {
-      title: "Archives",
-      intro: "Traces photo des jours de shooting Lantso.",
-      acknowledgments: "Remerciements",
-      close: "Fermer"
+    credits: {
+      title: "Remerciements"
     },
     club: {
       title: "Join the club",
@@ -450,6 +449,7 @@ const I18N = {
       email: "Email",
       submit: "Rejoindre la liste",
       success: "Tu es dans la liste.",
+      duplicate: "Cet email est déjà dans la liste.",
       error: "Le profil n'a pas pu être enregistré."
     },
     gate: {
@@ -507,8 +507,8 @@ const I18N = {
       terms: "الشروط والأحكام",
       privacy: "سياسة الخصوصية",
       contact: "تواصل",
-      locked: "ابق قريبا",
-      archives: "الأرشيف"
+      locked: "Brand",
+      archives: "الشكر"
     },
     hero: {
       title: "From the Roots\nto the World",
@@ -572,8 +572,8 @@ const I18N = {
     },
     legal: {
       title: "القانوني والتواصل",
-      termsBody: "تبيع Lantso قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ Lantso إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة. يتحمل العميل مسؤولية العنوان الصحيح وأي رسوم أو ضرائب استيراد أو تكاليف ناقل خارج الاتحاد الأوروبي. للدعم: contact@lantso.com.",
-      privacyBody: "تجمع Lantso البيانات الضرورية لتشغيل المتجر: بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم وتسجيلات النادي. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة. لطلب الوصول إلى البيانات المؤهلة أو حذفها: contact@lantso.com.",
+      termsBody: "تبيع لانطسو قمصانا محدودة باليورو عبر هذا المتجر. المخزون محدود ولا يتم حجز القطعة إلا عند فتح Stripe Checkout؛ يؤكد الطلب بعد نجاح الدفع. يمكن لـ لانطسو إلغاء ورد طلب عند وجود مؤشر احتيال أو خطأ مخزون أو بيانات توصيل ناقصة. يتحمل العميل مسؤولية العنوان الصحيح وأي رسوم أو ضرائب استيراد أو تكاليف ناقل خارج الاتحاد الأوروبي. للدعم: contact@lantso.com.",
+      privacyBody: "تجمع لانطسو البيانات الضرورية لتشغيل المتجر: بيانات التواصل، عنوان التوصيل، محتوى السلة، تفضيلات اللغة والدخول، رسائل الدعم وتسجيلات النادي. بيانات الدفع يعالجها Stripe ولا يخزنها هذا الموقع. تستخدم البيانات للدفع، التجهيز، الدعم، منع الاحتيال، السجلات المحاسبية المطلوبة ورسائل البريد المطلوبة. لطلب الوصول إلى البيانات المؤهلة أو حذفها: contact@lantso.com.",
       contactBody: "للدعم أو المقاسات أو الصحافة أو طلبات الجملة، استخدم النموذج أدناه أو اكتب إلى contact@lantso.com.",
       name: "الاسم",
       email: "البريد الإلكتروني",
@@ -597,11 +597,8 @@ const I18N = {
         "فقط برؤية. وبقرار الإيمان بأنها تستحق أن توجد."
       ]
     },
-    archives: {
-      title: "الأرشيف",
-      intro: "آثار مصورة من أيام تصوير Lantso.",
-      acknowledgments: "الشكر",
-      close: "إغلاق"
+    credits: {
+      title: "الشكر"
     },
     club: {
       title: "Join the club",
@@ -609,6 +606,7 @@ const I18N = {
       email: "البريد الإلكتروني",
       submit: "انضم إلى القائمة",
       success: "أنت الآن في القائمة.",
+      duplicate: "هذا البريد موجود بالفعل في القائمة.",
       error: "تعذر حفظ الحساب."
     },
     gate: {
@@ -632,7 +630,7 @@ const I18N = {
       emailInvalid: "أدخل بريدا إلكترونيا صحيحا."
     },
     cookie: {
-      body: "تستخدم Lantso ملفات تعريف ارتباط أساسية والتخزين المحلي للسلة واللغة والدخول الخاص وأمان الدفع.",
+      body: "تستخدم لانطسو ملفات تعريف ارتباط أساسية والتخزين المحلي للسلة واللغة والدخول الخاص وأمان الدفع.",
       accept: "موافق"
     },
     checkout: {
@@ -647,7 +645,7 @@ const I18N = {
       back: "العودة إلى المتجر"
     },
     footer: {
-      rights: "© 2026 Lantso\nAll rights reserved.",
+      rights: "© 2026 لانطسو\nAll rights reserved.",
       secure: "مدفوعات آمنة"
     }
   }
@@ -697,6 +695,7 @@ const clubModal = document.querySelector("[data-club-modal]");
 const cookieNotice = document.querySelector("[data-cookie-notice]");
 let countdownTimer;
 let previousCartFocus;
+let checkoutRequestActive = false;
 
 function t(path) {
   return path.split(".").reduce((value, key) => value?.[key], I18N[state.lang]) || path;
@@ -734,7 +733,7 @@ function route() {
   if (active === "/info") return { name: "info" };
   if (active === "/legal") return { name: "legal" };
   if (active === "/roots") return { name: "roots" };
-  if (active === "/archives") return { name: "archives" };
+  if (active === "/acknowledgments" || active === "/archives") return { name: "credits" };
   if (active === "/success") return { name: "success" };
   if (active === "/cancel") return { name: "cancel" };
   return { name: "home" };
@@ -760,7 +759,7 @@ function pageMeta(current = route()) {
       info: ["Shipping, Returns and FAQ | Lantso", "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys."],
       legal: ["Legal and Contact | Lantso", "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys."],
       roots: ["Discover the Roots | Lantso", "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world."],
-      archives: ["Archives | Lantso", "Minimal photo archive from Lantso shooting days and brand acknowledgments."],
+      credits: ["Acknowledgments | Lantso", "Credits and acknowledgments from the Lantso Roots chapter."],
       success: ["Order Received | Lantso", "Lantso order confirmation."],
       cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
     },
@@ -770,19 +769,19 @@ function pageMeta(current = route()) {
       info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso."],
       legal: ["Mentions légales et contact | Lantso", "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso."],
       roots: ["Découvrir l'histoire | Lantso", "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
-      archives: ["Archives | Lantso", "Archive photo minimaliste des jours de shooting Lantso et remerciements de la marque."],
+      credits: ["Remerciements | Lantso", "Crédits et remerciements du chapitre Roots de Lantso."],
       success: ["Commande reçue | Lantso", "Confirmation de commande Lantso."],
       cancel: ["Paiement annulé | Lantso", "Paiement Lantso annulé."]
     },
     ar: {
-      home: ["Lantso - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من Lantso: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."],
-      shop: ["متجر قمصان كرة القدم المغربية | Lantso", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."],
-      info: ["الشحن والإرجاع والأسئلة | Lantso", "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان Lantso المغربية المحدودة."],
-      legal: ["القانوني والتواصل | Lantso", "الشروط والخصوصية ومعلومات التواصل لشراء قمصان Lantso المغربية المحدودة."],
-      roots: ["اكتشف الجذور | Lantso", "قصة Lantso خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."],
-      archives: ["الأرشيف | Lantso", "أرشيف صور بسيط من أيام تصوير Lantso وقائمة شكر العلامة."],
-      success: ["تم استلام الطلب | Lantso", "تأكيد طلب Lantso."],
-      cancel: ["تم إلغاء الدفع | Lantso", "تم إلغاء دفع Lantso."]
+      home: ["لانطسو - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من لانطسو: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."],
+      shop: ["متجر قمصان كرة القدم المغربية | لانطسو", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."],
+      info: ["الشحن والإرجاع والأسئلة | لانطسو", "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان لانطسو المغربية المحدودة."],
+      legal: ["القانوني والتواصل | لانطسو", "الشروط والخصوصية ومعلومات التواصل لشراء قمصان لانطسو المغربية المحدودة."],
+      roots: ["اكتشف الجذور | لانطسو", "قصة لانطسو خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."],
+      credits: ["الشكر | لانطسو", "قائمة شكر فصل الجذور من لانطسو."],
+      success: ["تم استلام الطلب | لانطسو", "تأكيد طلب لانطسو."],
+      cancel: ["تم إلغاء الدفع | لانطسو", "تم إلغاء دفع لانطسو."]
     }
   };
   const copy = localizedMeta[state.lang] || localizedMeta.en;
@@ -791,7 +790,7 @@ function pageMeta(current = route()) {
     info: { title: copy.info[0], description: copy.info[1], path: "/info", image: "/assets/photos/fallback/hero.jpg", schema: faqSchema() },
     legal: { title: copy.legal[0], description: copy.legal[1], path: "/legal", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema() },
     roots: { title: copy.roots[0], description: copy.roots[1], path: "/roots", image: "/assets/photos/fallback/origin-1.jpg", schema: organizationSchema() },
-    archives: { title: copy.archives[0], description: copy.archives[1], path: "/archives", image: "/assets/photos/fallback/origin-2.jpg", schema: organizationSchema() },
+    credits: { title: copy.credits[0], description: copy.credits[1], path: "/acknowledgments", image: "/assets/photos/fallback/origin-2.jpg", schema: organizationSchema() },
     success: { title: copy.success[0], description: copy.success[1], path: "/success", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema(), robots: "noindex, nofollow" },
     cancel: { title: copy.cancel[0], description: copy.cancel[1], path: "/cancel", image: "/assets/photos/fallback/hero.jpg", schema: organizationSchema(), robots: "noindex, nofollow" }
   };
@@ -1243,8 +1242,7 @@ function footer() {
       </div>
       ${footerColumn(t("nav.shop"), [
         [t("nav.allProducts"), "/shop"],
-        [t("nav.jerseys"), "/shop"],
-        [t("nav.origin"), "/roots"]
+        [t("nav.jerseys"), "/shop"]
       ])}
       ${footerColumn(t("nav.info"), [
         [t("nav.shipping"), "/info#shipping"],
@@ -1258,9 +1256,9 @@ function footer() {
       ])}
       <div class="footer-col">
         <h3>${t("nav.locked")}</h3>
-        <div class="social-row">
-          <a href="${SOCIAL_LINKS.instagram}" rel="noreferrer" target="_blank" aria-label="Instagram">INSTAGRAM</a>
-        </div>
+        <a href="${SOCIAL_LINKS.instagram}" rel="noreferrer" target="_blank" aria-label="Instagram">Instagram</a>
+        <a href="${localizedPath("/roots")}" data-link>${t("nav.origin")}</a>
+        <a href="${localizedPath("/acknowledgments")}" data-link>${t("nav.archives")}</a>
       </div>
       <div class="payments">
         ${paymentBadges()}
@@ -1576,49 +1574,28 @@ function paragraphsHtml(paragraphs) {
   return paragraphs.map((body) => `<p>${escapeHtml(body)}</p>`).join("");
 }
 
-function archivesPage() {
+function creditsPage() {
   return `
     <div class="page-shell">
       ${breadcrumb(t("nav.archives"))}
-      <section class="archive-page">
-        <div class="archive-head">
-          <h1>${t("archives.title")}</h1>
-          <p>${t("archives.intro")}</p>
-        </div>
-        <div class="archive-grid">
-          ${ARCHIVE_ITEMS.map((item, index) => archiveCard(item, index)).join("")}
-        </div>
-        <section class="acknowledgments">
-          <h2>${t("archives.acknowledgments")}</h2>
+      <section class="credits-page">
+        <section class="acknowledgments acknowledgments--solo">
+          <h1>${t("credits.title")}</h1>
           <ul>
-            ${ACKNOWLEDGMENTS.map((name) => `<li>${escapeHtml(name)}</li>`).join("")}
+            ${ACKNOWLEDGMENTS.map(acknowledgmentItem).join("")}
           </ul>
         </section>
       </section>
-      ${archiveDialog()}
       ${footer()}
     </div>
   `;
 }
 
-function archiveCard(item, index) {
-  const label = `${item.date} - ${item.title}`;
-  return `
-    <article class="archive-card">
-      <button class="archive-thumb" type="button" data-archive-open="${index}" aria-label="${escapeHtml(label)}"></button>
-      <p>${escapeHtml(label)}</p>
-    </article>
-  `;
-}
-
-function archiveDialog() {
-  return `
-    <dialog class="archive-modal" data-archive-modal>
-      <button class="modal-close" type="button" data-archive-close aria-label="${t("archives.close")}">×</button>
-      <div class="archive-modal-visual" aria-hidden="true"></div>
-      <p data-archive-caption></p>
-    </dialog>
-  `;
+function acknowledgmentItem(item) {
+  if (item.url) {
+    return `<li><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.name)}</a></li>`;
+  }
+  return `<li>${escapeHtml(item.name)}</li>`;
 }
 
 function checkoutConfirmation() {
@@ -1698,7 +1675,7 @@ function render(options = {}) {
   if (current.name === "info") renderMarkup(app, `<div class="page">${infoPage()}</div>`);
   if (current.name === "legal") renderMarkup(app, `<div class="page">${legalPage()}</div>`);
   if (current.name === "roots") renderMarkup(app, `<div class="page">${rootsPage()}</div>`);
-  if (current.name === "archives") renderMarkup(app, `<div class="page">${archivesPage()}</div>`);
+  if (current.name === "credits") renderMarkup(app, `<div class="page">${creditsPage()}</div>`);
   if (current.name === "success") renderMarkup(app, `<div class="page">${noticePage("success")}</div>`);
   if (current.name === "cancel") renderMarkup(app, `<div class="page">${noticePage("cancel")}</div>`);
   bindPageEvents();
@@ -1745,7 +1722,7 @@ function bindGateEvents() {
       source: "gate-newsletter"
     });
     setFormPending(newsletterForm, false);
-    message.textContent = response.ok ? t("gate.subscribed") : t("club.error");
+    message.textContent = response.ok ? (response.data?.duplicate ? t("club.duplicate") : t("gate.subscribed")) : response.data?.message || t("club.error");
     if (response.ok) newsletterForm.reset();
   });
 }
@@ -1820,24 +1797,6 @@ function bindPageEvents() {
       calculator.querySelector("[data-calc-result]").textContent = `${result.zone.label[state.lang] || result.zone.label.en}: ${formatStoreMoney(result.amount, state.shippingCountry)} · ${result.zone.eta[state.lang] || result.zone.eta.en}`;
       renderCart();
     });
-  }
-
-  const archiveModal = app.querySelector("[data-archive-modal]");
-  if (archiveModal) {
-    const caption = archiveModal.querySelector("[data-archive-caption]");
-    app.querySelectorAll("[data-archive-open]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const item = ARCHIVE_ITEMS[Number(button.dataset.archiveOpen)];
-        caption.textContent = item ? `${item.date} - ${item.title}` : "";
-        archiveModal.showModal();
-        document.body.classList.add("modal-open");
-      });
-    });
-    archiveModal.querySelector("[data-archive-close]")?.addEventListener("click", () => archiveModal.close());
-    archiveModal.addEventListener("click", (event) => {
-      if (event.target === archiveModal) archiveModal.close();
-    });
-    archiveModal.addEventListener("close", () => document.body.classList.remove("modal-open"));
   }
 
   const contactForm = app.querySelector("[data-contact-form]");
@@ -2133,12 +2092,16 @@ function breadcrumbSchema(current = route()) {
     { "@type": "ListItem", position: 1, name: t("nav.home"), item: absoluteUrl(localizedPath("/")) }
   ];
   if (meta.path !== "/") {
-    items.push({ "@type": "ListItem", position: 2, name: meta.title.replace(" | Lantso", ""), item: absoluteUrl(localizedPath(meta.path)) });
+    items.push({ "@type": "ListItem", position: 2, name: stripBrandSuffix(meta.title), item: absoluteUrl(localizedPath(meta.path)) });
   }
   return {
     "@type": "BreadcrumbList",
     itemListElement: items
   };
+}
+
+function stripBrandSuffix(value) {
+  return String(value || "").replace(" | Lantso", "").replace(" | لانطسو", "");
 }
 
 function faqSchema() {
@@ -2154,7 +2117,8 @@ function faqSchema() {
 }
 
 async function checkout(preferredMethod = "") {
-  if (state.checkoutPending) return;
+  if (state.checkoutPending || checkoutRequestActive) return;
+  checkoutRequestActive = true;
   state.checkoutPending = true;
   renderCart();
   const message = cartBody.querySelector("[data-checkout-message]");
@@ -2171,12 +2135,14 @@ async function checkout(preferredMethod = "") {
   if (response.ok && response.data.url) {
     rememberCheckout(response.data);
     prepareForCheckoutRedirect();
+    checkoutRequestActive = false;
+    resetCheckoutPending();
     window.location.assign(response.data.url);
     return;
   }
-  state.checkoutPending = false;
+  checkoutRequestActive = false;
+  resetCheckoutPending();
   if (response.status === 409) refreshInventory();
-  renderCart();
   const errorMessage = cartBody.querySelector("[data-checkout-message]");
   if (errorMessage) errorMessage.textContent = response.status === 0 || response.status === 503 ? t("cart.checkoutError") : response.data?.message || t("cart.checkoutError");
 }
@@ -2186,6 +2152,13 @@ function prepareForCheckoutRedirect() {
   if (history.state?.cartOpen) {
     history.replaceState({ ...(history.state || {}), cartOpen: false }, "", window.location.href);
   }
+}
+
+function resetCheckoutPending() {
+  if (checkoutRequestActive) return;
+  if (!state.checkoutPending) return;
+  state.checkoutPending = false;
+  renderCart();
 }
 
 function rememberCheckout(data = {}) {
@@ -2257,9 +2230,15 @@ async function submitForm(name, payload) {
   const endpoint = name === "contact" ? "/api/contact" : "/api/club";
   const apiResponse = await postJson(endpoint, payload);
   if (apiResponse.ok) return apiResponse;
+  if (name === "club") return apiResponse;
   const formResponse = await submitNetlifyForm(name, payload);
   if (formResponse.ok) return formResponse;
   return apiResponse;
+}
+
+function clubResponseMessage(response) {
+  if (!response.ok) return response.data?.message || t("club.error");
+  return response.data?.duplicate ? t("club.duplicate") : t("club.success");
 }
 
 async function submitNetlifyForm(name, payload) {
@@ -2385,7 +2364,7 @@ document.querySelector("[data-club-form]").addEventListener("submit", async (eve
   setFormPending(form, true);
   const response = await submitForm("club", payload);
   setFormPending(form, false);
-  message.textContent = response.ok ? t("club.success") : response.data?.message || t("club.error");
+  message.textContent = clubResponseMessage(response);
   if (response.ok) form.reset();
 });
 
@@ -2403,9 +2382,13 @@ window.addEventListener("popstate", (event) => {
   render();
 });
 window.addEventListener("pageshow", () => {
-  if (!state.checkoutPending) return;
-  state.checkoutPending = false;
-  renderCart();
+  resetCheckoutPending();
+});
+window.addEventListener("focus", () => {
+  resetCheckoutPending();
+});
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) resetCheckoutPending();
 });
 window.addEventListener("scroll", updateHeaderScrollState, { passive: true });
 window.addEventListener("resize", updateHeaderChrome);
