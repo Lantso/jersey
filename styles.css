@@ -886,6 +886,13 @@ body.is-scrolled .site-header::before {
 
 .roots-image .photo-frame {
   aspect-ratio: 4 / 5;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+}
+
+.roots-image .photo-frame img {
+  object-fit: contain;
 }
 
 .credits-page {
