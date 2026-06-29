@@ -8,13 +8,13 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260629a";
+} from "./catalog.mjs?v=20260629b";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260629a";
+const PHOTO_VERSION = "20260629b";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -142,6 +142,7 @@ const POSTAL_CODE_SAMPLES = {
 };
 const PRODUCT_GALLERY_DETAILS = {
   "roots-01-khaki": [
+    ["roots-01-khaki-01", "Roots 01 Khaki worn front view"],
     ["roots-01-khaki-02", "Roots 01 Khaki chest and crest detail"],
     ["roots-01-khaki-03", "Roots 01 Khaki crest close-up"],
     ["roots-01-khaki-04", "Roots 01 Khaki collar detail"],
@@ -149,6 +150,7 @@ const PRODUCT_GALLERY_DETAILS = {
     ["roots-01-khaki-06", "Roots 01 Khaki atelier label detail"]
   ],
   "atlas-02-white": [
+    ["atlas-02-white-01", "Atlas 02 White worn front view"],
     ["atlas-02-white-02", "Atlas 02 White worn front detail"],
     ["atlas-02-white-03", "Atlas 02 White crest close-up"],
     ["atlas-02-white-04", "Atlas 02 White collar detail"],
