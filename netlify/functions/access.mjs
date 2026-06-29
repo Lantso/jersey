@@ -1,7 +1,9 @@
+import { connectLambda } from "@netlify/blobs";
 import { accessCookieHeader, verifyAccessPassword } from "../../lib/access.mjs";
 import { corsHeaders, isAllowedOrigin, rateLimit, securityHeaders } from "../../lib/checkout.mjs";
 
 export async function handler(event) {
+  connectBlobs(event);
   const origin = header(event, "origin");
   const siteUrl = process.env.PUBLIC_SITE_URL || "https://lantso.com";
   const allowedOrigins = [siteUrl, requestSiteUrl(event), process.env.URL, process.env.DEPLOY_PRIME_URL, process.env.DEPLOY_URL];
@@ -15,7 +17,7 @@ export async function handler(event) {
   if (!isAllowedOrigin(origin, allowedOrigins)) {
     return json(403, { message: "Forbidden origin" }, origin, allowedOrigins);
   }
-  const limited = rateLimit(`${clientIp(event)}:access`, { limit: 20, windowMs: 60_000 });
+  const limited = await rateLimit(`${clientIp(event)}:access`, { limit: 20, windowMs: 60_000 });
   if (!limited.ok) return json(429, { message: "Too many requests" }, origin, allowedOrigins);
   const body = parseJson(event.body);
   if (!verifyAccessPassword(body.password)) {
@@ -53,5 +55,12 @@ function parseJson(raw = "") {
     return JSON.parse(raw || "{}");
   } catch {
     return {};
+  }
+}
+
+function connectBlobs(event) {
+  try {
+    if (event.blobs) connectLambda(event);
+  } catch {
   }
 }

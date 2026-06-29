@@ -174,6 +174,7 @@ function gateHtml(pathname, lang, nonce) {
         <p class="message" data-access-message role="status"></p>
       </form>
       <form class="newsletter" data-newsletter-form>
+        <input name="bot-field" type="text" autocomplete="off" tabindex="-1" hidden>
         <label>${escapeHtml(copy.email)}<input name="email" type="email" inputmode="email" autocomplete="email" maxlength="320" required></label>
         <button type="submit">${escapeHtml(copy.join)}</button>
         <p class="message" data-newsletter-message role="status"></p>
@@ -181,6 +182,7 @@ function gateHtml(pathname, lang, nonce) {
     </main>
     <script nonce="${escapeHtml(nonce)}">
       const returnPath = ${scriptJson(pathname || "/")};
+      const formStartedAt = String(Date.now());
       const copy = ${scriptJson({
         checking: copy.checking,
         invalid: copy.invalid,
@@ -224,7 +226,15 @@ function gateHtml(pathname, lang, nonce) {
           emailInput.addEventListener("input", () => emailInput.setCustomValidity(""), { once: true });
           return;
         }
-        const payload = { name: "Launch list", email, newsletter: "yes", source: "edge-gate-newsletter" };
+        const payload = {
+          name: "Launch list",
+          email,
+          newsletter: "yes",
+          source: "edge-gate-newsletter",
+          "bot-field": String(new FormData(newsletterForm).get("bot-field") || ""),
+          formStartedAt,
+          formSubmittedAt: String(Date.now())
+        };
         const body = new URLSearchParams({ "form-name": "club", ...payload });
         message.textContent = copy.saving;
         button.disabled = true;

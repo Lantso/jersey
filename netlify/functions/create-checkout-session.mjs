@@ -16,7 +16,7 @@ export async function handler(event) {
   if (!isAllowedOrigin(origin, allowedOrigins)) {
     return json(403, { message: "Forbidden origin" }, origin, allowedOrigins);
   }
-  const limited = rateLimit(`${clientIp(event)}:checkout`, { limit: 30, windowMs: 60_000 });
+  const limited = await rateLimit(`${clientIp(event)}:checkout`, { limit: 30, windowMs: 60_000 });
   if (!limited.ok) return json(429, { message: "Too many requests" }, origin, allowedOrigins);
   const body = parseJson(event.body);
   const result = await createStripeCheckoutSession(body, {

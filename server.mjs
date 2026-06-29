@@ -44,7 +44,7 @@ const server = http.createServer(async (request, response) => {
         return json(response, 204, {}, request);
       }
       const key = `${request.socket.remoteAddress || "local"}:${url.pathname}`;
-      const limited = rateLimit(key, { limit: url.pathname === "/api/access" ? 20 : 80, windowMs: 60_000 });
+      const limited = await rateLimit(key, { limit: url.pathname === "/api/access" ? 20 : 80, windowMs: 60_000 });
       if (!limited.ok) {
         return json(response, 429, { message: "Too many requests" }, request);
       }
@@ -144,7 +144,12 @@ async function handleStripeWebhook(request, response) {
   if (!verifyStripeSignature(request.headers["stripe-signature"], rawBody)) {
     return json(response, 400, { message: "Invalid webhook signature" }, request);
   }
-  const event = JSON.parse(rawBody.toString("utf8"));
+  let event;
+  try {
+    event = JSON.parse(rawBody.toString("utf8"));
+  } catch {
+    return json(response, 400, { message: "Invalid webhook payload" }, request);
+  }
   const result = await handleStripeCommerceEvent(event);
   if (result.order) {
     await appendJsonl("paid-orders.jsonl", {

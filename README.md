@@ -43,6 +43,7 @@ Netlify publishes `dist/`.
 ## data
 
 - Stripe checkout takes payment.
+- Checkout prices are sent to Stripe in EUR. Set `STRIPE_ADAPTIVE_PRICING=true` only if you want Stripe to handle localized presentment currency.
 - Stripe Dashboard has the paid checkout sessions.
 - Netlify Blobs stores stock, paid orders, club signups, contact messages.
 - Paid orders live in `lantso-commerce / inventory-v1 / orders`.
@@ -67,6 +68,9 @@ Optional:
 - `RESEND_API_KEY`
 - `CONTACT_FROM_EMAIL`
 - `CONTACT_TO_EMAIL=contact@lantso.com`
+- `STRIPE_ADAPTIVE_PRICING=true` to let Stripe handle local presentment currency
+- `LANTSO_FORM_MIN_ELAPSED_MS=1200` to tune JSON form bot-friction timing
+- `LANTSO_RATE_LIMIT_DRIVER=memory` for local-only limiter fallback testing
 
 ## webhook
 

@@ -1,14 +1,4 @@
 export const CURRENCY = "eur";
-export const LOCAL_CURRENCY_BY_COUNTRY = {
-  CH: "chf",
-  GB: "gbp",
-  MA: "mad"
-};
-export const LOCAL_CURRENCY_PREVIEW_RATES = {
-  chf: 0.95,
-  gbp: 0.86,
-  mad: 10.75
-};
 export const FREE_SHIPPING_THRESHOLD = null;
 export const JERSEY_WEIGHT_GRAMS = 300;
 export const PARCEL_DIMENSIONS_CM = {
@@ -302,18 +292,15 @@ export function calculateShipping(countryCode, subtotal, quantity = 1) {
 }
 
 export function currencyForCountry(countryCode = "FR") {
-  return LOCAL_CURRENCY_BY_COUNTRY[String(countryCode || "").toUpperCase()] || CURRENCY;
+  return CURRENCY;
 }
 
 export function moneyCountryForCurrency(currency = CURRENCY) {
-  const normalized = String(currency || CURRENCY).toLowerCase();
-  return Object.entries(LOCAL_CURRENCY_BY_COUNTRY).find(([, value]) => value === normalized)?.[0] || "FR";
+  return "FR";
 }
 
 export function convertMoney(cents, countryCode = "FR") {
-  const currency = currencyForCountry(countryCode);
-  if (currency === CURRENCY) return cents;
-  return Math.round(Number(cents || 0) * LOCAL_CURRENCY_PREVIEW_RATES[currency]);
+  return Number(cents || 0);
 }
 
 export function formatMoney(cents, locale = "fr-FR", countryCode = "FR") {

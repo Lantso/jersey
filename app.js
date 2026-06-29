@@ -8,13 +8,13 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260606b";
+} from "./catalog.mjs?v=20260629a";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260610c";
+const PHOTO_VERSION = "20260629a";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -142,14 +142,18 @@ const POSTAL_CODE_SAMPLES = {
 };
 const PRODUCT_GALLERY_DETAILS = {
   "roots-01-khaki": [
-    ["roots-01-khaki-logo", "Roots 01 Khaki logo detail"],
-    ["roots-01-khaki-mg-5580", "Roots 01 Khaki jersey studio detail"],
-    ["roots-01-khaki-mg-0420", "Roots 01 Khaki jersey worn detail"]
+    ["roots-01-khaki-02", "Roots 01 Khaki chest and crest detail"],
+    ["roots-01-khaki-03", "Roots 01 Khaki crest close-up"],
+    ["roots-01-khaki-04", "Roots 01 Khaki collar detail"],
+    ["roots-01-khaki-05", "Roots 01 Khaki sleeve detail"],
+    ["roots-01-khaki-06", "Roots 01 Khaki atelier label detail"]
   ],
   "atlas-02-white": [
-    ["atlas-02-white-logo", "Atlas 02 White logo detail"],
-    ["atlas-02-white-pir05315", "Atlas 02 White jersey studio detail"],
-    ["atlas-02-white-studio-84", "Atlas 02 White jersey worn detail"]
+    ["atlas-02-white-02", "Atlas 02 White worn front detail"],
+    ["atlas-02-white-03", "Atlas 02 White crest close-up"],
+    ["atlas-02-white-04", "Atlas 02 White collar detail"],
+    ["atlas-02-white-05", "Atlas 02 White sleeve detail"],
+    ["atlas-02-white-06", "Atlas 02 White worn side detail"]
   ]
 };
 const ACKNOWLEDGMENTS = [
@@ -258,7 +262,7 @@ const I18N = {
     },
     legal: {
       title: "Legal & contact",
-      termsBody: "Lantso sells limited edition jerseys through this storefront. Prices can be presented in the customer's local currency where Stripe supports it. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details. The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, contact contact@lantso.com.",
+      termsBody: "Lantso sells limited edition jerseys in EUR through this storefront. Product availability is limited and stock is reserved only when Stripe Checkout opens; an order is confirmed after successful payment. Lantso may cancel and refund orders flagged for fraud, stock error, or incomplete delivery details. The customer is responsible for providing an accurate address and for any import duties, taxes, or carrier charges applied outside the European Union. For order support, contact contact@lantso.com.",
       privacyBody: "Lantso collects the details needed to run the shop: contact details, delivery address, cart contents, language and access preferences, support messages, and club sign-up details. Payment details are processed by Stripe and are not stored by this website. Data is used for checkout, fulfilment, customer support, fraud prevention, required accounting records, and email updates when requested. To access or delete eligible data, contact contact@lantso.com.",
       contactBody: "For order support, sizing, press, or wholesale requests, use the form below or write to contact@lantso.com.",
       name: "Name",
@@ -1212,6 +1216,7 @@ function gatePage() {
           <p class="form-message" data-access-message role="status"></p>
         </form>
         <form class="gate-form gate-newsletter" data-gate-newsletter>
+          <input name="bot-field" type="text" autocomplete="off" tabindex="-1" hidden>
           <label>
             <span>${t("gate.email")}</span>
             <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="320" required>
@@ -1525,6 +1530,7 @@ function legalPage() {
           <div class="prose">
             <p>${t("legal.contactBody")}</p>
             <form class="contact-form" data-contact-form>
+              <input name="bot-field" type="text" autocomplete="off" tabindex="-1" hidden>
               <label><span>${t("legal.name")}</span><input name="name" autocomplete="name" required></label>
               <label><span>${t("legal.email")}</span><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="320" required></label>
               <label><span>${t("legal.message")}</span><textarea name="message" required></textarea></label>
@@ -1708,6 +1714,7 @@ function bindGateEvents() {
   });
 
   const newsletterForm = app.querySelector("[data-gate-newsletter]");
+  seedFormGuard(newsletterForm);
   newsletterForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const message = newsletterForm.querySelector("[data-gate-newsletter-message]");
@@ -1715,12 +1722,12 @@ function bindGateEvents() {
     if (!email) return;
     message.textContent = t("form.processing");
     setFormPending(newsletterForm, true);
-    const response = await submitForm("club", {
+    const response = await submitForm("club", withFormGuard(newsletterForm, {
       name: "Launch list",
       email,
       newsletter: "yes",
       source: "gate-newsletter"
-    });
+    }));
     setFormPending(newsletterForm, false);
     message.textContent = response.ok ? (response.data?.duplicate ? t("club.duplicate") : t("gate.subscribed")) : response.data?.message || t("club.error");
     if (response.ok) newsletterForm.reset();
@@ -1801,6 +1808,7 @@ function bindPageEvents() {
 
   const contactForm = app.querySelector("[data-contact-form]");
   if (contactForm) {
+    seedFormGuard(contactForm);
     contactForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       const message = contactForm.querySelector("[data-contact-message]");
@@ -1811,7 +1819,7 @@ function bindPageEvents() {
       payload.source = "contact-page";
       message.textContent = t("form.processing");
       setFormPending(contactForm, true);
-      const response = await submitForm("contact", payload);
+      const response = await submitForm("contact", withFormGuard(contactForm, payload));
       setFormPending(contactForm, false);
       message.textContent = response.ok ? t("legal.sent") : t("club.error");
       if (response.ok) contactForm.reset();
@@ -1824,6 +1832,22 @@ function setFormPending(form, pending) {
   form.querySelectorAll("button, input, select, textarea").forEach((control) => {
     control.disabled = pending;
   });
+}
+
+function seedFormGuard(form) {
+  if (!form || form.dataset.formStartedAt) return;
+  form.dataset.formStartedAt = String(Date.now());
+}
+
+function withFormGuard(form, payload = {}) {
+  seedFormGuard(form);
+  const data = new FormData(form);
+  return {
+    ...payload,
+    "bot-field": String(data.get("bot-field") || ""),
+    formStartedAt: form?.dataset.formStartedAt || "",
+    formSubmittedAt: String(Date.now())
+  };
 }
 
 function renderCart() {
@@ -2350,7 +2374,9 @@ clubModal.addEventListener("close", () => {
   document.body.classList.remove("modal-open");
 });
 
-document.querySelector("[data-club-form]").addEventListener("submit", async (event) => {
+const clubForm = document.querySelector("[data-club-form]");
+seedFormGuard(clubForm);
+clubForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.currentTarget;
   const message = form.querySelector("[data-club-message]");
@@ -2362,7 +2388,7 @@ document.querySelector("[data-club-form]").addEventListener("submit", async (eve
   payload.source = "club-modal";
   message.textContent = t("form.processing");
   setFormPending(form, true);
-  const response = await submitForm("club", payload);
+  const response = await submitForm("club", withFormGuard(form, payload));
   setFormPending(form, false);
   message.textContent = clubResponseMessage(response);
   if (response.ok) form.reset();
