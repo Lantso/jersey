@@ -109,8 +109,12 @@ test("inventory reservations reduce availability and release cleanly", async () 
   });
   assert.equal(checkout.ok, true);
 
+  const reservedAtMs = Date.now();
   const reservation = await reserveCheckoutInventory(checkout, { language: "en" });
   assert.equal(reservation.ok, true);
+  const checkoutExpiresAtMs = Date.parse(reservation.checkoutExpiresAt);
+  assert.ok(checkoutExpiresAtMs - reservedAtMs <= 10 * 60 * 1000 + 1000);
+  assert.ok(checkoutExpiresAtMs - reservedAtMs >= 10 * 60 * 1000 - 1000);
 
   let snapshot = await getInventorySnapshot();
   assert.equal(snapshot.products["roots-01-khaki"].sizes.M.available, 0);

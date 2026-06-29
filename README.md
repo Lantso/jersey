@@ -69,6 +69,7 @@ Optional:
 - `CONTACT_FROM_EMAIL`
 - `CONTACT_TO_EMAIL=contact@lantso.com`
 - `STRIPE_ADAPTIVE_PRICING=true` to let Stripe handle local presentment currency
+- `LANTSO_CHECKOUT_TTL_MS=600000` controls unpaid checkout stock holds; default and minimum are 10 minutes
 - `LANTSO_FORM_MIN_ELAPSED_MS=1200` to tune JSON form bot-friction timing
 - `LANTSO_RATE_LIMIT_DRIVER=memory` for local-only limiter fallback testing
 
