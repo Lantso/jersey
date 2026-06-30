@@ -342,35 +342,8 @@ body.is-scrolled .site-header::before {
   object-position: center 10%;
 }
 
-.mobile-hero-carousel {
+.mobile-hero-frame {
   display: none;
-}
-
-.mobile-hero-track,
-.mobile-hero-slide {
-  height: 100%;
-}
-
-.mobile-hero-track {
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  touch-action: pan-x;
-  -webkit-overflow-scrolling: touch;
-}
-
-.mobile-hero-track::-webkit-scrollbar {
-  display: none;
-}
-
-.mobile-hero-slide {
-  position: relative;
-  flex: 0 0 100%;
-  min-width: 100%;
-  scroll-snap-align: start;
 }
 
 .mobile-hero-visual img {
@@ -1574,7 +1547,7 @@ textarea {
     display: none;
   }
 
-  .mobile-hero-carousel {
+  .mobile-hero-frame {
     position: absolute;
     inset: 0;
     z-index: 0;
@@ -1582,7 +1555,7 @@ textarea {
     overflow: hidden;
   }
 
-  .mobile-hero-carousel::after {
+  .mobile-hero-frame::after {
     content: "";
     position: absolute;
     inset: 0;
