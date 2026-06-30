@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
 const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://www.lantso.com").replace(/\/$/, "");
-const PHOTO_VERSION = "20260630b";
+const PHOTO_VERSION = "20260630c";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
@@ -52,14 +52,14 @@ const COPY = {
   },
   homeDescription: {
     en: "Lantso creates limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White, inspired by Moroccan heritage and the 2026 World Cup period.",
-    fr: "Lantso crée des maillots de football marocains limités : Roots 01 Khaki et Atlas 02 White, inspirés par l'héritage marocain et la période Coupe du Monde 2026.",
+    fr: "Lantso crée des maillots de football marocains limités : ROOTS 01 Khaki et Atlas 02 White, inspirés par l'héritage marocain et la période Coupe du Monde 2026.",
     ar: "لانطسو تصمم قمصان كرة قدم مغربية محدودة: روتس 01 كاكي وأطلس 02 أبيض، مستوحاة من الإرث المغربي وفترة كأس العالم 2026."
   },
   stepInside: { en: "Step inside", fr: "Entrer", ar: "ادخل" },
   shopTitle: { en: "Shop Moroccan Football Jerseys | Lantso", fr: "Boutique maillots de football marocains | Lantso", ar: "متجر قمصان كرة القدم المغربية | لانطسو" },
   shopDescription: {
     en: "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period.",
-    fr: "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026.",
+    fr: "Acheter ROOTS 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026.",
     ar: "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."
   },
   shopHeading: { en: "Shop Lantso Moroccan jerseys", fr: "Boutique Lantso maillots marocains", ar: "متجر قمصان لانطسو المغربية" },
@@ -119,13 +119,13 @@ const COPY = {
     fr: "Instagram : lantso.at.",
     ar: "Instagram: lantso.at."
   },
-  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Découvrir l'histoire | Lantso", ar: "اكتشف الجذور | لانطسو" },
+  rootsTitle: { en: "Discover the Roots | Lantso", fr: "Découvrir ROOTS | Lantso", ar: "اكتشف الجذور | لانطسو" },
   rootsDescription: {
     en: "The Lantso story behind Roots 01 Khaki and Atlas 02 White, from Moroccan heritage to the world.",
-    fr: "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde.",
+    fr: "L'histoire Lantso derrière ROOTS 01 Khaki et Atlas 02 White, de l'héritage marocain au monde.",
     ar: "قصة لانطسو خلف روتس 01 كاكي وأطلس 02 أبيض، من الجذور المغربية إلى العالم."
   },
-  rootsHeading: { en: "Discover the Roots", fr: "Découvrir l'histoire", ar: "اكتشف الجذور" },
+  rootsHeading: { en: "Discover the Roots", fr: "Découvrir ROOTS", ar: "اكتشف الجذور" },
   rootsParagraphs: {
     en: [
       "Some people wait for the right moment. Others understand that it does not exist.",
@@ -170,7 +170,7 @@ const COPY = {
   creditsTitle: { en: "Acknowledgments | Lantso", fr: "Remerciements | Lantso", ar: "الشكر | لانطسو" },
   creditsDescription: {
     en: "Credits and acknowledgments from the Lantso Roots chapter.",
-    fr: "Crédits et remerciements du chapitre Roots de Lantso.",
+    fr: "Crédits et remerciements du chapitre ROOTS de Lantso.",
     ar: "قائمة شكر فصل الجذور من لانطسو."
   },
   creditsHeading: { en: "Acknowledgments", fr: "Remerciements", ar: "الشكر" },

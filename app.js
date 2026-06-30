@@ -8,13 +8,13 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260630b";
+} from "./catalog.mjs?v=20260630c";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
 const SITE_URL = "https://www.lantso.com";
-const PHOTO_VERSION = "20260630b";
+const PHOTO_VERSION = "20260630c";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -158,6 +158,14 @@ const PRODUCT_GALLERY_DETAILS = {
     ["atlas-02-white-06", "Atlas 02 White worn side detail", 1448, 2171]
   ]
 };
+const MOBILE_HERO_IMAGES = [
+  ["mobile-hero-01", "Lantso khaki jersey portrait with a vintage football", 1080, 1329],
+  ["mobile-hero-02", "Lantso white and khaki jerseys worn on city steps", 1080, 1350],
+  ["mobile-hero-03", "Lantso white and khaki jerseys in a street campaign portrait", 1078, 1509],
+  ["mobile-hero-04", "Lantso jersey campaign with two shirts hanging above the models", 1080, 1546],
+  ["mobile-hero-05", "Lantso white jersey campaign portrait on a scooter", 1075, 1613],
+  ["mobile-hero-06", "Lantso white jersey and khaki jersey youth campaign portrait", 1080, 1339]
+];
 const ACKNOWLEDGMENTS = [
   { name: "Mizan Studio" },
   { name: "Wlad Derb", url: "https://wladderb.com" },
@@ -373,7 +381,7 @@ const I18N = {
       discoverShop: "Découvrir la boutique",
       origin: "Origine",
       before: "Avant le design,\nil y avait une histoire",
-      discoverRoots: "Découvrir l'histoire"
+      discoverRoots: "Découvrir ROOTS"
     },
     product: {
       limited: "Pièces limitées",
@@ -706,6 +714,7 @@ const cartCount = document.querySelector("[data-cart-count]");
 const clubModal = document.querySelector("[data-club-modal]");
 const cookieNotice = document.querySelector("[data-cookie-notice]");
 let countdownTimer;
+let mobileHeroTimer;
 let previousCartFocus;
 let checkoutRequestActive = false;
 
@@ -776,12 +785,12 @@ function pageMeta(current = route()) {
       cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
     },
     fr: {
-      home: ["Lantso | Maillots de football marocains limités", "Lantso crée des maillots de football marocains limités : Roots 01 Khaki et Atlas 02 White, inspirés par l'héritage marocain et la période Coupe du Monde 2026."],
-      shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026."],
+      home: ["Lantso | Maillots de football marocains limités", "Lantso crée des maillots de football marocains limités : ROOTS 01 Khaki et Atlas 02 White, inspirés par l'héritage marocain et la période Coupe du Monde 2026."],
+      shop: ["Boutique maillots de football marocains | Lantso", "Acheter ROOTS 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026."],
       info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso."],
       legal: ["Mentions légales et contact | Lantso", "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso."],
-      roots: ["Découvrir l'histoire | Lantso", "L'histoire Lantso derrière Roots 01 Khaki et Atlas 02 White, des racines marocaines au monde."],
-      credits: ["Remerciements | Lantso", "Crédits et remerciements du chapitre Roots de Lantso."],
+      roots: ["Découvrir ROOTS | Lantso", "L'histoire Lantso derrière ROOTS 01 Khaki et Atlas 02 White, de l'héritage marocain au monde."],
+      credits: ["Remerciements | Lantso", "Crédits et remerciements du chapitre ROOTS de Lantso."],
       success: ["Commande reçue | Lantso", "Confirmation de commande Lantso."],
       cancel: ["Paiement annulé | Lantso", "Paiement Lantso annulé."]
     },
@@ -1158,6 +1167,20 @@ function photo(file, className, alt, width, height, loading = "lazy") {
   };
 }
 
+function mobileHeroPhoto(file, alt, width, height, loading = "lazy") {
+  return {
+    src: photoUrl(`/assets/photos/fallback/${file}.jpg`),
+    webp: photoUrl(`/assets/photos/${file}.webp`),
+    srcset: `${photoUrl(`/assets/photos/responsive/${file}-480.webp`)} 480w, ${photoUrl(`/assets/photos/responsive/${file}-800.webp`)} 800w, ${photoUrl(`/assets/photos/responsive/${file}-1080.webp`)} 1080w`,
+    sizes: "100vw",
+    className: "mobile-hero-visual",
+    alt,
+    width,
+    height,
+    loading
+  };
+}
+
 function photoUrl(path) {
   return `${path}?v=${PHOTO_VERSION}`;
 }
@@ -1305,6 +1328,7 @@ function homePage() {
   return `
     <section class="hero">
       ${placeholder("Lantso campaign image")}
+      ${mobileHeroCarousel()}
       <div class="hero-content">
         <h1 class="script-title">${t("hero.title").replace("\n", "<br>")}</h1>
         <a class="button-primary" href="#shirts" data-scroll-link>${t("hero.step")}</a>
@@ -1328,6 +1352,20 @@ function homePage() {
       ${placeholder("Campaign image four")}
     </section>
     ${footer()}
+  `;
+}
+
+function mobileHeroCarousel() {
+  return `
+    <div class="mobile-hero-carousel" data-mobile-hero-carousel aria-label="Lantso mobile campaign gallery">
+      <div class="mobile-hero-track" data-mobile-hero-track>
+        ${MOBILE_HERO_IMAGES.map(([file, alt, width, height], index) => `
+          <div class="mobile-hero-slide">
+            ${visualFrame(mobileHeroPhoto(file, alt, width, height, index === 0 ? "eager" : "lazy"), alt)}
+          </div>
+        `).join("")}
+      </div>
+    </div>
   `;
 }
 
@@ -1668,6 +1706,7 @@ function completeStoredCheckout(confirmation) {
 
 function render(options = {}) {
   const shouldScroll = options.scroll !== false;
+  stopMobileHeroCarousel();
   if (state.locked) {
     updateSeo(route());
     document.body.classList.add("is-gated");
@@ -1694,6 +1733,7 @@ function render(options = {}) {
   if (current.name === "success") renderMarkup(app, `<div class="page">${noticePage("success")}</div>`);
   if (current.name === "cancel") renderMarkup(app, `<div class="page">${noticePage("cancel")}</div>`);
   bindPageEvents();
+  startMobileHeroCarousel();
   renderCart();
   if (shouldScroll) window.scrollTo({ top: 0, behavior: "instant" });
   updateHeaderChrome();
@@ -2325,6 +2365,34 @@ function stopCountdown() {
   if (countdownTimer) {
     window.clearInterval(countdownTimer);
     countdownTimer = undefined;
+  }
+}
+
+function startMobileHeroCarousel() {
+  stopMobileHeroCarousel();
+  const track = app.querySelector("[data-mobile-hero-track]");
+  if (!track) return;
+  const slides = [...track.children];
+  if (slides.length < 2) return;
+  const phoneMedia = window.matchMedia("(max-width: 760px)");
+  let activeIndex = 0;
+  const syncActiveIndex = () => {
+    const width = Math.max(1, track.clientWidth);
+    activeIndex = Math.round(track.scrollLeft / width) % slides.length;
+  };
+  track.addEventListener("scroll", syncActiveIndex, { passive: true });
+  mobileHeroTimer = window.setInterval(() => {
+    if (!phoneMedia.matches) return;
+    syncActiveIndex();
+    activeIndex = (activeIndex + 1) % slides.length;
+    track.scrollTo({ left: activeIndex * track.clientWidth, behavior: "smooth" });
+  }, 4000);
+}
+
+function stopMobileHeroCarousel() {
+  if (mobileHeroTimer) {
+    window.clearInterval(mobileHeroTimer);
+    mobileHeroTimer = undefined;
   }
 }
 

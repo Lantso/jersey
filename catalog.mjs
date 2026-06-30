@@ -14,7 +14,7 @@ export const PRODUCTS = [
     chapter: "ROOTS 01",
     name: {
       en: "Roots 01 - Khaki",
-      fr: "Roots 01 - Khaki",
+      fr: "ROOTS 01 - Khaki",
       ar: "روتس 01 - كاكي"
     },
     shortName: {
@@ -33,9 +33,9 @@ export const PRODUCTS = [
       ar: "مستوحى من 98. مصمم للحاضر."
     },
     description: {
-      en: "A very limited Morocco-inspired jersey in khaki green, designed for match days, summer nights, and collectors.",
-      fr: "Un maillot vert khaki en édition très limitée, inspiré du Maroc et pensé pour les jours de match, les soirs d'été et les collectionneurs.",
-      ar: "قميص أخضر كاكي بإصدار محدود جدا، مستوحى من المغرب ومصمم للمباريات والأمسيات الصيفية والمهتمين بالقطع الخاصة."
+      en: "Inspired by Morocco 1998, ROOTS 01 revisits a classic through Lantso's lens. A tribute to a generation, a culture, and a heritage that continue to inspire today.",
+      fr: "Inspiré du Maroc 1998, ROOTS 01 revisite un classique à travers le regard de Lantso. Un hommage à une génération, à une culture et à un héritage qui continuent d'inspirer aujourd'hui.",
+      ar: "مستوحى من منتخب المغرب 1998، يعيد ROOTS 01 قراءة قميص كلاسيكي من خلال رؤية لانطسو. تحية لجيل وثقافة وإرث ما زالوا مصدر إلهام حتى اليوم."
     },
     material: {
       en: "100% polyester",
@@ -81,14 +81,14 @@ export const PRODUCTS = [
       ar: "أبيض"
     },
     story: {
-      en: "Seen up close. Felt from afar.",
-      fr: "Vu de près. Ressenti de loin.",
-      ar: "يظهر عن قرب. ويصل إحساسه من بعيد."
+      en: "The Maghreb, worn differently.",
+      fr: "Le Maghreb, porté autrement.",
+      ar: "المغرب العربي، يُرتدى بطريقة مختلفة."
     },
     description: {
-      en: "A very limited white jersey from the same heritage line, built around contrast, movement, and Moroccan detail.",
-      fr: "Un maillot blanc en édition très limitée dans la même ligne héritage, construit autour du contraste, du mouvement et du détail marocain.",
-      ar: "قميص أبيض بإصدار محدود جدا من نفس خط التراث، مبني على التباين والحركة والتفاصيل المغربية."
+      en: "A white jersey elevated by a subtle zellige pattern, where every detail pays tribute to Moroccan heritage. A refined piece, designed to cross generations.",
+      fr: "Un maillot blanc sublimé par un motif zellige discret, où chaque détail rend hommage au patrimoine marocain. Une pièce épurée, pensée pour traverser les générations.",
+      ar: "قميص أبيض يزدان بنقشة زليج خفية، حيث يكرم كل تفصيل التراث المغربي. قطعة نقية صُممت لتعبر الأجيال."
     },
     material: {
       en: "100% polyester",
