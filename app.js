@@ -8,13 +8,13 @@ import {
   findProduct,
   formatCurrencyAmount,
   formatMoney
-} from "./catalog.mjs?v=20260629b";
+} from "./catalog.mjs?v=20260630b";
 
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lantso.at"
 };
-const SITE_URL = "https://lantso.com";
-const PHOTO_VERSION = "20260629b";
+const SITE_URL = "https://www.lantso.com";
+const PHOTO_VERSION = "20260630b";
 const COUNTRY_NAMES = {
   AE: "United Arab Emirates",
   AT: "Austria",
@@ -142,20 +142,20 @@ const POSTAL_CODE_SAMPLES = {
 };
 const PRODUCT_GALLERY_DETAILS = {
   "roots-01-khaki": [
-    ["roots-01-khaki-01", "Roots 01 Khaki worn front view"],
-    ["roots-01-khaki-02", "Roots 01 Khaki chest and crest detail"],
-    ["roots-01-khaki-03", "Roots 01 Khaki crest close-up"],
-    ["roots-01-khaki-04", "Roots 01 Khaki collar detail"],
-    ["roots-01-khaki-05", "Roots 01 Khaki sleeve detail"],
-    ["roots-01-khaki-06", "Roots 01 Khaki atelier label detail"]
+    ["roots-01-khaki-01", "Roots 01 Khaki worn front view", 1448, 2172],
+    ["roots-01-khaki-02", "Roots 01 Khaki chest and crest detail", 1448, 2171],
+    ["roots-01-khaki-03", "Roots 01 Khaki crest close-up", 1448, 2171],
+    ["roots-01-khaki-04", "Roots 01 Khaki collar detail", 1448, 2171],
+    ["roots-01-khaki-05", "Roots 01 Khaki sleeve detail", 1448, 2171],
+    ["roots-01-khaki-06", "Roots 01 Khaki atelier label detail", 1448, 2171]
   ],
   "atlas-02-white": [
-    ["atlas-02-white-01", "Atlas 02 White worn front view"],
-    ["atlas-02-white-02", "Atlas 02 White worn front detail"],
-    ["atlas-02-white-03", "Atlas 02 White crest close-up"],
-    ["atlas-02-white-04", "Atlas 02 White collar detail"],
-    ["atlas-02-white-05", "Atlas 02 White sleeve detail"],
-    ["atlas-02-white-06", "Atlas 02 White worn side detail"]
+    ["atlas-02-white-01", "Atlas 02 White worn front view", 1448, 2171],
+    ["atlas-02-white-02", "Atlas 02 White worn front detail", 1448, 2171],
+    ["atlas-02-white-03", "Atlas 02 White crest close-up", 1448, 2171],
+    ["atlas-02-white-04", "Atlas 02 White collar detail", 1448, 2171],
+    ["atlas-02-white-05", "Atlas 02 White sleeve detail", 1448, 2171],
+    ["atlas-02-white-06", "Atlas 02 White worn side detail", 1448, 2171]
   ]
 };
 const ACKNOWLEDGMENTS = [
@@ -180,7 +180,13 @@ const ACKNOWLEDGMENTS = [
   { name: "Nilaksaan A." },
   { name: "David M." },
   { name: "Pierre L." },
-  { name: "Mustapha E." }
+  { name: "Mustapha E." },
+  { name: "Santiago P." },
+  { name: "Aimen C." },
+  { name: "Ahmed M." },
+  { name: "Indris H." },
+  { name: "Samuel M." },
+  { name: "Oussama S." }
 ];
 
 const I18N = {
@@ -203,7 +209,7 @@ const I18N = {
       archives: "Acknowledgments"
     },
     hero: {
-      title: "From the Roots\nto the World",
+      title: "Lantso\nJerseys",
       step: "Step inside",
       chapter: "Chapter 01 - Roots",
       headline: "Two pieces\none heritage\nreimagined",
@@ -360,7 +366,7 @@ const I18N = {
       archives: "Remerciements"
     },
     hero: {
-      title: "From the Roots\nto the World",
+      title: "Lantso\nMaillots",
       step: "Entrer",
       chapter: "Chapitre 01 - Roots",
       headline: "Deux pièces\nun héritage\nréimaginé",
@@ -517,7 +523,7 @@ const I18N = {
       archives: "الشكر"
     },
     hero: {
-      title: "From the Roots\nto the World",
+      title: "لانطسو\nقمصان",
       step: "ادخل",
       chapter: "الفصل 01 - الجذور",
       headline: "قطعتان\nإرث واحد\nبرؤية جديدة",
@@ -760,7 +766,7 @@ function pageMeta(current = route()) {
   }
   const localizedMeta = {
     en: {
-      home: ["Lantso - From the Roots to the World", "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, made for the 2026 World Cup period."],
+      home: ["Lantso | Limited Moroccan Football Jerseys", "Lantso creates limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White, inspired by Moroccan heritage and the 2026 World Cup period."],
       shop: ["Shop Moroccan Football Jerseys | Lantso", "Shop Lantso Roots 01 Khaki and Atlas 02 White, limited Moroccan football jerseys for the 2026 World Cup period."],
       info: ["Shipping, Returns and FAQ | Lantso", "Delivery countries, tracked shipping rates, returns process, sizing answers and customer support details for Lantso limited Moroccan jerseys."],
       legal: ["Legal and Contact | Lantso", "Terms, privacy and contact information for buying limited Lantso Moroccan football jerseys."],
@@ -770,7 +776,7 @@ function pageMeta(current = route()) {
       cancel: ["Checkout Cancelled | Lantso", "Lantso checkout cancelled."]
     },
     fr: {
-      home: ["Lantso - From the Roots to the World", "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, pour la période Coupe du Monde 2026."],
+      home: ["Lantso | Maillots de football marocains limités", "Lantso crée des maillots de football marocains limités : Roots 01 Khaki et Atlas 02 White, inspirés par l'héritage marocain et la période Coupe du Monde 2026."],
       shop: ["Boutique maillots de football marocains | Lantso", "Acheter Roots 01 Khaki et Atlas 02 White, deux maillots de football marocains limités pour la période Coupe du Monde 2026."],
       info: ["Livraison, retours et FAQ | Lantso", "Pays livrables, tarifs suivis, retours, tailles et support client pour les maillots marocains limités Lantso."],
       legal: ["Mentions légales et contact | Lantso", "Conditions, confidentialité et contact pour acheter les maillots de football marocains limités Lantso."],
@@ -780,7 +786,7 @@ function pageMeta(current = route()) {
       cancel: ["Paiement annulé | Lantso", "Paiement Lantso annulé."]
     },
     ar: {
-      home: ["لانطسو - From the Roots to the World", "قمصان كرة قدم مغربية محدودة من لانطسو: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."],
+      home: ["لانطسو | قمصان كرة قدم مغربية محدودة", "لانطسو تصمم قمصان كرة قدم مغربية محدودة: روتس 01 كاكي وأطلس 02 أبيض، مستوحاة من الإرث المغربي وفترة كأس العالم 2026."],
       shop: ["متجر قمصان كرة القدم المغربية | لانطسو", "تسوق روتس 01 كاكي وأطلس 02 أبيض، قمصان كرة قدم مغربية محدودة لفترة كأس العالم 2026."],
       info: ["الشحن والإرجاع والأسئلة | لانطسو", "الدول المتاحة، أسعار الشحن، الإرجاع، المقاسات والدعم لقمصان لانطسو المغربية المحدودة."],
       legal: ["القانوني والتواصل | لانطسو", "الشروط والخصوصية ومعلومات التواصل لشراء قمصان لانطسو المغربية المحدودة."],
@@ -1085,8 +1091,9 @@ function placeholder(label = "") {
 
 function visualFrame(visual, label = "") {
   const alt = visual.alt || label;
+  const aspectClass = Number(visual.width) && Number(visual.height) && Number(visual.width) !== Number(visual.height) ? " is-portrait-photo" : "";
   return `
-    <figure class="photo-frame ${visual.className}" aria-label="${escapeHtml(label)}">
+    <figure class="photo-frame ${visual.className}${aspectClass}" aria-label="${escapeHtml(label)}">
       <picture>
         ${visual.srcset ? `<source srcset="${visual.srcset}" sizes="${visual.sizes}" type="image/webp">` : ""}
         <img src="${visual.src}" alt="${escapeHtml(alt)}" loading="${visual.loading || "lazy"}" decoding="async" fetchpriority="${visual.loading === "eager" ? "high" : "auto"}" width="${visual.width}" height="${visual.height}">
@@ -1133,7 +1140,7 @@ function productGallerySlides(product, productName) {
   const details = PRODUCT_GALLERY_DETAILS[product.id] || [];
   return [
     { label: productName, visual: visualFor(productName) },
-    ...details.map(([file, alt]) => ({ label: alt, visual: photo(file, "product-visual", alt, 1448, 1448) }))
+    ...details.map(([file, alt, width = 1448, height = 2171]) => ({ label: alt, visual: photo(file, "product-visual", alt, width, height) }))
   ];
 }
 
@@ -2094,10 +2101,19 @@ function organizationSchema() {
     "@type": "Organization",
     "@id": absoluteUrl("/#organization"),
     name: "Lantso",
+    alternateName: ["LANTSO", "Lantso Atelier"],
     url: absoluteUrl("/"),
     logo: absoluteUrl("/assets/icons/lantso-icon-512.png"),
     description: "Limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White.",
+    slogan: "From the Roots to the World",
+    brand: { "@type": "Brand", name: "Lantso" },
     email: "contact@lantso.com",
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "contact@lantso.com",
+      contactType: "customer support",
+      availableLanguage: ["en", "fr", "ar"]
+    },
     sameAs: [SOCIAL_LINKS.instagram]
   };
 }
@@ -2108,7 +2124,8 @@ function webSiteSchema() {
     "@id": absoluteUrl("/#website"),
     name: "Lantso",
     url: absoluteUrl("/"),
-    inLanguage: LANGS
+    inLanguage: LANGS,
+    publisher: { "@id": absoluteUrl("/#organization") }
   };
 }
 

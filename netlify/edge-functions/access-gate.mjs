@@ -5,6 +5,8 @@ const PUBLIC_FILE = /\.(?:css|js|mjs|json|svg|png|jpe?g|webp|ico|txt|xml|woff2?)
 const OPEN_PREFIXES = ["/api/", "/assets/", "/.netlify/"];
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
+const SEARCH_CRAWLER_PATTERN =
+  /\b(?:googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot)\b/i;
 
 const COPY = {
   en: {
@@ -74,6 +76,7 @@ export default async function accessGate(request, context) {
   if (request.method !== "GET" && request.method !== "HEAD") return context.next();
 
   const url = new URL(request.url);
+  if (isSearchCrawler(request)) return context.next();
   if (isOpenPath(url.pathname) || hasAccessCookie(request)) return context.next();
 
   const lang = detectLang(url.pathname, request.headers.get("accept-language") || "");
@@ -101,6 +104,10 @@ function env(name) {
 
 function isOpenPath(pathname) {
   return OPEN_PREFIXES.some((prefix) => pathname.startsWith(prefix)) || PUBLIC_FILE.test(pathname);
+}
+
+function isSearchCrawler(request) {
+  return SEARCH_CRAWLER_PATTERN.test(request.headers.get("user-agent") || "");
 }
 
 function hasAccessCookie(request) {

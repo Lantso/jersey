@@ -6,8 +6,8 @@ import { CURRENCY, PRODUCTS, calculateShipping, formatMoney } from "../catalog.m
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 const DIST = path.join(ROOT, "dist");
-const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://lantso.com").replace(/\/$/, "");
-const PHOTO_VERSION = "20260629b";
+const SITE_URL = (process.env.PUBLIC_SITE_URL || "https://www.lantso.com").replace(/\/$/, "");
+const PHOTO_VERSION = "20260630b";
 const LANGS = ["en", "fr", "ar"];
 const DEFAULT_LANG = "en";
 const SOCIAL_LINKS = {
@@ -35,19 +35,25 @@ const ACKNOWLEDGMENTS = [
   { name: "Nilaksaan A." },
   { name: "David M." },
   { name: "Pierre L." },
-  { name: "Mustapha E." }
+  { name: "Mustapha E." },
+  { name: "Santiago P." },
+  { name: "Aimen C." },
+  { name: "Ahmed M." },
+  { name: "Indris H." },
+  { name: "Samuel M." },
+  { name: "Oussama S." }
 ];
 
 const COPY = {
   homeTitle: {
-    en: "Lantso - From the Roots to the World",
-    fr: "Lantso - From the Roots to the World",
-    ar: "لانطسو - From the Roots to the World"
+    en: "Lantso | Limited Moroccan Football Jerseys",
+    fr: "Lantso | Maillots de football marocains limités",
+    ar: "لانطسو | قمصان كرة قدم مغربية محدودة"
   },
   homeDescription: {
-    en: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, made for the 2026 World Cup period.",
-    fr: "Maillots de football marocains limités par Lantso : Roots 01 Khaki et Atlas 02 White, pour la période Coupe du Monde 2026.",
-    ar: "قمصان كرة قدم مغربية محدودة من لانطسو: روتس 01 كاكي وأطلس 02 أبيض لفترة كأس العالم 2026."
+    en: "Lantso creates limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White, inspired by Moroccan heritage and the 2026 World Cup period.",
+    fr: "Lantso crée des maillots de football marocains limités : Roots 01 Khaki et Atlas 02 White, inspirés par l'héritage marocain et la période Coupe du Monde 2026.",
+    ar: "لانطسو تصمم قمصان كرة قدم مغربية محدودة: روتس 01 كاكي وأطلس 02 أبيض، مستوحاة من الإرث المغربي وفترة كأس العالم 2026."
   },
   stepInside: { en: "Step inside", fr: "Entrer", ar: "ادخل" },
   shopTitle: { en: "Shop Moroccan Football Jerseys | Lantso", fr: "Boutique maillots de football marocains | Lantso", ar: "متجر قمصان كرة القدم المغربية | لانطسو" },
@@ -182,8 +188,8 @@ const COPY = {
 const routes = [
   {
     path: "/",
-    title: "Lantso - From the Roots to the World",
-    description: "Limited Moroccan football jerseys by Lantso: Roots 01 Khaki and Atlas 02 White, made for the 2026 World Cup period.",
+    title: "Lantso | Limited Moroccan Football Jerseys",
+    description: "Lantso creates limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White, inspired by Moroccan heritage and the 2026 World Cup period.",
     image: "/assets/photos/fallback/hero.jpg",
     body: homeBody,
     schema: (lang) => [organizationSchema(lang), webSiteSchema(lang), collectionSchema(lang)]
@@ -403,7 +409,7 @@ function homeBody(lang = DEFAULT_LANG) {
   return `
         <section class="seo-hero">
           ${pictureHtml("hero", "Lantso Moroccan jersey campaign in a Casablanca street", 1920, 1280, "100vw")}
-          <h1>From the Roots to the World</h1>
+          <h1>${escapeHtml(text("homeTitle", lang))}</h1>
           <p>${escapeHtml(text("homeDescription", lang))}</p>
           <a class="button-primary" href="${linkTo("/shop", lang)}">${escapeHtml(text("stepInside", lang))}</a>
         </section>
@@ -556,10 +562,19 @@ function organizationSchema(lang = DEFAULT_LANG) {
     "@type": "Organization",
     "@id": `${absolute(localizedPath("/", lang))}#organization`,
     name: "Lantso",
+    alternateName: ["LANTSO", "Lantso Atelier"],
     url: absolute(localizedPath("/", lang)),
     logo: `${SITE_URL}/assets/icons/lantso-icon-512.png`,
     description: "Limited Moroccan football jerseys: Roots 01 Khaki and Atlas 02 White.",
+    slogan: "From the Roots to the World",
+    brand: { "@type": "Brand", name: "Lantso" },
     email: "contact@lantso.com",
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "contact@lantso.com",
+      contactType: "customer support",
+      availableLanguage: LANGS
+    },
     sameAs: [SOCIAL_LINKS.instagram]
   };
 }
@@ -570,7 +585,8 @@ function webSiteSchema(lang = DEFAULT_LANG) {
     "@id": `${absolute(localizedPath("/", lang))}#website`,
     name: "Lantso",
     url: absolute(localizedPath("/", lang)),
-    inLanguage: LANGS
+    inLanguage: LANGS,
+    publisher: { "@id": `${absolute(localizedPath("/", lang))}#organization` }
   };
 }
 

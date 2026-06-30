@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lantso.com/sitemap.xml
+Sitemap: https://www.lantso.com/sitemap.xml
 
 # Human and AI-readable product summary.
-# https://lantso.com/llms.txt
+# https://www.lantso.com/llms.txt

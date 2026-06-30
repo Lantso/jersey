@@ -58,7 +58,7 @@ Copy `.env.example`.
 
 Must set in Netlify:
 
-- `PUBLIC_SITE_URL=https://lantso.com`
+- `PUBLIC_SITE_URL=https://www.lantso.com`
 - `STRIPE_SECRET_KEY`
 - `STRIPE_WEBHOOK_SECRET`
 - `LANTSO_ACCESS_HASH` if the gate is on
@@ -78,10 +78,10 @@ Optional:
 Stripe webhook:
 
 ```text
-https://lantso.com/api/webhook
+https://www.lantso.com/api/webhook
 ```
 
-Use the apex URL directly. `www` can redirect, and Stripe wants this endpoint itself to answer `2xx`.
+Use the exact host that answers this endpoint directly without redirect. Stripe wants the webhook URL itself to answer `2xx`.
 
 events:
 

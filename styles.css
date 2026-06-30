@@ -704,6 +704,10 @@ body.is-scrolled .site-header::before {
   aspect-ratio: 1 / 1;
 }
 
+.product-gallery .photo-frame.is-portrait-photo {
+  aspect-ratio: 2 / 3;
+}
+
 .gallery-stage {
   position: relative;
 }
@@ -749,6 +753,10 @@ body.is-scrolled .site-header::before {
 
 .thumb-grid .photo-frame {
   aspect-ratio: 1 / 1;
+}
+
+.thumb-grid .photo-frame.is-portrait-photo {
+  aspect-ratio: 2 / 3;
 }
 
 .gallery-thumb {
