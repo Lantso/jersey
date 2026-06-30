@@ -210,7 +210,7 @@ const I18N = {
       archives: "Acknowledgments"
     },
     hero: {
-      title: "Lantso\nJerseys",
+      title: "From the Roots\nto the World",
       step: "Step inside",
       chapter: "Chapter 01 - Roots",
       headline: "Two pieces\none heritage\nreimagined",
@@ -367,7 +367,7 @@ const I18N = {
       archives: "Remerciements"
     },
     hero: {
-      title: "Lantso\nMaillots",
+      title: "From the Roots\nto the World",
       step: "Entrer",
       chapter: "Chapitre 01 - Roots",
       headline: "Deux pièces\nun héritage\nréimaginé",
@@ -524,7 +524,7 @@ const I18N = {
       archives: "الشكر"
     },
     hero: {
-      title: "لانطسو\nقمصان",
+      title: "From the Roots\nto the World",
       step: "ادخل",
       chapter: "الفصل 01 - الجذور",
       headline: "قطعتان\nإرث واحد\nبرؤية جديدة",
